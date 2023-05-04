@@ -2,6 +2,7 @@ import urllib.request
 from bs4 import BeautifulSoup
 import bibtexparser
 
+
 def zb_search(query: str) -> str | None:
     with urllib.request.urlopen(f"https://zbmath.org/?q={query}") as fp:
         result = fp.read().decode("utf8")
@@ -41,9 +42,7 @@ def zb_get_metadata(zbmath: str):
 
 
 def zb_get_metadata2(zbl: str):
-    with urllib.request.urlopen(
-        f"https://zbmath.org/{zbl}"
-    ) as fp:
+    with urllib.request.urlopen(f"https://zbmath.org/{zbl}") as fp:
         result = fp.read().decode("utf8")
 
     metadata = BeautifulSoup(result)
@@ -57,16 +56,23 @@ class ZBRecord:
         self.bibtex = zb_get_bib(zbl)
 
         bibtex_parsed = bibtexparser.loads(self.bibtex).entries[0]
-        self.zbmath = bibtex_parsed['zbmath']
+        self.zbmath = bibtex_parsed["zbmath"]
 
         meta = zb_get_metadata(self.zbmath)
 
-        self.authors = meta['authors']
-        self.classifications = meta['classifications']
-        self.title = bibtex_parsed['title']
-        self.journal = bibtex_parsed['journal']
-        self.journal_full = bibtex_parsed['fjournal']
-        self.doi = bibtex_parsed['doi']
+        self.authors = meta["authors"]
+        self.classifications = meta["classifications"]
+        if (
+            meta["title"]
+            == "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
+        ):
+            self.title = bibtex_parsed["title"]
+        else:
+            self.title = meta["title"]
+
+        self.journal = bibtex_parsed["journal"]
+        self.journal_full = bibtex_parsed["fjournal"]
+        self.doi = bibtex_parsed["doi"]
 
     @classmethod
     def from_doi(cls, doi: str):
@@ -77,11 +83,10 @@ class ZBRecord:
             # TODO: better error
             raise ValueError("Could not find record associated with DOI!")
 
-
     def __repr__(self):
         return str(self.__dict__)
 
 
 # print(zb_search_doi("10.1007/s00209-020-02546-0"))
-# print(ZBRecord("1461.42012").title)
+print(ZBRecord("1461.42012").title)
 # print(ZBRecord.from_doi("10.54330/afm.120529"))
