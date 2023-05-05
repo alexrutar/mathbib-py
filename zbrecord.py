@@ -83,10 +83,14 @@ class ZBRecord:
             # TODO: better error
             raise ValueError("Could not find record associated with DOI!")
 
+    @classmethod
+    def from_query(cls, query: str):
+        res = zb_search(query)
+        if res is not None:
+            return cls(res)
+        else:
+            # TODO: better error
+            raise ValueError("Could not find record associated with DOI!")
+
     def __repr__(self):
         return str(self.__dict__)
-
-
-# print(zb_search_doi("10.1007/s00209-020-02546-0"))
-print(ZBRecord("1461.42012").title)
-# print(ZBRecord.from_doi("10.54330/afm.120529"))
