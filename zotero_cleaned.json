@@ -1,0 +1,5067 @@
+[
+  {
+    "zbmath": "3036558",
+    "language": "English",
+    "issn": "0002-9327",
+    "title": "On a family of symmetric Bernoulli convolutions",
+    "authors": [
+      "Erdős, Paul"
+    ],
+    "author_ids": [
+      "erdos.pal"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "45E10"
+    ],
+    "doi": "10.2307/2371641",
+    "journal": "Am. J. Math.",
+    "pages": "974--976",
+    "volume": "61",
+    "year": "1939",
+    "zbl": "0022.35402",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/E/1939/Erdős_1939_On a Family of Symmetric Bernoulli Convolutions.pdf"
+  },
+  {
+    "zbmath": "1142779",
+    "language": "English",
+    "issn": "0065-1036",
+    "title": "On the sequence of numbers of the form \\(ɛ_0+ɛ_1q+\\dots+ɛ_n q^n\\), \\(ɛ ın\\0,1\\\\)",
+    "authors": [
+      "Erdős, Paul",
+      "Joó, István",
+      "Komornik, Vilmos"
+    ],
+    "author_ids": [
+      "erdos.pal",
+      "joo.istvan",
+      "komornik.vilmos"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11A67",
+      "11B83",
+      "11R06"
+    ],
+    "doi": "10.4064/aa-83-3-201-210",
+    "journal": "Acta Arith.",
+    "number": "3",
+    "pages": "201--210",
+    "volume": "83",
+    "year": "1998",
+    "zbl": "0896.11006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/E/1998/Erdős_Joó_Komornik_1998_On the sequence of numbers of the form \\$-epsilon_0 + -epsilon_1q + -ldots +.pdf"
+  },
+  {
+    "zbmath": "6324095",
+    "language": "English",
+    "issn": "1016-443X",
+    "title": "On the exceptional set for absolute continuity of Bernoulli convolutions",
+    "authors": [
+      "Shmerkin, Pablo"
+    ],
+    "author_ids": [
+      "shmerkin.pablo-s"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37A45"
+    ],
+    "doi": "10.1007/s00039-014-0285-4",
+    "journal": "Geom. Funct. Anal.",
+    "number": "3",
+    "pages": "946--958",
+    "volume": "24",
+    "year": "2014",
+    "zbl": "1305.28012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/S/2014/Shmerkin_2014_On the Exceptional Set for Absolute Continuity of Bernoulli Convolutions.pdf"
+  },
+  {
+    "zbmath": "7041748",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "On Furstenberg's intersection conjecture, self-similar measures, and the \\(L^q\\) norms of convolutions",
+    "authors": [
+      "Shmerkin, Pablo"
+    ],
+    "author_ids": [
+      "shmerkin.pablo-s"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.4007/annals.2019.189.2.1",
+    "journal": "Ann. Math. (2)",
+    "number": "2",
+    "pages": "319--391",
+    "volume": "189",
+    "year": "2019",
+    "zbl": "1426.11079",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/S/2019/Shmerkin_2019_On Furstenberg's intersection conjecture, self-similar measures, and the \\$L^q\\$.pdf"
+  },
+  {
+    "zbmath": "913761",
+    "language": "English",
+    "issn": "1073-2780",
+    "title": "Absolute continuity of Bernoulli convolutions, a simple proof",
+    "authors": [
+      "Peres, Yuval",
+      "Solomyak, Boris"
+    ],
+    "author_ids": [
+      "peres.yuval",
+      "solomyak.boris"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A12",
+      "28A15",
+      "42A61"
+    ],
+    "doi": "10.4310/MRL.1996.v3.n2.a8",
+    "journal": "Math. Res. Lett.",
+    "number": "2",
+    "pages": "231--239",
+    "volume": "3",
+    "year": "1996",
+    "zbl": "0867.28001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/1996/Peres_Solomyak_1996_Absolute Continuity of Bernoulli Convolutions, A Simple Proof.pdf"
+  },
+  {
+    "zbmath": "6346461",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "On self-similar sets with overlaps and inverse theorems for entropy",
+    "authors": [
+      "Hochman, Michael"
+    ],
+    "author_ids": [
+      "hochman.michael"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28D20",
+      "37C35",
+      "37L40"
+    ],
+    "doi": "10.4007/annals.2014.180.2.7",
+    "journal": "Ann. Math. (2)",
+    "number": "2",
+    "pages": "773--822",
+    "volume": "180",
+    "year": "2014",
+    "zbl": "1337.28015",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2014/Hochman_2014_On self-similar sets with overlaps and inverse theorems for entropy.pdf"
+  },
+  {
+    "zbmath": "38754",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "Self-similar sets 7. A characterization of self-similar fractals with positive Hausdorff measure",
+    "authors": [
+      "Bandt, Christoph",
+      "Graf, Siegfried"
+    ],
+    "author_ids": [
+      "bandt.christoph",
+      "graf.siegfried"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "54E40",
+      "54H15"
+    ],
+    "doi": "10.2307/2159618",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "4",
+    "pages": "995--1001",
+    "volume": "114",
+    "year": "1992",
+    "zbl": "0823.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/1992/Bandt_Graf_1992_Self-Similar Sets 7.pdf"
+  },
+  "Techniques in fractal geometry::/Users/alexrutar/.local/share/database/zotero_papers/F/1997/Falconer_1997_Techniques in fractal geometry.pdf",
+  "Fractal geometry: mathematical foundations and applications::/Users/alexrutar/.local/share/database/zotero_papers/F/2003/Falconer_2003_Fractal geometry.pdf",
+  {
+    "zbmath": "1998686",
+    "language": "English",
+    "issn": "0024-6107",
+    "title": "Smoothness of the \\(L^q\\)-spectrum of self-similar measures with overlaps.",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C40"
+    ],
+    "doi": "10.1112/S002461070300437X",
+    "journal": "J. Lond. Math. Soc., II. Ser.",
+    "number": "1",
+    "pages": "102--118",
+    "volume": "68",
+    "year": "2003",
+    "zbl": "1041.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2003/Feng_2003_Smoothness of the \\$L^q\\$-spectrum of self-similar measures with overlaps.pdf"
+  },
+  {
+    "zbmath": "6403149",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "On the Assouad dimension of self-similar sets with overlaps",
+    "authors": [
+      "Fraser, J.",
+      "Henderson, A.",
+      "Olson, E.",
+      "Robinson, J."
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "henderson.a-m",
+      "olson.eric-j",
+      "robinson.james-c"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1016/j.aim.2014.12.026",
+    "journal": "Adv. Math.",
+    "pages": "188--214",
+    "volume": "273",
+    "year": "2015",
+    "zbl": "1317.28014",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2015/Fraser_Henderson_Olson_Robinson_2015_On the Assouad dimension of self-similar sets with overlaps.pdf"
+  },
+  {
+    "zbmath": "5601720",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "Lyapunov exponents for products of matrices and multifractal analysis. II: General matrices",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37H15"
+    ],
+    "doi": "10.1007/s11856-009-0033-x",
+    "journal": "Isr. J. Math.",
+    "pages": "355--394",
+    "volume": "170",
+    "year": "2009",
+    "zbl": "1181.37073",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2009/Feng_2009_Lyapunov exponents for products of matrices and multifractal analysis.pdf"
+  },
+  {
+    "zbmath": "6539497",
+    "language": "English",
+    "issn": "1435-9855",
+    "title": "On the topology of polynomials with bounded integer coefficients",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11J17",
+      "11K16",
+      "28A78"
+    ],
+    "doi": "10.4171/JEMS/587",
+    "journal": "J. Eur. Math. Soc. (JEMS)",
+    "number": "1",
+    "pages": "181--193",
+    "volume": "18",
+    "year": "2016",
+    "zbl": "1332.11066",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2016/Feng_2016_On the topology of polynomials with bounded integer coefficients.pdf"
+  },
+  {
+    "zbmath": "6687344",
+    "language": "English",
+    "issn": "2308-1309",
+    "title": "Local dimensions of measures of finite type",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Matthews, Kevin"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "matthews.kevin-r"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K16",
+      "28A80",
+      "28C10"
+    ],
+    "doi": "10.4171/JFG/39",
+    "journal": "J. Fractal Geom.",
+    "number": "4",
+    "pages": "331--376",
+    "volume": "3",
+    "year": "2016",
+    "zbl": "1396.28011",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2016/Hare_Hare_Matthews_2016_Local dimensions of measures of finite type.pdf"
+  },
+  {
+    "zbmath": "6929296",
+    "language": "English",
+    "issn": "0008-414X",
+    "title": "Local dimensions of measures of finite type II: measures without full support and with non-regular probabilities",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Ng, Michael"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "ng.michael-ka-shing"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11R06",
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.4153/CJM-2017-025-6",
+    "journal": "Can. J. Math.",
+    "number": "4",
+    "pages": "824--867",
+    "volume": "70",
+    "year": "2018",
+    "zbl": "1457.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2018/Hare_Hare_Ng_2018_Local dimensions of measures of finite type II.pdf"
+  },
+  {
+    "zbmath": "6813470",
+    "language": "English",
+    "issn": "0022-247X",
+    "title": "Local dimensions of measures of finite type III -- measures that are not equicontractive",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Simms, Grant"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "simms.grant"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1016/j.jmaa.2017.10.037",
+    "journal": "J. Math. Anal. Appl.",
+    "number": "2",
+    "pages": "1653--1677",
+    "volume": "458",
+    "year": "2018",
+    "zbl": "1376.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2018/Hare_Hare_Simms_2018_Local dimensions of measures of finite type III — Measures that are not.pdf"
+  },
+  "Fractals and {Self} {Similarity}::/Users/alexrutar/.local/share/database/zotero_papers/H/1981/Hutchinson_1981_Fractals and Self Similarity.pdf",
+  {
+    "zbmath": "1251308",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Multifractal measures and a weak separation condition",
+    "authors": [
+      "Lau, Ka-Sing",
+      "Ngai, Sze-Man"
+    ],
+    "author_ids": [
+      "lau.kasing",
+      "ngai.sze-man"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "60G40"
+    ],
+    "doi": "10.1006/aima.1998.1773",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "45--96",
+    "volume": "141",
+    "year": "1999",
+    "zbl": "0929.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/1999/Lau_Ngai_1999_Multifractal Measures and a Weak Separation Condition.pdf"
+  },
+  {
+    "zbmath": "5083645",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "A generalized finite type condition for iterated function systems",
+    "authors": [
+      "Lau, Ka-Sing",
+      "Ngai, Sze-Man"
+    ],
+    "author_ids": [
+      "lau.kasing",
+      "ngai.sze-man"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1016/j.aim.2006.03.007",
+    "journal": "Adv. Math.",
+    "number": "2",
+    "pages": "647--671",
+    "volume": "208",
+    "year": "2007",
+    "zbl": "1113.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2007/Lau_Ngai_2007_A generalized finite type condition for iterated function systems.pdf"
+  },
+  "Weak {Separation} {Properties} for {Self}-{Similar} {Sets}::/Users/alexrutar/.local/share/database/zotero_papers/Z/1996/Zerner_1996_Weak Separation Properties for Self-Similar Sets.pdf",
+  {
+    "zbmath": "7179833",
+    "language": "English",
+    "note": "Id/No 1850002",
+    "issn": "0218-348X",
+    "title": "On the exact convex hull of IFS fractals",
+    "authors": [
+      "Vass, József"
+    ],
+    "author_ids": [
+      "vass.jozsef"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1142/S0218348X18500020",
+    "journal": "Fractals",
+    "number": "1",
+    "pages": "21",
+    "volume": "26",
+    "year": "2018",
+    "zbl": "1432.28012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/V/2018/Vass_2018_On the exact convex hull of IFS fractals.pdf"
+  },
+  {
+    "zbmath": "6489561",
+    "language": "English",
+    "publisher": "Providence, RI: American Mathematical Society (AMS)",
+    "isbn": "978-0-8218-9147-6; 978-1-4704-1082-7",
+    "booktitle": "Fractal geometry and dynamical systems in pure and applied mathematics I: Fractals in pure mathematics. Selected papers based on three conferences following the passing of Benoît Mandelbrot in October 2010. 1st PISRS 2011 international conference on analysis, fractal geometry, dynamical systems and economics, Messina, Italy, November 8--12, 2011, AMS special session on fractal geometry in pure and applied mathematics, in memory of Benoît Mandelbrot, Boston, MA, USA, January 2012, AMS special session on geometry and analysis on fractal spaces, Honolulu, HI, USA, March 2012",
+    "title": "Separation conditions for iterated function systems with overlaps",
+    "authors": [
+      "Deng, Qi-Rong",
+      "Lau, Ka-Sing",
+      "Ngai, Sze-Man"
+    ],
+    "author_ids": [
+      "deng.qirong",
+      "lau.kasing",
+      "ngai.sze-man"
+    ],
+    "bibtype": "incollection",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/conm/600/11928",
+    "pages": "1--20",
+    "year": "2013",
+    "zbl": "1321.28014",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2013/Deng_Lau_Ngai_2013_Separation Conditions for Iterated Function Systems with Overlaps.pdf"
+  },
+  "Iterated {Function} {Systems} of {Finite} {Type} and the {Weak} {Separation} {Property}::/Users/alexrutar/.local/share/database/zotero_papers/N/2002/Nguyen_2002_Iterated Function Systems of Finite Type and the Weak Separation Property.pdf",
+  {
+    "zbmath": "5015986",
+    "language": "English",
+    "issn": "1019-8385",
+    "title": "General finite type IFS and \\(M\\)-matrix",
+    "authors": [
+      "Jin, Ning",
+      "Yau, Stephen"
+    ],
+    "author_ids": [
+      "jin.ning",
+      "yau.stephen-shing-toung"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.4310/CAG.2005.v13.n4.a8",
+    "journal": "Commun. Anal. Geom.",
+    "number": "4",
+    "pages": "821--843",
+    "volume": "13",
+    "year": "2005",
+    "zbl": "1101.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/J/2005/Jin_Yau_2005_General finite type IFS and M-matrix.pdf"
+  },
+  {
+    "zbmath": "1818691",
+    "language": "English",
+    "issn": "0024-6107",
+    "title": "Hausdorff dimension of self-similar sets with overlaps",
+    "authors": [
+      "Ngai, Sze-Man",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "ngai.sze-man",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S0024610701001946",
+    "journal": "J. Lond. Math. Soc., II. Ser.",
+    "number": "3",
+    "pages": "655--672",
+    "volume": "63",
+    "year": "2001",
+    "zbl": "1013.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/2001/Ngai_Wang_2001_Hausdorff dimension of self-similar sets with overlaps.pdf"
+  },
+  {
+    "zbmath": "5016083",
+    "language": "English",
+    "issn": "1093-6106",
+    "title": "Self-similar measures associated to IFS with non-uniform contraction ratios",
+    "authors": [
+      "Ngai, Sze-Man",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "ngai.sze-man",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.4310/AJM.2005.v9.n2.a7",
+    "journal": "Asian J. Math.",
+    "number": "2",
+    "pages": "227--244",
+    "volume": "9",
+    "year": "2005",
+    "zbl": "1105.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/2005/Ngai_Wang_2005_Self-similar measures associated to IFS with non-uniform contraction ratios.pdf"
+  },
+  {
+    "zbmath": "1818654",
+    "language": "English",
+    "issn": "0024-6107",
+    "title": "Iterated function systems with overlaps and self-similar measures",
+    "authors": [
+      "Lau, Ka-Sing",
+      "Ngai, Sze-Man",
+      "Rao, Hui"
+    ],
+    "author_ids": [
+      "lau.kasing",
+      "ngai.sze-man",
+      "rao.hui"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28D05",
+      "37A05",
+      "37C40"
+    ],
+    "doi": "10.1112/S0024610700001654",
+    "journal": "J. Lond. Math. Soc., II. Ser.",
+    "number": "1",
+    "pages": "99--116",
+    "volume": "63",
+    "year": "2001",
+    "zbl": "1019.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2001/Lau_Ngai_Rao_2001_Iterated Function Systems with Overlaps and Self-Similar Measures.pdf"
+  },
+  "Separation properties for self-similar sets::/Users/alexrutar/.local/share/database/zotero_papers/S/1994/Schief_1994_Separation properties for self-similar sets.pdf",
+  {
+    "zbmath": "36405",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Multifractal decompositions of Moran fractals",
+    "authors": [
+      "Cawley, Robert",
+      "Mauldin, R."
+    ],
+    "author_ids": [
+      "cawley.robert-g",
+      "mauldin.richard-daniel"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37D45"
+    ],
+    "doi": "10.1016/0001-8708(92)90064-R",
+    "journal": "Adv. Math.",
+    "number": "2",
+    "pages": "196--236",
+    "volume": "92",
+    "year": "1992",
+    "zbl": "0763.58018",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/C/1992/Cawley_Mauldin_1992_Multifractal decompositions of Moran fractals.pdf"
+  },
+  {
+    "zbmath": "5033991",
+    "language": "English",
+    "issn": "1093-6106",
+    "title": "A modified multifractal formalism for a class of self-similar measures with overlap",
+    "authors": [
+      "Shmerkin, Pablo"
+    ],
+    "author_ids": [
+      "shmerkin.pablo-s"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.4310/AJM.2005.v9.n3.a3",
+    "journal": "Asian J. Math.",
+    "number": "3",
+    "pages": "323--348",
+    "volume": "9",
+    "year": "2005",
+    "zbl": "1091.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/S/2005/Shmerkin_2005_A Modified Multifractal Formalism for a Class of Self-similar Measures with.pdf"
+  },
+  "Recent progress on {Bernoulli} convolutions::/Users/alexrutar/.local/share/database/zotero_papers/V/2018/Varjú_2018_Recent progress on Bernoulli convolutions.pdf",
+  "Matrix analysis::/Users/alexrutar/.local/share/database/zotero_papers/H/1985/Horn_Johnson_1985_Matrix analysis.pdf",
+  {
+    "zbmath": "1691066",
+    "url": "semanticscholar.org/paper/4ce10ddbcf5deca940611fdabf077d58694fbe37",
+    "language": "English",
+    "issn": "0196-8858",
+    "title": "Multifractal structure of convolution of the Cantor measure",
+    "authors": [
+      "Hu, Tian-You",
+      "Lau, Ka-Sing"
+    ],
+    "author_ids": [
+      "hu.tianyou",
+      "lau.kasing"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A75",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1006/aama.2000.0683",
+    "journal": "Adv. Appl. Math.",
+    "number": "1",
+    "pages": "1--16",
+    "volume": "27",
+    "year": "2001",
+    "zbl": "0991.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2001/Hu_Lau_2001_Multifractal Structure of Convolution of the Cantor Measure.pdf"
+  },
+  {
+    "zbmath": "2189364",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "The limited Rademacher functions and Bernoulli convolutions associated with Pisot numbers",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "11R06",
+      "28A78",
+      "28A80",
+      "28D20",
+      "37A45",
+      "54C30"
+    ],
+    "doi": "10.1016/j.aim.2004.06.011",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "24--101",
+    "volume": "195",
+    "year": "2005",
+    "zbl": "1078.11062",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2005/Feng_2005_The limited Rademacher functions and Bernoulli convolutions associated with.pdf"
+  },
+  {
+    "zbmath": "5618743",
+    "language": "English",
+    "issn": "0021-7824",
+    "title": "Multifractal formalism for self-similar measures with weak separation condition",
+    "authors": [
+      "Feng, De-Jun",
+      "Lau, Ka-Sing"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "lau.kasing"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1016/j.matpur.2009.05.009",
+    "journal": "J. Math. Pures Appl. (9)",
+    "number": "4",
+    "pages": "407--428",
+    "volume": "92",
+    "year": "2009",
+    "zbl": "1184.28009",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2009/Feng_Lau_2009_Multifractal formalism for self-similar measures with weak separation condition.pdf"
+  },
+  {
+    "zbmath": "5792553",
+    "language": "English",
+    "issn": "0951-7715",
+    "title": "Graph-directed iterated function systems satisfying the generalized finite type condition",
+    "authors": [
+      "Ngai, Sze-Man",
+      "Wang, Fei",
+      "Dong, Xinhan"
+    ],
+    "author_ids": [
+      "ngai.sze-man",
+      "wang.fei.9",
+      "dong.xinhan"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1088/0951-7715/23/9/013",
+    "journal": "Nonlinearity",
+    "number": "9",
+    "pages": "2333--2350",
+    "volume": "23",
+    "year": "2010",
+    "zbl": "1196.28009",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/2010/Ngai_Wang_Dong_2010_Graph-directed iterated function systems satisfying the generalized finite type.pdf"
+  },
+  {
+    "zbmath": "6051266",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "Local entropy averages and projections of fractal measures",
+    "authors": [
+      "Hochman, Michael",
+      "Shmerkin, Pablo"
+    ],
+    "author_ids": [
+      "hochman.michael",
+      "shmerkin.pablo-s"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.4007/annals.2012.175.3.1",
+    "journal": "Ann. Math. (2)",
+    "number": "3",
+    "pages": "1001--1059",
+    "volume": "175",
+    "year": "2012",
+    "zbl": "1251.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2012/Hochman_Shmerkin_2012_Local entropy averages and projections of fractal measures.pdf"
+  },
+  "On self-similar sets with overlaps and inverse theorems for entropy in \\${\\textbackslash}mathbb\\{{R}\\}{\\textasciicircum}d\\$::/Users/alexrutar/.local/share/zotero/storage/9QBURP2K/1503.html",
+  "Dimension of ergodic measures projected onto self-similar sets with overlaps::/Users/alexrutar/.local/share/zotero/storage/6U2CJSA6/1908.html",
+  "Espaces métriques, plongements, facteurs",
+  "Ensembles impropres et nombre dimensionnel",
+  {
+    "zbmath": "6371220",
+    "language": "English",
+    "issn": "0002-9947",
+    "title": "Assouad type dimensions and homogeneity of fractals",
+    "authors": [
+      "Fraser, Jonathan"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A20",
+      "28A78",
+      "28A80",
+      "28C15"
+    ],
+    "doi": "10.1090/S0002-9947-2014-06202-8",
+    "journal": "Trans. Am. Math. Soc.",
+    "number": "12",
+    "pages": "6687--6733",
+    "volume": "366",
+    "year": "2014",
+    "zbl": "1305.28021",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2014/Fraser_2014_Assouad type dimensions and homogeneity of fractals.pdf"
+  },
+  {
+    "zbmath": "1512242",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "On the existence of doubling measures with certain regularity properties",
+    "authors": [
+      "Bylund, Per",
+      "Gudayol, Jaume"
+    ],
+    "author_ids": [
+      "bylund.per",
+      "gudayol.jaume"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28C15",
+      "54E45",
+      "54F45"
+    ],
+    "doi": "10.1090/S0002-9939-00-05405-8",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "11",
+    "pages": "3317--3327",
+    "volume": "128",
+    "year": "2000",
+    "zbl": "0957.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2000/Bylund_Gudayol_2000_On the existence of doubling measures with certain regularity properties.pdf"
+  },
+  "Étude d'une dimension métrique liée à la possibilité de plongements dans \\${\\textbackslash}mathbb\\{{R}\\}{\\textasciicircum}n\\$",
+  {
+    "zbmath": "1804061",
+    "language": "English",
+    "issn": "1073-2780",
+    "title": "The pressure function for products of non-negative matrices.",
+    "authors": [
+      "Feng, De-Jun",
+      "Lau, Ka-Sing"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "lau.kasing"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37A60",
+      "37D35"
+    ],
+    "doi": "10.4310/MRL.2002.v9.n3.a10",
+    "journal": "Math. Res. Lett.",
+    "number": "2-3",
+    "pages": "363--378",
+    "volume": "9",
+    "year": "2002",
+    "zbl": "1116.37302",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2002/Feng_Lau_2002_The Pressure Function for Products of Non-negative Matrices.pdf"
+  },
+  "Some exceptional phenomena in multifractal formalism: {Part} {II}::/Users/alexrutar/.local/share/database/zotero_papers/F/2005/Feng_Lau_Wang_2005_Some exceptional phenomena in multifractal formalism.pdf",
+  "Self-{Similarity}, \\${L}{\\textasciicircum}p\\$-{Spectrum} and {Multifractal} {Formalism}::/Users/alexrutar/.local/share/database/zotero_papers/L/1995/Lau_1995_Self-Similarity, \\$L^p\\$-Spectrum and Multifractal Formalism.pdf",
+  {
+    "zbmath": "404275",
+    "language": "English",
+    "issn": "0026-9255",
+    "title": "Mean quadratic variations and Fourier asymptotics of self-similar measures",
+    "authors": [
+      "Lau, Ka-Sing",
+      "Wang, Jianrong"
+    ],
+    "author_ids": [
+      "lau.kasing",
+      "wang.jianrong"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "42B10"
+    ],
+    "doi": "10.1007/BF01311213",
+    "journal": "Monatsh. Math.",
+    "number": "1-2",
+    "pages": "99--132",
+    "volume": "115",
+    "year": "1993",
+    "zbl": "0778.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/1993/Lau_Wang_1993_Mean quadratic variations and Fourier asymptotics of self-similar measures.pdf"
+  },
+  {
+    "zbmath": "5614742",
+    "language": "English",
+    "issn": "0010-3640",
+    "title": "Dimension theory of iterated function systems",
+    "authors": [
+      "Feng, De-Jun",
+      "Hu, Huyi"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "hu.huyi"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37C40",
+      "37C45"
+    ],
+    "doi": "10.1002/cpa.20276",
+    "journal": "Commun. Pure Appl. Math.",
+    "number": "11",
+    "pages": "1435--1500",
+    "volume": "62",
+    "year": "2009",
+    "zbl": "1230.37031",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2009/Feng_Hu_2009_Dimension theory of iterated function systems.pdf"
+  },
+  {
+    "zbmath": "1139872",
+    "url": "semanticscholar.org/paper/df92c40a78a4c81d43794571ecc196dbb3a86268",
+    "language": "English",
+    "issn": "0196-8858",
+    "title": "Self-conformal multifractal measures",
+    "authors": [
+      "Patzschke, Norbert"
+    ],
+    "author_ids": [
+      "patzschke.norbert"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "28D05",
+      "37D45"
+    ],
+    "doi": "10.1006/aama.1997.0557",
+    "journal": "Adv. Appl. Math.",
+    "number": "4",
+    "pages": "486--513",
+    "volume": "19",
+    "year": "1997",
+    "zbl": "0912.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/1997/Patzschke_1997_Self-Conformal Multifractal Measures.pdf"
+  },
+  "Haar measure and the semigroup of measures on a compact group::/Users/alexrutar/.local/share/database/zotero_papers/W/1954/Wendel_1954_Haar measure and the semigroup of measures on a compact group.pdf",
+  "On the embedding of topological semigroups and integral domains::/Users/alexrutar/.local/share/database/zotero_papers/G/1951/Gelbaum_Kalisch_Olmsted_1951_On the embedding of topological semigroups and integral domains.pdf",
+  {
+    "zbmath": "5272585",
+    "language": "English",
+    "issn": "0065-1036",
+    "title": "Dyadic Diophantine approximation and Katok's horseshoe approximation",
+    "authors": [
+      "Persson, Tomas",
+      "Schmeling, Jörg"
+    ],
+    "author_ids": [
+      "persson.tomas",
+      "schmeling.jorg"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11J83",
+      "37A45",
+      "37C45"
+    ],
+    "doi": "10.4064/aa132-3-2",
+    "journal": "Acta Arith.",
+    "number": "3",
+    "pages": "205--230",
+    "volume": "132",
+    "year": "2008",
+    "zbl": "1169.11033",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/2008/Persson_Schmeling_2008_Dyadic Diophantine approximation and Katok's horseshoe approximation.pdf"
+  },
+  {
+    "zbmath": "6570859",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Multifractal analysis of some multiple ergodic averages",
+    "authors": [
+      "Fan, Ai-Hua",
+      "Schmeling, Jörg",
+      "Wu, Meng"
+    ],
+    "author_ids": [
+      "fan.ai-hua",
+      "schmeling.jorg",
+      "wu.meng"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37A25",
+      "37B10",
+      "37C30",
+      "37C45",
+      "37D35"
+    ],
+    "doi": "10.1016/j.aim.2016.03.012",
+    "journal": "Adv. Math.",
+    "pages": "271--333",
+    "volume": "295",
+    "year": "2016",
+    "zbl": "1358.37016",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2016/Fan_Schmeling_Wu_2016_Multifractal analysis of some multiple ergodic averages.pdf"
+  },
+  {
+    "zbmath": "1279669",
+    "language": "English",
+    "issn": "0022-4715",
+    "title": "A multifractal analysis of equilibrium measures for conformal expanding maps and Moran-like geometric constructions",
+    "authors": [
+      "Pesin, Yakov",
+      "Weiss, Howard"
+    ],
+    "author_ids": [
+      "pesin.yakov-b",
+      "weiss.howard"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37A35",
+      "37C45",
+      "37F15",
+      "37F35"
+    ],
+    "doi": "10.1007/BF02180206",
+    "journal": "J. Stat. Phys.",
+    "number": "1-2",
+    "pages": "233--275",
+    "volume": "86",
+    "year": "1997",
+    "zbl": "0985.37040",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/1997/Pesin_Weiss_1997_A multifractal analysis of equilibrium measures for conformal expanding maps.pdf"
+  },
+  "Some exceptional phenomena in multifractal formalism: {Part} {I}::/Users/alexrutar/.local/share/database/zotero_papers/L/2005/Lau_Wang_2005_Some exceptional phenomena in multifractal formalism.pdf",
+  {
+    "zbmath": "1800237",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Ergodic limits on the conformal repellers",
+    "authors": [
+      "Feng, De-Jun",
+      "Lau, Ka-Sing",
+      "Wu, Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "lau.kasing",
+      "wu.jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37A25",
+      "37C45",
+      "37C70",
+      "37F15"
+    ],
+    "doi": "10.1006/aima.2001.2054",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "58--91",
+    "volume": "169",
+    "year": "2002",
+    "zbl": "1033.37017",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2002/Feng_Lau_Wu_2002_Ergodic Limits on the Conformal Repellers.pdf"
+  },
+  {
+    "zbmath": "5021190",
+    "language": "French",
+    "issn": "0246-0203",
+    "title": "Weak quasi-Bernoulli measures: results and examples",
+    "authors": [
+      "Testud, Benoît"
+    ],
+    "author_ids": [
+      "testud.benoit"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "28D05"
+    ],
+    "doi": "10.1016/j.anihpb.2005.01.002",
+    "journal": "Ann. Inst. Henri Poincaré, Probab. Stat.",
+    "number": "1",
+    "pages": "1--35",
+    "volume": "42",
+    "year": "2006",
+    "zbl": "1134.28303",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/T/2006/Testud_2006_Mesures quasi-Bernoulli au sens faible.pdf"
+  },
+  {
+    "zbmath": "5041366",
+    "language": "English",
+    "issn": "0951-7715",
+    "title": "Phase transitions for the multifractal analysis of self-similar measures",
+    "authors": [
+      "Testud, B."
+    ],
+    "author_ids": [
+      "testud.benoit"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37A45",
+      "37C45"
+    ],
+    "doi": "10.1088/0951-7715/19/5/009",
+    "journal": "Nonlinearity",
+    "number": "5",
+    "pages": "1201--1217",
+    "volume": "19",
+    "year": "2006",
+    "zbl": "1093.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/T/2006/Testud_2006_Phase transitions for the multifractal analysis of self-similar measures.pdf"
+  },
+  {
+    "zbmath": "6023762",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Multifractal analysis of Bernoulli convolutions associated with Salem numbers",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K16",
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1016/j.aim.2011.11.006",
+    "journal": "Adv. Math.",
+    "number": "5",
+    "pages": "3052--3077",
+    "volume": "229",
+    "year": "2012",
+    "zbl": "1244.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2012/Feng_2012_Multifractal analysis of Bernoulli convolutions associated with Salem numbers.pdf"
+  },
+  {
+    "zbmath": "1633091",
+    "language": "English",
+    "issn": "0022-2518",
+    "title": "Existence of \\(L^q\\) dimensions and entropy dimension for self-conformal measures",
+    "authors": [
+      "Peres, Yuval",
+      "Solomyak, Boris"
+    ],
+    "author_ids": [
+      "peres.yuval",
+      "solomyak.boris"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1512/iumj.2000.49.1851",
+    "journal": "Indiana Univ. Math. J.",
+    "number": "4",
+    "pages": "1603--1621",
+    "volume": "49",
+    "year": "2000",
+    "zbl": "0978.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/2000/Peres_Solomyak_2000_Existence of \\$L^q\\$ dimensions and entropy dimension for self-conformal measures.pdf"
+  },
+  {
+    "zbmath": "5695272",
+    "language": "English",
+    "issn": "1050-2947",
+    "title": "Fractal measures and their singularities: the characterization of strange sets.",
+    "authors": [
+      "Halsey, Thomas",
+      "Jensen, Mogens",
+      "Kadanoff, Leo",
+      "Procaccia, Itamar",
+      "Shraiman, Boris"
+    ],
+    "author_ids": [
+      "halsey.thomas-c",
+      "jensen.mogens-h",
+      "kadanoff.leo-p",
+      "procaccia.itamar",
+      "shraiman.boris-i"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37D45",
+      "82B05"
+    ],
+    "doi": "10.1103/PhysRevA.33.1141",
+    "journal": "Phys. Rev. A (3)",
+    "number": "2",
+    "pages": "1141--1151",
+    "volume": "33",
+    "year": "1986",
+    "zbl": "1184.37028",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/1986/Halsey_Jensen_Kadanoff_Procaccia_Shraiman_1986_Fractal measures and their singularities.pdf"
+  },
+  "Convex analysis::/Users/alexrutar/.local/share/database/zotero_papers/R/1970/Rockafellar_1970_Convex analysis.pdf",
+  {
+    "zbmath": "2060066",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "Lyapunov exponents for products of matrices and multifractal analysis. I: Positive matrices",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45",
+      "37H15"
+    ],
+    "doi": "10.1007/BF02783432",
+    "journal": "Isr. J. Math.",
+    "pages": "353--376",
+    "volume": "138",
+    "year": "2003",
+    "zbl": "1037.37023",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2003/Feng_2003_Lyapunov exponents for products of matrices and multifractal analysis.pdf"
+  },
+  null,
+  "On the multifractal spectrum of weighted {Birkhoff} averages::/Users/alexrutar/.local/share/zotero/storage/2WAYFAY4/2006.html",
+  "A {Sandwich} {Proof} of the {Shannon}-{McMillan}-{Breiman} {Theorem}::/Users/alexrutar/.local/share/database/zotero_papers/A/1988/Algoet_Cover_1988_A Sandwich Proof of the Shannon-McMillan-Breiman Theorem.pdf",
+  {
+    "zbmath": "7228221",
+    "url": "semanticscholar.org/paper/5352b9a1789044337c79fa225f21a066b73500f1",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "Uniformity of Lyapunov exponents for non-invertible matrices",
+    "authors": [
+      "Feng, De-Jun",
+      "Lo, Chiu-Hong",
+      "Shen, Shuang"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "lo.chiu-hong",
+      "shen.shuang"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37B10",
+      "37D35",
+      "37H15"
+    ],
+    "doi": "10.1017/etds.2019.4",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "9",
+    "pages": "2399--2433",
+    "volume": "40",
+    "year": "2020",
+    "zbl": "1448.37060",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2019/Feng_Lo_Shen_2019_Uniformity of Lyapunov exponents for non-invertible matrices.pdf"
+  },
+  {
+    "zbmath": "1011400",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "Projecting the one-dimensional Sierpiński gasket",
+    "authors": [
+      "Kenyon, Richard"
+    ],
+    "author_ids": [
+      "kenyon.richard-w"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37D45"
+    ],
+    "doi": "10.1007/BF02774038",
+    "journal": "Isr. J. Math.",
+    "pages": "221--238",
+    "volume": "97",
+    "year": "1997",
+    "zbl": "0871.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/1997/Kenyon_1997_Projecting the one-dimensional Sierpinski gasket.pdf"
+  },
+  {
+    "zbmath": "7010361",
+    "language": "English",
+    "issn": "0894-0347",
+    "title": "Absolute continuity of Bernoulli convolutions for algebraic parameters",
+    "authors": [
+      "Varjú, Péter"
+    ],
+    "author_ids": [
+      "varju.peter-pal"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "42A85"
+    ],
+    "doi": "10.1090/jams/916",
+    "journal": "J. Am. Math. Soc.",
+    "number": "2",
+    "pages": "351--397",
+    "volume": "32",
+    "year": "2019",
+    "zbl": "1408.28017",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/V/2019/Varjú_2019_Absolute continuity of Bernoulli convolutions for algebraic parameters.pdf"
+  },
+  {
+    "zbmath": "7097495",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "On the dimension of Bernoulli convolutions for all transcendental parameters",
+    "authors": [
+      "Varjú, Péter"
+    ],
+    "author_ids": [
+      "varju.peter-pal"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "42A85"
+    ],
+    "doi": "10.4007/annals.2019.189.3.9",
+    "journal": "Ann. Math. (2)",
+    "number": "3",
+    "pages": "1001--1011",
+    "volume": "189",
+    "year": "2019",
+    "zbl": "1426.28024",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/V/2019/Varjú_2019_On the dimension of Bernoulli convolutions for all transcendental parameters.pdf"
+  },
+  "Non-negative matrices and {Markov} chains::/Users/alexrutar/.local/share/database/zotero_papers/S/1981/Seneta_1981_Non-negative matrices and Markov chains.pdf",
+  {
+    "zbmath": "7061260",
+    "url": "hdl.handle.net/10023/20006",
+    "language": "English",
+    "issn": "0002-9890",
+    "title": "Almost arithmetic progressions in the primes and other large sets",
+    "authors": [
+      "Fraser, Jonathan"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11B05",
+      "11B25",
+      "11N13"
+    ],
+    "doi": "10.1080/00029890.2019.1586264",
+    "journal": "Am. Math. Mon.",
+    "number": "6",
+    "pages": "553--558",
+    "volume": "126",
+    "year": "2019",
+    "zbl": "1473.11026",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2019/Fraser_2019_Almost Arithmetic Progressions in the Primes and Other Large Sets.pdf"
+  },
+  {
+    "zbmath": "6846521",
+    "url": "hdl.handle.net/10023/11978",
+    "language": "English",
+    "issn": "0024-6093",
+    "title": "Arithmetic patches, weak tangents, and dimension",
+    "authors": [
+      "Fraser, Jonathan",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11B25",
+      "11N13",
+      "28A80"
+    ],
+    "doi": "10.1112/blms.12112",
+    "journal": "Bull. Lond. Math. Soc.",
+    "number": "1",
+    "pages": "85--95",
+    "volume": "50",
+    "year": "2018",
+    "zbl": "1429.11022",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2018/Fraser_Yu_2018_Arithmetic patches, weak tangents, and dimension.pdf"
+  },
+  {
+    "zbmath": "7323075",
+    "url": "hdl.handle.net/10023/16374",
+    "language": "English",
+    "issn": "1073-7928",
+    "title": "Dimensions of sets which uniformly avoid arithmetic progressions",
+    "authors": [
+      "Fraser, Jonathan",
+      "Saito, Kota",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "saito.kota",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11B25",
+      "28A80",
+      "37A44"
+    ],
+    "doi": "10.1093/imrn/rnx261",
+    "journal": "Int. Math. Res. Not.",
+    "number": "14",
+    "pages": "4419--4430",
+    "volume": "2019",
+    "year": "2019",
+    "zbl": "1460.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2019/Fraser_Saito_Yu_2019_Dimensions of Sets Which Uniformly Avoid Arithmetic Progressions.pdf"
+  },
+  {
+    "zbmath": "2092420",
+    "url": "journals.impan.gov.pl/sm/Inf/161-3-3.html",
+    "language": "English",
+    "issn": "0039-3223",
+    "title": "Iterated function systems with a weak separation condition",
+    "authors": [
+      "Lau, Ka-Sing",
+      "Wang, Xiang-Yang"
+    ],
+    "author_ids": [
+      "lau.kasing",
+      "wang.xiangyang"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.4064/sm161-3-3",
+    "journal": "Stud. Math.",
+    "number": "3",
+    "pages": "249--268",
+    "volume": "161",
+    "year": "2004",
+    "zbl": "1062.28009",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2004/Lau_Wang_2004_Iterated function systems with a weak separation condition.pdf"
+  },
+  {
+    "zbmath": "1990960",
+    "language": "English",
+    "issn": "0022-2518",
+    "title": "Dimensions of overlaps of self-similar fractals and self-similar multifractals",
+    "authors": [
+      "Olsen, L."
+    ],
+    "author_ids": [
+      "olsen.lars-ole-ronnow"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1512/iumj.2002.51.2186",
+    "journal": "Indiana Univ. Math. J.",
+    "number": "6",
+    "pages": "1461--1477",
+    "volume": "51",
+    "year": "2002",
+    "zbl": "1026.28010",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/2002/Olsen_2002_Dimensions of overlaps of self-similar fractals and self-similar multifractals.pdf"
+  },
+  {
+    "zbmath": "927263",
+    "language": "English",
+    "issn": "0025-584X",
+    "title": "Random self-similar multifractals",
+    "authors": [
+      "Arbeiter, Matthias",
+      "Patzschke, Norbert"
+    ],
+    "author_ids": [
+      "arbeiter.matthias",
+      "patzschke.norbert"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "60D05",
+      "60G57"
+    ],
+    "doi": "10.1002/mana.3211810102",
+    "journal": "Math. Nachr.",
+    "pages": "5--42",
+    "volume": "181",
+    "year": "1996",
+    "zbl": "0873.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/1996/Arbeiter_Patzschke_1996_Random Self-Similar Multifractals.pdf"
+  },
+  {
+    "zbmath": "743912",
+    "language": "English",
+    "issn": "0022-247X",
+    "title": "An improved multifractal formalism and self-similar measures",
+    "authors": [
+      "Riedi, Rolf"
+    ],
+    "author_ids": [
+      "riedi.rolf-h"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1006/jmaa.1995.1030",
+    "journal": "J. Math. Anal. Appl.",
+    "number": "2",
+    "pages": "462--490",
+    "volume": "189",
+    "year": "1995",
+    "zbl": "0819.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/R/1995/Riedi_1995_An Improved Multifractal Formalism and Self-Similar Measures.pdf"
+  },
+  {
+    "zbmath": "6821007",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "Additive energy and the Hausdorff dimension of the exceptional set in metric pair correlation problems",
+    "authors": [
+      "Aistleitner, Christoph",
+      "Larcher, Gerhard",
+      "Lewko, Mark"
+    ],
+    "author_ids": [
+      "aistleitner.christoph",
+      "larcher.gerhard",
+      "lewko.mark"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K06",
+      "11K60"
+    ],
+    "doi": "10.1007/s11856-017-1597-5",
+    "journal": "Isr. J. Math.",
+    "number": "1",
+    "pages": "463--485",
+    "volume": "222",
+    "year": "2017",
+    "zbl": "1388.11043",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2017/Aistleitner_Larcher_Lewko_2017_Additive energy and the Hausdorff dimension of the exceptional set in metric.pdf"
+  },
+  "Exact dimensionality and {Ledrappier}-{Young} formula for the {Furstenberg} measure::/Users/alexrutar/.local/share/zotero/storage/DBKN5RXC/2007.html",
+  {
+    "zbmath": "6766540",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Differentiability of \\(L^{q}\\)-spectrum and multifractal decomposition by using infinite graph-directed IFSs",
+    "authors": [
+      "Deng, Guotai",
+      "Ngai, Sze-Man"
+    ],
+    "author_ids": [
+      "deng.guotai",
+      "ngai.sze-man"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1016/j.aim.2017.02.021",
+    "journal": "Adv. Math.",
+    "pages": "190--237",
+    "volume": "311",
+    "year": "2017",
+    "zbl": "1459.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2017/Deng_Ngai_2017_Differentiability of \\$L^q\\$-spectrum and multifractal decomposition by using.pdf"
+  },
+  {
+    "zbmath": "6731115",
+    "language": "English",
+    "issn": "0021-7670",
+    "title": "Dynamical multifractal zeta-functions, multifractal pressure and fine multifractal spectra",
+    "authors": [
+      "Olsen, L."
+    ],
+    "author_ids": [
+      "olsen.lars-ole-ronnow"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37B10",
+      "37C30"
+    ],
+    "doi": "10.1007/s11854-017-0007-6",
+    "journal": "J. Anal. Math.",
+    "pages": "207--253",
+    "volume": "131",
+    "year": "2017",
+    "zbl": "1386.37019",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/2017/Olsen_2017_Dynamical multifractal zeta-functions, multifractal pressure and fine.pdf"
+  },
+  {
+    "zbmath": "7000113",
+    "language": "English",
+    "issn": "1446-7887",
+    "title": "\\(L^q\\)-spectrum of self-similar measures with overlaps in the absence of second-order identities",
+    "authors": [
+      "Ngai, Sze-Man",
+      "Xie, Yuanyuan"
+    ],
+    "author_ids": [
+      "ngai.sze-man",
+      "xie.yuanyuan"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S1446788718000034",
+    "journal": "J. Aust. Math. Soc.",
+    "number": "1",
+    "pages": "56--103",
+    "volume": "106",
+    "year": "2019",
+    "zbl": "1408.28015",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/2019/Ngai_Xie_2019_\\$L^q\\$-Spectrum of Self-Similar Measures with Overlaps in the Absence of.pdf"
+  },
+  "Estimations de la dimension inférieure et de la dimension supérieure des mesures::/Users/alexrutar/.local/share/database/zotero_papers/H/1998/Heurteaux_1998_Estimations de la dimension inférieure et de la dimension supérieure des mesures.pdf",
+  {
+    "zbmath": "6275654",
+    "language": "English",
+    "issn": "0951-7715",
+    "title": "Multifractal spectrum of self-similar measures with overlap",
+    "authors": [
+      "Bruggeman, Cameron",
+      "Hare, Kathryn",
+      "Mak, Cheuk"
+    ],
+    "author_ids": [
+      "bruggeman.cameron",
+      "hare.kathryn-e",
+      "mak.cheuk-yu"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "42A85"
+    ],
+    "doi": "10.1088/0951-7715/27/2/227",
+    "journal": "Nonlinearity",
+    "number": "2",
+    "pages": "227--256",
+    "volume": "27",
+    "year": "2014",
+    "zbl": "1286.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2014/Bruggeman_Hare_Mak_2014_Multifractal spectrum of self-similar measures with overlap.pdf"
+  },
+  {
+    "zbmath": "6324842",
+    "language": "English",
+    "issn": "0147-1937",
+    "title": "Multi-fractal analysis of convolution powers of measures",
+    "authors": [
+      "Bruggeman, Cameron",
+      "Hare, Kathryn"
+    ],
+    "author_ids": [
+      "bruggeman.cameron",
+      "hare.kathryn-e"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.14321/realanalexch.38.2.0391",
+    "journal": "Real Anal. Exch.",
+    "number": "2",
+    "pages": "391--408",
+    "volume": "38",
+    "year": "2013",
+    "zbl": "1298.28013",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2013/Bruggeman_Hare_2013_Multi-Fractal Analysis of Convolution Powers of Measures.pdf"
+  },
+  {
+    "zbmath": "838708",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "A multifractal formalism",
+    "authors": [
+      "Olsen, L."
+    ],
+    "author_ids": [
+      "olsen.lars-ole-ronnow"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1006/aima.1995.1066",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "82--196",
+    "volume": "116",
+    "year": "1995",
+    "zbl": "0841.28012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/1995/Olsen_1995_A Multifractal Formalism.pdf"
+  },
+  "Über die {Verteilung} der {Wurzeln} bei gewissen algebraischen {Gleichungen} mit ganzzahligen {Koeffizienten}::/Users/alexrutar/.local/share/database/zotero_papers/F/1923/Fekete_1923_Über die Verteilung der Wurzeln bei gewissen algebraischen Gleichungen mit.pdf",
+  "Functional analysis and semi-groups::/Users/alexrutar/.local/share/database/zotero_papers/H/1957/Hille_Phillips_1957_Functional analysis and semi-groups.pdf",
+  {
+    "zbmath": "3857419",
+    "language": "English",
+    "issn": "0027-7630",
+    "title": "The Hausdorff dimension of general Sierpi\\ŉski carpets",
+    "authors": [
+      "McMullen, Curt"
+    ],
+    "author_ids": [
+      "mcmullen.curtis-t"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A75"
+    ],
+    "doi": "10.1017/S0027763000021085",
+    "journal": "Nagoya Math. J.",
+    "pages": "1--9",
+    "volume": "96",
+    "year": "1984",
+    "zbl": "0539.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/1984/McMullen_1984_The Hausdorff dimension of general Sierpiński carpets.pdf"
+  },
+  {
+    "zbmath": "881832",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "Measures of full dimension on affine-invariant sets",
+    "authors": [
+      "Kenyon, R.",
+      "Peres, Y."
+    ],
+    "author_ids": [
+      "kenyon.richard-w",
+      "peres.yuval"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28D20",
+      "37A99"
+    ],
+    "doi": "10.1017/S0143385700008828",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "2",
+    "pages": "307--323",
+    "volume": "16",
+    "year": "1996",
+    "zbl": "0851.58028",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/1996/Kenyon_Peres_1996_Measures of full dimension on affine-invariant sets.pdf"
+  },
+  "Assouad dimension and fractal geometry::/Users/alexrutar/.local/share/database/zotero_papers/F/2021/Fraser_2021_Assouad dimension and fractal geometry.pdf",
+  "Iterated function systems with super-exponentially close cylinders::/Users/alexrutar/.local/share/zotero/storage/W7RNNUKE/1909.html",
+  {
+    "zbmath": "7019851",
+    "language": "English",
+    "issn": "0022-2518",
+    "title": "Assouad-type spectra for some fractal families",
+    "authors": [
+      "Fraser, Jonathan",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45",
+      "82B43"
+    ],
+    "doi": "10.1512/iumj.2018.67.7509",
+    "journal": "Indiana Univ. Math. J.",
+    "number": "5",
+    "pages": "2005--2043",
+    "volume": "67",
+    "year": "2018",
+    "zbl": "1407.28002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2018/Fraser_Yu_2018_Assouad-type spectra for some fractal families.pdf"
+  },
+  "Properties of {Quasi}-{Assouad} dimension::/Users/alexrutar/.local/share/zotero/storage/776BL3IX/1703.html",
+  {
+    "zbmath": "902619",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "Hausdorff dimensions of sofic affine-invariant sets",
+    "authors": [
+      "Kenyon, R.",
+      "Peres, Y."
+    ],
+    "author_ids": [
+      "kenyon.richard-w",
+      "peres.yuval"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "37B10"
+    ],
+    "doi": "10.1007/BF02762702",
+    "journal": "Isr. J. Math.",
+    "pages": "157--178",
+    "volume": "94",
+    "year": "1997",
+    "zbl": "1075.37503",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/1996/Kenyon_Peres_1996_Hausdorff dimensions of sofic affine-invariant sets.pdf"
+  },
+  {
+    "zbmath": "7047809",
+    "language": "English",
+    "issn": "1239-629X",
+    "title": "The Assouad spectrum and the quasi-Assouad dimension: a tale of two spectra",
+    "authors": [
+      "Fraser, Jonathan",
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Troscheit, Sascha",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "troscheit.sascha",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.5186/aasfm.2019.4419",
+    "journal": "Ann. Acad. Sci. Fenn., Math.",
+    "number": "1",
+    "pages": "379--387",
+    "volume": "44",
+    "year": "2019",
+    "zbl": "1410.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2019/Fraser_Hare_Hare_Troscheit_Yu_2019_The Assouad spectrum and the quasi-Assouad dimension.pdf"
+  },
+  "Exploring the toolkit of {Jean} {Bourgain}::/Users/alexrutar/.local/share/database/zotero_papers/T/2020/Tao_2020_Exploring the toolkit of Jean Bourgain.pdf",
+  {
+    "zbmath": "6769143",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "The Assouad dimension of self-affine carpets with no grid structure",
+    "authors": [
+      "Fraser, Jonathan",
+      "Jordan, Thomas"
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1090/proc/13629",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "11",
+    "pages": "4905--4918",
+    "volume": "145",
+    "year": "2017",
+    "zbl": "1371.28016",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2017/Fraser_Jordan_2017_The Assouad dimension of self-affine carpets with no grid structure.pdf"
+  },
+  {
+    "zbmath": "5166239",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "Gibbs properties of self-conformal measures and the multifractal formalism",
+    "authors": [
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S0143385706000952",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "3",
+    "pages": "787--812",
+    "volume": "27",
+    "year": "2007",
+    "zbl": "1126.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2007/Feng_2007_Gibbs properties of self-conformal measures and the multifractal formalism.pdf"
+  },
+  {
+    "zbmath": "2171866",
+    "language": "English",
+    "issn": "1069-5869",
+    "title": "A class of self-affine sets and self-affine measures",
+    "authors": [
+      "Feng, De-Jun",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C35"
+    ],
+    "doi": "10.1007/s00041-004-4031-4",
+    "journal": "J. Fourier Anal. Appl.",
+    "number": "1",
+    "pages": "107--124",
+    "volume": "11",
+    "year": "2005",
+    "zbl": "1091.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2005/Feng_Wang_2005_A Class of Self-Affine Sets and Self-Affine Measures.pdf"
+  },
+  {
+    "zbmath": "3856061",
+    "language": "English",
+    "issn": "0167-2789",
+    "title": "The infinite number of generalized dimensions of fractals and strange attractors",
+    "authors": [
+      "Hentschel, H.",
+      "Procaccia, Itamar"
+    ],
+    "author_ids": [
+      "hentschel.h-george-e",
+      "procaccia.itamar"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37D45"
+    ],
+    "doi": "10.1016/0167-2789(83)90235-X",
+    "journal": "Physica D",
+    "pages": "435--444",
+    "volume": "8",
+    "year": "1983",
+    "zbl": "0538.58026",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/1983/Hentschel_Procaccia_1983_The infinite number of generalized dimensions of fractals and strange attractors.pdf"
+  },
+  {
+    "zbmath": "1069924",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "A dimension result arising from the \\(L^q\\)-spectrum of a measure",
+    "authors": [
+      "Ngai, Sze-Man"
+    ],
+    "author_ids": [
+      "ngai.sze-man"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/S0002-9939-97-03974-9",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "10",
+    "pages": "2943--2951",
+    "volume": "125",
+    "year": "1997",
+    "zbl": "0886.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/1997/Ngai_1997_A dimension result arising from the \\$L^q\\$-spectrum of a measure.pdf"
+  },
+  {
+    "zbmath": "6551168",
+    "language": "English",
+    "issn": "0002-9947",
+    "title": "Absolute continuity of self-similar measures, their projections and convolutions",
+    "authors": [
+      "Shmerkin, Pablo",
+      "Solomyak, Boris"
+    ],
+    "author_ids": [
+      "shmerkin.pablo-s",
+      "solomyak.boris"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37A45",
+      "42A38"
+    ],
+    "doi": "10.1090/tran6696",
+    "journal": "Trans. Am. Math. Soc.",
+    "number": "7",
+    "pages": "5125--5151",
+    "volume": "368",
+    "year": "2016",
+    "zbl": "1334.28013",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/S/2015/Shmerkin_Solomyak_2015_Absolute continuity of self-similar measures, their projections and convolutions.pdf"
+  },
+  {
+    "zbmath": "6863445",
+    "url": "hdl.handle.net/10023/17146",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "New dimension spectra: finer information on scaling and homogeneity",
+    "authors": [
+      "Fraser, Jonathan",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "26A21",
+      "28A80",
+      "30L05"
+    ],
+    "doi": "10.1016/j.aim.2017.12.019",
+    "journal": "Adv. Math.",
+    "pages": "273--328",
+    "volume": "329",
+    "year": "2018",
+    "zbl": "1390.28019",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2018/Fraser_Yu_2018_New dimension spectra.pdf"
+  },
+  {
+    "zbmath": "6593689",
+    "language": "English",
+    "issn": "2308-1309",
+    "title": "Quasi-Assouad dimension of fractals",
+    "authors": [
+      "Lü, Fan",
+      "Xi, Li-Feng"
+    ],
+    "author_ids": [
+      "lu.fan",
+      "xi.lifeng"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37F35"
+    ],
+    "doi": "10.4171/JFG/34",
+    "journal": "J. Fractal Geom.",
+    "number": "2",
+    "pages": "187--215",
+    "volume": "3",
+    "year": "2016",
+    "zbl": "1345.28019",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2016/Lü_Xi_2016_Quasi-Assouad dimension of fractals.pdf"
+  },
+  "Totally ergodic generalised matrix equilibrium states have the {Bernoulli} property::/Users/alexrutar/.local/share/zotero/storage/8V97XV2H/2011.html",
+  "\\${L}{\\textasciicircum}q\\$ dimensions of self-similar measures, and applications: a survey::/Users/alexrutar/.local/share/zotero/storage/DP5NUR2Y/1907.html",
+  {
+    "zbmath": "5780980",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-1-4419-7287-3; 978-1-4614-2636-3; 978-1-4419-7288-0",
+    "issn": "0172-6056",
+    "series": "Undergraduate Texts Math.",
+    "fseries": "Undergraduate Texts in Mathematics",
+    "edition": "3rd ed.",
+    "title": "Complex analysis",
+    "authors": [
+      "Bak, Joseph",
+      "Newman, Donald"
+    ],
+    "author_ids": [
+      "bak.joseph",
+      "newman.donald-j"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "30-01"
+    ],
+    "doi": "10.1007/978-1-4419-7288-0",
+    "year": "2010",
+    "zbl": "1205.30001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2010/Bak_Newman_2010_Complex Analysis.pdf"
+  },
+  "Linear analysis: an introductory course::/Users/alexrutar/.local/share/database/zotero_papers/B/1999/Bollobás_1999_Linear analysis.pdf",
+  "Measure {Theory}::/Users/alexrutar/.local/share/database/zotero_papers/B/2007/Bogačev_2007_Measure Theory.pdf",
+  "Real analysis::/Users/alexrutar/Database/Zotero/Bruckner et al_1997_Real analysis2.pdf",
+  {
+    "zbmath": "6258045",
+    "language": "English",
+    "publisher": "New York, NY: Birkhäuser/Springer",
+    "isbn": "978-1-4614-6955-1; 978-1-4614-6956-8",
+    "issn": "1019-6242",
+    "series": "Birkhäuser Adv. Texts, Basler Lehrbüch.",
+    "fseries": "Birkhäuser Advanced Texts. Basler Lehrbücher",
+    "edition": "2nd revised ed.",
+    "title": "Measure theory",
+    "authors": [
+      "Cohn, Donald"
+    ],
+    "author_ids": [
+      "cohn.donald-l"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "01A75",
+      "28-01",
+      "28Axx"
+    ],
+    "doi": "10.1007/978-1-4614-6956-8",
+    "year": "2013",
+    "zbl": "1292.28002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/C/2013/Cohn_2013_Measure Theory.pdf"
+  },
+  "Measure {Theory}::/Users/alexrutar/.local/share/database/zotero_papers/D/1994/Doob_1994_Measure Theory.pdf",
+  "The geometry of fractal sets::/Users/alexrutar/.local/share/database/zotero_papers/F/2002/Falconer_2002_The geometry of fractal sets.pdf",
+  {
+    "zbmath": "6473590",
+    "language": "English",
+    "publisher": "Boca Raton, FL: CRC Press",
+    "isbn": "978-1-4987-2713-6; 978-1-4987-2715-0",
+    "series": "Textb. Math.",
+    "fseries": "Textbooks in Mathematics",
+    "edition": "2nd updated edition",
+    "title": "A course in abstract harmonic analysis",
+    "authors": [
+      "Folland, Gerald"
+    ],
+    "author_ids": [
+      "folland.gerald-b"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "43-01"
+    ],
+    "doi": "10.1201/b19172",
+    "year": "2016",
+    "zbl": "1342.43001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2016/Folland_2016_A Course in Abstract Harmonic Analysis.pdf"
+  },
+  "Real analysis: modern techniques and their applications::/Users/alexrutar/.local/share/database/zotero_papers/F/1999/Folland_1999_Real analysis.pdf",
+  {
+    "zbmath": "6085892",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-1-4614-5391-8; 978-1-4614-5392-5",
+    "issn": "1613-5237",
+    "series": "CMS Books Math./Ouvrages Math. SMC",
+    "fseries": "CMS Books in Mathematics/Ouvrages de Mathématiques de la SMC",
+    "title": "Interpolation and Sidon sets for compact groups",
+    "authors": [
+      "Graham, Colin",
+      "Hare, Kathryn"
+    ],
+    "author_ids": [
+      "graham.colin-c",
+      "hare.kathryn-e"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "42A38",
+      "42A55",
+      "43-02",
+      "43A25",
+      "43A46"
+    ],
+    "doi": "10.1007/978-1-4614-5392-5",
+    "year": "2013",
+    "zbl": "1267.43001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2013/Graham_Hare_2013_Interpolation and Sidon Sets for Compact Groups.pdf"
+  },
+  "Introduction to geometric probability::/Users/alexrutar/.local/share/database/zotero_papers/K/1999/Klain_Rota_1999_Introduction to geometric probability.pdf",
+  "Introductory functional analysis with applications::/Users/alexrutar/.local/share/database/zotero_papers/K/1978/Kreyszig_1978_Introductory functional analysis with applications.pdf",
+  "Introduction to stochastic integration::/Users/alexrutar/.local/share/database/zotero_papers/K/2006/Kuo_2006_Introduction to stochastic integration.pdf",
+  "Analysis::/Users/alexrutar/.local/share/database/zotero_papers/L/2006/Lieb_Loss_2006_Analysis.pdf",
+  "An {Introduction} to {Functional} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/M/2018/Marcoux_2018_An Introduction to Functional Analysis.pdf",
+  "The {Existence} and {Uniqueness} of the {Haar} {Integral} on a {Locally} {Compact} {Topological} {Group}::/Users/alexrutar/.local/share/database/zotero_papers/P/2000/Pedersen_2000_The Existence and Uniqueness of the Haar Integral on a Locally Compact.pdf",
+  "A {First} {Course} in {Probability}::/Users/alexrutar/.local/share/database/zotero_papers/R/2010/Ross_2010_A First Course in Probability.pdf",
+  "Real and {Complex} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/R/2013/Rudin_2013_Real and Complex Analysis.pdf",
+  "Functional analysis::/Users/alexrutar/.local/share/database/zotero_papers/R/2007/Rudin_2007_Functional analysis.pdf",
+  "Math 411: {Honours} {Complex} {Variables}::/Users/alexrutar/.local/share/database/zotero_papers/R/2013/Runde_Bowman_2013_Math 411.pdf",
+  "Handbook of analysis and its foundations::/Users/alexrutar/.local/share/database/zotero_papers/S/1997/Schechter_1997_Handbook of analysis and its foundations.pdf",
+  "Lectures on {Analytic} {Geometry}::/Users/alexrutar/.local/share/database/zotero_papers/S/2019/Scholze_2019_Lectures on Analytic Geometry.pdf",
+  "A {Course} on {Borel} {Sets}::/Users/alexrutar/.local/share/database/zotero_papers/S/1998/Srivastava_1998_A Course on Borel Sets.pdf",
+  "Fourier analysis: an introduction::/Users/alexrutar/.local/share/database/zotero_papers/S/2003/Stein_Shakarchi_2003_Fourier analysis.pdf",
+  "Complex analysis::/Users/alexrutar/.local/share/database/zotero_papers/S/2003/Stein_Shakarchi_2003_Complex analysis.pdf",
+  "Real analysis: measure theory, integration, and hilbert spaces::/Users/alexrutar/.local/share/database/zotero_papers/S/2005/Stein_Shakarchi_2005_Real analysis.pdf",
+  "Multivariable {Calculus}::/Users/alexrutar/.local/share/database/zotero_papers/R/2005/Runde_2005_Multivariable Calculus.pdf",
+  "Measure {Theory} and {Fine} {Properties} of {Functions}::/Users/alexrutar/.local/share/database/zotero_papers/E/2015/Evans_Gariepy_2015_Measure Theory and Fine Properties of Functions.pdf",
+  "Stochastic {Calculus}: {An} {Introduction} with {Applications}::/Users/alexrutar/.local/share/database/zotero_papers/L/2014/Lawler_2014_Stochastic Calculus.pdf",
+  "Functional {Analysis}: {Introduction} to {Further} {Topics} in {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/S/2011/Stein_Shakarchi_2011_Functional Analysis.pdf",
+  "A first look at rigorous probability theory::/Users/alexrutar/.local/share/database/zotero_papers/R/2010/Rosenthal_2010_A first look at rigorous probability theory.pdf",
+  "An {Introduction} to {Harmonic} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/K/2004/Katznelson_2004_An Introduction to Harmonic Analysis.pdf",
+  "Principles of mathematical analysis::/Users/alexrutar/.local/share/database/zotero_papers/R/2017/Rudin_2017_Principles of mathematical analysis.pdf",
+  "Abstract {Algebra}::/Users/alexrutar/.local/share/database/zotero_papers/G/2007/Garrett_2007_Abstract Algebra.pdf",
+  "The {Theory} of {Algebraic} {Number} {Fields}::/Users/alexrutar/.local/share/database/zotero_papers/H/1998/Hilbert_1998_The Theory of Algebraic Number Fields.pdf",
+  "Ideals, varieties, and algorithms::/Users/alexrutar/.local/share/database/zotero_papers/C/2012/Cox_Little_O'Shea_2012_Ideals, varieties, and algorithms.pdf",
+  "A {First} {Course} in {Noncommutative} {Rings}::/Users/alexrutar/.local/share/database/zotero_papers/L/2001/Lam_2001_A First Course in Noncommutative Rings.pdf",
+  "Algebraic {Number} {Theory}::/Users/alexrutar/.local/share/database/zotero_papers/L/1994/Lang_1994_Algebraic Number Theory.pdf",
+  "Algebra::/Users/alexrutar/.local/share/database/zotero_papers/L/2005/Lang_2005_Algebra.pdf",
+  "An {Introduction} to {Algebra}::/Users/alexrutar/.local/share/database/zotero_papers/L/2018/Lawrence_Zorzitto_2018_An Introduction to Algebra.pdf",
+  {
+    "zbmath": "6875542",
+    "language": "English",
+    "publisher": "Cham: Springer",
+    "isbn": "978-3-319-90232-6; 978-3-319-90233-3",
+    "issn": "0172-5939",
+    "series": "Universitext",
+    "fseries": "Universitext",
+    "edition": "2nd edition",
+    "title": "Number fields",
+    "authors": [
+      "Marcus, Daniel"
+    ],
+    "author_ids": [
+      "marcus.daniel-a"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "11-01",
+      "11R04",
+      "11R27",
+      "11R29",
+      "11R37",
+      "11R44",
+      "11Rxx"
+    ],
+    "doi": "10.1007/978-3-319-90233-3",
+    "year": "2018",
+    "zbl": "1411.11003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/2018/Marcus_2018_Number Fields.pdf"
+  },
+  "Linear representations of finite groups::/Users/alexrutar/.local/share/database/zotero_papers/S/2014/Serre_Scott_Springer Science+Business Media_2014_Linear representations of finite groups.pdf",
+  "Introduction to commutative algebra::/Users/alexrutar/.local/share/database/zotero_papers/A/2003/Atiyah_Macdonald_2003_Introduction to commutative algebra.pdf",
+  "Abstract algebra::/Users/alexrutar/.local/share/database/zotero_papers/D/2004/Dummit_Foote_2004_Abstract algebra.pdf",
+  "Algebra::/Users/alexrutar/.local/share/database/zotero_papers/H/2008/Hungerford_2008_Algebra.pdf",
+  "Algebra and {Topology}::/Users/alexrutar/.local/share/database/zotero_papers/S/2011/Schapira_2011_Algebra and Topology.pdf",
+  "Ramanujan’s {Notebooks}::/Users/alexrutar/.local/share/database/zotero_papers/B/1985/Berndt_1985_Ramanujan’s Notebooks.pdf",
+  "Theory of {Lie} {Groups}::/Users/alexrutar/.local/share/database/zotero_papers/C/1946/Chevalley_1946_Theory of Lie Groups.pdf",
+  "Probability: {Theory} and {Examples}::/Users/alexrutar/.local/share/database/zotero_papers/D/2019/Durrett_2019_Probability.pdf",
+  {
+    "zbmath": "5785125",
+    "language": "English",
+    "publisher": "London: Springer",
+    "isbn": "978-0-85729-020-5; 978-0-85729-021-2",
+    "issn": "0072-5285",
+    "series": "Grad. Texts Math.",
+    "fseries": "Graduate Texts in Mathematics",
+    "title": "Ergodic theory. With a view towards number theory",
+    "authors": [
+      "Einsiedler, Manfred",
+      "Ward, Thomas"
+    ],
+    "author_ids": [
+      "einsiedler.manfred-leopold",
+      "ward.thomas-b"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "11K99",
+      "28-02",
+      "28Axx",
+      "37-02",
+      "37Axx"
+    ],
+    "doi": "10.1007/978-0-85729-021-2",
+    "volume": "259",
+    "year": "2011",
+    "zbl": "1206.37001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/E/2011/Einsiedler_Ward_2011_Ergodic Theory.pdf"
+  },
+  "Graph theory::/Users/alexrutar/.local/share/database/zotero_papers/D/2000/Diestel_2000_Graph theory.pdf",
+  "A course in game theory::/Users/alexrutar/.local/share/database/zotero_papers/O/2006/Osborne_Rubinstein_2006_A course in game theory.pdf",
+  {
+    "zbmath": "5625353",
+    "language": "English",
+    "publisher": "London: Springer",
+    "isbn": "978-1-84882-890-2; 978-1-84882-891-9",
+    "issn": "1615-2085",
+    "series": "Springer Undergrad. Math. Ser.",
+    "fseries": "Springer Undergraduate Mathematics Series",
+    "edition": "2nd ed.",
+    "title": "Elementary differential geometry",
+    "authors": [
+      "Pressley, Andrew"
+    ],
+    "author_ids": [
+      "pressley.andrew"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "53-01",
+      "53A04",
+      "53A05",
+      "53A10",
+      "53C20",
+      "53C22",
+      "53C40"
+    ],
+    "doi": "10.1007/978-1-84882-891-9",
+    "year": "2010",
+    "zbl": "1191.53002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/2010/Pressley_2010_Elementary Differential Geometry.pdf"
+  },
+  "Combinatorial problems and exercises::/Users/alexrutar/.local/share/database/zotero_papers/L/2005/Lovász_2005_Combinatorial problems and exercises.pdf",
+  {
+    "zbmath": "6034615",
+    "url": "zenodo.org/record/4461500",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-1-4419-9981-8; 978-1-4419-9982-5",
+    "issn": "0072-5285",
+    "series": "Grad. Texts Math.",
+    "fseries": "Graduate Texts in Mathematics",
+    "edition": "2nd revised ed",
+    "title": "Introduction to smooth manifolds",
+    "authors": [
+      "Lee, John"
+    ],
+    "author_ids": [
+      "lee.john-m"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "53-01",
+      "53-02",
+      "53Cxx",
+      "57-02",
+      "57Rxx",
+      "58-02",
+      "58Axx"
+    ],
+    "doi": "10.1007/978-1-4419-9982-5",
+    "volume": "218",
+    "year": "2013",
+    "zbl": "1258.53002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2012/Lee_2012_Introduction to Smooth Manifolds.pdf"
+  },
+  "Riemannian manifolds: an introduction to curvature::/Users/alexrutar/.local/share/database/zotero_papers/L/1997/Lee_1997_Riemannian manifolds.pdf",
+  "Algebraic {Geometry}::/Users/alexrutar/.local/share/database/zotero_papers/H/1977/Hartshorne_1977_Algebraic Geometry.pdf",
+  "Representation {Theory}::/Users/alexrutar/.local/share/database/zotero_papers/F/2004/Fulton_Harris_2004_Representation Theory.pdf",
+  "Combinatorial optimization: polyhedra and efficiency::/Users/alexrutar/.local/share/database/zotero_papers/S/2003/Schrijver_2003_Combinatorial optimization.pdf",
+  {
+    "zbmath": "5785475",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-1-4419-7399-3; 978-1-4419-7400-6",
+    "issn": "0172-5939",
+    "series": "Universitext",
+    "fseries": "Universitext",
+    "edition": "2nd ed.",
+    "title": "An introduction to manifolds. 2nd revised ed.",
+    "authors": [
+      "Tu, Loring"
+    ],
+    "author_ids": [
+      "tu.loring-w"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "57Rxx",
+      "58-01",
+      "58Axx",
+      "58C25",
+      "58C35",
+      "93Cxx"
+    ],
+    "doi": "10.1007/978-1-4419-7400-6",
+    "year": "2011",
+    "zbl": "1200.58001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/T/2011/Tu_2011_An Introduction to Manifolds.pdf"
+  },
+  "Putnam and beyond::/Users/alexrutar/.local/share/database/zotero_papers/G/2007/Gelca_Andreescu_2007_Putnam and beyond.pdf",
+  "Foundations of {Algebraic} {Geometry}::/Users/alexrutar/.local/share/database/zotero_papers/V/2017/Vakil_2017_Foundations of Algebraic Geometry.pdf",
+  "An introduction to the theory of numbers::/Users/alexrutar/.local/share/database/zotero_papers/H/1998/Hardy_Wright_1998_An introduction to the theory of numbers.pdf",
+  "Abstract {Harmonic} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/H/1963/Hewitt_Ross_1963_Abstract Harmonic Analysis.pdf",
+  "Topology::/Users/alexrutar/.local/share/database/zotero_papers/M/2015/Munkres_2015_Topology.pdf",
+  "Calculus on manifolds::/Users/alexrutar/.local/share/database/zotero_papers/S/1998/Spivak_1998_Calculus on manifolds.pdf",
+  "Algebraic topology::/Users/alexrutar/.local/share/database/zotero_papers/H/2018/Hatcher_2018_Algebraic topology.pdf",
+  "Conjecture and proof::/Users/alexrutar/.local/share/database/zotero_papers/L/2001/Laczkovich_2001_Conjecture and proof.pdf",
+  "Additive combinatorics::/Users/alexrutar/.local/share/database/zotero_papers/T/2010/Tao_Vu_2010_Additive combinatorics.pdf",
+  "Harmonic analysis: real-variable methods, orthogonality and oscillatory integrals::/Users/alexrutar/.local/share/database/zotero_papers/S/1995/Stein_Murphy_1995_Harmonic analysis.pdf",
+  "Conformal graph directed {Markov} systems on {Carnot} groups::/Users/alexrutar/.local/share/database/zotero_papers/C/2020/Chousionis_Tyson_Urbański_2020_Conformal graph directed Markov systems on Carnot groups.pdf",
+  "Making sense of the {Legendre} transform::/Users/alexrutar/.local/share/database/zotero_papers/Z/2009/Zia_Redish_McKay_2009_Making sense of the Legendre transform.pdf",
+  "Additive transversality of fractal sets in the reals and the integers::/Users/alexrutar/.local/share/zotero/storage/EWQ77ZQJ/2007.html",
+  "Fractal geometry of {Bedford}-{McMullen} carpets::/Users/alexrutar/.local/share/zotero/storage/CXUFM9CT/2008.html",
+  "A {Characterization} of {Cesaro} {Convergence}::/Users/alexrutar/.local/share/zotero/storage/QYKW7VL7/2012.html",
+  "Defining fractals in a probability space::/Users/alexrutar/.local/share/database/zotero_papers/D/1994/Dai_Taylor_1994_Defining fractals in a probability space.pdf",
+  {
+    "zbmath": "5216350",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "Billingsley's packing dimension",
+    "authors": [
+      "Das, Manav"
+    ],
+    "author_ids": [
+      "das.manav"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/S0002-9939-07-09069-7",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "1",
+    "pages": "273--278",
+    "volume": "136",
+    "year": "2008",
+    "zbl": "1132.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2008/Das_2008_Billingsley's packing dimension.pdf"
+  },
+  {
+    "zbmath": "2188288",
+    "language": "English",
+    "issn": "0002-9947",
+    "title": "Hausdorff measures, dimensions and mutual singularity",
+    "authors": [
+      "Das, Manav"
+    ],
+    "author_ids": [
+      "das.manav"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/S0002-9947-05-04031-6",
+    "journal": "Trans. Am. Math. Soc.",
+    "number": "11",
+    "pages": "4249--4268",
+    "volume": "357",
+    "year": "2005",
+    "zbl": "1104.28001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2005/Das_2005_Hausdorff measures, dimensions and mutual singularity.pdf"
+  },
+  "Hausdorff dimension in probability theory::/Users/alexrutar/.local/share/database/zotero_papers/B/1960/Billingsley_1960_Hausdorff dimension in probability theory.pdf",
+  {
+    "zbmath": "1747012",
+    "url": "semanticscholar.org/paper/23cb57762ae019d077365c4513c4ff225a75971a",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "The validity of the multifractal formalism: Results and examples",
+    "authors": [
+      "Nasr, Fathi",
+      "Bhouri, Imen",
+      "Heurteaux, Yanick"
+    ],
+    "author_ids": [
+      "ben-nasr.fathi",
+      "bhouri.imen",
+      "heurteaux.yanick"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1006/aima.2001.2025",
+    "journal": "Adv. Math.",
+    "number": "2",
+    "pages": "264--284",
+    "volume": "165",
+    "year": "2002",
+    "zbl": "1020.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2002/Ben Nasr_Bhouri_Heurteaux_2002_The Validity of the Multifractal Formalism.pdf"
+  },
+  {
+    "zbmath": "2077782",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "Multifractal analysis of weak Gibbs measures and phase transition -- application to some Bernoulli convolutions.",
+    "authors": [
+      "Feng, De-Jun",
+      "Olivier, Eric"
+    ],
+    "author_ids": [
+      "feng.de-jun",
+      "olivier.eric"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "37A99",
+      "37C45",
+      "37D35"
+    ],
+    "doi": "10.1017/S0143385703000051",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "6",
+    "pages": "1751--1784",
+    "volume": "23",
+    "year": "2003",
+    "zbl": "1128.37303",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2003/Feng_Olivier_2003_Multifractal analysis of weak Gibbs measures and phase transition—application.pdf"
+  },
+  "Fourier decay of self-similar measures and self-similar sets of uniqueness::/Users/alexrutar/.local/share/zotero/storage/JIXWURKB/2004.html",
+  {
+    "zbmath": "7211591",
+    "language": "English",
+    "issn": "0147-1937",
+    "title": "Local dimensions of overlapping self-similar measures",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28C15",
+      "37C45"
+    ],
+    "doi": "10.14321/realanalexch.44.2.0247",
+    "journal": "Real Anal. Exch.",
+    "number": "2",
+    "pages": "247--266",
+    "volume": "44",
+    "year": "2019",
+    "zbl": "1440.28010",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2019/Hare_Hare_2019_Local Dimensions of Overlapping Self-Similar Measures.pdf"
+  },
+  "Fourier analysis and {Hausdorff} dimension::/Users/alexrutar/.local/share/database/zotero_papers/M/2015/Mattila_2015_Fourier analysis and Hausdorff dimension.pdf",
+  {
+    "zbmath": "6798848",
+    "language": "English",
+    "issn": "0020-9910",
+    "title": "The Hausdorff and dynamical dimensions of self-affine sponges: a dimension gap result",
+    "authors": [
+      "Das, Tushar",
+      "Simmons, David"
+    ],
+    "author_ids": [
+      "das.tushar-kanti",
+      "simmons.david"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37C15",
+      "37C40",
+      "37C45",
+      "37D20",
+      "37D35"
+    ],
+    "doi": "10.1007/s00222-017-0725-5",
+    "journal": "Invent. Math.",
+    "number": "1",
+    "pages": "85--134",
+    "volume": "210",
+    "year": "2017",
+    "zbl": "1387.37026",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2017/Das_Simmons_2017_The Hausdorff and dynamical dimensions of self-affine sponges.pdf"
+  },
+  "Local dimensions of measures of finite type: {Appendix}::/Users/alexrutar/.local/share/zotero/storage/9UUFMSXW/1504.html",
+  "Topics in symbolic dynamics and applications::/Users/alexrutar/.local/share/database/zotero_papers/B/2000/Blanchard_Maass_Nogueira_2000_Topics in symbolic dynamics and applications.pdf",
+  "Introduction to dynamical systems::/Users/alexrutar/.local/share/database/zotero_papers/B/2002/Brin_Stuck_2002_Introduction to dynamical systems.pdf",
+  "Fourier analysis::/Users/alexrutar/.local/share/database/zotero_papers/D/2001/Duoandikoetxea_2001_Fourier analysis.pdf",
+  "A {Mathematician}’s {Apology}::/Users/alexrutar/.local/share/database/zotero_papers/H/1940/Hardy_1940_A Mathematician’s Apology.pdf",
+  "The machinery of life::/Users/alexrutar/.local/share/database/zotero_papers/G/2010/Goodsell_2010_The machinery of life.pdf",
+  "Asymptotics and special functions::/Users/alexrutar/.local/share/database/zotero_papers/O/2010/Olver_2010_Asymptotics and special functions.pdf",
+  "Geometric and {Combinatorial} {Properties} of {Self}-similar {Multifractal} {Measures}::/Users/alexrutar/.local/share/zotero/storage/4DWG7F7K/2008.html",
+  "Pisot and {Salem} {Numbers}::/Users/alexrutar/.local/share/database/zotero_papers/B/1992/Bertin_Decomps-Guilloux_Grandet-Hugot_Pathiaux-Delefosse_Schreiber_1992_Pisot and Salem Numbers.pdf",
+  "The ergodicity problem in economics::/Users/alexrutar/.local/share/database/zotero_papers/P/2019/Peters_2019_The ergodicity problem in economics.pdf",
+  {
+    "zbmath": "5381924",
+    "language": "English",
+    "issn": "0022-2518",
+    "title": "Multifractal spectra of in-homogeneous self-similar measures",
+    "authors": [
+      "Olsen, L.",
+      "Snigireva, N."
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1512/iumj.2008.57.3622",
+    "journal": "Indiana Univ. Math. J.",
+    "number": "4",
+    "pages": "1789--1843",
+    "volume": "57",
+    "year": "2008",
+    "zbl": "1218.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/2008/Olsen_Snigireva_2008_Multifractal spectra of in-homogenous self-similar measures.pdf"
+  },
+  {
+    "zbmath": "7242466",
+    "language": "English",
+    "issn": "0025-5874",
+    "title": "Intermediate dimensions",
+    "authors": [
+      "Falconer, Kenneth",
+      "Fraser, Jonathan",
+      "Kempton, Tom"
+    ],
+    "author_ids": [
+      "falconer.kenneth-j",
+      "fraser.jonathan-m",
+      "kempton.tom"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1007/s00209-019-02452-0",
+    "journal": "Math. Z.",
+    "number": "1-2",
+    "pages": "813--830",
+    "volume": "296",
+    "year": "2020",
+    "zbl": "1448.28009",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2020/Falconer_Fraser_Kempton_2020_Intermediate dimensions.pdf"
+  },
+  {
+    "zbmath": "5838021",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "Multifractal analysis for Bedford-McMullen carpets",
+    "authors": [
+      "Jordan, Thomas",
+      "Rams, Michal"
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1017/S0305004110000472",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "1",
+    "pages": "147--156",
+    "volume": "150",
+    "year": "2011",
+    "zbl": "1206.28012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/J/2011/Jordan_Rams_2011_Multifractal analysis for Bedford–McMullen carpets.pdf"
+  },
+  "Crinkly curves, {Markov} partitions and box dimensions in self-similar sets::/Users/alexrutar/.local/share/database/zotero_papers/B/1984/Bedford_1984_Crinkly curves, Markov partitions and box dimensions in self-similar sets.pdf",
+  "Hausdorff dimension in graph directed constructions::/Users/alexrutar/.local/share/database/zotero_papers/M/1988/Mauldin_Williams_1988_Hausdorff dimension in graph directed constructions.pdf",
+  {
+    "zbmath": "6432474",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-1-4939-2711-1; 978-1-4939-5026-3; 978-3-319-16721-3",
+    "issn": "0172-6056",
+    "series": "Undergraduate Texts Math.",
+    "fseries": "Undergraduate Texts in Mathematics",
+    "edition": "2nd ed.",
+    "title": "Understanding analysis",
+    "authors": [
+      "Abbott, Stephen"
+    ],
+    "author_ids": [
+      "abbott.stephen-d"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "26-01"
+    ],
+    "doi": "10.1007/978-1-4939-2712-8",
+    "year": "2015",
+    "zbl": "1318.26001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2015/Abbott_2015_Understanding Analysis.pdf"
+  },
+  "The scenery flow of self-similar measures with weak separation condition::/Users/alexrutar/.local/share/zotero/storage/Y58PUFAD/2103.html",
+  {
+    "zbmath": "6370013",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Scaling scenery of \\((\\times m, \\times n)\\) invariant measures",
+    "authors": [
+      "Ferguson, Andrew",
+      "Fraser, Jonathan",
+      "Sahlsten, Tuomas"
+    ],
+    "author_ids": [
+      "ferguson.andrew-l",
+      "fraser.jonathan-m",
+      "sahlsten.tuomas"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28D05",
+      "37C45"
+    ],
+    "doi": "10.1016/j.aim.2014.09.019",
+    "journal": "Adv. Math.",
+    "pages": "564--602",
+    "volume": "268",
+    "year": "2015",
+    "zbl": "1302.28029",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2015/Ferguson_Fraser_Sahlsten_2015_Scaling scenery of ( × m , × n ) invariant measures.pdf"
+  },
+  {
+    "zbmath": "7332520",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "When the weak separation condition implies the generalized finite type condition",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Rutar, Alex"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "rutar.alex"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1090/proc/15307",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "4",
+    "pages": "1555--1568",
+    "volume": "149",
+    "year": "2021",
+    "zbl": "1466.28010",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2021/Hare_Hare_Rutar_2021_When the Weak Separation Condition implies the Generalized Finite Type Condition.pdf"
+  },
+  "On badly approximable numbers and certain games::/Users/alexrutar/.local/share/database/zotero_papers/S/1966/Schmidt_1966_On badly approximable numbers and certain games.pdf",
+  "A {Mass} {Transference} {Principle} and the {Duffin}-{Schaeffer} {Conjecture} for {Hausdorff} {Measures}::/Users/alexrutar/.local/share/database/zotero_papers/B/2006/Beresnevich_Velani_2006_A Mass Transference Principle and the Duffin-Schaeffer Conjecture for Hausdorff.pdf",
+  {
+    "zbmath": "7239275",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "On the Duffin-Schaeffer conjecture",
+    "authors": [
+      "Koukoulopoulos, Dimitris",
+      "Maynard, James"
+    ],
+    "author_ids": [
+      "koukoulopoulos.dimitris",
+      "maynard.james"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "05C40",
+      "11J83"
+    ],
+    "doi": "10.4007/annals.2020.192.1.5",
+    "journal": "Ann. Math. (2)",
+    "number": "1",
+    "pages": "251--307",
+    "volume": "192",
+    "year": "2020",
+    "zbl": "1459.11154",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/2020/Koukoulopoulos_Maynard_2020_On the Duffin-Schaeffer conjecture.pdf"
+  },
+  "On the {Hausdorff} measure of shrinking target sets on self-conformal sets::/Users/alexrutar/.local/share/database/zotero_papers/A/2021/Allen_Bárány_2021_On the Hausdorff measure of shrinking target sets on self-conformal sets.pdf",
+  "Overlapping iterated function systems from the perspective of {Metric} {Number} {Theory}::/Users/alexrutar/.local/share/zotero/storage/PX98JHNW/1901.html",
+  "Intrinsic {Diophantine} {Approximation} for overlapping iterated function systems::/Users/alexrutar/.local/share/zotero/storage/8G94PTBW/2104.html",
+  {
+    "zbmath": "7128517",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "An analogue of Khintchine's theorem for self-conformal sets",
+    "authors": [
+      "Baker, Simon"
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "11J83",
+      "11K55",
+      "28A80"
+    ],
+    "doi": "10.1017/S030500411800049X",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "3",
+    "pages": "567--597",
+    "volume": "167",
+    "year": "2019",
+    "zbl": "1444.11158",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2019/Baker_2019_An analogue of Khintchine's theorem for self-conformal sets.pdf"
+  },
+  "A {Multifractal} {Decomposition} for {Self}-similar {Measures} with {Exact} {Overlaps}::/Users/alexrutar/.local/share/zotero/storage/LXBBRYIX/2104.html",
+  "Lectures in {Harmonic} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/W/2002/Wolff_2002_Lectures in Harmonic Analysis.pdf",
+  "Hausdorff and {Box} {Dimensions} of {Certain} {Self}-{Affine} {Fractals}::/Users/alexrutar/.local/share/database/zotero_papers/L/1992/Lalley_Gatzouras_1992_Hausdorff and Box Dimensions of Certain Self-Affine Fractals.pdf",
+  {
+    "zbmath": "7066466",
+    "language": "English",
+    "issn": "0020-9910",
+    "title": "Hausdorff dimension of planar self-affine sets and measures",
+    "authors": [
+      "Bárány, Balázs",
+      "Hochman, Michael",
+      "Rapaport, Ariel"
+    ],
+    "author_ids": [
+      "barany.balazs",
+      "hochman.michael",
+      "rapaport.ariel"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45",
+      "37F35"
+    ],
+    "doi": "10.1007/s00222-018-00849-y",
+    "journal": "Invent. Math.",
+    "number": "3",
+    "pages": "601--659",
+    "volume": "216",
+    "year": "2019",
+    "zbl": "1414.28014",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2019/Bárány_Hochman_Rapaport_2019_Hausdorff dimension of planar self-affine sets and measures.pdf"
+  },
+  "Geometry of {Sets} and {Measures} in {Euclidean} {Spaces}: {Fractals} and {Rectifiability}::/Users/alexrutar/.local/share/database/zotero_papers/M/1995/Mattila_1995_Geometry of Sets and Measures in Euclidean Spaces.pdf",
+  {
+    "zbmath": "5578730",
+    "url": "annals.math.princeton.edu/annals/2008/168-3/p01.xhtml",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "On the dimensions of conformal repellers. Randomness and parameter dependency",
+    "authors": [
+      "Rugh, Hans"
+    ],
+    "author_ids": [
+      "rugh.hans-henrik"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37D35",
+      "37F35",
+      "37F45",
+      "37H99"
+    ],
+    "doi": "10.4007/annals.2008.168.695",
+    "journal": "Ann. Math. (2)",
+    "number": "3",
+    "pages": "695--748",
+    "volume": "168",
+    "year": "2008",
+    "zbl": "1181.37066",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/R/2008/Rugh_2008_On the dimensions of conformal repellers.pdf"
+  },
+  "Dimension of invariant measures for affine iterated function systems::/Users/alexrutar/.local/share/zotero/storage/MAQF7VBR/1901.html",
+  "Conformal {Fractals}: {Ergodic} {Theory} {Methods}::/Users/alexrutar/.local/share/database/zotero_papers/P/2010/Przytycki_Urbański_2010_Conformal Fractals.pdf",
+  "Minkowski dimension for measures::/Users/alexrutar/.local/share/zotero/storage/Z9PFUK2G/2001.html",
+  {
+    "zbmath": "7113905",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "On the Hausdorff dimension of microsets",
+    "authors": [
+      "Fraser, Jonathan",
+      "Howroyd, Douglas",
+      "Käenmäki, Antti",
+      "Yu, Han"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "howroyd.douglas-c",
+      "kaenmaki.antti",
+      "yu.han"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/proc/14613",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "11",
+    "pages": "4921--4936",
+    "volume": "147",
+    "year": "2019",
+    "zbl": "1428.28013",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2019/Fraser_Howroyd_Käenmäki_Yu_2019_On the Hausdorff dimension of microsets.pdf"
+  },
+  "Introduction to {Fourier} analysis on {Euclidean} spaces::/Users/alexrutar/.local/share/database/zotero_papers/S/1975/Stein_Weiss_1975_Introduction to Fourier analysis on Euclidean spaces.pdf",
+  "Differentiation of real functions::/Users/alexrutar/.local/share/database/zotero_papers/B/1994/Bruckner_1994_Differentiation of real functions.pdf",
+  "Generalised intermediate dimensions::/Users/alexrutar/.local/share/zotero/storage/HQ9PUIPS/2011.html",
+  {
+    "zbmath": "7000762",
+    "language": "English",
+    "issn": "0308-2105",
+    "title": "Assouad dimensions of complementary sets",
+    "authors": [
+      "García, Ignacio",
+      "Hare, Kathryn",
+      "Mendivil, Franklin"
+    ],
+    "author_ids": [
+      "garcia.ignacio",
+      "hare.kathryn-e",
+      "mendivil.franklin"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S0308210517000488",
+    "journal": "Proc. R. Soc. Edinb., Sect. A, Math.",
+    "number": "3",
+    "pages": "517--540",
+    "volume": "148",
+    "year": "2018",
+    "zbl": "1405.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2018/García_Hare_Mendivil_2018_Assouad dimensions of complementary sets.pdf"
+  },
+  {
+    "zbmath": "7056188",
+    "url": "hdl.handle.net/11336/122819",
+    "language": "English",
+    "issn": "0021-2172",
+    "title": "On the Hausdorff dimension of pinned distance sets",
+    "authors": [
+      "Shmerkin, Pablo"
+    ],
+    "author_ids": [
+      "shmerkin.pablo-s"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28D20"
+    ],
+    "doi": "10.1007/s11856-019-1847-9",
+    "journal": "Isr. J. Math.",
+    "number": "2",
+    "pages": "949--972",
+    "volume": "230",
+    "year": "2019",
+    "zbl": "1414.28011",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/S/2019/Shmerkin_2019_On the Hausdorff dimension of pinned distance sets.pdf"
+  },
+  {
+    "zbmath": "1106777",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "Sums of Cantor sets",
+    "authors": [
+      "Cabrelli, Carlos",
+      "Hare, Kathryn",
+      "Molter, Ursula"
+    ],
+    "author_ids": [
+      "cabrelli.carlos-a",
+      "hare.kathryn-e",
+      "molter.ursula-maria"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A05",
+      "28A78"
+    ],
+    "doi": "10.1017/S0143385797097678",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "6",
+    "pages": "1299--1313",
+    "volume": "17",
+    "year": "1997",
+    "zbl": "0891.28001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/C/1997/Cabrelli_Hare_Molter_1997_Sums of Cantor sets.pdf"
+  },
+  "Sur l'ensemble des points de non-dérivabilité d'une fonction continue::/Users/alexrutar/.local/share/database/zotero_papers/Z/1946/Zahorski_1946_Sur l'ensemble des points de non-dérivabilité d'une fonction continue.pdf",
+  {
+    "zbmath": "7357084",
+    "language": "English",
+    "issn": "2308-1309",
+    "title": "Projection theorems for intermediate dimensions",
+    "authors": [
+      "Burrell, Stuart",
+      "Falconer, Kenneth",
+      "Fraser, Jonathan"
+    ],
+    "author_ids": [
+      "burrell.stuart-a",
+      "falconer.kenneth-j",
+      "fraser.jonathan-m"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.4171/JFG/99",
+    "journal": "J. Fractal Geom.",
+    "number": "2",
+    "pages": "95--116",
+    "volume": "8",
+    "year": "2021",
+    "zbl": "1470.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2021/Burrell_Falconer_Fraser_2021_Projection theorems for intermediate dimensions.pdf"
+  },
+  "Intermediate dimensions of infinitely generated attractors::/Users/alexrutar/.local/share/zotero/storage/E67HZN28/2104.html",
+  "The fractal structure of elliptical polynomial spirals::/Users/alexrutar/.local/share/zotero/storage/QU2BC6MU/2008.html",
+  {
+    "zbmath": "7621010",
+    "language": "English",
+    "issn": "0894-9840",
+    "title": "Dimensions of fractional Brownian images",
+    "authors": [
+      "Burrell, Stuart"
+    ],
+    "author_ids": [
+      "burrell.stuart-a"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "60G15",
+      "60G22"
+    ],
+    "doi": "10.1007/s10959-021-01131-3",
+    "journal": "J. Theor. Probab.",
+    "number": "4",
+    "pages": "2217--2238",
+    "volume": "35",
+    "year": "2022",
+    "zbl": "07621010",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2021/Burrell_2021_Dimensions of Fractional Brownian Images.pdf"
+  },
+  {
+    "zbmath": "7336444",
+    "language": "English",
+    "publisher": "Cham: Birkhäuser",
+    "isbn": "978-3-030-59648-4; 978-3-030-59651-4; 978-3-030-59649-1",
+    "booktitle": "Fractal geometry and stochastics VI. Selected papers of the 6th conference, Bad Herrenalb, Germany, September 30 -- October 6, 2018",
+    "title": "Interpolating between dimensions",
+    "authors": [
+      "Fraser, Jonathan"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m"
+    ],
+    "bibtype": "incollection",
+    "classifications": [
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1007/978-3-030-59649-1_1",
+    "pages": "3--24",
+    "year": "2021",
+    "zbl": "1462.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2021/Fraser_2021_Interpolating Between Dimensions.pdf"
+  },
+  "Intermediate dimensions of {Bedford}-{McMullen} carpets with applications to {Lipschitz} equivalence::/Users/alexrutar/.local/share/zotero/storage/YCPX7XWB/2111.html",
+  {
+    "zbmath": "7444077",
+    "language": "English",
+    "publisher": "Cham: Springer",
+    "isbn": "978-3-030-74862-3; 978-3-030-74863-0",
+    "booktitle": "Thermodynamic formalism. CIRM Jean-Morlet chair, fall 2019",
+    "title": "Intermediate dimensions: a survey",
+    "authors": [
+      "Falconer, Kenneth"
+    ],
+    "author_ids": [
+      "falconer.kenneth-j"
+    ],
+    "bibtype": "incollection",
+    "classifications": [
+      "28A80",
+      "54F45"
+    ],
+    "doi": "10.1007/978-3-030-74863-0_14",
+    "pages": "469--493",
+    "year": "2021",
+    "zbl": "1484.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2021/Falconer_2021_Intermediate Dimensions.pdf"
+  },
+  {
+    "zbmath": "2063610",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "One-sided multifractal analysis and points of non-differentiability of devil's staircases",
+    "authors": [
+      "Falconer, Kenneth"
+    ],
+    "author_ids": [
+      "falconer.kenneth-j"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "26A27",
+      "28A78",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1017/S0305004103006960",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "1",
+    "pages": "167--174",
+    "volume": "136",
+    "year": "2004",
+    "zbl": "1046.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2004/Falconer_2004_One-sided multifractal analysis and points of non-differentiability of devils.pdf"
+  },
+  {
+    "zbmath": "7429185",
+    "language": "English",
+    "issn": "1093-6106",
+    "title": "The \\(L^q\\)-spectrum for a class of self-similar measures with overlap",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin",
+      "Shen, Wanchun"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g",
+      "shen.wanchun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.4310/AJM.2021.v25.n2.a3",
+    "journal": "Asian J. Math.",
+    "number": "2",
+    "pages": "195--228",
+    "volume": "25",
+    "year": "2021",
+    "zbl": "1482.28011",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2021/Hare_Hare_Shen_2021_The \\$L^q\\$-spectrum for a class of self-similar measures with overlap.pdf"
+  },
+  {
+    "zbmath": "3034382",
+    "language": "English",
+    "issn": "0012-7094",
+    "title": "The ergodic theorem",
+    "authors": [
+      "Wiener, Norbert"
+    ],
+    "author_ids": [
+      "wiener.norbert"
+    ],
+    "bibtype": "article",
+    "classifications": [],
+    "doi": "10.1215/S0012-7094-39-00501-6",
+    "journal": "Duke Math. J.",
+    "pages": "1--18",
+    "volume": "5",
+    "year": "1939",
+    "zbl": "0021.23501",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/W/1939/Wiener_1939_The ergodic theorem.pdf"
+  },
+  "Matrix representations for some self-similar measures on \\${\\textbackslash}mathbb\\{{R}\\}{\\textasciicircum}\\{d\\}\\$::/Users/alexrutar/.local/share/zotero/storage/W7ZYLNK3/2201.html",
+  "Super-exponential condensation without exact overlaps::/Users/alexrutar/.local/share/zotero/storage/FNN96N33/1910.html",
+  "Sub-self-similar sets::/Users/alexrutar/.local/share/database/zotero_papers/F/1995/Falconer_1995_Sub-self-similar sets.pdf",
+  "Approximation by {Algebraic} {Numbers}::/Users/alexrutar/.local/share/database/zotero_papers/B/2004/Bugeaud_2004_Approximation by Algebraic Numbers.pdf",
+  {
+    "zbmath": "6782156",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "Generalised Cantor sets and the dimension of products",
+    "authors": [
+      "Olson, Eric",
+      "Robinson, James",
+      "Sharples, Nicholas"
+    ],
+    "author_ids": [
+      "olson.eric-j",
+      "robinson.james-c",
+      "sharples.nicholas"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1017/S0305004115000584",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "1",
+    "pages": "51--75",
+    "volume": "160",
+    "year": "2016",
+    "zbl": "1371.28024",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/2016/Olson_Robinson_Sharples_2016_Generalised Cantor sets and the dimension of products.pdf"
+  },
+  "Hausdorff measures::/Users/alexrutar/.local/share/database/zotero_papers/R/1970/Rogers_1970_Hausdorff measures.pdf",
+  {
+    "zbmath": "7348174",
+    "language": "English",
+    "issn": "0024-6115",
+    "title": "Dimension of ergodic measures projected onto self-similar sets with overlaps",
+    "authors": [
+      "Jordan, Thomas",
+      "Rapaport, Ariel"
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1112/plms.12337",
+    "journal": "Proc. Lond. Math. Soc. (3)",
+    "number": "2",
+    "pages": "191--206",
+    "volume": "122",
+    "year": "2021",
+    "zbl": "1465.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/J/2021/Jordan_Rapaport_2021_Dimension of ergodic measures projected onto self‐similar sets with overlaps.pdf"
+  },
+  {
+    "zbmath": "838703",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "The singularity spectrum for general Sierpiński carpets",
+    "authors": [
+      "King, James"
+    ],
+    "author_ids": [
+      "king.james-f"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "26A18",
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1006/aima.1995.1061",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "1--11",
+    "volume": "116",
+    "year": "1995",
+    "zbl": "0845.28007",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/1995/King_1995_The Singularity Spectrum for General Sierpinski Carpets.pdf"
+  },
+  "Fractals in probability and analysis::/Users/alexrutar/.local/share/database/zotero_papers/B/2017/Bishop_Peres_2017_Fractals in probability and analysis.pdf",
+  {
+    "zbmath": "12345",
+    "language": "English",
+    "issn": "0020-9910",
+    "title": "Intersecting random translates of invariant Cantor sets",
+    "authors": [
+      "Kenyon, Richard",
+      "Peres, Yuval"
+    ],
+    "author_ids": [
+      "kenyon.richard-w",
+      "peres.yuval"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "28A80",
+      "28D99",
+      "60F10"
+    ],
+    "doi": "10.1007/BF01245092",
+    "journal": "Invent. Math.",
+    "number": "3",
+    "pages": "601--629",
+    "volume": "104",
+    "year": "1991",
+    "zbl": "0745.28012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/1991/Kenyon_Peres_1991_Intersecting random translates of invariant Cantor sets.pdf"
+  },
+  "The {Assouad} spectrum of {Kleinian} limit sets and {Patterson}-{Sullivan} measure::/Users/alexrutar/.local/share/zotero/storage/6AHHGBMH/2203.html",
+  {
+    "zbmath": "7391927",
+    "language": "English",
+    "issn": "0143-3857",
+    "title": "The Assouad spectrum of random self-affine carpets",
+    "authors": [
+      "Fraser, Jonathan",
+      "Troscheit, Sascha"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "troscheit.sascha"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1017/etds.2020.93",
+    "journal": "Ergodic Theory Dyn. Syst.",
+    "number": "10",
+    "pages": "2927--2945",
+    "volume": "41",
+    "year": "2021",
+    "zbl": "1479.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2021/Fraser_Troscheit_2021_The Assouad spectrum of random self-affine carpets.pdf"
+  },
+  "Attainable forms of intermediate dimensions::/Users/alexrutar/.local/share/database/zotero_papers/B/2022/Banaji_Rutar_2022_Attainable forms of intermediate dimensions.pdf",
+  "Spherical maximal functions and fractal dimensions of dilation sets::/Users/alexrutar/.local/share/zotero/storage/XUZVLUAJ/2004.html",
+  {
+    "zbmath": "7333871",
+    "language": "English",
+    "issn": "0025-5874",
+    "title": "\\(L^p \\rightarrow L^q\\) bounds for spherical maximal operators",
+    "authors": [
+      "Anderson, T.",
+      "Hughes, K.",
+      "Roos, J.",
+      "Seeger, A."
+    ],
+    "author_ids": [
+      "anderson.theresa-c",
+      "hughes.kevin",
+      "roos.joris",
+      "seeger.andreas"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "42B20",
+      "42B25",
+      "42B35",
+      "42B99",
+      "46E30",
+      "58J35"
+    ],
+    "doi": "10.1007/s00209-020-02546-0",
+    "journal": "Math. Z.",
+    "number": "3-4",
+    "pages": "1057--1074",
+    "volume": "297",
+    "year": "2021",
+    "zbl": "1461.42012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2021/Anderson_Hughes_Roos_Seeger_2021_\\$L^p-rightarrow L^q\\$ bounds for spherical maximal operators.pdf"
+  },
+  "Conformal {Dimension}::/Users/alexrutar/.local/share/database/zotero_papers/M/2010/Mackay_Tyson_2010_Conformal Dimension.pdf",
+  "Dimensions, {Embeddings}, and {Attractors}::/Users/alexrutar/.local/share/database/zotero_papers/R/2010/Robinson_2010_Dimensions, Embeddings, and Attractors.pdf",
+  {
+    "zbmath": "4046059",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "The Hausdorff dimension of self-affine fractals",
+    "authors": [
+      "Falconer, K."
+    ],
+    "author_ids": [
+      "falconer.kenneth-j"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A75",
+      "37D45"
+    ],
+    "doi": "10.1017/S0305004100064926",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "2",
+    "pages": "339--350",
+    "volume": "103",
+    "year": "1988",
+    "zbl": "0642.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/1988/Falconer_1988_The Hausdorff dimension of self-affine fractals.pdf"
+  },
+  "Self-affine tiles in \\${\\textbackslash}mathbb\\{{R}\\}{\\textasciicircum}n\\$",
+  {
+    "zbmath": "934289",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Self-affine tiles in \\(\\mathbb{R}^n\\)",
+    "authors": [
+      "Lagarias, Jeffrey",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "lagarias.jeffrey-c",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "52C22"
+    ],
+    "doi": "10.1006/aima.1996.0045",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "21--49",
+    "volume": "121",
+    "year": "1996",
+    "zbl": "0893.52013"
+  },
+  {
+    "zbmath": "934289",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Self-affine tiles in \\(\\mathbb{R}^n\\)",
+    "authors": [
+      "Lagarias, Jeffrey",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "lagarias.jeffrey-c",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "52C22"
+    ],
+    "doi": "10.1006/aima.1996.0045",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "21--49",
+    "volume": "121",
+    "year": "1996",
+    "zbl": "0893.52013",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/1996/Lagarias_Wang_1996_Self-Affine Tiles in Rn.pdf"
+  },
+  {
+    "zbmath": "934289",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Self-affine tiles in \\(\\mathbb{R}^n\\)",
+    "authors": [
+      "Lagarias, Jeffrey",
+      "Wang, Yang"
+    ],
+    "author_ids": [
+      "lagarias.jeffrey-c",
+      "wang.yang.1"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "52C22"
+    ],
+    "doi": "10.1006/aima.1996.0045",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "21--49",
+    "volume": "121",
+    "year": "1996",
+    "zbl": "0893.52013",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/1996/Lagarias_Wang_1996_Self-Affine Tiles in \\$-mathbb R ^n\\$.pdf"
+  },
+  {
+    "zbmath": "7480727",
+    "language": "English",
+    "issn": "2644-9463",
+    "title": "Self-similar measures and the Rajchman property",
+    "authors": [
+      "Brémont, Julien"
+    ],
+    "author_ids": [
+      "bremont.julien"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K16",
+      "28A78",
+      "37A44",
+      "42A38",
+      "42A61",
+      "60K20"
+    ],
+    "doi": "10.5802/ahl.94",
+    "journal": "Ann. Henri Lebesgue",
+    "pages": "973--1004",
+    "volume": "4",
+    "year": "2021",
+    "zbl": "1480.11094",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2021/Brémont_2021_Self-similar measures and the Rajchman property.pdf"
+  },
+  {
+    "zbmath": "6447614",
+    "language": "English",
+    "publisher": "Cambridge: Cambridge University Press",
+    "isbn": "978-1-107-10192-0; 978-1-107-49943-0; 978-1-316-18227-7",
+    "title": "Prime numbers and the Riemann hypothesis",
+    "authors": [
+      "Mazur, Barry",
+      "Stein, William"
+    ],
+    "author_ids": [
+      "mazur.barry",
+      "stein.william-a"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "11-02",
+      "11A41",
+      "11M26",
+      "11N05"
+    ],
+    "doi": "10.1017/CBO9781316182277",
+    "year": "2016",
+    "zbl": "1356.11001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/2016/Mazur_Stein_2016_Prime Numbers and the Riemann Hypothesis.pdf"
+  },
+  "Finer geometry of planar self-affine sets::/Users/alexrutar/.local/share/zotero/storage/XBQLR848/2107.html",
+  "Rigidity of {Quasisymmetric} {Mappings} on {Self}-affine {Carpets}::/Users/alexrutar/.local/share/database/zotero_papers/K/2018/Käenmäki_Ojala_Rossi_2018_Rigidity of Quasisymmetric Mappings on Self-affine Carpets.pdf",
+  "On the {Hausdorff} dimension of some fractal sets::/Users/alexrutar/.local/share/database/zotero_papers/P/1989/Przytycki_Urbański_1989_On the Hausdorff dimension of some fractal sets.pdf",
+  {
+    "zbmath": "7357480",
+    "language": "English",
+    "issn": "0025-5874",
+    "title": "On multifractal formalism for self-similar measures with overlaps",
+    "authors": [
+      "Barral, Julien",
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "barral.julien",
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.1007/s00209-020-02622-5",
+    "journal": "Math. Z.",
+    "number": "1-2",
+    "pages": "359--383",
+    "volume": "298",
+    "year": "2021",
+    "zbl": "1469.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2021/Barral_Feng_2021_On multifractal formalism for self-similar measures with overlaps.pdf"
+  },
+  "Attainable forms of {Assouad} spectra::/Users/alexrutar/.local/share/zotero/storage/3PEUF2EQ/2206.html",
+  {
+    "zbmath": "2162385",
+    "language": "English",
+    "issn": "1016-443X",
+    "title": "Conformal Assouad dimension and modulus",
+    "authors": [
+      "Keith, S.",
+      "Laakso, T."
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "28C15",
+      "30C65"
+    ],
+    "doi": "10.1007/s00039-004-0492-5",
+    "journal": "Geom. Funct. Anal.",
+    "number": "6",
+    "pages": "1278--1321",
+    "volume": "14",
+    "year": "2004",
+    "zbl": "1108.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/2004/Keith_Laakso_2004_Conformal assouad dimension and modulus.pdf"
+  },
+  {
+    "zbmath": "7445557",
+    "language": "English",
+    "issn": "2308-1309",
+    "title": "Intermediate Assouad-like dimensions",
+    "authors": [
+      "García, Ignacio",
+      "Hare, Kathryn",
+      "Mendivil, Franklin"
+    ],
+    "author_ids": [
+      "garcia.ignacio",
+      "hare.kathryn-e",
+      "mendivil.franklin"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.4171/JFG/102",
+    "journal": "J. Fractal Geom.",
+    "number": "3",
+    "pages": "201--245",
+    "volume": "8",
+    "year": "2021",
+    "zbl": "1485.28006",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2021/García_Hare_Mendivil_2021_Intermediate Assouad-like dimensions.pdf"
+  },
+  "Dimensions and measures of quasi self-similar sets::/Users/alexrutar/.local/share/database/zotero_papers/F/1989/Falconer_1989_Dimensions and measures of quasi self-similar sets.pdf",
+  {
+    "zbmath": "7591215",
+    "language": "English",
+    "issn": "0951-7715",
+    "title": "Local dimensions of self-similar measures satisfying the finite neighbour condition",
+    "authors": [
+      "Hare, Kathryn",
+      "Rutar, Alex"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "rutar.alex"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1088/1361-6544/ac8040",
+    "journal": "Nonlinearity",
+    "number": "9",
+    "pages": "4876--4904",
+    "volume": "35",
+    "year": "2022",
+    "zbl": "07591215",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2022/Hare_Rutar_2022_Local dimensions of self-similar measures satisfying the finite neighbour.pdf"
+  },
+  "Fractal geometry: mathematical foundations and applications::/Users/alexrutar/.local/share/database/zotero_papers/F/2014/Falconer_2014_Fractal geometry.pdf",
+  {
+    "zbmath": "1761122",
+    "language": "English",
+    "issn": "0026-9255",
+    "title": "Relationships between different dimensions of a measure",
+    "authors": [
+      "Fan, Ai-Hua",
+      "Lau, Ka-Sing",
+      "Rao, Hui"
+    ],
+    "author_ids": [
+      "fan.ai-hua",
+      "lau.kasing",
+      "rao.hui"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1007/s006050200016",
+    "journal": "Monatsh. Math.",
+    "number": "3",
+    "pages": "191--201",
+    "volume": "135",
+    "year": "2002",
+    "zbl": "0996.28001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2002/Fan_Lau_Rao_2002_Relationships between Different Dimensions of a Measure.pdf"
+  },
+  {
+    "zbmath": "6550642",
+    "language": "English",
+    "issn": "0002-9947",
+    "title": "Non-autonomous conformal iterated function systems and Moran-set constructions",
+    "authors": [
+      "Rempe-Gillen, Lasse",
+      "Urba\\ŉski, Mariusz"
+    ],
+    "author_ids": [
+      "rempe-gillen.lasse",
+      "urbanski.mariusz"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45",
+      "37F10"
+    ],
+    "doi": "10.1090/tran/6490",
+    "journal": "Trans. Am. Math. Soc.",
+    "number": "3",
+    "pages": "1979--2017",
+    "volume": "368",
+    "year": "2016",
+    "zbl": "1404.28017",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/R/2015/Rempe-Gillen_Urbański_2015_Non-autonomous conformal iterated function systems and Moran-set constructions.pdf"
+  },
+  {
+    "zbmath": "6040469",
+    "language": "English",
+    "issn": "1088-4173",
+    "title": "Assouad dimension of self-affine carpets",
+    "authors": [
+      "Mackay, John"
+    ],
+    "author_ids": [
+      "mackay.john-m"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C45",
+      "37F35"
+    ],
+    "doi": "10.1090/S1088-4173-2011-00232-3",
+    "journal": "Conform. Geom. Dyn.",
+    "pages": "177--187",
+    "volume": "15",
+    "year": "2011",
+    "zbl": "1278.37032",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/2011/Mackay_2011_Assouad dimension of self-affine carpets.pdf"
+  },
+  {
+    "zbmath": "7211067",
+    "language": "English",
+    "issn": "0002-9939",
+    "title": "Attainable values for the Assouad dimension of projections",
+    "authors": [
+      "Fraser, Jonathan",
+      "Käenmäki, Antti"
+    ],
+    "author_ids": [
+      "fraser.jonathan-m",
+      "kaenmaki.antti"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1090/proc/14999",
+    "journal": "Proc. Am. Math. Soc.",
+    "number": "8",
+    "pages": "3393--3405",
+    "volume": "148",
+    "year": "2020",
+    "zbl": "1444.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2020/Fraser_Käenmäki_2020_Attainable values for the Assouad dimensionof projections.pdf"
+  },
+  {
+    "zbmath": "7523083",
+    "language": "English",
+    "issn": "1435-9855",
+    "title": "Hausdorff dimension of planar self-affine sets and measures with overlaps",
+    "authors": [
+      "Hochman, Michael",
+      "Rapaport, Ariel"
+    ],
+    "author_ids": [
+      "hochman.michael",
+      "rapaport.ariel"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.4171/JEMS/1127",
+    "journal": "J. Eur. Math. Soc. (JEMS)",
+    "number": "7",
+    "pages": "2361--2441",
+    "volume": "24",
+    "year": "2022",
+    "zbl": "1502.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2021/Hochman_Rapaport_2021_Hausdorff dimension of planar self-affine sets and measures with overlaps.pdf"
+  },
+  {
+    "zbmath": "5132554",
+    "language": "English",
+    "issn": "0001-8708",
+    "title": "Hausdorff dimension of the limit sets of some planar geometric constructions",
+    "authors": [
+      "Bara\\ŉski, Krzysztof"
+    ],
+    "author_ids": [
+      "baranski.krzysztof"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1016/j.aim.2006.06.005",
+    "journal": "Adv. Math.",
+    "number": "1",
+    "pages": "215--245",
+    "volume": "210",
+    "year": "2007",
+    "zbl": "1116.28008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2007/Barański_2007_Hausdorff dimension of the limit sets of some planar geometric constructions.pdf"
+  },
+  {
+    "zbmath": "7194663",
+    "language": "English",
+    "issn": "0008-4395",
+    "title": "Assouad spectrum thresholds for some random constructions",
+    "authors": [
+      "Troscheit, Sascha"
+    ],
+    "author_ids": [
+      "troscheit.sascha"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80",
+      "37C45",
+      "60J80"
+    ],
+    "doi": "10.4153/S0008439519000547",
+    "journal": "Can. Math. Bull.",
+    "number": "2",
+    "pages": "434--453",
+    "volume": "63",
+    "year": "2020",
+    "zbl": "1437.28015",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/T/2020/Troscheit_2020_Assouad Spectrum Thresholds for Some Random Constructions.pdf"
+  },
+  {
+    "zbmath": "7461324",
+    "language": "English",
+    "note": "Id/No 125912",
+    "issn": "0022-247X",
+    "title": "Assouad-like dimensions of a class of random Moran measures",
+    "authors": [
+      "Hare, Kathryn",
+      "Mendivil, Franklin"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "mendivil.franklin"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "60G57"
+    ],
+    "doi": "10.1016/j.jmaa.2021.125912",
+    "journal": "J. Math. Anal. Appl.",
+    "number": "2",
+    "pages": "25",
+    "volume": "508",
+    "year": "2022",
+    "zbl": "1489.28001",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2022/Hare_Mendivil_2022_Assouad-like dimensions of a class of random Moran measures.pdf"
+  },
+  {
+    "zbmath": "7548796",
+    "language": "English",
+    "note": "Id/No 2050143",
+    "issn": "0218-348X",
+    "title": "Intermediate Assouad-like dimensins for measures",
+    "authors": [
+      "Hare, Kathryn",
+      "Hare, Kevin"
+    ],
+    "author_ids": [
+      "hare.kathryn-e",
+      "hare.kevin-g"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1142/S0218348X20501431",
+    "journal": "Fractals",
+    "number": "7",
+    "pages": "22",
+    "volume": "28",
+    "year": "2020",
+    "zbl": "1506.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2020/Hare_Hare_2020_Intermediate Assouad-like dimensions for measures.pdf"
+  },
+  "Entropy in {Ergodic} {Theory} and {Topological} {Dynamics}",
+  {
+    "zbmath": "7097489",
+    "language": "English",
+    "issn": "0003-486X",
+    "title": "A proof of Furstenberg's conjecture on the intersections of \\(\\times p\\)- and \\(\\times q\\)-invariant sets",
+    "authors": [
+      "Wu, Meng"
+    ],
+    "author_ids": [
+      "wu.meng"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "28A50",
+      "28A80",
+      "28D05",
+      "37C45"
+    ],
+    "doi": "10.4007/annals.2019.189.3.2",
+    "journal": "Ann. Math. (2)",
+    "number": "3",
+    "pages": "707--751",
+    "volume": "189",
+    "year": "2019",
+    "zbl": "1430.11106",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/W/2019/Wu_2019_A proof of Furstenberg's conjecture on the intersections of \\$-times p\\$- and.pdf"
+  },
+  {
+    "zbmath": "7478504",
+    "language": "English",
+    "issn": "1930-5311",
+    "title": "A new dynamical proof of the Shmerkin-Wu theorem",
+    "authors": [
+      "Austin, Tim"
+    ],
+    "author_ids": [
+      "austin.tim-d"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "28A50",
+      "28A80",
+      "37C45"
+    ],
+    "doi": "10.3934/jmd.2022001",
+    "journal": "J. Mod. Dyn.",
+    "pages": "1--11",
+    "volume": "18",
+    "year": "2022",
+    "zbl": "1487.11076",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2022/Austin_2022_A new dynamical proof of the Shmerkin–Wu theorem.pdf"
+  },
+  {
+    "zbmath": "7656172",
+    "language": "English",
+    "issn": "1073-7928",
+    "title": "Improved versions of some Furstenberg type slicing theorems for self-affine carpets",
+    "authors": [
+      "Algom, Amir",
+      "Wu, Meng"
+    ],
+    "author_ids": [
+      "algom.amir",
+      "wu.meng"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1093/imrn/rnab318",
+    "journal": "Int. Math. Res. Not.",
+    "number": "3",
+    "pages": "2304--2343",
+    "volume": "2023",
+    "year": "2023",
+    "zbl": "07656172",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2021/Algom_Wu_2021_Improved Versions of Some Furstenberg Type Slicing Theorems for Self-Affine.pdf"
+  },
+  {
+    "zbmath": "6825466",
+    "language": "English",
+    "issn": "0020-9910",
+    "title": "On the dimension of Furstenberg measure for \\({SL}_{2}(\\mathbb {R})\\) random matrix products",
+    "authors": [
+      "Hochman, Michael",
+      "Solomyak, Boris"
+    ],
+    "author_ids": [
+      "hochman.michael",
+      "solomyak.boris"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "22D40",
+      "37A35",
+      "37A45"
+    ],
+    "doi": "10.1007/s00222-017-0740-6",
+    "journal": "Invent. Math.",
+    "number": "3",
+    "pages": "815--875",
+    "volume": "210",
+    "year": "2017",
+    "zbl": "1398.37012",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/2017/Hochman_Solomyak_2017_On the dimension of Furstenberg measure for \\$ -mathrm SL _2(-mathbb R )\\$.pdf"
+  },
+  "Aperiodic order",
+  {
+    "zbmath": "7191801",
+    "language": "English",
+    "issn": "0026-9255",
+    "title": "Inflation word entropy for semi-compatible random substitutions",
+    "authors": [
+      "Gohlke, Philipp"
+    ],
+    "author_ids": [
+      "gohlke.philipp"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "20M05",
+      "28D20",
+      "37A35",
+      "37B10",
+      "37B40",
+      "52C23",
+      "54C70"
+    ],
+    "doi": "10.1007/s00605-020-01380-0",
+    "journal": "Monatsh. Math.",
+    "number": "1",
+    "pages": "93--110",
+    "volume": "192",
+    "year": "2020",
+    "zbl": "1441.37014",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2020/Gohlke_2020_Inflation word entropy for semi-compatible random substitutions.pdf"
+  },
+  {
+    "zbmath": "7074653",
+    "language": "English",
+    "issn": "1078-0947",
+    "title": "Shifts of finite type and random substitutions",
+    "authors": [
+      "Gohlke, Philipp",
+      "Rust, Dan",
+      "Spindeler, Timo"
+    ],
+    "author_ids": [
+      "gohlke.philipp",
+      "rust.dan",
+      "spindeler.timo"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37B10",
+      "37B40",
+      "37B51",
+      "52C23"
+    ],
+    "doi": "10.3934/dcds.2019206",
+    "journal": "Discrete Contin. Dyn. Syst.",
+    "number": "9",
+    "pages": "5085--5103",
+    "volume": "39",
+    "year": "2019",
+    "zbl": "1442.37025",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2019/Gohlke_Rust_Spindeler_2019_Shifts of finite type and random substitutions.pdf"
+  },
+  {
+    "zbmath": "7282477",
+    "language": "English",
+    "issn": "0039-3223",
+    "title": "Ergodic frequency measures for random substitutions",
+    "authors": [
+      "Gohlke, Philipp",
+      "Spindeler, Timo"
+    ],
+    "author_ids": [
+      "gohlke.philipp",
+      "spindeler.timo"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37A25",
+      "37B10",
+      "37H12",
+      "52C23"
+    ],
+    "doi": "10.4064/sm181026-14-8",
+    "journal": "Stud. Math.",
+    "number": "3",
+    "pages": "265--301",
+    "volume": "255",
+    "year": "2020",
+    "zbl": "1461.37018",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2020/Gohlke_Spindeler_2020_Ergodic frequency measures for random substitutions.pdf"
+  },
+  {
+    "zbmath": "822672",
+    "language": "English",
+    "publisher": "Cambridge: Cambridge University Press",
+    "isbn": "0-521-55124-2; 0-521-55900-6",
+    "title": "An introduction to symbolic dynamics and coding",
+    "authors": [
+      "Lind, Douglas",
+      "Marcus, Brian"
+    ],
+    "author_ids": [
+      "lind.douglas-a",
+      "marcus.brian-h"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "15B48",
+      "37-01",
+      "37B10",
+      "37B40",
+      "37B50",
+      "54H20",
+      "94A24",
+      "94B60"
+    ],
+    "doi": "10.1017/CBO9780511626302",
+    "year": "1995",
+    "zbl": "1106.37301"
+  },
+  "Substitution {Dynamical} {Systems}-{Spectral} {Analysis}::/Users/alexrutar/.local/share/database/zotero_papers/Q/1987/Queffélec_1987_Substitution Dynamical Systems-Spectral Analysis.pdf",
+  {
+    "zbmath": "7259093",
+    "language": "English",
+    "issn": "0026-9255",
+    "title": "Periodic points in random substitution subshifts",
+    "authors": [
+      "Rust, Dan"
+    ],
+    "author_ids": [
+      "rust.dan"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37B10",
+      "37B40",
+      "37C25",
+      "37H12",
+      "52C23"
+    ],
+    "doi": "10.1007/s00605-020-01458-9",
+    "journal": "Monatsh. Math.",
+    "number": "3",
+    "pages": "683--704",
+    "volume": "193",
+    "year": "2020",
+    "zbl": "1452.37058",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/R/2020/Rust_2020_Periodic points in random substitution subshifts.pdf"
+  },
+  {
+    "zbmath": "6904733",
+    "url": "oro.open.ac.uk/70946/1/sss_revision2.pdf",
+    "language": "English",
+    "issn": "0019-3577",
+    "title": "Dynamical systems arising from random substitutions",
+    "authors": [
+      "Rust, Dan",
+      "Spindeler, Timo"
+    ],
+    "author_ids": [
+      "rust.dan",
+      "spindeler.timo"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37B10",
+      "37B40",
+      "37B50",
+      "74H65"
+    ],
+    "doi": "10.1016/j.indag.2018.05.013",
+    "journal": "Indag. Math., New Ser.",
+    "number": "4",
+    "pages": "1131--1155",
+    "volume": "29",
+    "year": "2018",
+    "zbl": "1409.37023",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/R/2018/Rust_Spindeler_2018_Dynamical systems arising from random substitutions.pdf"
+  },
+  "Assouad-type {Dimensions} of {Overlapping} {Self}-affine {Sets}::/Users/alexrutar/.local/share/zotero/storage/V67WZ2SQ/2209.html",
+  "The \\${L}{\\textasciicircum}q\\$ spectrum of self-affine measures on sponges::/Users/alexrutar/.local/share/zotero/storage/GE252EFG/2205.html",
+  {
+    "zbmath": "7000113",
+    "language": "English",
+    "issn": "1446-7887",
+    "title": "\\(L^q\\)-spectrum of self-similar measures with overlaps in the absence of second-order identities",
+    "authors": [
+      "Ngai, Sze-Man",
+      "Xie, Yuanyuan"
+    ],
+    "author_ids": [
+      "ngai.sze-man",
+      "xie.yuanyuan"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S1446788718000034",
+    "journal": "J. Aust. Math. Soc.",
+    "number": "1",
+    "pages": "56--103",
+    "volume": "106",
+    "year": "2019",
+    "zbl": "1408.28015",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/N/2019/Ngai_Xie_2019_\\$L^q\\$-spectrum of self-similar measures with overlaps in the absence of2.pdf"
+  },
+  {
+    "zbmath": "5639438",
+    "language": "English",
+    "publisher": "Berlin: Springer",
+    "isbn": "978-3-642-03310-0; 978-3-642-03311-7",
+    "issn": "0172-4568",
+    "series": "Stoch. Model. Appl. Probab.",
+    "fseries": "Stochastic Modelling and Applied Probability",
+    "edition": "2nd ed., corrected 2nd printing",
+    "title": "Large deviations techniques and applications.",
+    "authors": [
+      "Dembo, Amir",
+      "Zeitouni, Ofer"
+    ],
+    "author_ids": [
+      "dembo.amir",
+      "zeitouni.ofer"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "60-02",
+      "60B10",
+      "60F10"
+    ],
+    "doi": "10.1007/978-3-642-03311-7",
+    "volume": "38",
+    "year": "2010",
+    "zbl": "1177.60035",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/D/2010/Dembo_Zeitouni_2010_Large Deviations Techniques and Applications.pdf"
+  },
+  {
+    "zbmath": "6904728",
+    "language": "English",
+    "issn": "0019-3577",
+    "title": "Diffraction of compatible random substitutions in one dimension",
+    "authors": [
+      "Baake, Michael",
+      "Spindeler, Timo",
+      "Strungaru, Nicolae"
+    ],
+    "author_ids": [
+      "baake.michael",
+      "spindeler.timo",
+      "strungaru.nicolae"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37A50",
+      "60B10",
+      "82B20"
+    ],
+    "doi": "10.1016/j.indag.2018.05.008",
+    "journal": "Indag. Math., New Ser.",
+    "number": "4",
+    "pages": "1031--1071",
+    "volume": "29",
+    "year": "2018",
+    "zbl": "1457.82054",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2018/Baake_Spindeler_Strungaru_2018_Diffraction of compatible random substitutions in one dimension.pdf"
+  },
+  {
+    "zbmath": "4181355",
+    "language": "English",
+    "issn": "0022-4715",
+    "title": "Quasiperiodicity and randomness in tilings of the plane",
+    "authors": [
+      "Godrèche, C.",
+      "Luck, J."
+    ],
+    "author_ids": [
+      "godreche.claude",
+      "luck.jean-marc"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "05B45"
+    ],
+    "doi": "10.1007/BF01042590",
+    "journal": "J. Stat. Phys.",
+    "number": "1-2",
+    "pages": "1--28",
+    "volume": "55",
+    "year": "1989",
+    "zbl": "0717.05025",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/1989/Godrèche_Luck_1989_Quasiperiodicity and randomness in tilings of the plane.pdf"
+  },
+  {
+    "zbmath": "7444063",
+    "language": "English",
+    "publisher": "Cham: Springer",
+    "isbn": "978-3-030-74862-3; 978-3-030-74863-0",
+    "booktitle": "Thermodynamic formalism. CIRM Jean-Morlet chair, fall 2019",
+    "title": "Beyond Bowen's specification property",
+    "authors": [
+      "Climenhaga, Vaughn",
+      "Thompson, Daniel"
+    ],
+    "author_ids": [
+      "climenhaga.vaughn",
+      "thompson.daniel-j"
+    ],
+    "bibtype": "incollection",
+    "classifications": [
+      "37D10",
+      "37D20",
+      "37D35"
+    ],
+    "doi": "10.1007/978-3-030-74863-0_1",
+    "pages": "3--82",
+    "year": "2021",
+    "zbl": "1485.37029",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/C/2021/Climenhaga_Thompson_2021_Beyond Bowen’s Specification Property.pdf"
+  },
+  "Topological {Mixing} of {Random} {Substitutions}::/Users/alexrutar/.local/share/zotero/storage/D45CGD6E/2103.html",
+  "The {Process} of {Government}:::/Users/alexrutar/.local/share/database/zotero_papers/B/1967/Bentley_1967_The Process of Government.pdf",
+  "\\${L}{\\textasciicircum}q\\$-spectra of self-affine measures: closed forms, counterexamples, and split binomial sums::/Users/alexrutar/.local/share/database/zotero_papers/F/2021/Fraser_Lee_Morris_Yu_2021_\\$L^q\\$-spectra of self-affine measures.pdf",
+  "Automorphism groups of random substitution subshifts::/Users/alexrutar/.local/share/zotero/storage/LHT6UGKV/2203.html",
+  {
+    "zbmath": "1415880",
+    "language": "English",
+    "issn": "0010-3616",
+    "title": "Multifractal analysis of Lyapunov exponent for continued fraction and Manneville-Pomeau transformations and applications to diophantine approximation",
+    "authors": [
+      "Pollicott, Mark",
+      "Weiss, Howard"
+    ],
+    "author_ids": [
+      "pollicott.mark",
+      "weiss.howard"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "11K55",
+      "11K60",
+      "37C45",
+      "37D25",
+      "37D40",
+      "37E05"
+    ],
+    "doi": "10.1007/s002200050722",
+    "journal": "Commun. Math. Phys.",
+    "number": "1",
+    "pages": "145--171",
+    "volume": "207",
+    "year": "1999",
+    "zbl": "0960.37008",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/1999/Pollicott_Weiss_1999_Multifractal Analysis of Lyapunov Exponent for Continued Fraction and.pdf"
+  },
+  "Dimension theory in dynamical systems: contemporary views and applications::/Users/alexrutar/.local/share/database/zotero_papers/P/1997/Pesin_1997_Dimension theory in dynamical systems.pdf",
+  {
+    "zbmath": "1818712",
+    "language": "English",
+    "issn": "0024-6107",
+    "title": "Recurrence, dimension and entropy",
+    "authors": [
+      "Fan, Ai-Hua",
+      "Feng, De-Jun",
+      "Wu, Jun"
+    ],
+    "author_ids": [
+      "fan.ai-hua",
+      "feng.de-jun",
+      "wu.jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "37A25",
+      "37B20",
+      "37B40",
+      "37C40",
+      "37C45"
+    ],
+    "doi": "10.1017/S0024610701002137",
+    "journal": "J. Lond. Math. Soc., II. Ser.",
+    "number": "1",
+    "pages": "229--244",
+    "volume": "64",
+    "year": "2001",
+    "zbl": "1011.37003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/F/2001/Fan_Feng_Wu_2001_Recurrence, dimension, and entropy.pdf"
+  },
+  "Topological entropy for noncompact sets::/Users/alexrutar/.local/share/database/zotero_papers/B/1973/Bowen_1973_Topological entropy for noncompact sets.pdf",
+  {
+    "zbmath": "4022321",
+    "language": "English",
+    "issn": "0178-8051",
+    "title": "Superbranching processes and projections of random Cantor sets",
+    "authors": [
+      "Dekking, F.",
+      "Grimmet, G."
+    ],
+    "author_ids": [
+      "dekking.michel",
+      "grimmet.g-r"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "60J80"
+    ],
+    "doi": "10.1007/BF00334199",
+    "journal": "Probab. Theory Relat. Fields",
+    "number": "3",
+    "pages": "335--355",
+    "volume": "78",
+    "year": "1988",
+    "zbl": "0628.60091"
+  },
+  {
+    "zbmath": "4176192",
+    "language": "English",
+    "issn": "0022-4715",
+    "title": "On the structure of Mandelbrot's percolation process and other random Cantor sets",
+    "authors": [
+      "Dekking, F.",
+      "Meester, R."
+    ],
+    "author_ids": [
+      "dekking.michel",
+      "meester.ronald-w-j"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "58D30",
+      "60K35",
+      "82B43"
+    ],
+    "doi": "10.1007/BF01026566",
+    "journal": "J. Stat. Phys.",
+    "number": "5-6",
+    "pages": "1109--1126",
+    "volume": "58",
+    "year": "1990",
+    "zbl": "0714.60102"
+  },
+  "Determining quasicrystal structures on substitution tilings",
+  "Fractal percolation and branching cellular automata::/Users/alexrutar/.local/share/database/zotero_papers/D/2001/Dekking_v.d. Wal_2001_Fractal percolation and branching cellular automata.pdf",
+  "Substitutions aléatoires itérées",
+  {
+    "zbmath": "7645512",
+    "language": "English",
+    "issn": "1424-0637",
+    "title": "Measure theoretic entropy of random substitution subshifts",
+    "authors": [
+      "Gohlke, P.",
+      "Mitchell, A.",
+      "Rust, D.",
+      "Samuel, T."
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "37A25",
+      "37A50",
+      "37B10",
+      "37B51",
+      "37B52",
+      "37H12",
+      "52C23"
+    ],
+    "doi": "10.1007/s00023-022-01212-x",
+    "journal": "Ann. Henri Poincaré",
+    "number": "1",
+    "pages": "277--323",
+    "volume": "24",
+    "year": "2023",
+    "zbl": "07645512",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/G/2023/Gohlke_Mitchell_Rust_Samuel_2023_Measure Theoretic Entropy of Random Substitution Subshifts.pdf"
+  },
+  "Assouad type dimensions of infinitely generated self-conformal sets::/Users/alexrutar/.local/share/zotero/storage/KC7JFI82/2207.html",
+  "Quasiconformal distortion of the {Assouad} spectrum and classification of polynomial spirals::/Users/alexrutar/.local/share/database/zotero_papers/C/2023/Chrontsios Garitsis_Tyson_2023_Quasiconformal distortion of the Assouad spectrum and classification of.pdf",
+  {
+    "zbmath": "6434506",
+    "url": "urn.fi/URN:NBN:fi:jyu-201508172681",
+    "language": "English",
+    "issn": "0022-2518",
+    "title": "Assouad dimension, Nagata dimension, and uniformly close metric tangents",
+    "authors": [
+      "Le Donne, Enrico",
+      "Rajala, Tapio"
+    ],
+    "author_ids": [
+      "le-donne.enrico",
+      "rajala.tapio"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "53C17",
+      "53C23",
+      "54E35",
+      "54F45"
+    ],
+    "doi": "10.1512/iumj.2015.64.5469",
+    "journal": "Indiana Univ. Math. J.",
+    "number": "1",
+    "pages": "21--54",
+    "volume": "64",
+    "year": "2015",
+    "zbl": "1321.54059",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/GRKLENI4/Le Donne and Rajala - 2015 - Assouad dimension, Nagata dimension, and uniformly.pdf"
+  },
+  {
+    "zbmath": "927146",
+    "language": "English",
+    "issn": "0024-6115",
+    "title": "Dimensions and measures in infinite iterated function systems",
+    "authors": [
+      "Mauldin, R.",
+      "Urba\\ŉski, Mariusz"
+    ],
+    "author_ids": [
+      "mauldin.richard-daniel",
+      "urbanski.mariusz"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80",
+      "37A99",
+      "37B99"
+    ],
+    "doi": "10.1112/plms/s3-73.1.105",
+    "journal": "Proc. Lond. Math. Soc. (3)",
+    "number": "1",
+    "pages": "105--154",
+    "volume": "73",
+    "year": "1996",
+    "zbl": "0852.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/1996/Mauldin_Urbański_1996_Dimensions and Measures in Infinite Iterated Function Systems.pdf"
+  },
+  {
+    "zbmath": "2072301",
+    "language": "English",
+    "issn": "0024-6107",
+    "title": "Normal and non-normal points of self-similar sets and divergence points of self-similar measures",
+    "authors": [
+      "Olsen, L.",
+      "Winter, S."
+    ],
+    "author_ids": [
+      "olsen.lars-ole-ronnow",
+      "winter.steffen"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1112/S0024610702003630",
+    "journal": "J. Lond. Math. Soc., II. Ser.",
+    "number": "1",
+    "pages": "103--122",
+    "volume": "67",
+    "year": "2003",
+    "zbl": "1040.28014",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/2003/Olsen_Winter_2003_Normal and non-normal points of self-similar sets and divergence points of.pdf"
+  },
+  "Branching {Processes}::/Users/alexrutar/.local/share/database/zotero_papers/A/1972/Athreya_Ney_1972_Branching Processes2.pdf",
+  {
+    "zbmath": "880077",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "Strong and weak duality for fractal dimension in Euclidean space",
+    "authors": [
+      "Cutler, Colleen"
+    ],
+    "author_ids": [
+      "cutler.colleen-d"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S0305004100073758",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "3",
+    "pages": "393--410",
+    "volume": "118",
+    "year": "1995",
+    "zbl": "0866.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/C/1995/Cutler_1995_Strong and weak duality principles for fractal dimension in Euclidean space.pdf"
+  },
+  "The {Geometry} of {Fractal} {Sets}::/Users/alexrutar/.local/share/database/zotero_papers/F/1985/Falconer_1985_The Geometry of Fractal Sets.pdf",
+  {
+    "zbmath": "1066719",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "Measure and dimension functions: Measurability and densities",
+    "authors": [
+      "Mattila, Pertti",
+      "Mauldin, R."
+    ],
+    "author_ids": [
+      "mattila.pertti",
+      "mauldin.richard-daniel"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A05",
+      "28A78"
+    ],
+    "doi": "10.1017/S0305004196001089",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "1",
+    "pages": "81--100",
+    "volume": "121",
+    "year": "1997",
+    "zbl": "0885.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/M/1997/Mattila_Mauldin_1997_Measure and dimension functions.pdf"
+  },
+  {
+    "zbmath": "6653785",
+    "language": "English",
+    "publisher": "Cambridge: Cambridge University Press",
+    "isbn": "978-1-107-16015-6; 978-1-108-73272-7; 978-1-316-67281-5",
+    "series": "Camb. Ser. Stat. Probab. Math.",
+    "fseries": "Cambridge Series in Statistical and Probabilistic Mathematics",
+    "title": "Probability on trees and networks",
+    "authors": [
+      "Lyons, Russell",
+      "Peres, Yuval"
+    ],
+    "author_ids": [
+      "lyons.russell",
+      "peres.yuval"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "05-02",
+      "05C05",
+      "05C80",
+      "05C81",
+      "05C82",
+      "94C05"
+    ],
+    "doi": "10.1017/9781316672815",
+    "volume": "42",
+    "year": "2016",
+    "zbl": "1376.05002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2016/Lyons_Peres_2016_Probability on Trees and Networks.pdf"
+  },
+  {
+    "zbmath": "6551802",
+    "language": "English",
+    "issn": "1239-629X",
+    "title": "Weak separation condition, Assouad dimension, and Furstenberg homogeneity",
+    "authors": [
+      "Käenmäki, Antti",
+      "Rossi, Eino"
+    ],
+    "author_ids": [
+      "kaenmaki.antti",
+      "rossi.eino"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A50",
+      "28A80",
+      "28D05",
+      "37C45"
+    ],
+    "doi": "10.5186/aasfm.2016.4133",
+    "journal": "Ann. Acad. Sci. Fenn., Math.",
+    "number": "1",
+    "pages": "465--490",
+    "volume": "41",
+    "year": "2016",
+    "zbl": "1342.28016",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/2016/Käenmäki_Rossi_2016_Weak separation condition, Assouad dimension, and Furstenberg homogeneity.pdf"
+  },
+  {
+    "zbmath": "1180207",
+    "language": "English",
+    "issn": "1945-5844",
+    "title": "Self-affine multifractal Sierpiński sponges in \\(\\mathbb{R}^d\\)",
+    "authors": [
+      "Olsen, L."
+    ],
+    "author_ids": [],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.2140/pjm.1998.183.143",
+    "journal": "Pac. J. Math.",
+    "number": "1",
+    "pages": "143--199",
+    "volume": "183",
+    "year": "1998",
+    "zbl": "0955.28004",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/O/1998/Olsen_1998_Self-affine multifractal Sierpinski sponges in \\$-mathbb R ^d\\$.pdf"
+  },
+  {
+    "zbmath": "7202676",
+    "language": "English",
+    "issn": "0024-6093",
+    "title": "Self-conformal sets with positive Hausdorff measure",
+    "authors": [
+      "Angelevska, Jasmina",
+      "Käenmäki, Antti",
+      "Troscheit, Sascha"
+    ],
+    "author_ids": [
+      "angelevska.jasmina",
+      "kaenmaki.antti",
+      "troscheit.sascha"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1112/blms.12320",
+    "journal": "Bull. Lond. Math. Soc.",
+    "number": "1",
+    "pages": "200--223",
+    "volume": "52",
+    "year": "2020",
+    "zbl": "1441.28003",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/2020/Angelevska_Käenmäki_Troscheit_2020_Self‐conformal sets with positive Hausdorff measure.pdf"
+  },
+  "Fractal {Geometry} and {Stochastics} {II}::/Users/alexrutar/.local/share/database/zotero_papers/B/2000/Bandt_Graf_Zähle_2000_Fractal Geometry and Stochastics II.pdf",
+  {
+    "zbmath": "713615",
+    "language": "English",
+    "issn": "0305-0041",
+    "title": "The self-affine carpets of McMullen and Bedford have infinite Hausdorff measure",
+    "authors": [
+      "Peres, Yuval"
+    ],
+    "author_ids": [
+      "peres.yuval"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78",
+      "28A80"
+    ],
+    "doi": "10.1017/S0305004100072789",
+    "journal": "Math. Proc. Camb. Philos. Soc.",
+    "number": "3",
+    "pages": "513--526",
+    "volume": "116",
+    "year": "1994",
+    "zbl": "0811.28005",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/P/1994/Peres_1994_The self-affine carpets of McMullen and Bedford have infinite Hausdorff measure.pdf"
+  },
+  {
+    "zbmath": "5956581",
+    "language": "English",
+    "issn": "0951-7715",
+    "title": "Non-uniqueness of ergodic measures with full Hausdorff dimensions on a Gatzouras-Lalley carpet",
+    "authors": [
+      "Barral, Julien",
+      "Feng, De-Jun"
+    ],
+    "author_ids": [
+      "barral.julien",
+      "feng.de-jun"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "37A35",
+      "37B10",
+      "37C40",
+      "37C45",
+      "37D35"
+    ],
+    "doi": "10.1088/0951-7715/24/9/010",
+    "journal": "Nonlinearity",
+    "number": "9",
+    "pages": "2563--2567",
+    "volume": "24",
+    "year": "2011",
+    "zbl": "1228.37025",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/B/2011/Barral_Feng_2011_Non-uniqueness of ergodic measures with full Hausdorff dimensions on a.pdf"
+  },
+  "Large deviation rates for branching processes. {II}. {The} multitype case::/Users/alexrutar/.local/share/zotero/storage/2XNIEKFU/Athreya and Vidyashankar - 1995 - Large deviation rates for branching processes. II..pdf",
+  {
+    "zbmath": "496251",
+    "language": "English",
+    "issn": "0001-8678",
+    "title": "Large deviations in the supercritical branching process",
+    "authors": [
+      "Biggins, J.",
+      "Bingham, N."
+    ],
+    "author_ids": [
+      "biggins.j-d",
+      "bingham.nicholas-h"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "60F10",
+      "60J80"
+    ],
+    "doi": "10.2307/1427790",
+    "journal": "Adv. Appl. Probab.",
+    "number": "4",
+    "pages": "757--772",
+    "volume": "25",
+    "year": "1993",
+    "zbl": "0796.60090",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/KJUW93GT/Biggins and Bingham - 1993 - Large deviations in the supercritical branching pr.pdf"
+  },
+  {
+    "zbmath": "7672992",
+    "language": "English",
+    "issn": "0010-3616",
+    "title": "Box-counting dimension in one-dimensional random geometry of multiplicative cascades",
+    "authors": [
+      "Falconer, Kenneth",
+      "Troscheit, Sascha"
+    ],
+    "author_ids": [
+      "falconer.kenneth-j",
+      "troscheit.sascha"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A80"
+    ],
+    "doi": "10.1007/s00220-022-04558-9",
+    "journal": "Commun. Math. Phys.",
+    "number": "1",
+    "pages": "57--83",
+    "volume": "399",
+    "year": "2023",
+    "zbl": "07672992",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/IWS5Y6GI/Falconer and Troscheit - 2023 - Box-Counting Dimension in One-Dimensional Random G.pdf"
+  },
+  {
+    "zbmath": "5598046",
+    "language": "English",
+    "issn": "0246-0203",
+    "title": "On the left tail asymptotics for the limit law of supercritical Galton-Watson processes in the Böttcher case",
+    "authors": [
+      "Fleischmann, Klaus",
+      "Wachtel, Vitali"
+    ],
+    "author_ids": [
+      "fleischmann.klaus",
+      "wachtel.vitali-i"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "60F10",
+      "60J80"
+    ],
+    "doi": "10.1214/07-AIHP162",
+    "journal": "Ann. Inst. Henri Poincaré, Probab. Stat.",
+    "number": "1",
+    "pages": "201--225",
+    "volume": "45",
+    "year": "2009",
+    "zbl": "1175.60075",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/74DL74QK/Fleischmann and Wachtel - 2009 - On the left tail asymptotics for the limit law of .pdf"
+  },
+  {
+    "zbmath": "3063408",
+    "language": "English",
+    "issn": "0003-4851",
+    "title": "Branching processes",
+    "authors": [
+      "Harris, T."
+    ],
+    "author_ids": [
+      "harris.theodore-e"
+    ],
+    "bibtype": "article",
+    "classifications": [],
+    "doi": "10.1214/aoms/1177730146",
+    "journal": "Ann. Math. Stat.",
+    "pages": "474--494",
+    "volume": "19",
+    "year": "1948",
+    "zbl": "0041.45603",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/6DITG3EC/Harris - 1948 - Branching Processes.pdf"
+  },
+  {
+    "zbmath": "6285904",
+    "language": "English",
+    "issn": "0081-5438",
+    "title": "Tail asymptotics for the supercritical Galton-Watson process in the heavy-tailed case",
+    "authors": [
+      "Wachtel, V.",
+      "Denisov, D.",
+      "Korshunov, D."
+    ],
+    "author_ids": [
+      "wachtel.vitali-i",
+      "denisov.denis-e",
+      "korshunov.dmitry"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "60J80"
+    ],
+    "doi": "10.1134/S0081543813060205",
+    "journal": "Proc. Steklov Inst. Math.",
+    "pages": "273--297",
+    "volume": "282",
+    "year": "2013",
+    "zbl": "1290.60087",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/2VP26SHP/Wachtel et al. - 2013 - Tail asymptotics for the supercritical Galton-Wats.pdf"
+  },
+  {
+    "zbmath": "681402",
+    "language": "English",
+    "issn": "1050-5164",
+    "title": "Large deviation rates for branching processes. I: Single type case",
+    "authors": [
+      "Athreya, K."
+    ],
+    "author_ids": [
+      "athreya.krishna-balasundaram"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "60F10",
+      "60J80"
+    ],
+    "doi": "10.1214/aoap/1177004971",
+    "journal": "Ann. Appl. Probab.",
+    "number": "3",
+    "pages": "779--790",
+    "volume": "4",
+    "year": "1994",
+    "zbl": "0806.60068",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/A/1994/Athreya_1994_Large Deviation Rates for Branching Processes--I.pdf"
+  },
+  {
+    "zbmath": "5284798",
+    "language": "English",
+    "publisher": "New York, NY: Springer",
+    "isbn": "978-0-387-33998-6; 978-0-387-49820-1",
+    "issn": "1868-0941",
+    "series": "Texts Comput. Sci.",
+    "fseries": "Texts in Computer Science",
+    "edition": "3rd ed.",
+    "title": "An introduction to Kolmogorov complexity and its applications",
+    "authors": [
+      "Li, Ming",
+      "Vitányi, Paul"
+    ],
+    "author_ids": [
+      "li.ming.1",
+      "vitanyi.paul-m-b"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "03B48",
+      "60A05",
+      "68-02",
+      "68Q30",
+      "82B03",
+      "94A14"
+    ],
+    "doi": "10.1007/978-0-387-49820-1",
+    "year": "2008",
+    "zbl": "1185.68369",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/L/2008/Li_Vitányi_2008_An Introduction to Kolmogorov Complexity and Its Applications.pdf"
+  },
+  "Descriptive {Set} {Theory}::/Users/alexrutar/.local/share/database/zotero_papers/M/2009/Moschovakis_2009_Descriptive Set Theory.pdf",
+  {
+    "zbmath": "7638961",
+    "language": "English",
+    "publisher": "Providence, RI: American Mathematical Society (AMS)",
+    "isbn": "978-1-4704-6857-6; 978-1-4704-7174-3; 978-1-4704-7175-0",
+    "issn": "1065-7338",
+    "series": "Grad. Stud. Math.",
+    "fseries": "Graduate Studies in Mathematics",
+    "title": "Discrete analogues in harmonic analysis. Bourgain, Stein, and beyond",
+    "authors": [
+      "Krause, Ben"
+    ],
+    "author_ids": [
+      "krause.ben"
+    ],
+    "bibtype": "book",
+    "classifications": [
+      "11-XX",
+      "37-XX",
+      "42-02",
+      "42B20",
+      "44A12"
+    ],
+    "doi": "10.1090/gsm/224",
+    "volume": "224",
+    "year": "2022",
+    "zbl": "07638961",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/K/2023/Krause_2023_Discrete Analogues in Harmonic Analysis.pdf"
+  },
+  {
+    "zbmath": "769924",
+    "language": "English",
+    "issn": "0024-6115",
+    "title": "On dimension and on the existence of sets of finite positive Hausdorff measure",
+    "authors": [
+      "Howroyd, J."
+    ],
+    "author_ids": [
+      "howroyd.john-d"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "28A78"
+    ],
+    "doi": "10.1112/plms/s3-70.3.581",
+    "journal": "Proc. Lond. Math. Soc. (3)",
+    "number": "3",
+    "pages": "581--604",
+    "volume": "70",
+    "year": "1995",
+    "zbl": "0828.28002",
+    "file": "/Users/alexrutar/.local/share/database/zotero_papers/H/1995/Howroyd_1995_On Dimension and on the Existence of Sets of Finite Positive Hausdorff Measure.pdf"
+  },
+  "A {Short} {Proof} of {Lebesgue}'s {Density} {Theorem}::/Users/alexrutar/.local/share/database/zotero_papers/F/2002/Faure_2002_A Short Proof of Lebesgue's Density Theorem.pdf",
+  {
+    "zbmath": "6160860",
+    "language": "English",
+    "issn": "0020-9910",
+    "title": "Ultrametric subsets with large Hausdorff dimension",
+    "authors": [
+      "Mendel, Manor",
+      "Naor, Assaf"
+    ],
+    "author_ids": [
+      "mendel.manor",
+      "naor.assaf"
+    ],
+    "bibtype": "article",
+    "classifications": [
+      "30L05",
+      "37F35",
+      "46B85"
+    ],
+    "doi": "10.1007/s00222-012-0402-7",
+    "journal": "Invent. Math.",
+    "number": "1",
+    "pages": "1--54",
+    "volume": "192",
+    "year": "2013",
+    "zbl": "1272.30082",
+    "file": "/Users/alexrutar/.local/share/zotero/storage/8C63QW5F/Mendel and Naor - 2013 - Ultrametric subsets with large Hausdorff dimension.pdf"
+  }
+]

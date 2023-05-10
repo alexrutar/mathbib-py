@@ -1,215 +1,123 @@
 import urllib.request
-from bs4 import BeautifulSoup
-# import bibtexparser
-from bibtexparser.bparser import BibTexParser
-from bibtexparser.customization import convert_to_unicode, page_double_hyphen, author
-from bibtexparser import loads
 import re
 from pathlib import Path
-from dataclasses import dataclass
 from nameparser import HumanName
 
+import tomllib
 
-def cite_file_search(path: Path):
-    cmds = re.findall(
-        r"\\(?:|paren|foot|text|super|auto)cite{(arx|zbl|mr):([\d\.]+)}",
-        path.read_text(),
-    )
-    method_table = {"arx": BaseRecord.from_arxiv, "zbl": BaseRecord.from_zbl}
-    return [method_table[key](index) for key, index in cmds]
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
 
+from remote import arxiv_remote, zbmath_remote, zbl_remote
 
-class ZBmath:
-    @staticmethod
-    def search(query: str) -> str | None:
-        with urllib.request.urlopen(f"https://zbmath.org/?q={query}") as fp:
-            result = fp.read().decode("utf8")
-
-        title = BeautifulSoup(result, "html.parser").title
-        if title is not None:
-            title_string = title.string
-            if title_string is not None:
-                return title_string.split(" ")[2]
-
-    @staticmethod
-    def search_doi(doi: str) -> str | None:
-        return ZBmath.search("en:" + doi)
-
-    @staticmethod
-    def get_bib(zbl: str) -> str | None:
-        with urllib.request.urlopen(f"https://zbmath.org/bibtex/{zbl}.bib") as fp:
-            result = fp.read().decode("utf8")
-        return result
-
-    @staticmethod
-    def get_metadata(zbmath: str):
-        with urllib.request.urlopen(
-            f"https://oai.zbmath.org/v1/?verb=GetRecord&identifier=oai:zbmath.org:{zbmath}&metadataPrefix=oai_zb_preview"
-        ) as fp:
-            result = fp.read().decode("utf8")
-
-        metadata = BeautifulSoup(result, features="xml")
-
-        return {
-            "author_ids": [
-                entry.string for entry in metadata.find_all("zbmath:author_id")
-            ],
-            "classifications": [
-                entry.string for entry in metadata.find_all("zbmath:classification")
-            ],
-            "title": metadata.find_all("zbmath:document_title")[0].string,
-        }
+from xdg_base_dirs import xdg_data_home
 
 
-class ArXiV:
-    @staticmethod
-    def parse_classifications(class_list):
-        return re.findall(r"(math\.[A-Z][A-Z]|\d\d[A-Z]\d\d)", " ".join(class_list))
+def zbmath_search(query: str) -> str | None:
+    with urllib.request.urlopen(f"https://zbmath.org/?q={query}") as fp:
+        result = fp.read().decode("utf8")
 
-    @staticmethod
-    def get_metadata(arxiv: str):
-        with urllib.request.urlopen(
-            f"https://export.arxiv.org/api/query?id_list={arxiv}"
-        ) as fp:
-            result = fp.read().decode("utf8")
-
-        metadata = BeautifulSoup(result, features="xml").entry
-        return {
-            "authors": [HumanName(entry.string) for entry in metadata.find_all("name")],
-            "title": " ".join(metadata.find_all("title")[0].string.split()),
-            "classifications": ArXiV.parse_classifications(
-                entry["term"] for entry in metadata.find_all("category")
-            ),
-        }
+    search_result = re.search(r"Zbl ([\d\.]+)", result)
+    if search_result is not None:
+        return search_result.group(1)
 
 
-@dataclass
-class BaseRecord:
-    arxiv: str | None = None
-    authors: list[HumanName] | None = None
-    author_ids: list[str] | None = None
-    bibtype: str = "preprint"
-    classifications: str | None = None
-    doi: str | None = None
-    journal: str | None = None
-    journal_full: str | None = None
-    number: str| None = None
-    pages: str| None = None
-    title: str | None = None
-    url: str | None = None
-    volume: str| None = None
-    year: str| None = None
-    zbl: str | None = None
-    zbmath: str | None = None
-
-    @classmethod
-    def from_arxiv(cls, arxiv: str):
-        meta = ArXiV.get_metadata(arxiv)
-        return cls(
-            arxiv=arxiv,
-            authors=meta["authors"],
-            bibtype="article",
-            classifications=meta["classifications"],
-            title=meta["title"],
-            url="https://arxiv.org/abs/{arxiv}",
-        )
-
-    @classmethod
-    def from_zbl(cls, zbl: str):
-        # TODO: proper error if fails
-        bibtex = ZBmath.get_bib(zbl)
-
-        parser = BibTexParser()
-        def customizations(record):
-            record = convert_to_unicode(record)
-            record = page_double_hyphen(record)
-            record = author(record)
-            return record
-        parser.customization = customizations
-
-        bibtex_parsed = loads(bibtex, parser=parser).entries[0]
-
-        zbmath = bibtex_parsed["zbmath"]
-        meta = ZBmath.get_metadata(zbmath)
-
-        if (
-            meta["title"]
-            == "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
-        ):
-            title = bibtex_parsed.get("title")
-        else:
-            title = meta.get("title")
-
-        return cls(
-            authors=[
-                HumanName(author) for author in bibtex_parsed["author"]
-            ],
-            author_ids=meta["author_ids"],
-            bibtype="article",
-            classifications=meta["classifications"],
-            doi=bibtex_parsed.get("doi"),
-            journal=bibtex_parsed.get("journal"),
-            journal_full=bibtex_parsed.get("fjournal"),
-            number=bibtex_parsed.get("number"),
-            pages=bibtex_parsed.get("pages"),
-            title=title,
-            url=f"https://zbmath.org/{zbl}",
-            volume=bibtex_parsed.get("volume"),
-            year=bibtex_parsed.get("year"),
-            zbl=zbl,
-            zbmath=zbmath,
-        )
-
-    @classmethod
-    def from_doi(cls, doi: str):
-        res = ZBmath.search_doi(doi)
-        if res is not None:
-            return cls.from_zbl(res)
-        else:
-            # TODO: better error
-            raise ValueError("Could not find record associated with DOI!")
+def zbmath_search_doi(doi: str) -> str | None:
+    return zbmath_search("en:" + doi)
 
 
-# a record should be a dict, with priority (1) arxiv, (2) zbl, (3) manual entry
+# a record should be a dict, with priority (1) arxiv, (2) zbl, (3) local record
 # there should be a distinct internal dict for each (all with the same keys)
 # outputting the record should throw the keys from the highest priority dictf
 class ArchiveRecord:
-    def __init__(self, zbl: str | None = None, arxiv: str | None = None):
-        self.url = f"https://zbmath.org/{zbl}"
-        self.arxiv = arxiv
-        self.zbl = zbl
-        if self.arxiv is not None:
-            pass
-        if self.zbl is not None:
-            self.bibtex = ZBmath.get_bib(self.zbl)
+    def __init__(self, remote_record=None):
+        self.record = remote_record if remote_record is not None else {}
+        self.bibtex = self.record.pop("bibtex", {})
+        self.record["authors"] = self.canonicalize_authors(self.record["authors"])
 
-            bibtex_parsed = bibtexparser.loads(self.bibtex).entries[0]
-            self.zbmath = bibtex_parsed["zbmath"]
+    @staticmethod
+    def canonicalize_authors(author_list: list[str]):
+        human_names = (HumanName(author) for author in author_list)
+        return [f"{hn.last}, {hn.first} {hn.middle}".strip() for hn in human_names]
 
-            meta = ZBmath.get_metadata(self.zbmath)
+    @classmethod
+    def from_arxiv(cls, arxiv: str):
+        return cls(remote_record=arxiv_remote.load_record(arxiv))
 
-            self.authors = meta["authors"]
-            self.classifications = meta["classifications"]
-            if (
-                meta["title"]
-                == "zbMATH Open Web Interface contents unavailable due to conflicting licenses."
-            ):
-                self.title = bibtex_parsed["title"]
-            else:
-                self.title = meta["title"]
+    @classmethod
+    def from_zbl(cls, zbl: str):
+        zbl_record = zbl_remote.load_record(zbl)
+        zbmath_record = zbmath_remote.load_record(zbl_record["zbmath"])
+        if "arxiv" in zbmath_record.keys():
+            arxiv_record = arxiv_remote.load_record(zbmath_record["arxiv"])
+        else:
+            arxiv_record = {}
 
-            self.journal = bibtex_parsed["journal"]
-            self.journal_full = bibtex_parsed["fjournal"]
-            self.doi = bibtex_parsed["doi"]
+        combined_record = {**arxiv_record, **zbmath_record, **zbl_record}
+
+        return cls(remote_record=combined_record)
 
     @classmethod
     def from_doi(cls, doi: str):
-        res = ZBmath.search_doi(doi)
-        if res is not None:
-            return cls(res)
+        zbl = zbmath_search_doi(doi)
+        if zbl is not None:
+            return cls.from_zbl(zbl)
         else:
-            # TODO: better error
-            raise ValueError("Could not find record associated with DOI!")
+            raise ValueError("Could not find DOI.")
 
-    def __repr__(self):
-        return str(self.__dict__)
+    def as_bibtex(self) -> dict:
+        if "zbl" in self.record.keys():
+            eprint = {"eprint": self.record["zbl"], "eprinttype": "zbl"}
+        elif "arxiv" in self.record.keys():
+            eprint = {"eprint": self.record["arxiv"], "eprinttype": "arxiv"}
+        else:
+            eprint = {}
+
+        captured = ("journal", "number", "pages", "year", "title")
+        record_captured = {k: v for k, v in self.record.items() if k in captured}
+
+        id_candidates = ("zbl", "arxiv", "doi", "issn", "title")
+        key, identifier = [
+            (key, self.record.get(key))
+            for key in id_candidates
+            if self.record.get(key) is not None
+        ][0]
+        record_special = {
+            "ID": f"{key}:{identifier}",
+            "ENTRYTYPE": self.record["bibtype"],
+            "author": " and ".join(self.record["authors"]),
+        }
+
+        try:
+            bibtex = tomllib.loads(
+                (xdg_data_home() / "mathbib" / key / f"{identifier}.toml").read_text()
+            )
+        except FileNotFoundError:
+            bibtex = self.bibtex
+
+        return {**eprint, **record_captured, **record_special, **bibtex}
+
+
+def cite_file_search(path: Path) -> list[ArchiveRecord]:
+    cmds = set(
+        re.findall(
+            r"\\(?:|paren|foot|text|super|auto)cite{(arxiv|zbl):([\d\.]+)}",
+            path.read_text(),
+        )
+    )
+    method_table = {
+        "arxiv": ArchiveRecord.from_arxiv,
+        "zbl": ArchiveRecord.from_zbl,
+    }
+    return [method_table[key](index) for key, index in cmds]
+
+
+def generate_file_citations(*paths: Path) -> str:
+    db = BibDatabase()
+    db.entries = [
+        record.as_bibtex() for path in paths for record in cite_file_search(path)
+    ]
+
+    writer = BibTexWriter()
+    writer.indent = "  "
+    return writer.write(db)
