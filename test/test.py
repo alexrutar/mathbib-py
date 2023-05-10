@@ -1,16 +1,12 @@
 from pathlib import Path
-from nameparser import HumanName
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
-
-from remote import arxiv_remote, zbmath_remote, zbl_remote
-from zbrecord import ArchiveRecord, generate_file_citations
+from mathbib.record import ArchiveRecord
+from mathbib.citegen import generate_biblatex
 
 
 def test_record():
-    hs_arxiv = "1302.5792"
+    # hs_arxiv = "1302.5792"
     hs_zbl = "1409.11054"
-    hs_zbmath = "6504096"
+    # hs_zbmath = "6504096"
     # print("arxiv", arxiv_remote.load_record(hs_arxiv))
     # print("zbl", zbl_remote.load_record(hs_zbl))
     # print("zbmath", zbmath_remote.load_record(hs_zbmath))
@@ -19,7 +15,7 @@ def test_record():
 
 
 def test_file_citations():
-    Path("out.bib").write_text(generate_file_citations(Path("example.tex")))
+    print(generate_biblatex(Path("example.tex")))
 
 
 test_file_citations()

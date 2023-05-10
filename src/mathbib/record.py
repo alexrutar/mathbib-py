@@ -1,44 +1,25 @@
-import urllib.request
-import re
-from pathlib import Path
 from nameparser import HumanName
 
 import tomllib
 
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
-
-from remote import arxiv_remote, zbmath_remote, zbl_remote
+from .api import arxiv_remote, zbmath_remote, zbl_remote
+from .search import zbmath_search_doi
 
 from xdg_base_dirs import xdg_data_home
 
 
-def zbmath_search(query: str) -> str | None:
-    with urllib.request.urlopen(f"https://zbmath.org/?q={query}") as fp:
-        result = fp.read().decode("utf8")
-
-    search_result = re.search(r"Zbl ([\d\.]+)", result)
-    if search_result is not None:
-        return search_result.group(1)
+def _canonicalize_authors(author_list: list[str]):
+    human_names = (HumanName(author) for author in author_list)
+    return [f"{hn.last}, {hn.first} {hn.middle}".strip() for hn in human_names]
 
 
-def zbmath_search_doi(doi: str) -> str | None:
-    return zbmath_search("en:" + doi)
-
-
-# a record should be a dict, with priority (1) arxiv, (2) zbl, (3) local record
-# there should be a distinct internal dict for each (all with the same keys)
-# outputting the record should throw the keys from the highest priority dictf
 class ArchiveRecord:
     def __init__(self, remote_record=None):
         self.record = remote_record if remote_record is not None else {}
         self.bibtex = self.record.pop("bibtex", {})
-        self.record["authors"] = self.canonicalize_authors(self.record["authors"])
+        self.record["authors"] = _canonicalize_authors(self.record["authors"])
 
-    @staticmethod
-    def canonicalize_authors(author_list: list[str]):
-        human_names = (HumanName(author) for author in author_list)
-        return [f"{hn.last}, {hn.first} {hn.middle}".strip() for hn in human_names]
+        self.local_record_folder = xdg_data_home() / "mathbib" / "records"
 
     @classmethod
     def from_arxiv(cls, arxiv: str):
@@ -90,34 +71,9 @@ class ArchiveRecord:
 
         try:
             bibtex = tomllib.loads(
-                (xdg_data_home() / "mathbib" / key / f"{identifier}.toml").read_text()
+                (self.local_record_folder / key / f"{identifier}.toml").read_text()
             )
         except FileNotFoundError:
             bibtex = self.bibtex
 
         return {**eprint, **record_captured, **record_special, **bibtex}
-
-
-def cite_file_search(path: Path) -> list[ArchiveRecord]:
-    cmds = set(
-        re.findall(
-            r"\\(?:|paren|foot|text|super|auto)cite{(arxiv|zbl):([\d\.]+)}",
-            path.read_text(),
-        )
-    )
-    method_table = {
-        "arxiv": ArchiveRecord.from_arxiv,
-        "zbl": ArchiveRecord.from_zbl,
-    }
-    return [method_table[key](index) for key, index in cmds]
-
-
-def generate_file_citations(*paths: Path) -> str:
-    db = BibDatabase()
-    db.entries = [
-        record.as_bibtex() for path in paths for record in cite_file_search(path)
-    ]
-
-    writer = BibTexWriter()
-    writer.indent = "  "
-    return writer.write(db)
