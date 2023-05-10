@@ -16,8 +16,6 @@ if TYPE_CHECKING:
 
 
 class RemoteRecord:
-    CACHE_DATE_FORMAT = r"%Y-%m-%dT%H:%M:%SZ"
-
     def __init__(
         self,
         key: str,
@@ -62,8 +60,8 @@ class RemoteRecord:
         """Update all records which are over a certain age."""
         for cache_file in self.cache_folder.glob("*.json"):
             cache_object = json.loads(cache_file.read_text())
-            age = datetime.now() - datetime.strptime(
-                cache_object["accessed"], self.CACHE_DATE_FORMAT
+            age = datetime.now() - datetime.fromisoformat(
+                cache_object["accessed"]
             )
             if age > max_age:
                 self.update_cached_record(cache_file.stem)
@@ -94,6 +92,6 @@ class RemoteRecord:
         target = self.get_cache_file(identifier)
         cache_object = {
             "record": record,
-            "accessed": datetime.now().strftime(self.CACHE_DATE_FORMAT),
+            "accessed": datetime.now().isoformat(),
         }
         target.write_text(json.dumps(cache_object))

@@ -21,9 +21,4 @@ def test_file_citations():
 def test_fail_load():
     ArchiveRecord.from_arxiv("0593.59322")
 
-
-# test_fail_load()
-try:
-    {}["hi"]
-except KeyError as e:
-    print(str(e))
+test_file_citations()

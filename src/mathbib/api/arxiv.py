@@ -22,7 +22,7 @@ def record_parser(result: str) -> dict:
     if date_str is None:
         raise RemoteParseError("Failed to find publication date tag.")
     try:
-        year = datetime.strptime(date_str, r"%Y-%m-%dT%H:%M:%SZ").strftime("%Y")
+        year = datetime.fromisoformat(date_str).strftime("%Y")
     except ValueError as e:
         raise RemoteParseError("Failed to parse publication date '{date_str}'") from e
 
