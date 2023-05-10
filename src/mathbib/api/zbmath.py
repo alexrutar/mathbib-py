@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import re
 
+from ..error import RemoteParseError
+
 
 def url_builder(zbmath: str) -> str:
     return (
@@ -33,6 +35,8 @@ def record_parser(result: str) -> dict:
         out["arxiv"] = arxiv  # type: ignore
 
     candidate_title = metadata.find_all("zbmath:document_title")[0].string
+    if candidate_title is None:
+        raise RemoteParseError("Could not identify title.")
     if (
         candidate_title
         != "zbMATH Open Web Interface contents unavailable due to conflicting licenses."

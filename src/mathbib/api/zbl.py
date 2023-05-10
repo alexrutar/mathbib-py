@@ -1,5 +1,7 @@
 import bibtexparser as bp
 
+from ..error import RemoteParseError
+
 
 def url_builder(zbl: str) -> str:
     return f"https://zbmath.org/bibtex/{zbl}.bib"
@@ -15,7 +17,10 @@ def record_parser(result: str) -> dict:
         )
 
     parser.customization = customizations
-    bibtex_parsed = bp.loads(result, parser=parser).entries[0]
+    try:
+        bibtex_parsed = bp.loads(result, parser=parser).entries[0]
+    except IndexError:
+        raise RemoteParseError("Could not parse bibtex entry.")
 
     # capture some keys explicitly from the bibtex file
     captured = (
@@ -43,15 +48,18 @@ def record_parser(result: str) -> dict:
     )
 
     extracted = {k: v for k, v in bibtex_parsed.items() if k in captured}
-    additional = {
-        # save any bibtex keys not captured or dropped
-        "bibtex": {
-            k: v
-            for k, v in bibtex_parsed.items()
-            if k not in captured and k not in dropped
-        },
-        "bibtype": bibtex_parsed["ENTRYTYPE"],
-        "authors": bibtex_parsed["author"],
-    }
+    try:
+        additional = {
+            # save any bibtex keys not captured or dropped
+            "bibtex": {
+                k: v
+                for k, v in bibtex_parsed.items()
+                if k not in captured and k not in dropped
+            },
+            "bibtype": bibtex_parsed["ENTRYTYPE"],
+            "authors": bibtex_parsed["author"],
+        }
+    except KeyError as key:
+        raise RemoteParseError(f"BibLaTeX file missing essential key '{key}'")
 
     return {**extracted, **additional}

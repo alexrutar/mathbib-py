@@ -18,12 +18,12 @@ def test_file_citations():
     print(generate_biblatex(Path("example.tex")))
 
 
-test_file_citations()
-# print(HumanName("Kenneth J. Falconer").__repr__)
-# print(ArchiveRecord.from_arxiv("2206.06921").as_local_dict())
+def test_fail_load():
+    ArchiveRecord.from_arxiv("0593.59322")
 
 
-# TODO next:
-# - bibtex generation from record
-# - save records locally, and search there first
-# - manually editing records?
+# test_fail_load()
+try:
+    {}["hi"]
+except KeyError as e:
+    print(str(e))

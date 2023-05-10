@@ -3,6 +3,8 @@ import re
 
 from bs4 import BeautifulSoup
 
+from ..error import RemoteAccessError, RemoteParseError
+
 
 def url_builder(arxiv: str) -> str:
     return f"https://export.arxiv.org/api/query?id_list={arxiv}"
@@ -11,27 +13,30 @@ def url_builder(arxiv: str) -> str:
 def record_parser(result: str) -> dict:
     metadata = BeautifulSoup(result, features="xml").entry
     if metadata is None:
-        raise ValueError("malformed arxiv")
+        raise RemoteAccessError("Response does not contain entry metadata.")
 
     published = metadata.published
     if published is None:
-        raise ValueError("malformed arxiv")
+        raise RemoteParseError("Failed to find publication date tag.")
     date_str = published.string
     if date_str is None:
-        raise ValueError("malformed arxiv")
-    year = datetime.strptime(date_str, r"%Y-%m-%dT%H:%M:%SZ").strftime("%Y")
+        raise RemoteParseError("Failed to find publication date tag.")
+    try:
+        year = datetime.strptime(date_str, r"%Y-%m-%dT%H:%M:%SZ").strftime("%Y")
+    except ValueError as e:
+        raise RemoteParseError("Failed to parse publication date '{date_str}'") from e
 
     arxiv_id = metadata.id
     if arxiv_id is None:
-        raise ValueError("malformed arxiv")
+        raise RemoteParseError("Failed to find version tag.")
     arxiv_link = arxiv_id.string
     if arxiv_link is None:
-        raise ValueError("malformed arxiv")
+        raise RemoteParseError("Failed to find version tag.")
     arxiv_id_search = re.fullmatch(
         r"https?://arxiv.org/abs/.+v([1-9][0-9]*)", arxiv_link
     )
     if arxiv_id_search is None:
-        raise ValueError("malformed arxiv")
+        raise RemoteParseError("Failed to find version.")
 
     classifications = sorted(
         re.findall(

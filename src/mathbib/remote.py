@@ -9,6 +9,8 @@ from urllib.error import HTTPError
 
 from xdg_base_dirs import xdg_cache_home
 
+from .error import RemoteAccessError, RemoteParseError
+
 if TYPE_CHECKING:
     from typing import Callable
 
@@ -42,9 +44,14 @@ class RemoteRecord:
         try:
             with urlopen(url) as fp:
                 return self.record_parser(fp.read().decode("utf8"))
-        except HTTPError as e:
-            print(f"Failed to access '{self.key}' identifier '{identifier}' at '{url}'")
-            raise e
+        except (HTTPError, RemoteAccessError) as e:
+            raise RemoteAccessError(
+                f"Failed to access '{self.key}:{identifier}' from '{url}'"
+            ) from e
+        except RemoteParseError as e:
+            raise RemoteParseError(
+                f"While processing '{self.key}:{identifier}': " + e.message
+            ) from e
 
     def update_cached_record(self, identifier: str) -> None:
         """Forcibly update the cache from the remote record."""
@@ -68,11 +75,15 @@ class RemoteRecord:
 
         # attempt to load from cache
         try:
-            record = self.load_cached_record(cache_file)
-
+            local_record = self.load_cached_record(cache_file)
         except FileNotFoundError:
+            local_record = None
+
+        if local_record is None:
             record = self.load_remote_record(identifier)
             self.serialize(identifier, record)
+        else:
+            record = local_record
 
         record[self.key] = identifier
         return record
