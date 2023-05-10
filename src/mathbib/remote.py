@@ -29,12 +29,32 @@ class RemoteRecord:
         self.record_parser = record_parser
         self.error_parser = error_parser
 
-    def load_cached_record(self, cache_file: Path) -> dict:
-        return json.loads(cache_file.read_text())["record"]
-
-    def get_cache_file(self, identifier: str) -> Path:
+    def get_cache_path(self, identifier: str) -> Path:
         """Get the cache file associated with the item identifier."""
         return self.cache_folder / f"{identifier}.json"
+
+    def serialize(self, identifier: str, record: dict) -> None:
+        self.cache_folder.mkdir(parents=True, exist_ok=True)
+
+        target = self.get_cache_path(identifier)
+        cache_object = {
+            "record": record,
+            "accessed": datetime.now().isoformat(),
+        }
+        target.write_text(json.dumps(cache_object))
+
+    def load_cached_record(self, identifier: str) -> dict:
+        cache_file = self.get_cache_path(identifier)
+        return json.loads(cache_file.read_text())["record"]
+
+    def delete_cached_record(self, identifier: str):
+        cache_file = self.get_cache_path(identifier)
+        cache_file.unlink(missing_ok=True)
+
+    def update_cached_record(self, identifier: str) -> None:
+        """Forcibly update the cache from the remote record."""
+        record = self.load_remote_record(identifier)
+        self.serialize(identifier, record)
 
     def load_remote_record(self, identifier: str) -> dict:
         """Load and parse the remote record."""
@@ -51,13 +71,8 @@ class RemoteRecord:
                 f"While processing '{self.key}:{identifier}': " + e.message
             ) from e
 
-    def update_cached_record(self, identifier: str) -> None:
-        """Forcibly update the cache from the remote record."""
-        record = self.load_remote_record(identifier)
-        self.serialize(identifier, record)
-
     def update_records(self, max_age: timedelta = timedelta(days=365)):
-        """Update all records which are over a certain age."""
+        """Update all cached records which are over a certain age."""
         for cache_file in self.cache_folder.glob("*.json"):
             cache_object = json.loads(cache_file.read_text())
             age = datetime.now() - datetime.fromisoformat(
@@ -69,11 +84,9 @@ class RemoteRecord:
     def load_record(self, identifier: str) -> dict:
         """Load the item identifier, defaulting to the cache if possible and
         writing to the cache after loading."""
-        cache_file = self.get_cache_file(identifier)
-
         # attempt to load from cache
         try:
-            local_record = self.load_cached_record(cache_file)
+            local_record = self.load_cached_record(identifier)
         except FileNotFoundError:
             local_record = None
 
@@ -85,13 +98,3 @@ class RemoteRecord:
 
         record[self.key] = identifier
         return record
-
-    def serialize(self, identifier: str, record: dict) -> None:
-        self.cache_folder.mkdir(parents=True, exist_ok=True)
-
-        target = self.get_cache_file(identifier)
-        cache_object = {
-            "record": record,
-            "accessed": datetime.now().isoformat(),
-        }
-        target.write_text(json.dumps(cache_object))
