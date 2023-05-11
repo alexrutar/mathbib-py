@@ -1,12 +1,6 @@
 from pathlib import Path
 from mathbib.record import ArchiveRecord
 from mathbib.citegen import generate_biblatex
-from mathbib.index import list_records, generate_records_from_storage
-
-# generate_records_from_storage()
-for record in list_records():
-    print(record)
-    # print(" && ".join(record))
 
 
 def test_record():
