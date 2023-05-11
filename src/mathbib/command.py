@@ -18,6 +18,9 @@ def cli():
                 if candidate.exists():
                     print(candidate)
 
+            case "parse-key":
+                print(sys.argv[2].split(" || ")[0], end="")
+
             case "list":
                 for record in list_records():
                     print(record)
