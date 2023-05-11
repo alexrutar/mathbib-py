@@ -5,7 +5,7 @@ from mathbib.index import list_records, generate_records_from_storage
 
 # generate_records_from_storage()
 for record in list_records():
-    print(str(record))
+    print(record)
     # print(" && ".join(record))
 
 

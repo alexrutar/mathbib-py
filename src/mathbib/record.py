@@ -4,6 +4,7 @@ import tomllib
 
 from .api import arxiv_remote, zbmath_remote, zbl_remote
 from .search import zbmath_search_doi
+from .error import RemoteAccessError
 
 from xdg_base_dirs import xdg_data_home
 
@@ -45,7 +46,7 @@ class ArchiveRecord:
         if zbl is not None:
             return cls.from_zbl(zbl)
         else:
-            raise ValueError("Could not find DOI.")
+            raise RemoteAccessError("Could not find DOI '{doi}'.")
 
     def as_bibtex(self) -> dict:
         if "zbl" in self.record.keys():
