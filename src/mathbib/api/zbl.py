@@ -57,9 +57,11 @@ def record_parser(result: str) -> dict:
                 if k not in captured and k not in dropped
             },
             "bibtype": bibtex_parsed["ENTRYTYPE"],
-            "authors": bibtex_parsed["author"],
         }
-    except KeyError as key:
-        raise RemoteParseError(f"BibLaTeX file missing essential key '{key}'")
+    except KeyError:
+        raise RemoteParseError(f"BibLaTeX file missing essential key 'ENTRYTYPE'")
+
+    if "author" in bibtex_parsed.keys():
+        additional["authors"] = bibtex_parsed["author"]
 
     return {**extracted, **additional}
