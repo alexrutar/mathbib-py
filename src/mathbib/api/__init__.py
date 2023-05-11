@@ -12,4 +12,4 @@ from . import zbmath
 
 arxiv_remote: Final = RemoteRecord("arxiv", arxiv.url_builder, arxiv.record_parser)
 zbl_remote: Final = RemoteRecord("zbl", zbl.url_builder, zbl.record_parser)
-zbmath_remote: Final = RemoteRecord("zbl", zbmath.url_builder, zbmath.record_parser)
+zbmath_remote: Final = RemoteRecord("zbmath", zbmath.url_builder, zbmath.record_parser)

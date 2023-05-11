@@ -1,6 +1,9 @@
 from __future__ import annotations
 from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from typing import Callable
+
 from datetime import datetime, timedelta
 import json
 from pathlib import Path
@@ -10,9 +13,6 @@ from urllib.error import HTTPError
 from xdg_base_dirs import xdg_cache_home
 
 from .error import RemoteAccessError, RemoteParseError
-
-if TYPE_CHECKING:
-    from typing import Callable
 
 
 class RemoteRecord:
@@ -34,9 +34,8 @@ class RemoteRecord:
         return self.cache_folder / f"{identifier}.json"
 
     def serialize(self, identifier: str, record: dict) -> None:
-        self.cache_folder.mkdir(parents=True, exist_ok=True)
-
         target = self.get_cache_path(identifier)
+        target.parent.mkdir(parents=True, exist_ok=True)
         cache_object = {
             "record": record,
             "accessed": datetime.now().isoformat(),
@@ -75,9 +74,7 @@ class RemoteRecord:
         """Update all cached records which are over a certain age."""
         for cache_file in self.cache_folder.glob("*.json"):
             cache_object = json.loads(cache_file.read_text())
-            age = datetime.now() - datetime.fromisoformat(
-                cache_object["accessed"]
-            )
+            age = datetime.now() - datetime.fromisoformat(cache_object["accessed"])
             if age > max_age:
                 self.update_cached_record(cache_file.stem)
 

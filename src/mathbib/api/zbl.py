@@ -30,6 +30,7 @@ def record_parser(result: str) -> dict:
         "issn",
         "number",
         "pages",
+        "title",
         "volume",
         "year",
         "zbmath",

@@ -17,7 +17,8 @@ class ArchiveRecord:
     def __init__(self, remote_record=None):
         self.record = remote_record if remote_record is not None else {}
         self.bibtex = self.record.pop("bibtex", {})
-        self.record["authors"] = _canonicalize_authors(self.record["authors"])
+        if "authors" in self.record.keys():
+            self.record["authors"] = _canonicalize_authors(self.record["authors"])
 
         self.local_record_folder = xdg_data_home() / "mathbib" / "records"
 
@@ -66,8 +67,9 @@ class ArchiveRecord:
         record_special = {
             "ID": f"{key}:{identifier}",
             "ENTRYTYPE": self.record["bibtype"],
-            "author": " and ".join(self.record["authors"]),
         }
+        if "authors" in self.record.keys():
+            record_special["author"] = " and ".join(self.record["authors"])
 
         try:
             bibtex = tomllib.loads(
@@ -77,3 +79,24 @@ class ArchiveRecord:
             bibtex = self.bibtex
 
         return {**eprint, **record_captured, **record_special, **bibtex}
+
+    def as_tuple(self) -> tuple[str, str, str | None, str | None, str | None, bool]:
+        bibtex_record = self.as_bibtex()
+        return (
+            bibtex_record["eprinttype"],
+            bibtex_record["eprint"],
+            bibtex_record.get("title"),
+            bibtex_record.get("author"),
+            bibtex_record.get("year"),
+            (
+                xdg_data_home()
+                / "mathbib"
+                / "files"
+                / "zbl"
+                / f"{bibtex_record['eprint']}.pdf"
+            ).exists(),
+        )
+
+    def __str__(self) -> str:
+        key, id, title, author, year, exists = self.as_tuple()
+        return f"{key}:{id} || {title} || {author} || {year} || file:{exists}"
