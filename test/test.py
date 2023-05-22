@@ -22,6 +22,9 @@ def test_fail_load():
     ArchiveRecord.from_arxiv("0593.59322")
 
 
+test_file_citations()
+
+
 # lost
 # {
 #   "title": "Real analysis",

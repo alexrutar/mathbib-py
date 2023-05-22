@@ -56,7 +56,7 @@ class ArchiveRecord:
         else:
             eprint = {}
 
-        captured = ("journal", "number", "pages", "year", "title")
+        captured = ("journal", "volume", "number", "pages", "year", "title", "doi")
         record_captured = {k: v for k, v in self.record.items() if k in captured}
 
         id_candidates = ("zbl", "arxiv", "doi", "issn", "title")

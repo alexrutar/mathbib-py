@@ -1,0 +1,738 @@
+<!doctype html>
+
+
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>No Documents Found - zbMATH Open</title>
+        <meta name="viewport" content="width=device-width, minimum-scale=0.1, maximum-scale=5.0">
+        <meta name="robots" content="noarchive, noindex">
+        <meta name="referrer" content="origin-when-cross-origin">
+        <link href="https://static.zbmath.org/contrib/bootstrap/v3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen,print">
+        <link href="https://static.zbmath.org/contrib/bootstrap/v3.3.7/css/bootstrap-theme.min.css" rel="stylesheet" media="screen,print">
+        <link href="https://static.zbmath.org/contrib/bootstrap-lightbox/v0.7.0/bootstrap-lightbox.min.css" rel="stylesheet" media="screen,print">
+        <link href="/static/css/smoothness/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" media="screen">
+        <link href="/static/styles.css?v=20230127" rel="stylesheet" media="screen,print">
+        <link href="https://static.zbmath.org/zbMathJax/v0.1.15/zbmathjax.css" rel="stylesheet" media="screen,print">
+        <link rel="shortcut icon" href="/static/zbmath.ico">
+        <script type="application/ld+json">
+            {
+              "@context": "http://schema.org",
+              "@type": "Organization",
+              "url": "https://zbmath.org/",
+              "logo": "https://zbmath.org/static/zbMATH.png"
+            }
+        </script>
+    </head>
+
+    <body>
+        <div id="line"></div>
+
+        <span id="clear" style="cursor: pointer;">&times;</span>
+
+        <div id="page">
+            <div id="head">
+                <nav id="menu" class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#zbnav" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">
+                                <img class="logo" src="/static/zbmath.gif" alt="zbMATH Open logo">
+                            </a>
+                        </div>
+                        <div id="zbnav" class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pages">
+                                <li class="about">
+                                    <a href="/about/">About</a>
+                                </li>
+                                <li class="frequently-asked-questions">
+                                    <a href="/frequently-asked-questions/">FAQ</a>
+                                </li>
+                                
+                                <li class="reviewer-service">
+                                    <a href="https://zbmath.org/reviewer-service/" target="_self" >Reviewer Service</a>
+                                </li>
+                                
+                                <li class="contact">
+                                    <a href="/contact/">Contact</a>
+                                </li>
+                                
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right prefs">
+                                <li class="preferences dropdown">
+                                    <a data-toggle="dropdown" href="#">Preferences <i class="caret"></i></a>
+                                    <ul class="dropdown-menu preferences">
+                                        <li>
+                                            <form
+                                                id="preferences"
+                                                class="navbar-form"
+                                                method="post"
+                                                action="/preferences/"
+                                                
+                                                    onsubmit="return confirm('This website uses cookies for the purposes of storing preference information. Do you agree to this?\n\nPlease refer to our Privacy Policy to learn more about our use of cookies.')"
+                                                
+                                            >
+                                                <input type="hidden" name="path" value="/?q=ti%3AA%20Multifractal%20Decomposition%20for%20Self-similar%20Measures%20with%20Exact%20Overlaps%20%26%20au%3ARutar">
+                                                <span class="count">
+                                                    <label class="title">Hits per Page</label>
+                                                    <div class="form-group">
+                                                        <input id="count-10" type="radio" name="count" value="10">
+                                                        <label for="count-10" class="radio">10</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="count-20" type="radio" name="count" value="20">
+                                                        <label for="count-20" class="radio">20</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="count-50" type="radio" name="count" value="50">
+                                                        <label for="count-50" class="radio">50</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="count-100" type="radio" name="count" value="100" checked>
+                                                        <label for="count-100" class="radio">100 (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="count-200" type="radio" name="count" value="200">
+                                                        <label for="count-200" class="radio">200</label>
+                                                    </div>
+                                                </span>
+                                                <span class="format">
+                                                    <label class="title">Display Format</label>
+                                                    <div class="form-group">
+                                                        <input id="format-mathjax" type="radio" name="format" value="mathjax" checked>
+                                                        <label for="format-mathjax" class="radio">MathJax (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="format-amstex" type="radio" name="format" value="latex">
+                                                        <label for="format-amstex" class="radio">LaTeX</label>
+                                                    </div>
+                                                </span>
+                                                <span class="ranking">
+                                                    <label class="title">Documents Sorting</label>
+                                                    <div class="form-group">
+                                                        <input id="documents-ranking-default" type="radio" name="documents_ranking" value="date" checked>
+                                                        <label for="documents-ranking-default" class="radio">Newest first (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="documents-ranking-references" type="radio" name="documents_ranking" value="references">
+                                                        <label for="documents-ranking-references" class="radio">Citations</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="documents-ranking-relevance" type="radio" name="documents_ranking" value="relevance">
+                                                        <label for="documents-ranking-relevance" class="radio">Relevance</label>
+                                                    </div>
+                                                </span>
+                                                <span class="ranking">
+                                                    <label class="title">Authors Sorting</label>
+                                                    <div class="form-group">
+                                                        <input id="authors-ranking-default" type="radio" name="authors_ranking" value="alpha" checked>
+                                                        <label for="authors-ranking-default" class="radio">Alphabetically (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="authors-ranking-references" type="radio" name="authors_ranking" value="references">
+                                                        <label for="authors-ranking-references" class="radio">Citations</label>
+                                                    </div>
+                                                </span>
+                                                <span class="ranking">
+                                                    <label class="title">Serials Sorting</label>
+                                                    <div class="form-group">
+                                                        <input id="serials-ranking-default" type="radio" name="serials_ranking" value="alpha" checked>
+                                                        <label for="serials-ranking-default" class="radio">Alphabetically (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="serials-ranking-references" type="radio" name="serials_ranking" value="references">
+                                                        <label for="serials-ranking-references" class="radio">Citations</label>
+                                                    </div>
+                                                </span>
+                                                <span class="ranking">
+                                                    <label class="title">Software Sorting</label>
+                                                    <div class="form-group">
+                                                        <input id="software-ranking-default" type="radio" name="software_ranking" value="references" checked>
+                                                        <label for="software-ranking-default" class="radio">Citations (default)</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="software-ranking-alpha" type="radio" name="software_ranking" value="alpha">
+                                                        <label for="software-ranking-alpha" class="radio">Alphabetically</label>
+                                                    </div>
+                                                </span>
+                                                <button type="submit" class="btn btn-default">OK</button>
+                                                <div class="clearfix">
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <div id="tabs">
+                    <h1 class="logo">
+                        <a class="logo" href="/">
+                            <img
+                            class="logo"
+                                
+                                    src="/static/zbmath.gif"
+                                    alt="zbMATH Open &mdash; the first resource for mathematics"
+                                
+                            >
+                        </a>
+                    </h1>
+                    <nav>
+                        <ul class="nav nav-tabs">
+                            <li class="tab-documents active">
+                                <a href="/">Documents</a>
+                            </li>
+                            <li class="tab-authors">
+                                <a href="/authors/">Authors</a>
+                            </li>
+                            <li class="tab-serials">
+                                <a href="/serials/">Serials</a>
+                            </li>
+                            <li class="tab-software">
+                                <a href="/software/">Software</a>
+                            </li>
+                            <li class="tab-classification">
+                                <a href="/classification/">Classification</a>
+                            </li>
+                            <li class="tab-formulae">
+                                <a href="/formulae/">Formulæ</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="clearfix"></div>
+                </div>
+                
+    <div class="content-fixed">
+        <div class="content-formular">
+    <form class="form-inline" name="documents" method="get" action="/">
+        <div class="documents one-line" style="display:block;">
+            
+                <div class="forms">
+                    <ul class="nav forms">
+                        <li class="structured"><a href="#">Structured Search <span class="glyphicon glyphicon-list"></span></a></li>
+                    </ul>
+                </div>
+            
+            <div id="search-row" class="input-group box">
+                <span>
+                    <div id="search-field">
+                        
+                            
+                                <input class="query form-control" type="text" name="q" value="ti:A Multifractal Decomposition for Self-similar Measures with Exact Overlaps &amp; au:Rutar" aria-label="Search for documents" placeholder="Search for documents" autocomplete="off">
+                            
+                        
+                    </div>
+                    <div class="search-buttons input-group-btn">
+                        <div class="btn-group">
+                            <button class="btn btn-default search" type="submit"><span class="virtual">Search</span>
+                            <span class="glyphicon glyphicon-search" style="top: 2px;"></span></button>
+                        </div>
+                    </div>
+                </span>
+                <span>
+                    <div class="search-buttons input-group-btn">
+                        <div class="btn-group">
+                            
+                                <div class="btn-group fields">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Fields <i class="caret"></i></button>
+                                    <ul id="fields" class="dropdown-menu pull-right">
+                                        <li><a href="#"><span class="token item">any:</span><span>&nbsp;</span>anywhere (default)</a></li>
+                                        <li><a href="#"><span class="token item">au:</span><span>&nbsp;&nbsp;</span>authors</a></li>
+                                        <li><a href="#"><span class="token item">ti:</span><span>&nbsp;&nbsp;</span>title</a></li>
+                                        <li><a href="#"><span class="token item">so:</span><span>&nbsp;&nbsp;</span>source / journal</a></li>
+                                        <li><a href="#"><span class="token item">la:</span><span>&nbsp;&nbsp;</span>language</a></li>
+                                        <li><a href="#"><span class="token item">py:</span><span>&nbsp;&nbsp;</span>year of publication</a></li>
+                                        <li><a href="#"><span class="token item">ab:</span><span>&nbsp;&nbsp;</span>summary / review</a></li>
+                                        <li><a href="#"><span class="token item">rv:</span><span>&nbsp;&nbsp;</span>reviewer</a></li>
+                                        <li><a href="#"><span class="token item">dt:</span><span>&nbsp;&nbsp;</span>document type</a></li>
+                                        <li><a href="#"><span class="token item">an:</span><span>&nbsp;&nbsp;</span>zbMATH ID</a></li>
+                                        <li><a href="#"><span class="token item">en:</span><span>&nbsp;&nbsp;</span>external ID</a></li>
+                                        <li><a href="#"><span class="token item">cc:</span><span>&nbsp;&nbsp;</span>classification</a></li>
+                                        <li><a href="#"><span class="token item">ut:</span><span>&nbsp;&nbsp;</span>keywords</a></li>
+                                        <li><a href="#"><span class="token item">sw:</span><span>&nbsp;&nbsp;</span>software</a></li>
+                                        <li><a href="#"><span class="token item">br:</span><span>&nbsp;&nbsp;</span>biographic reference</a></li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="btn-group operators">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Operators <i class="caret"></i></button>
+                                    <ul id="operators" class="dropdown-menu pull-right">
+                                        <li><a href="#"><span class="token">a&nbsp;<span class="item">&</span>&nbsp;b&nbsp;</span><span>&nbsp;</span>logical and (default)</a></li>
+                                        <li><a href="#"><span class="token">a&nbsp;<span class="item">|</span>&nbsp;b&nbsp;</span><span>&nbsp;</span>logical or</a></li>
+                                        <li><a href="#"><span class="token"><span class="item">!</span>ab&nbsp;&nbsp;&nbsp;</span><span>&nbsp;</span>logical not</a></li>
+                                        <li><a href="#"><span class="token">abc<span class="item">*</span>&nbsp;&nbsp;</span><span>&nbsp;</span>right wildcard</a></li>
+                                        <li><a href="#"><span class="token"><span class="item">"</span>ab&nbsp;c<span class="item">"</span></span><span>&nbsp;</span>phrase</a></li>
+                                        <li><a href="#"><span class="token"><span class="item">(</span>ab&nbsp;c<span class="item">)</span></span><span>&nbsp;</span>parentheses</a></li>
+                                    </ul>
+                                </div>
+                            
+                        </div>
+                    </div>
+                    <div class="special">
+                        <ul class="nav help-button">
+                            <li class="dropdown pull-right">
+                                <a href="#">Help <i class="caret"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </span>
+            </div>
+            <div class="help"><h2>Examples</h2>
+
+<div id="help-terms" role="table">
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=Geometry">Geometry</a></span>
+        <span class="search-explanation" role="cell" role="cell">Search for the term <em>Geometry</em> in <strong>any</strong> field. Queries are <strong>case-independent</strong>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=Funct%2A">Funct*</a></span>
+        <span class="search-explanation" role="cell"><strong>Wildcard</strong> queries are specified by <strong><u>*</u></strong> (e.g. <em>functions</em>, <em>functorial</em>, etc.). Otherwise the search is <strong>exact</strong>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=%22Topological+group%22">"Topological group"</a></span>
+        <span class="search-explanation" role="cell"><strong>Phrases</strong> (multi-words) should be set in <u>"</u>straight quotation marks<u>"</u>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=au%3A+Bourbaki+%26+ti%3A+Algebra">au: Bourbaki &amp; ti: Algebra</a></span>
+        <span class="search-explanation" role="cell">Search for <strong><u>au</u>thor</strong> and <strong><u>ti</u>tle</strong>. The <strong>and-operator &amp;</strong> is default and can be omitted.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=Chebyshev+%7C+Tschebyscheff">Chebyshev | Tschebyscheff</a></span>
+        <span class="search-explanation" role="cell">The <strong>or-operator |</strong> allows to search for <em>Chebyshev</em> or <em>Tschebyscheff</em>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=Quasi%2A+map%2A+py%3A+1989">Quasi* map* py: 1989</a></span>
+        <span class="search-explanation" role="cell">The resulting documents have <strong><u>p</u>ublication <u>y</u>ear</strong> <em>1989</em>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=so%3A+Eur%2A+J%2A+Mat%2A+Soc%2A+cc%3A+14">so: Eur* J* Mat* Soc* cc: 14</a></span>
+        <span class="search-explanation" role="cell">Search for publications in a particular <strong><u>so</u>urce</strong> with a <strong>Mathematics Subject <u>C</u>lassification <u>c</u>ode (<u>cc</u>)</strong> in <em>14</em>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=%22Partial+diff%2A+eq%2A%22+%21+elliptic">"Partial diff* eq*" ! elliptic</a></span>
+        <span class="search-explanation" role="cell">The <strong>not</strong>-operator <strong>!</strong> eliminates all results containing the word <em>elliptic</em>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=dt%3A+b+%26+au%3A+Hilbert">dt: b &amp; au: Hilbert</a></span>
+        <span class="search-explanation" role="cell">The <strong><u>d</u>ocument <u>t</u>ype</strong> is set to books; alternatively: <u>j</u> for <strong>journal articles</strong>, <u>a</u> for <strong>book articles</strong>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=py%3A+2000-2015+cc%3A+%2894A+%7C+11T%29">py: 2000-2015 cc: (94A | 11T)</a></span>
+        <span class="search-explanation" role="cell">Number <strong>ranges</strong> are accepted. Terms can be grouped within <strong><u>(</u>parentheses<u>)</u></strong>.</span>
+    </div>
+    <div class="help-item" role="row">
+        <span class="search-example" role="rowheader"><a href="/?q=la%3A+chinese">la: chinese</a></span>
+        <span class="search-explanation" role="cell">Find documents in a given <strong><u>la</u>nguage</strong>. <a href="http://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1</a> language codes can also be used.</span>
+    </div>
+</div>
+
+<div id="help-fields">
+    <h2>Fields</h2>
+    <table>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>any</strong></td>
+            <td class="padding">anywhere</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>an</strong></td>
+            <td class="padding">internal document identifier</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>au</strong></td>
+            <td class="padding">author, editor</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>ai</strong></td>
+            <td class="padding">internal author identifier</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>ti</strong></td>
+            <td class="padding">title</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>la</strong></td>
+            <td class="padding">language</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>so</strong></td>
+            <td class="padding">source</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>ab</strong></td>
+            <td class="padding">review, abstract</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>py</strong></td>
+            <td class="padding">publication year</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>rv</strong></td>
+            <td class="padding">reviewer</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>cc</strong></td>
+            <td class="padding">MSC code</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>ut</strong></td>
+            <td class="padding">uncontrolled term</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>dt</strong></td>
+            <td class="padding" colspan="4">document type (<strong>j</strong>: journal article; <strong>b</strong>: book; <strong>a</strong>: book article)</td>
+        </tr>
+    </table>
+</div>
+
+<div id="help-operators">
+    <h2>Operators</h2>
+    <table>
+        <tr>
+            <td class="nowrap padding" role="rowheader">a <strong>&amp;</strong> b</td>
+            <td class="padding">logic and</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader">a <strong>|</strong> b</td>
+            <td class="padding">logic or</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>!</strong>ab</td>
+            <td class="padding">logic not</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader">abc<strong>*</strong></td>
+            <td class="padding">right wildcard</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>"</strong>ab c<strong>"</strong></td>
+            <td class="padding">phrase</td>
+        </tr>
+        <tr>
+            <td class="nowrap padding" role="rowheader"><strong>(</strong>ab c<strong>)</strong></td>
+            <td class="padding">parentheses</td>
+        </tr>
+    </table>
+</div></div>
+        </div>
+    </form>
+
+
+    <form class="form-inline" name="documents" method="get" action="/">
+        <div class="documents structured" style="display:none;">
+            <div class="forms">
+                <ul class="nav forms">
+                    <li class="one-line">
+                        <span tabindex="0" class="glyphicon glyphicon-question-sign" title="One-Line Search allows for free logical combinations of search fields" aria-label="One-Line Search allows for free logical combinations of search fields" data-placement="bottom"></span>&nbsp;<a style="display: inline-block;" href="#">One-Line Search <span class="glyphicon glyphicon-search"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div class="container-fluid two-columns">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group field au">
+                            <label for="au">Authors:</label>
+                            <input id="au" name="au" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                        <div class="form-group field ti">
+                            <label for="ti">Title:</label>
+                            <input id="ti" name="ti" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                        <div class="form-group field so">
+                            <label for="so">Source / Journal:</label>
+                            <input id="so" name="so" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                        <div class="form-group field la">
+                            <label for="la">Language:</label>
+                            <input id="la" name="la" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="use name or ISO&nbsp;code" aria-label="use name or ISO code"></span>
+                        </div>
+                        <div class="form-group field py">
+                            <label for="py">Year of Publication:</label>
+                            <input id="py" name="py" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="enter year (e.g. 2018) or&nbsp;year&nbsp;range (e.g.&nbsp;1990-2000)" aria-label="enter year (e.g. 2018) or year range (e.g. 1990-2000)"></span>
+                        </div>
+                        <div class="form-group field ab">
+                            <label for="ab">Summary / Review:</label>
+                            <input id="ab" name="ab" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                        <div class="form-group field rv">
+                            <label for="rv">Reviewer:</label>
+                            <input id="rv" name="rv" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="enter name or zbMATH reviewer number" aria-label="enter name or zbMATH reviewer number"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group field an">
+                            <label for="an">zbMATH ID:</label>
+                            <input id="an" name="an" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" data-placement="bottom" title="Zbl, JFM or ERAM number" aria-label="Zbl, JFM or ERAM number"></span>
+                        </div>
+                        <div class="form-group field en">
+                            <label for="en">External ID:</label>
+                            <input id="en" name="en" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="e.g.&nbsp;DOI, ISBN, arXiv&nbsp;ID" aria-label="e.g. DOI, arXiv ID"></span>
+                        </div>
+                        <div class="form-group field cc">
+                            <label for="cc">Classification:</label>
+                            <input id="cc" name="cc" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="prefix with * to search only primary&nbsp;MSC" aria-label="prefix with * to search only primary MSC"></span>
+                        </div>
+                        <div class="form-group field ut">
+                            <label for="ut">Keywords:</label>
+                            <input id="ut" name="ut" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                        <div class="form-group field sw">
+                            <label for="sw">Software:</label>
+                            <input id="sw" name="sw" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="use * to find all documents using software" aria-label="use * to find all documents using software"></span>
+                        </div>
+                        <div class="form-group field br">
+                            <label for="br">Biographic Ref:</label>
+                            <input id="br" name="br" class="form-control" type="text" value="" placeholder="">
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="find documents about the life or work of a person" aria-label="find documents about the life or work of a person"></span>
+                        </div>
+                        <div class="form-group field any">
+                            <label for="any">Anywhere:</label>
+                            <input id="any" name="any" class="form-control" type="text" value="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row formula-search">
+                    <div class="col-xs-12 col-sm-8">
+                        <div class="form-group field dm">
+                            <label for="MathInput">Formula:</label>
+                            <div class="input-group box">
+                                <input class="form-control" name="dm" type="text" value="" placeholder="" id="MathInput" onkeyup="Preview.Update()" autocomplete="off">
+                                <div class="input-group-btn">
+                                    <div class="btn-group examples" style="z-index:2">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Examples <i class="caret"></i></button>
+    <ul class="dropdown-menu pull-right">
+        <li><a tabindex="0"><span class="text">limit</span><span class="formula">\lim_{?a\rightarrow 0} ?x</span>Limit</a></li>
+        <li><a tabindex="0"><span class="text">Fermat</span><span class="formula">?a^?n + ?b^?n=?c^?n</span>Fermat's Theorem</a></li>
+        <li><a tabindex="0"><span class="text">polynomial</span><span class="formula">P(?x)</span>Polynomial</a></li>
+        <li><a tabindex="0"><span class="text">probability</span><span class="formula">P(?x)</span>Probability</a></li>
+        <li><a tabindex="0"><span class="text">chain</span><span class="formula">0 \leq ?i \leq ?n</span>Inequality chain</a></li>
+        <li><a tabindex="0"><span class="text">periodic</span><span class="formula">?f(?x + ?k) = ?f(?x)</span>Periodic function</a></li>
+        <li><a tabindex="0"><span class="text">logistic</span><span class="formula">\lambda ?x (1 - ?x)</span>Logistic map</a></li>
+        
+    </ul>
+</div>
+                                </div>
+                            </div>
+                            <span tabindex="0" class="glyphicon glyphicon-question-sign" title="formulae are entered in LaTeX, search&nbsp;variables should be preceded by a question mark" aria-label="formulae are entered in LaTeX, search variables should be preceded by a question mark"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div id="preview">
+                            <div id="MathPreview"></div>
+                            <div id="MathBuffer" style="visibility:hidden; position:absolute;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="form-group field dt checkboxes-wrapper" style="white-space: nowrap;">
+                            <label>Document Type:</label>
+                            <div class="checkboxes">
+                                <input type="checkbox" id="dt-j" name="dt" class="form-control" value="j">
+                                <label for="dt-j" title="search for Articles in Journals">
+                                    Journal Articles
+                                </label>
+                                <br>
+                                <input type="checkbox" id="dt-a" name="dt" class="form-control" value="a">
+                                <label for="dt-a" title="search for Articles in Conference Proceedings and Collected Volumes">
+                                    Collection Articles
+                                </label>
+                                <br>
+                                <input type="checkbox" id="dt-b" name="dt" class="form-control" value="b">
+                                <label for="dt-b" title="search for Monographs, Proceedings, Dissertations etc.">
+                                    Books
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group field dt checkboxes-wrapper" style="white-space: nowrap;">
+                            <label>Database:</label>
+                            <div class="checkboxes">
+                                <input type="checkbox" id="db-zbl" name="db" class="form-control" value="zbl">
+                                <label for="db-zbl" title="search for Documents within Zentralblatt content">
+                                    Zbl (1932&ndash;present)
+                                </label>
+                                <br>
+                                <input type="checkbox" id="db-jfm" name="db" class="form-control" value="jfm|eram">
+                                <label for="db-jfm" title="search for Documents within Jahrbuch content (including Crelle's Journal)">
+                                    JFM (1868&ndash;1944)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row buttons">
+                    <div class="col-xs-6">
+                        <a tabindex="0" class="btn btn-default clear-all">Clear all <span class="glyphicon glyphicon-remove"></span></a>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="submit">
+                            <button class="btn btn-default search" type="submit">Search <span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="clearfix"></div>
+    </div>
+
+        
+
+        <div class="content-shadow"></div>
+    </div>
+
+            </div>
+
+            <div id="body">
+                <div id="main">
+                    <div class="messages">
+                        
+                    </div>
+                    <div id="documents">
+            <div class="content-main">
+                <div class="head">
+        <h2>Your query produced no results</h2>
+    </div>
+    <div class="main"><h3>Suggestions:</h3>
+<ul>
+  <li>Please check that all words are spelled correctly</li>
+  <li>Try a more general query</li>
+  <li>You may use the wildcard * for a less restrictive search</li>
+</ul></div>
+            </div>
+        </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div id="foot"><div class="copyright">
+                    &copy; 2023
+                    <a target="fiz" href="https://www.fiz-karlsruhe.de/en">FIZ Karlsruhe GmbH</a>
+                    <a href="/privacy-policy/">Privacy Policy</a>
+                    <a href="/legal-notices/">Legal Notices</a>
+                    <a href="/terms-conditions/">Terms &amp; Conditions</a>
+
+                    <div class="info">
+                        <ul class="nav">
+                            <li class="twitter">
+                                <a href="https://twitter.com/zbMATH" target="_blank" class="no-new-tab-icon">
+                                    <img src="/static/twitter.png" title="zbMATH at Twitter (opens in new tab)" alt="Twitter logo">
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix" style="height: 0px;"></div>
+            </div>
+        </div>
+
+        <script src="https://static.zbmath.org/contrib/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://static.zbmath.org/contrib/jquery/1.9.1/jquery-migrate.min.js"></script>
+        <script src="https://static.zbmath.org/contrib/jquery-caret/1.02/jquery.caret.min.js"></script>
+        <script src="/static/js/jquery-ui-1.10.1.custom.min.js"></script>
+        <script src="https://static.zbmath.org/contrib/bootstrap/v3.3.7zb1/js/bootstrap.min.js"></script>
+        <script src="https://static.zbmath.org/contrib/bootstrap-lightbox/v0.7.0/bootstrap-lightbox.min.js"></script>
+        <script src="https://static.zbmath.org/contrib/retina/unknown/retina.js"></script>
+        
+        <script>
+            var SCRIPT_ROOT = "";
+        </script>
+        <script src="/static/scripts.js?v=20221202">
+        </script>
+
+        <script src="https://static.zbmath.org/contrib/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+            <script type="text/x-mathjax-config">
+                MathJax.Hub.Config({
+                    "HTML-CSS": {
+                        preferredFont: "TeX",
+                        availableFonts: [ "STIX", "TeX" ],
+                        linebreaks: { automatic: true },
+                        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+                    },
+                    tex2jax: {
+                        processEscapes: true,
+                        ignoreClass: "tex2jax_ignore|dno"
+                    },
+                    TeX: {
+                        Macros: {
+                            Aut: "\\operatorname{Aut}",
+                            Hom: "\\operatorname{Hom}"
+                        },
+                        noUndefined: {
+                            attributes: {
+                                mathcolor: "#039", //"red",
+                                mathbackground: "white", //"#FFEEEE",
+                                mathsize: "90%"
+                            }
+                        }
+                    },
+                    messageStyle: "none"
+                });
+            </script>
+        <script src="https://static.zbmath.org/contrib/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML") }}"></script>
+            <script type="text/javascript">
+                var Preview = {
+                    delay: 100,
+                    preview: null,
+                    buffer: null,
+                    timeout: null,
+                    mjRunning: false,
+                    oldText: null,
+                    Init: function () {
+                        this.preview = document.getElementById("MathPreview");
+                        this.buffer = document.getElementById("MathBuffer");
+                    },
+                    SwapBuffers: function () {
+                        var buffer = this.preview, preview = this.buffer;
+                        this.buffer = buffer; this.preview = preview;
+                        buffer.style.visibility = "hidden"; buffer.style.position = "absolute";
+                        preview.style.position = ""; preview.style.visibility = "";
+                    },
+                    Update: function () {
+                        if (this.timeout) {clearTimeout(this.timeout)}
+                        this.timeout = setTimeout(this.callback,this.delay);
+                    },
+                    CreatePreview: function () {
+                        Preview.timeout = null;
+                        if (this.mjRunning) return;
+                        var text = document.getElementById("MathInput").value;
+                        text = text.replace(/\?([a-z0-9])/gi, '\{\\color{red}$1}')
+                        if (text) { text = "\\(" + text + "\\)"; }
+                        if (text === this.oldtext) return;
+                        this.buffer.innerHTML = this.oldtext = text;
+                        this.mjRunning = true;
+                        MathJax.Hub.Queue(
+                        [ "Typeset", MathJax.Hub, this.buffer ],
+                        [ "PreviewDone", this ]
+                        );
+                    },
+                    PreviewDone: function () {
+                        this.mjRunning = false;
+                        this.SwapBuffers();
+                        $(window).resize();
+                    }
+                };
+                Preview.callback = MathJax.Callback(["CreatePreview",Preview]);
+                Preview.callback.autoReset = true;
+                Preview.Init();
+            </script>
+        <div id="new_tab_icon" style="display: none">&nbsp;<span class="glyphicon glyphicon-new-window" aria-hidden="true"></span><span class="sr-only">(opens in new tab)</span></div>
+    </body>
+</html>
