@@ -18,7 +18,7 @@ CITEKEY_REGEX: Final = re.compile(
     r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?\{((?!\*)[^{}]+)\})"
 )
 
-SEARCHKEY_REGEX: Final = re.compile(r"(arxiv|zbl):([\d\.]+)")
+SEARCHKEY_REGEX: Final = re.compile(r"(arxiv|doi|zbmath|zbl):([\d\.]+)")
 
 KEY_REGEX: Final = re.compile(r"([0-9a-zA-Z\.\-:_/]+)")
 

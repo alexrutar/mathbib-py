@@ -37,7 +37,9 @@ class RemoteParseError(Exception):
 def make_request(identifier: str, url_builder: URLBuilder) -> str:
     url = url_builder(identifier)
     req = Request(url)
-    req.add_header("User-Agent", f"MathBib/{__version__} (mailto:crossref@rutar.org)")
+    req.add_header(
+        "User-Agent", f"MathBib/{__version__} (mailto:api-contact@rutar.org)"
+    )
 
     try:
         with urlopen(req) as fp:

@@ -2,14 +2,22 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, Optional
+    from typing import Iterable, TypedDict
+
+    class RecordEntry(TypedDict):
+        id: str
+        record: dict
+
+    RecordList = dict[str, RecordEntry]
+
 
 import tomllib
-from itertools import chain
 
-from .external import REMOTES, parse_key_id
-from .remote import RemoteAccessError
-from .search import zbmath_search_doi
+from itertools import chain
+import operator
+from functools import reduce
+
+from .external import REMOTES, parse_key_id, key_order
 
 from xdg_base_dirs import xdg_data_home
 
@@ -46,82 +54,62 @@ def _resolve_all_records(
         yield from _resolve_all_records(to_resolve.items(), resolved)
 
 
-def resolve_records(keyid: str) -> dict:
+def resolve_records(start_key: str, start_identifier: str) -> RecordList:
+    def _sort_order(trip: tuple[str, str, dict]) -> int:
+        key, _, _ = trip
+        return key_order(key)
+
     return {
         key: {"id": identifier, "record": record}
-        for key, identifier, record in _resolve_all_records(
-            (parse_key_id(keyid),), set()
+        for key, identifier, record in sorted(
+            _resolve_all_records(((start_key, start_identifier),), set()),
+            key=_sort_order,
         )
     }
 
 
+def merge_records(record_list: RecordList) -> dict:
+    records = (rec["record"] for rec in record_list.values())
+
+    returned_record = reduce(operator.ior, records, {})
+    returned_record["classifications"] = sorted(
+        chain.from_iterable(rec.get("classifications", []) for rec in records)
+    )
+    return returned_record
+
+
 class ArchiveRecord:
     def __init__(self, keyid: str):
-        key, identifier = parse_key_id(keyid)
-        self.record = remote_record if remote_record is not None else {}
-        self.bibtex = self.record.pop("bibtex", {})
-        if "authors" in self.record.keys():
-            self.record["authors"] = _canonicalize_authors(self.record["authors"])
+        self.key, self.identifier = parse_key_id(keyid)
+        self.record = merge_records(resolve_records(self.key, self.identifier))
 
+        # TODO: do not hardcode
         self.local_record_folder = xdg_data_home() / "mathbib" / "records"
 
-    @classmethod
-    def from_arxiv(cls, arxiv: str):
-        return cls(remote_record=REMOTES["arxiv"].load_record(arxiv))
-
-    @classmethod
-    def from_zbl(cls, zbl: str):
-        zbl_record = REMOTES["zbl"].load_record(zbl)
-        zbmath_record = REMOTES["zbmath"].load_record(zbl_record["zbmath"])
-        if "arxiv" in zbmath_record.keys():
-            arxiv_record = REMOTES["arxiv"].load_record(zbmath_record["arxiv"])
-        else:
-            arxiv_record = {}
-
-        combined_record = {**arxiv_record, **zbmath_record, **zbl_record}
-
-        return cls(remote_record=combined_record)
-
-    @classmethod
-    def from_doi(cls, doi: str):
-        zbl = zbmath_search_doi(doi)
-        if zbl is not None:
-            return cls.from_zbl(zbl)
-        else:
-            raise RemoteAccessError("Could not find DOI '{doi}'.")
-
     def as_bibtex(self) -> dict:
-        if "zbl" in self.record.keys():
-            eprint = {"eprint": self.record["zbl"], "eprinttype": "zbl"}
-        elif "arxiv" in self.record.keys():
-            eprint = {"eprint": self.record["arxiv"], "eprinttype": "arxiv"}
-        else:
-            eprint = {}
+        eprint = {"eprint": self.identifier, "eprinttype": self.key}
 
-        captured = ("journal", "volume", "number", "pages", "year", "title", "doi")
-        record_captured = {k: v for k, v in self.record.items() if k in captured}
+        captured = ("journal", "volume", "number", "pages", "year", "title")
+        captured = {k: v for k, v in self.record.items() if k in captured}
 
-        id_candidates = ("zbl", "arxiv", "doi", "issn", "title")
-        key, identifier = [
-            (key, self.record.get(key))
-            for key in id_candidates
-            if self.record.get(key) is not None
-        ][0]
-        record_special = {
-            "ID": f"{key}:{identifier}",
+        special = {
+            "ID": f"{self.key}:{self.identifier}",
             "ENTRYTYPE": self.record["bibtype"],
         }
         if "authors" in self.record.keys():
-            record_special["author"] = " and ".join(self.record["authors"])
+            special["author"] = " and ".join(self.record["authors"])
 
         try:
+            # TODO: something more intelligent?
             bibtex = tomllib.loads(
-                (self.local_record_folder / key / f"{identifier}.toml").read_text()
+                (
+                    self.local_record_folder / self.key / f"{self.identifier}.toml"
+                ).read_text()
             )
         except FileNotFoundError:
-            bibtex = self.bibtex
+            bibtex = {}
 
-        return {**eprint, **record_captured, **record_special, **bibtex}
+        return {**eprint, **captured, **special, **bibtex}
 
     def as_tuple(self) -> tuple[str, str, str | None, str | None, str | None, bool]:
         bibtex_record = self.as_bibtex()

@@ -5,17 +5,15 @@ if TYPE_CHECKING:
     from typing import Iterable, Optional
 
 import click
-from click import Context
 
 from pathlib import Path
 from json import dumps
 
-
-from .index import list_records
 from .citegen import generate_biblatex
 from .search import zbmath_search_bib
-from .external import REMOTES, parse_key_id
-from .record import resolve_records
+from .external import parse_key_id
+from .bibtex import BIBTEX_HANDLER
+from .record import ArchiveRecord, resolve_records
 
 
 @click.group()
@@ -33,7 +31,7 @@ from .record import resolve_records
 @click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.pass_context
-def cli(ctx: Context, dir: Path, verbose: bool, debug: bool) -> None:
+def cli(ctx: click.Context, dir: Path, verbose: bool, debug: bool) -> None:
     """TexProject is a tool to help streamline the creation and distribution of files
     written in LaTeX.
     """
@@ -84,20 +82,21 @@ def search(bibfile: Path):
     click.echo(dumps(zbmath_search_bib(bibfile)))
 
 
-@cli.command(name="get-record", short_help="Get record from key:id pair")
-@click.argument("key_id", type=str, metavar="KEYID")
-def get_record(key_id: str):
+@cli.group(name="get")
+def get_group():
+    pass
+
+
+@get_group.command(name="json", short_help="Get record from KEY:ID pair")
+@click.argument("key_id", type=str, metavar="KEY:ID")
+def json_cmd(key_id: str):
+    """Generate a JSON record for KEY:ID."""
     key, identifier = parse_key_id(key_id)
-    click.echo(dumps(REMOTES[key].load_record(identifier)))
+    click.echo(dumps(resolve_records(key, identifier)))
 
 
-@cli.command(name="get-all-records", short_help="Get record from key:id pair")
-@click.argument("keyid", type=str, metavar="KEYID")
-def get_all_records(keyid: str):
-    click.echo(dumps(resolve_records(keyid)))
-
-
-@cli.command(short_help="List all records", name="list")
-def list_cmd():
-    for record in list_records():
-        click.echo(record)
+@get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID pair")
+@click.argument("keyid", type=str, metavar="KEY:ID")
+def bibtex(keyid: str):
+    """Generate a BibTeX record for KEY:ID."""
+    click.echo(BIBTEX_HANDLER.write_dict(ArchiveRecord(keyid).as_bibtex()), nl=False)

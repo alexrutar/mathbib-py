@@ -4,10 +4,10 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional, Iterable
 
-import bibtexparser as bp
 from nameparser import HumanName
 
 from .journal_abbreviations import JOURNALS
+from ..bibtex import BIBTEX_HANDLER
 from . import RemoteParseError
 
 
@@ -24,7 +24,7 @@ def parse_journal(journal: str, fjournal: Optional[str] = None):
         return journal
 
 
-def canonicalize_authors(author_list: Iterable[str]):
+def canonicalize_authors(author_list: Iterable[str]) -> list[str]:
     human_names = [HumanName(author) for author in author_list]
     for hn in human_names:
         hn.capitalize()
@@ -32,17 +32,8 @@ def canonicalize_authors(author_list: Iterable[str]):
 
 
 def parse_bibtex(result: str) -> tuple[dict, dict]:
-    # parse bibtex string using bibtexparser
-    parser = bp.bparser.BibTexParser()
-
-    def customizations(record):
-        return bp.customization.convert_to_unicode(
-            bp.customization.page_double_hyphen(bp.customization.author(record))
-        )
-
-    parser.customization = customizations
     try:
-        bibtex_parsed = bp.loads(result, parser=parser).entries[0]
+        bibtex_parsed = BIBTEX_HANDLER.loads(result).entries[0]
     except IndexError:
         raise RemoteParseError("Could not parse bibtex entry.")
 
@@ -90,15 +81,19 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
                 if k not in captured and k not in dropped
             },
             "bibtype": bibtex_parsed["ENTRYTYPE"],
-            "journal": parse_journal(
-                bibtex_parsed["journal"], fjournal=bibtex_parsed.get("fjournal")
-            ),
         }
     except KeyError:
         raise RemoteParseError(f"BibLaTeX file missing essential key 'ENTRYTYPE'")
 
     if "author" in bibtex_parsed.keys():
         additional["authors"] = canonicalize_authors(bibtex_parsed["author"])
+
+    if "journal" in bibtex_parsed.keys():
+        additional["journal"] = (
+            parse_journal(
+                bibtex_parsed["journal"], fjournal=bibtex_parsed.get("fjournal")
+            ),
+        )
 
     return {**extracted, **additional}, {
         k: v for k, v in bibtex_parsed.items() if k in related
