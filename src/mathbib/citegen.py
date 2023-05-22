@@ -15,21 +15,19 @@ from .record import ArchiveRecord
 from typing import Final
 
 CITEKEY_REGEX: Final = re.compile(
-        r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?\{((?!\*)[^{}]+)\})"
-    )
+    r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?\{((?!\*)[^{}]+)\})"
+)
 
 SEARCHKEY_REGEX: Final = re.compile(r"(arxiv|zbl):([\d\.]+)")
 
 KEY_REGEX: Final = re.compile(r"([0-9a-zA-Z\.\-:_/]+)")
 
+
 def get_citekeys(path: Path) -> Iterable[str]:
     cite_commands = (
-        m.group(2)
-        for m in CITEKEY_REGEX.finditer(path.read_text())
-        if m.group(2)
+        m.group(2) for m in CITEKEY_REGEX.finditer(path.read_text()) if m.group(2)
     )
     return set(chain.from_iterable(KEY_REGEX.findall(k) for k in cite_commands))
-
 
 
 def cite_file_search(*paths: Path) -> Iterable[ArchiveRecord]:

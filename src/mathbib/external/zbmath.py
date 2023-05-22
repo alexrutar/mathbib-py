@@ -1,7 +1,13 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from ..remote import ParsedRecord
+
 from bs4 import BeautifulSoup
 import re
 
-from ..error import RemoteParseError
+from ..remote import RemoteParseError
 
 
 def url_builder(zbmath: str) -> str:
@@ -13,26 +19,33 @@ def url_builder(zbmath: str) -> str:
     )
 
 
-def record_parser(result: str) -> dict:
+def record_parser(result: str) -> ParsedRecord:
+    related = {}
     metadata = BeautifulSoup(result, features="xml")
+
+    # find arxiv
     links = [entry.string for entry in metadata.find_all("zbmath:link")]
     arxiv_searched = (
         re.fullmatch(r"https?://arxiv.org/abs/(.+)", link) for link in links
     )
     arxiv_pruned = [match for match in arxiv_searched if match is not None]
     if len(arxiv_pruned) > 0:
-        arxiv = arxiv_pruned[0].group(1)
-    else:
-        arxiv = None
+        related["arxiv"] = str(arxiv_pruned[0].group(1))
+
+    # find doi
+    dois = metadata.find_all("zbmath:doi")
+    if len(dois) > 0 and dois[0]:
+        related["doi"] = dois[0].string
 
     out = {
         "author_ids": [entry.string for entry in metadata.find_all("zbmath:author_id")],
         "classifications": sorted(
             entry.string for entry in metadata.find_all("zbmath:classification")
         ),
+        "year": metadata.find_all("zbmath:publication_year")[0].string,
     }
-    if arxiv is not None:
-        out["arxiv"] = arxiv  # type: ignore
+
+    # extract year
 
     candidate_title = metadata.find_all("zbmath:document_title")[0].string
     if candidate_title is None:
@@ -43,4 +56,4 @@ def record_parser(result: str) -> dict:
     ):
         out["title"] = candidate_title
 
-    return out
+    return out, related

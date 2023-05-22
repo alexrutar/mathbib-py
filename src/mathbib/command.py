@@ -8,10 +8,15 @@ import click
 from click import Context
 
 from pathlib import Path
+from json import dumps
+
 
 from .index import list_records
-from .citegen import generate_biblatex, get_citekeys
-from .search import zbmath_replace_bib
+from .citegen import generate_biblatex
+from .search import zbmath_search_bib
+from .external import REMOTES, parse_key_id
+from .record import resolve_records
+
 
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
@@ -28,9 +33,7 @@ from .search import zbmath_replace_bib
 @click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.pass_context
-def cli(
-    ctx: Context, dir: Path, verbose: bool, debug: bool
-) -> None:
+def cli(ctx: Context, dir: Path, verbose: bool, debug: bool) -> None:
     """TexProject is a tool to help streamline the creation and distribution of files
     written in LaTeX.
     """
@@ -71,21 +74,27 @@ def generate(texfile: Iterable[Path], out: Optional[Path]):
 
 @cli.command(short_help="Search ZBMath for entries from bibtex file.")
 @click.argument(
-    "texfile",
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
-    metavar="TEXFILE",
-)
-@click.argument(
     "bibfile",
     type=click.Path(
         exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
     ),
     metavar="BIBFILE",
 )
-def replace(texfile: Path, bibfile: Path):
-    click.echo(zbmath_replace_bib(texfile, bibfile, tuple(get_citekeys(texfile))), nl=False)
+def search(bibfile: Path):
+    click.echo(dumps(zbmath_search_bib(bibfile)))
+
+
+@cli.command(name="get-record", short_help="Get record from key:id pair")
+@click.argument("key_id", type=str, metavar="KEYID")
+def get_record(key_id: str):
+    key, identifier = parse_key_id(key_id)
+    click.echo(dumps(REMOTES[key].load_record(identifier)))
+
+
+@cli.command(name="get-all-records", short_help="Get record from key:id pair")
+@click.argument("keyid", type=str, metavar="KEYID")
+def get_all_records(keyid: str):
+    click.echo(dumps(resolve_records(keyid)))
 
 
 @cli.command(short_help="List all records", name="list")

@@ -1,21 +1,53 @@
-from nameparser import HumanName
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Iterable, Optional
 
 import tomllib
+from itertools import chain
 
-from .api import arxiv_remote, zbmath_remote, zbl_remote
+from .external import REMOTES, parse_key_id
+from .remote import RemoteAccessError
 from .search import zbmath_search_doi
-from .error import RemoteAccessError
 
 from xdg_base_dirs import xdg_data_home
 
 
-def _canonicalize_authors(author_list: list[str]):
-    human_names = (HumanName(author) for author in author_list)
-    return [f"{hn.last}, {hn.first} {hn.middle}".strip() for hn in human_names]
+def get_records(
+    keyid_pairs: Iterable[tuple[str, str]]
+) -> dict[str, tuple[dict, dict[str, str]]]:
+    return {key:REMOTES[key].load_record(identifier) for key, identifier in keyid_pairs}
+
+
+def extract_keyid_pairs(
+    to_resolve: Iterable[tuple[dict, dict[str, str]]]
+) -> dict[str, str]:
+    return {k: v for _, dct in to_resolve for k, v in dct.items()}
+
+
+def _resolve_all_records(
+    keyid_pairs: Iterable[tuple[str, str]], resolved: set[str]
+) -> Iterable[tuple[str, dict]]:
+    results = get_records(
+        ((key, identifier) for key, identifier in keyid_pairs if key not in resolved)
+    )
+    yield from ((key, rec) for (key, (rec, _)) in results.items())
+
+    resolved.update(k for k, _ in keyid_pairs)
+    to_resolve = extract_keyid_pairs(results.values())
+
+    if len(to_resolve) > 0:
+        yield from _resolve_all_records(to_resolve.items(), resolved)
+
+
+def resolve_records(keyid: str) -> dict:
+    return {k:v for k,v in _resolve_all_records((parse_key_id(keyid),), set())}
 
 
 class ArchiveRecord:
-    def __init__(self, remote_record=None):
+    def __init__(self, keyid: str):
+        key, identifier = parse_key_id(keyid)
         self.record = remote_record if remote_record is not None else {}
         self.bibtex = self.record.pop("bibtex", {})
         if "authors" in self.record.keys():
@@ -25,14 +57,14 @@ class ArchiveRecord:
 
     @classmethod
     def from_arxiv(cls, arxiv: str):
-        return cls(remote_record=arxiv_remote.load_record(arxiv))
+        return cls(remote_record=REMOTES["arxiv"].load_record(arxiv))
 
     @classmethod
     def from_zbl(cls, zbl: str):
-        zbl_record = zbl_remote.load_record(zbl)
-        zbmath_record = zbmath_remote.load_record(zbl_record["zbmath"])
+        zbl_record = REMOTES["zbl"].load_record(zbl)
+        zbmath_record = REMOTES["zbmath"].load_record(zbl_record["zbmath"])
         if "arxiv" in zbmath_record.keys():
-            arxiv_record = arxiv_remote.load_record(zbmath_record["arxiv"])
+            arxiv_record = REMOTES["arxiv"].load_record(zbmath_record["arxiv"])
         else:
             arxiv_record = {}
 
