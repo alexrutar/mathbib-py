@@ -10,16 +10,14 @@ if TYPE_CHECKING:
 
     RecordList = dict[str, RecordEntry]
 
-
-import tomllib
-
 from itertools import chain
 import operator
 from functools import reduce
-
-from .external import REMOTES, parse_key_id, key_order
+import tomllib
 
 from xdg_base_dirs import xdg_data_home
+
+from .external import REMOTES, parse_key_id, key_order
 
 
 def get_records(

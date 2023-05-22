@@ -4,39 +4,27 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Iterable, Optional
 
-import click
-
 from pathlib import Path
 from json import dumps
 
+import click
+
+from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
-from .search import zbmath_search_bib
 from .external import parse_key_id
-from .bibtex import BIBTEX_HANDLER
 from .record import ArchiveRecord, resolve_records
 
 
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
-@click.option(
-    "-C",
-    "dir",
-    default=".",
-    show_default=True,
-    help="working directory",
-    type=click.Path(
-        exists=True, file_okay=False, dir_okay=True, writable=True, path_type=Path
-    ),
-)
 @click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.pass_context
-def cli(ctx: click.Context, dir: Path, verbose: bool, debug: bool) -> None:
-    """TexProject is a tool to help streamline the creation and distribution of files
-    written in LaTeX.
+def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
+    """MathBib is a tool to help streamline the management of BibLaTeX files associated
+    with records from various mathematical repositories.
     """
     ctx.obj = {
-        "dir": dir,
         "verbose": verbose,
         "debug": debug,
     }
@@ -70,19 +58,7 @@ def generate(texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
-@cli.command(short_help="Search ZBMath for entries from bibtex file.")
-@click.argument(
-    "bibfile",
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
-    metavar="BIBFILE",
-)
-def search(bibfile: Path):
-    click.echo(dumps(zbmath_search_bib(bibfile)))
-
-
-@cli.group(name="get")
+@cli.group(name="get", short_help="Retrieve various records from KEY:ID pairs.")
 def get_group():
     pass
 
@@ -96,7 +72,8 @@ def json_cmd(key_id: str):
 
 
 @get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID pair")
-@click.argument("keyid", type=str, metavar="KEY:ID")
-def bibtex(keyid: str):
+@click.argument("key_id", type=str, metavar="KEY:ID")
+def bibtex(key_id: str):
     """Generate a BibTeX record for KEY:ID."""
-    click.echo(BIBTEX_HANDLER.write_dict(ArchiveRecord(keyid).as_bibtex()), nl=False)
+    bth = BibTexHandler()
+    click.echo(bth.write_records((ArchiveRecord(key_id),)), nl=False)

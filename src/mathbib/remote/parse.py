@@ -7,7 +7,7 @@ if TYPE_CHECKING:
 from nameparser import HumanName
 
 from .journal_abbreviations import JOURNALS
-from ..bibtex import BIBTEX_HANDLER
+from ..bibtex import BibTexHandler
 from . import RemoteParseError
 
 
@@ -32,8 +32,9 @@ def canonicalize_authors(author_list: Iterable[str]) -> list[str]:
 
 
 def parse_bibtex(result: str) -> tuple[dict, dict]:
+    bth = BibTexHandler()
     try:
-        bibtex_parsed = BIBTEX_HANDLER.loads(result).entries[0]
+        bibtex_parsed = bth.loads(result).entries[0]
     except IndexError:
         raise RemoteParseError("Could not parse bibtex entry.")
 
@@ -89,10 +90,8 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
         additional["authors"] = canonicalize_authors(bibtex_parsed["author"])
 
     if "journal" in bibtex_parsed.keys():
-        additional["journal"] = (
-            parse_journal(
-                bibtex_parsed["journal"], fjournal=bibtex_parsed.get("fjournal")
-            ),
+        additional["journal"] = parse_journal(
+            bibtex_parsed["journal"], fjournal=bibtex_parsed.get("fjournal")
         )
 
     return {**extracted, **additional}, {

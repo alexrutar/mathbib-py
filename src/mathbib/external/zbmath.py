@@ -4,8 +4,9 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ..remote import ParsedRecord
 
-from bs4 import BeautifulSoup
 import re
+
+from bs4 import BeautifulSoup
 
 from ..remote import RemoteParseError
 
