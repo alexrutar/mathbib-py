@@ -16,8 +16,8 @@ from xdg_base_dirs import xdg_data_home
 
 def get_records(
     keyid_pairs: Iterable[tuple[str, str]]
-) -> dict[str, tuple[dict, dict[str, str]]]:
-    return {key:REMOTES[key].load_record(identifier) for key, identifier in keyid_pairs}
+) -> dict[tuple[str, str], tuple[dict, dict[str, str]]]:
+    return {(key, identifier):REMOTES[key].load_record(identifier) for key, identifier in keyid_pairs}
 
 
 def extract_keyid_pairs(
@@ -28,11 +28,11 @@ def extract_keyid_pairs(
 
 def _resolve_all_records(
     keyid_pairs: Iterable[tuple[str, str]], resolved: set[str]
-) -> Iterable[tuple[str, dict]]:
+) -> Iterable[tuple[str, str, dict]]:
     results = get_records(
         ((key, identifier) for key, identifier in keyid_pairs if key not in resolved)
     )
-    yield from ((key, rec) for (key, (rec, _)) in results.items())
+    yield from ((key, identifier, rec) for ((key, identifier), (rec, _)) in results.items())
 
     resolved.update(k for k, _ in keyid_pairs)
     to_resolve = extract_keyid_pairs(results.values())
@@ -42,7 +42,7 @@ def _resolve_all_records(
 
 
 def resolve_records(keyid: str) -> dict:
-    return {k:v for k,v in _resolve_all_records((parse_key_id(keyid),), set())}
+    return {key:{"id": identifier, "record":record} for key, identifier, record in _resolve_all_records((parse_key_id(keyid),), set())}
 
 
 class ArchiveRecord:
