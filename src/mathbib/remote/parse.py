@@ -11,7 +11,6 @@ from .journal_abbreviations import JOURNALS
 from . import RemoteParseError
 
 
-
 def parse_journal(journal: str, fjournal: Optional[str] = None):
     if fjournal is not None:
         abbrev = JOURNALS.get(fjournal)
