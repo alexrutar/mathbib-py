@@ -8,7 +8,7 @@ from dataclasses import dataclass
 
 from xdg_base_dirs import xdg_data_home
 
-from . import doi, zbl, arxiv, zbmath
+from . import doi, zbl, arxiv, zbmath, isbn, ol
 from ..remote import RemoteRecord, RemoteKey
 
 
@@ -17,6 +17,8 @@ REMOTES: Final = {
     RemoteKey.DOI: RemoteRecord("doi", doi.url_builder, doi.record_parser),
     RemoteKey.ZBMATH: RemoteRecord("zbmath", zbmath.url_builder, zbmath.record_parser),
     RemoteKey.ARXIV: RemoteRecord("arxiv", arxiv.url_builder, arxiv.record_parser),
+    RemoteKey.ISBN: RemoteRecord("isbn", isbn.url_builder, isbn.record_parser),
+    RemoteKey.OL: RemoteRecord("ol", ol.url_builder, ol.record_parser),
 }
 
 

@@ -9,13 +9,14 @@ import re
 from bs4 import BeautifulSoup
 
 from ..remote import RemoteParseError
+from urllib.parse import quote
 
 
 def url_builder(zbmath: str) -> str:
     return (
         "https://oai.zbmath.org/v1/"
         "?verb=GetRecord"
-        f"&identifier=oai:zbmath.org:{zbmath}"
+        f"&identifier=oai:zbmath.org:{quote(zbmath)}"
         "&metadataPrefix=oai_zb_preview"
     )
 

@@ -6,6 +6,7 @@ if TYPE_CHECKING:
 
 from nameparser import HumanName
 import re
+from urllib.parse import quote
 
 from .journal_abbreviations import JOURNALS
 from ..bibtex import BibTexHandler
@@ -13,7 +14,7 @@ from . import RemoteParseError
 
 
 def zbmath_external_identifier_url(identifier: str) -> str:
-    return f"https://zbmath.org/?q=en:{identifier}"
+    return f"https://zbmath.org/?q=en:{quote(identifier)}"
 
 
 def zbmath_external_identifier_parse(result: str) -> str | None:
@@ -77,9 +78,11 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
         "author",
         "zbmath",
         "doi",
+        "isbn",
     )
 
     # extract some related keys
+    # TODO: also get ISBN?
     related = (
         "zbmath",
         "doi",

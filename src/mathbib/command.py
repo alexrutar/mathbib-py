@@ -6,11 +6,12 @@ if TYPE_CHECKING:
 
 from pathlib import Path
 import sys
+import re
 
 import click
 
 from .bibtex import BibTexHandler
-from .citegen import generate_biblatex
+from .citegen import generate_biblatex, make_record_lookup
 from .record import ArchiveRecord
 from .external import KeyId
 
@@ -101,9 +102,40 @@ def open_cmd(keyid_str: str):
     click.echo("Error: Could not find associated file.", err=True)
     sys.exit(1)
 
+
 @cli.command(name="edit", short_help="Edit local record for KEY:ID.")
 @click.argument("keyid_str", type=str, metavar="KEY:ID")
 def edit_cmd(keyid_str: str):
     path = KeyId.from_keyid(keyid_str).toml_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     click.edit(filename=str(path))
+
+
+def multiple_replace(dct: dict[str, str], text: str):
+    # Create a regular expression  from the dictionary keys
+    regex = re.compile(f"({'|'.join(map(re.escape, dct.keys()))})")
+
+    # For each match, look-up corresponding value in dictionary
+    return regex.sub(lambda mo: dct[mo.string[mo.start() : mo.end()]], text)
+
+
+@cli.command(
+    name="update", short_help="Search for updated versions of keys in BIBFILE."
+)
+@click.argument(
+    "texfile",
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
+    ),
+    metavar="TEXFILE",
+)
+@click.option(
+    "--key-source",
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
+    ),
+    metavar="BIBFILE",
+)
+def update(texfile: Path, key_source: Path):
+    record_lookup = make_record_lookup(key_source)
+    click.echo(multiple_replace(record_lookup, texfile.read_text()), nl=False)

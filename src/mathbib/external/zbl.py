@@ -5,10 +5,11 @@ if TYPE_CHECKING:
     from ..remote import ParsedRecord
 
 from ..remote.parse import parse_bibtex
+from urllib.parse import quote
 
 
 def url_builder(zbl: str) -> str:
-    return f"https://zbmath.org/bibtex/{zbl}.bib"
+    return f"https://zbmath.org/bibtex/{quote(zbl)}.bib"
 
 
 def record_parser(result: str) -> ParsedRecord:

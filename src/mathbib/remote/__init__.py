@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     RecordParser = Callable[[str], ParsedRecord]
     URLBuilder = Callable[[str], str]
 
-from datetime import datetime, timedelta
+from datetime import datetime
 from enum import IntEnum, auto
 import json
 from pathlib import Path
@@ -21,6 +21,7 @@ from urllib.error import HTTPError
 from xdg_base_dirs import xdg_cache_home
 
 from .. import __version__
+from ..term import TermWrite
 
 
 class RemoteKey(IntEnum):
@@ -32,9 +33,18 @@ class RemoteKey(IntEnum):
     DOI = auto()
     ZBMATH = auto()
     ARXIV = auto()
+    ISBN = auto()
+    OL = auto()
 
     def __str__(self):
         return self.name.lower()
+
+
+class RemoteError(Exception):
+    def __init__(self, message: str, identifier: str):
+        self.message = message
+        self.identifier = identifier
+        super().__init__(message)
 
 
 class RemoteAccessError(Exception):
@@ -51,6 +61,9 @@ class RemoteParseError(Exception):
 
 def make_request(identifier: str, url_builder: URLBuilder) -> str:
     url = url_builder(identifier)
+
+    TermWrite.remote(url)
+
     req = Request(url)
     req.add_header(
         "User-Agent", f"MathBib/{__version__} (mailto:api-contact@rutar.org)"
@@ -64,6 +77,7 @@ def make_request(identifier: str, url_builder: URLBuilder) -> str:
 
     except (HTTPError, RemoteAccessError) as e:
         raise RemoteAccessError(f"Failed to access '{identifier}' from '{url}'") from e
+
     except RemoteParseError as e:
         raise RemoteParseError(f"While processing '{identifier}': " + e.message) from e
 
@@ -84,7 +98,9 @@ class RemoteRecord:
         """Get the cache file associated with the item identifier."""
         return self.cache_folder / f"{identifier}.json"
 
-    def serialize(self, identifier: str, record: dict, related: dict[str, str]) -> None:
+    def serialize(
+        self, identifier: str, record: Optional[dict], related: Optional[dict[str, str]]
+    ) -> None:
         target = self.get_cache_path(identifier)
         target.parent.mkdir(parents=True, exist_ok=True)
         cache_object = {
@@ -102,11 +118,6 @@ class RemoteRecord:
         cache_file = self.get_cache_path(identifier)
         cache_file.unlink(missing_ok=True)
 
-    def update_cached_record(self, identifier: str) -> None:
-        """Forcibly update the cache from the remote record."""
-        record, related = self.load_remote_record(identifier)
-        self.serialize(identifier, record, related)
-
     def resolve_related(
         self, identifier: str, related: RelatedRecords
     ) -> dict[str, str]:
@@ -123,18 +134,17 @@ class RemoteRecord:
 
         return related_identifiers
 
-    def load_remote_record(self, identifier: str) -> tuple[dict, dict[str, str]]:
+    def load_remote_record(
+        self, identifier: str
+    ) -> Optional[tuple[dict, dict[str, str]]]:
         """Load and parse the remote record."""
-        record, related = self.record_parser(make_request(identifier, self.url_builder))
-        return (record, self.resolve_related(identifier, related))
-
-    def update_records(self, max_age: timedelta = timedelta(days=365)):
-        """Update all cached records which are over a certain age."""
-        for cache_file in self.cache_folder.glob("*.json"):
-            cache_object = json.loads(cache_file.read_text())
-            age = datetime.now() - datetime.fromisoformat(cache_object["accessed"])
-            if age > max_age:
-                self.update_cached_record(cache_file.stem)
+        try:
+            record, related = self.record_parser(
+                make_request(identifier, self.url_builder)
+            )
+            return (record, self.resolve_related(identifier, related))
+        except (RemoteAccessError, RemoteParseError):
+            return None
 
     def load_record(self, identifier: str) -> tuple[dict, dict[str, str]]:
         """Load the item identifier, defaulting to the cache if possible and
@@ -146,9 +156,19 @@ class RemoteRecord:
             cache = None
 
         if cache is None:
-            record, related = self.load_remote_record(identifier)
-            self.serialize(identifier, record, related)
+            remote = self.load_remote_record(identifier)
+            if remote is not None:
+                record, related = remote
+                self.serialize(identifier, record, related)
+            else:
+                self.serialize(identifier, None, None)
+                raise RemoteError("Null identifier {identifier}.", identifier)
         else:
             record, related = cache
+            if record is None or related is None:
+                raise RemoteError(
+                    f"Null identifier '{self.key}:{identifier}'.",
+                    f"{self.key}:{identifier}",
+                )
 
         return (record, related)
