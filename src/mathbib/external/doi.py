@@ -6,23 +6,20 @@ if TYPE_CHECKING:
 
 import re
 
-from ..remote.parse import parse_bibtex
+from ..remote.parse import (
+    parse_bibtex,
+    zbmath_external_identifier_url,
+    zbmath_external_identifier_parse,
+)
 
 
 def url_builder(doi: str) -> str:
     return f"https://api.crossref.org/works/{doi}/transform/application/x-bibtex"
 
 
-def doi_to_zbl_url(doi: str) -> str:
-    return f"https://zbmath.org/?q=en:{doi}"
-
-
-def doi_to_zbl_parse(result: str) -> str | None:
-    search_result = re.search(r"Zbl ([\d\.]+)", result)
-    if search_result is not None:
-        return search_result.group(1)
-
-
 def record_parser(result: str) -> ParsedRecord:
     btx, _ = parse_bibtex(result)
-    return (btx, {"zbl": (doi_to_zbl_url, doi_to_zbl_parse)})
+    return (
+        btx,
+        {"zbl": (zbmath_external_identifier_url, zbmath_external_identifier_parse)},
+    )

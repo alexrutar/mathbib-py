@@ -5,14 +5,13 @@ if TYPE_CHECKING:
     from typing import Iterable, Optional
 
 from pathlib import Path
-from json import dumps
+import sys
 
 import click
 
 from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
-from .external import parse_key_id
-from .record import ArchiveRecord, resolve_records
+from .record import ArchiveRecord
 
 
 @click.group()
@@ -64,11 +63,10 @@ def get_group():
 
 
 @get_group.command(name="json", short_help="Get record from KEY:ID pair")
-@click.argument("key_id", type=str, metavar="KEY:ID")
-def json_cmd(key_id: str):
+@click.argument("keyid", type=str, metavar="KEY:ID")
+def json_cmd(keyid: str):
     """Generate a JSON record for KEY:ID."""
-    key, identifier = parse_key_id(key_id)
-    click.echo(dumps(resolve_records(key, identifier)))
+    click.echo(ArchiveRecord.from_keyid(keyid).as_json())
 
 
 @get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID pair")
@@ -76,4 +74,28 @@ def json_cmd(key_id: str):
 def bibtex(key_id: str):
     """Generate a BibTeX record for KEY:ID."""
     bth = BibTexHandler()
-    click.echo(bth.write_records((ArchiveRecord(key_id),)), nl=False)
+    click.echo(bth.write_records((ArchiveRecord.from_keyid(key_id),)), nl=False)
+
+
+@get_group.command(name="key", short_help="Get highest priority key from KEY:ID pair")
+@click.argument("keyid", type=str, metavar="KEY:ID")
+def key(keyid: str):
+    """Generate a BibTeX record for KEY:ID."""
+    click.echo(ArchiveRecord.from_keyid(keyid).priority_key())
+
+
+@cli.group(name="file", short_help="Manage files associated with records.")
+def file_group():
+    pass
+
+
+@file_group.command(name="open", short_help="Open file associated with KEY:ID pair")
+@click.argument("keyid_str", type=str, metavar="KEY:ID")
+def open_cmd(keyid_str: str):
+    for keyid in ArchiveRecord.from_keyid(keyid_str).related_keys():
+        if click.launch(str(keyid.file_path())) == 0:
+            return
+
+    # TODO: if missing file, try to download arxiv and open it instead
+    click.echo("Error: Could not find associated file.", err=True)
+    sys.exit(1)

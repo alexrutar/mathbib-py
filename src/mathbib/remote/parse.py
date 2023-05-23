@@ -5,18 +5,31 @@ if TYPE_CHECKING:
     from typing import Optional, Iterable
 
 from nameparser import HumanName
+import re
 
 from .journal_abbreviations import JOURNALS
 from ..bibtex import BibTexHandler
 from . import RemoteParseError
 
 
+def zbmath_external_identifier_url(identifier: str) -> str:
+    return f"https://zbmath.org/?q=en:{identifier}"
+
+
+def zbmath_external_identifier_parse(result: str) -> str | None:
+    search_result = re.search(r"Zbl ([\d\.]+)", result)
+    if search_result is not None:
+        return search_result.group(1)
+
+
 def parse_journal(journal: str, fjournal: Optional[str] = None):
+    normalize = lambda name: name.lower().replace(" ", "_").replace(".", "")
+
     if fjournal is not None:
-        abbrev = JOURNALS.get(fjournal)
+        abbrev = JOURNALS.get(normalize(fjournal))
 
     else:
-        abbrev = JOURNALS.get(journal)
+        abbrev = JOURNALS.get(normalize(journal))
 
     if abbrev is not None:
         return abbrev

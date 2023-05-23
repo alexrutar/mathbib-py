@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     URLBuilder = Callable[[str], str]
 
 from datetime import datetime, timedelta
+from enum import IntEnum, auto
 import json
 from pathlib import Path
 from urllib.request import urlopen, Request
@@ -20,6 +21,20 @@ from urllib.error import HTTPError
 from xdg_base_dirs import xdg_cache_home
 
 from .. import __version__
+
+
+class RemoteKey(IntEnum):
+    """Note: the order of declaration is also used as the priority order
+    for various other functionalities.
+    """
+
+    ZBL = auto()
+    DOI = auto()
+    ZBMATH = auto()
+    ARXIV = auto()
+
+    def __str__(self):
+        return self.name.lower()
 
 
 class RemoteAccessError(Exception):

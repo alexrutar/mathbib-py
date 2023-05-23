@@ -10,7 +10,11 @@ import re
 from bs4 import BeautifulSoup
 
 from ..remote import RemoteAccessError, RemoteParseError
-from ..remote.parse import canonicalize_authors
+from ..remote.parse import (
+    canonicalize_authors,
+    zbmath_external_identifier_url,
+    zbmath_external_identifier_parse,
+)
 
 
 def url_builder(arxiv: str) -> str:
@@ -18,7 +22,9 @@ def url_builder(arxiv: str) -> str:
 
 
 def record_parser(result: str) -> ParsedRecord:
-    related = {}
+    related = {
+        "zbl": (zbmath_external_identifier_url, zbmath_external_identifier_parse)
+    }
     metadata = BeautifulSoup(result, features="xml").entry
     if metadata is None:
         raise RemoteAccessError("Response does not contain entry metadata.")
