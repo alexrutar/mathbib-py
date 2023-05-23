@@ -12,6 +12,7 @@ import click
 from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
+from .external import KeyId
 
 
 @click.group()
@@ -57,19 +58,19 @@ def generate(texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
-@cli.group(name="get", short_help="Retrieve various records from KEY:ID pairs.")
+@cli.group(name="get", short_help="Retrieve various records from KEY:IDs.")
 def get_group():
     pass
 
 
-@get_group.command(name="json", short_help="Get record from KEY:ID pair")
+@get_group.command(name="json", short_help="Get record from KEY:ID.")
 @click.argument("keyid", type=str, metavar="KEY:ID")
 def json_cmd(keyid: str):
     """Generate a JSON record for KEY:ID."""
     click.echo(ArchiveRecord.from_keyid(keyid).as_json())
 
 
-@get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID pair")
+@get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID.")
 @click.argument("key_id", type=str, metavar="KEY:ID")
 def bibtex(key_id: str):
     """Generate a BibTeX record for KEY:ID."""
@@ -77,7 +78,7 @@ def bibtex(key_id: str):
     click.echo(bth.write_records((ArchiveRecord.from_keyid(key_id),)), nl=False)
 
 
-@get_group.command(name="key", short_help="Get highest priority key from KEY:ID pair")
+@get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
 @click.argument("keyid", type=str, metavar="KEY:ID")
 def key(keyid: str):
     """Generate a BibTeX record for KEY:ID."""
@@ -89,7 +90,7 @@ def file_group():
     pass
 
 
-@file_group.command(name="open", short_help="Open file associated with KEY:ID pair")
+@file_group.command(name="open", short_help="Open file associated with KEY:ID.")
 @click.argument("keyid_str", type=str, metavar="KEY:ID")
 def open_cmd(keyid_str: str):
     for keyid in ArchiveRecord.from_keyid(keyid_str).related_keys():
@@ -99,3 +100,10 @@ def open_cmd(keyid_str: str):
     # TODO: if missing file, try to download arxiv and open it instead
     click.echo("Error: Could not find associated file.", err=True)
     sys.exit(1)
+
+@cli.command(name="edit", short_help="Edit local record for KEY:ID.")
+@click.argument("keyid_str", type=str, metavar="KEY:ID")
+def edit_cmd(keyid_str: str):
+    path = KeyId.from_keyid(keyid_str).toml_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    click.edit(filename=str(path))
