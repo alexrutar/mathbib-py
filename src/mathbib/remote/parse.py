@@ -23,7 +23,8 @@ def zbmath_external_identifier_parse(result: str) -> str | None:
 
 
 def parse_journal(journal: str, fjournal: Optional[str] = None):
-    normalize = lambda name: name.lower().replace(" ", "_").replace(".", "")
+    def normalize(name: str) -> str:
+        return name.lower().replace(" ", "_").replace(".", "")
 
     if fjournal is not None:
         abbrev = JOURNALS.get(normalize(fjournal))
@@ -97,7 +98,7 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
             "bibtype": bibtex_parsed["ENTRYTYPE"],
         }
     except KeyError:
-        raise RemoteParseError(f"BibLaTeX file missing essential key 'ENTRYTYPE'")
+        raise RemoteParseError("BibLaTeX file missing essential key 'ENTRYTYPE'")
 
     if "author" in bibtex_parsed.keys():
         additional["authors"] = canonicalize_authors(bibtex_parsed["author"])

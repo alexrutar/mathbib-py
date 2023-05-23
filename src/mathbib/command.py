@@ -39,12 +39,12 @@ def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
     metavar="TEXFILE",
 )
 @click.option(
-    f"--out",
-    f"out",
+    "--out",
+    "out",
     type=click.Path(
         exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
     ),
-    help=f"Output file path.",
+    help="Output file path.",
 )
 def generate(texfile: Iterable[Path], out: Optional[Path]):
     """Parse TEXFILE and generate bibtex entries corresponding to keys.

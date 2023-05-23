@@ -4,8 +4,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ..remote import ParsedRecord
 
-import re
-
 from ..remote.parse import (
     parse_bibtex,
     zbmath_external_identifier_url,
