@@ -58,21 +58,6 @@ def get_record_list(start_keyid: KeyId) -> dict[KeyId, dict]:
     return dict(sorted(_resolve_all_records((start_keyid,), set())))
 
 
-def _merge_records(record_list: dict[KeyId, dict]) -> dict:
-    # reverse order, since reduce will prioritize later keys rather than earlier
-    records = reversed(list(record_list.values()))
-    returned_record = reduce(operator.ior, records, {})
-
-    returned_record["classifications"] = sorted(
-        set(chain.from_iterable(rec.get("classifications", []) for rec in records))
-    )
-    return returned_record
-
-
-def get_joint_record(keyid: KeyId) -> dict:
-    return _merge_records(get_record_list(keyid))
-
-
 class ArchiveRecord:
     def __init__(self, keyid: KeyId):
         self.keyid = keyid
