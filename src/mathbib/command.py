@@ -45,9 +45,7 @@ def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
         record = ArchiveRecord(
             keyid_callback(ctx, param, keyid_str), session=ctx.obj["session"]
         )
-    except ConnectionError as e:
-        print(e)
-        # TODO: fail more gracefully
+    except ConnectionError:
         TermWrite.error("Failed to resolve remote server address.")
         sys.exit(1)
 
