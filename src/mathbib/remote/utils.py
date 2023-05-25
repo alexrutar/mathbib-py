@@ -4,14 +4,16 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional, Iterable
 
+from importlib.resources import files
 import re
 from urllib.parse import quote
+import json
 
 from nameparser import HumanName
 
-from .journal_abbreviations import JOURNALS
-from ...bibtex import BibTexHandler, CAPTURED
-from ..error import RemoteParseError
+from ..bibtex import BibTexHandler, CAPTURED
+from .error import RemoteParseError
+from .. import resources
 
 
 def zbmath_external_identifier_url(identifier: str) -> str:
@@ -25,14 +27,18 @@ def zbmath_external_identifier_parse(result: str) -> str | None:
 
 
 def parse_journal(journal: str, fjournal: Optional[str] = None):
+    journal_abbrevs = json.loads(
+        files(resources).joinpath("journal_abbrevs.json").read_text()
+    )
+
     def normalize(name: str) -> str:
         return name.lower().replace(" ", "_").replace(".", "")
 
     if fjournal is not None:
-        abbrev = JOURNALS.get(normalize(fjournal))
+        abbrev = journal_abbrevs.get(normalize(fjournal))
 
     else:
-        abbrev = JOURNALS.get(normalize(journal))
+        abbrev = journal_abbrevs.get(normalize(journal))
 
     if abbrev is not None:
         return abbrev
