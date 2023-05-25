@@ -47,7 +47,7 @@ class RemoteRecord:
     download_url: Optional[URLBuilder] = None
 
 
-REMOTES: Final = {
+_REMOTES: Final = {
     RemoteKey.ZBL: RemoteRecord(
         RemoteKey.ZBL,
         zbl.url_builder,
@@ -93,6 +93,10 @@ REMOTES: Final = {
 }
 
 
+def get_remote_record(keyid: KeyId) -> RemoteRecord:
+    return _REMOTES[keyid.key]
+
+
 class KeyIdError(Exception):
     def __init__(self, message="Invalid KeyId"):
         super().__init__(message)
@@ -126,7 +130,7 @@ class KeyId:
         if len(tokens) >= 2:
             if tokens[0].upper() in RemoteKey.__members__:
                 key, identifier = RemoteKey[tokens[0].upper()], ":".join(tokens[1:])
-                if REMOTES[key].validate_identifier(identifier):
+                if _REMOTES[key].validate_identifier(identifier):
                     return cls(key, identifier)
                 else:
                     raise KeyIdIdentifierError(key, identifier)

@@ -18,16 +18,16 @@ from functools import reduce
 
 from xdg_base_dirs import xdg_data_home
 
-from .remote import KeyId, AliasedKeyId, REMOTES
-from .request import load_record, NullRecordError, streaming_download
+from .remote import KeyId, AliasedKeyId, get_remote_record
+from .request import NullRecordError, RemoteSession
 from .bibtex import CAPTURED
 from .term import TermWrite
 
 
 def _get_record_lists(
-    keyid_pairs: Iterable[KeyId],
+    keyid_pairs: Iterable[KeyId], session: RemoteSession
 ) -> dict[KeyId, tuple[Optional[dict], dict[str, str]]]:
-    return {keyid: load_record(keyid) for keyid in keyid_pairs}
+    return {keyid: session.load_record(keyid) for keyid in keyid_pairs}
 
 
 def _extract_keyid_pairs(
@@ -41,10 +41,10 @@ def _extract_keyid_pairs(
 
 
 def _resolve_all_records(
-    keyid_pairs: Iterable[KeyId], resolved: set[KeyId]
+    keyid_pairs: Iterable[KeyId], resolved: set[KeyId], session: RemoteSession
 ) -> Iterable[tuple[KeyId, dict]]:
     results = _get_record_lists(
-        (keyid for keyid in keyid_pairs if keyid not in resolved)
+        (keyid for keyid in keyid_pairs if keyid not in resolved), session
     )
     yield from ((keyid, rec) for keyid, (rec, _) in results.items() if rec is not None)
 
@@ -52,24 +52,30 @@ def _resolve_all_records(
     to_resolve = _extract_keyid_pairs(results.values())
 
     if len(to_resolve) > 0:
-        yield from _resolve_all_records(to_resolve, resolved)
+        yield from _resolve_all_records(to_resolve, resolved, session)
 
 
-def _get_record_dict(start_keyid: KeyId) -> dict[KeyId, dict]:
-    return dict(sorted(_resolve_all_records((start_keyid,), set())))
+def _get_record_dict(start_keyid: KeyId, session: RemoteSession) -> dict[KeyId, dict]:
+    return dict(sorted(_resolve_all_records((start_keyid,), set(), session)))
 
 
 class ArchiveRecord:
-    def __init__(self, keyid: AliasedKeyId):
+    def __init__(self, keyid: AliasedKeyId, session: Optional[RemoteSession] = None):
         self.keyid = keyid
-        self.record = _get_record_dict(keyid.drop_alias())
+        self.remote_session = RemoteSession() if session is None else session
+        self.record = _get_record_dict(keyid.drop_alias(), self.remote_session)
 
     def __hash__(self) -> int:
         return hash(self.keyid)
 
     @classmethod
-    def from_str(cls, keyid_str: str, alias: Optional[str] = None):
-        return cls(AliasedKeyId.from_str(keyid_str, alias=alias))
+    def from_str(
+        cls,
+        keyid_str: str,
+        alias: Optional[str] = None,
+        session: Optional[RemoteSession] = None,
+    ):
+        return cls(AliasedKeyId.from_str(keyid_str, alias=alias), session=session)
 
     def as_json(self) -> str:
         return json.dumps({str(k): v for k, v in self.record.items()})
@@ -152,7 +158,7 @@ class ArchiveRecord:
 
     def show_url(self) -> Optional[str]:
         for keyid in self.related_keys():
-            show_url = REMOTES[keyid.key].show_url
+            show_url = get_remote_record(keyid).show_url
             if show_url is not None:
                 return show_url(keyid.identifier)
 
@@ -163,10 +169,13 @@ class ArchiveRecord:
 
     def download_file(self) -> Optional[Path]:
         for keyid in self.related_keys():
-            download_url = REMOTES[keyid.key].download_url
+            download_url = get_remote_record(keyid).download_url
             path = keyid.file_path()
-            if download_url is not None and streaming_download(
-                download_url(keyid.identifier), path
+            if (
+                download_url is not None
+                and self.remote_session.make_raw_streaming_request(
+                    download_url(keyid.identifier), path
+                )
             ):
                 return path
 

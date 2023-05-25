@@ -14,6 +14,7 @@ from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
+from .request import RemoteSession
 from .alias import (
     add_bib_alias,
     delete_bib_alias,
@@ -41,8 +42,11 @@ def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
     otherwise, try to obtain it directly.
     """
     try:
-        record = ArchiveRecord(keyid_callback(ctx, param, keyid_str))
-    except ConnectionError:
+        record = ArchiveRecord(
+            keyid_callback(ctx, param, keyid_str), session=ctx.obj["session"]
+        )
+    except ConnectionError as e:
+        print(e)
         # TODO: fail more gracefully
         TermWrite.error("Failed to resolve remote server address.")
         sys.exit(1)
@@ -70,18 +74,21 @@ texfile_argument = click.argument(
 alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 
 
-# TODO: add --cache/--no-cache option
-# TODO: add --remote/--no-remote option
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
-@click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
+@click.option("--cache/--no-cache", "cache", default=True, help="Use local cache")
+@click.option("--remote/--no-remote", "remote", default=True, help="Use local cache")
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.pass_context
-def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
+def cli(ctx: click.Context, cache: bool, remote: bool, debug: bool) -> None:
     """MathBib is a tool to help streamline the management of BibLaTeX files associated
     with records from various mathematical repositories.
     """
-    ctx.obj = {"verbose": verbose, "debug": debug, "alias": load_alias_dict()}
+    ctx.obj = {
+        "session": RemoteSession(cache=cache, remote=remote),
+        "debug": debug,
+        "alias": load_alias_dict(),
+    }
 
 
 @cli.command(short_help="Generate citations from keys in file.")
@@ -94,11 +101,12 @@ def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
     ),
     help="Output file path.",
 )
-def generate(texfile: Iterable[Path], out: Optional[Path]):
+@click.pass_context
+def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
     """Parse TEXFILE and generate bibtex entries corresponding to keys.
     If option --out is specified, write generated text to file.
     """
-    bibstr = generate_biblatex(*texfile)
+    bibstr = generate_biblatex(ctx.obj["session"], *texfile)
     if out is None:
         click.echo(bibstr, nl=False)
     else:
@@ -187,9 +195,11 @@ def alias():
 @alias.command(name="add", short_help="Add new alias.")
 @alias_argument
 @keyid_argument
-def add_alias(alias_name: str, keyid: AliasedKeyId):
+@click.pass_context
+def add_alias(ctx: click.Context, alias_name: str, keyid: AliasedKeyId):
     """Add ALIAS for record KEY:ID."""
-    add_bib_alias(alias_name, keyid)
+    # TODO: maybe better to pass record directly?
+    add_bib_alias(alias_name, keyid, ctx.obj["session"])
 
 
 @alias.command(name="delete", short_help="Delete alias.")

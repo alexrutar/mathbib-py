@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import Iterable, Final, Optional
+    from .request import RemoteSession
 
 from itertools import chain
 from pathlib import Path
@@ -33,7 +34,9 @@ def get_citekeys(tex: str) -> frozenset[str]:
     return frozenset(chain.from_iterable(rx_citekey.findall(k) for k in cite_commands))
 
 
-def citekey_to_record(citekey: str, alias: dict[str, str]) -> Optional[ArchiveRecord]:
+def citekey_to_record(
+    session: RemoteSession, citekey: str, alias: dict[str, str]
+) -> Optional[ArchiveRecord]:
     """Convert a citation key to an ArchiveRecord if possible.
 
     Warning: the returned ArchiveRecord might be a null record.
@@ -41,9 +44,9 @@ def citekey_to_record(citekey: str, alias: dict[str, str]) -> Optional[ArchiveRe
     aliased = alias.get(citekey)
     try:
         if aliased is not None:
-            return ArchiveRecord.from_str(aliased, alias=citekey)
+            return ArchiveRecord.from_str(aliased, alias=citekey, session=session)
         else:
-            return ArchiveRecord.from_str(citekey)
+            return ArchiveRecord.from_str(citekey, session=session)
 
     except KeyIdError:
         TermWrite.warn(f"Could not find KEY:ID associated with '{citekey}'.")
@@ -57,7 +60,7 @@ def multiple_replace(dct: dict[str, str], text: str):
     return regex.sub(lambda mo: dct[mo.string[mo.start() : mo.end()]], text)
 
 
-def get_file_records(*paths: Path) -> Iterable[ArchiveRecord]:
+def get_file_records(session: RemoteSession, *paths: Path) -> Iterable[ArchiveRecord]:
     """Open the file at `path`, parse for citation commands, and
     generate the corresponding list of ArchiveRecord."""
 
@@ -65,12 +68,14 @@ def get_file_records(*paths: Path) -> Iterable[ArchiveRecord]:
     citekeys = frozenset(
         chain.from_iterable(get_citekeys(path.read_text()) for path in paths)
     )
-    records_or_none = (citekey_to_record(citekey, alias_dict) for citekey in citekeys)
+    records_or_none = (
+        citekey_to_record(session, citekey, alias_dict) for citekey in citekeys
+    )
 
     return (record for record in records_or_none if record is not None)
 
 
-def generate_biblatex(*paths: Path) -> str:
+def generate_biblatex(session: RemoteSession, *paths: Path) -> str:
     """Generate the biblatex file associated with the citations inside a given file."""
     bth = BibTexHandler()
-    return bth.write_records(get_file_records(*paths))
+    return bth.write_records(get_file_records(session, *paths))

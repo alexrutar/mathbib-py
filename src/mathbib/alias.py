@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .remote import AliasedKeyId
+    from .request import RemoteSession
     from pathlib import Path
 
 from xdg_base_dirs import xdg_data_home
@@ -11,7 +12,7 @@ import sys
 
 from tomli_w import dumps
 
-from .request import load_record
+# from .request import load_record
 from .term import TermWrite
 
 
@@ -33,9 +34,9 @@ def load_alias_dict(sys_fail: bool = False) -> dict[str, str]:
             raise e
 
 
-def add_bib_alias(alias: str, aliased_keyid: AliasedKeyId):
+def add_bib_alias(alias: str, aliased_keyid: AliasedKeyId, session: RemoteSession):
     keyid = aliased_keyid.drop_alias()
-    record, _ = load_record(keyid)
+    record, _ = session.load_record(keyid)
     if record is None:
         TermWrite.error(f"Null record associated with '{keyid}'")
         sys.exit(1)

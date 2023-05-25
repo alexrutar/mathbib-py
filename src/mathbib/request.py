@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional
     from pathlib import Path
-    from .remote import RelatedRecords, URLBuilder, RemoteRecord, KeyId
+    from .remote import RelatedRecords, URLBuilder, KeyId
 
 from datetime import datetime
 import json
@@ -12,10 +12,13 @@ import json
 import click
 import requests
 import sys
+import tomllib
+
+from xdg_base_dirs import xdg_config_home
 
 from . import __version__
 from .term import TermWrite
-from .remote import REMOTES
+from .remote import get_remote_record
 
 
 class NullRecordError(Exception):
@@ -24,122 +27,146 @@ class NullRecordError(Exception):
         super().__init__(f"KEY:ID '{keyid}' is a null record.")
 
 
-def make_request(identifier: str, build_url: URLBuilder) -> Optional[str]:
-    url = build_url(identifier)
-    TermWrite.remote(url)
-    headers = {"User-Agent": f"MathBib/{__version__} (mailto:api-contact@rutar.org)"}
-    res = requests.get(url, headers=headers)
+class RemoteSession:
+    def __init__(
+        self,
+        timeout: float = 30,
+        info: bool = True,
+        cache: bool = True,
+        remote: bool = True,
+    ):
+        self.session = requests.Session()
 
-    if res.status_code == requests.codes.ok:
-        return res.text
+        contact_email = tomllib.loads(
+            (xdg_config_home() / "mathbib" / "config.toml").read_text()
+        ).get("email")
+        if contact_email is not None:
+            self.session.headers.update(
+                {"User-Agent": f"MathBib/{__version__} (mailto:{contact_email})"}
+            )
 
+        self.timeout = timeout
+        self.print_info = info
+        self.cache = cache
+        self.remote = remote
 
-def serialize(
-    keyid: KeyId, record: Optional[dict], related: Optional[dict[str, str]]
-) -> None:
-    target = keyid.cache_path()
-    target.parent.mkdir(parents=True, exist_ok=True)
-    cache_object = {
-        "record": record,
-        "accessed": datetime.now().isoformat(),
-        "related": related,
-    }
-    target.write_text(json.dumps(cache_object))
+    def _resolve_related_records(
+        self, keyid: KeyId, related: RelatedRecords
+    ) -> dict[str, str]:
+        related_identifiers = {str(keyid.key): keyid.identifier}
 
+        for key, res in related.items():
+            if isinstance(res, str):
+                related_identifiers[key] = res
+            else:
+                url_builder, parser = res
+                response = self.make_request(keyid, url_builder)
+                if response is not None:
+                    parsed = parser(response)
+                    if parsed is not None:
+                        related_identifiers[key] = parsed
 
-def _load_cached_record(keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
-    cache = json.loads(keyid.cache_path().read_text())
-    return cache["record"], cache["related"]
+        return related_identifiers
 
+    def _clear_cache(self, keyid: KeyId):
+        keyid.cache_path().unlink(missing_ok=True)
 
-def delete_cached_record(keyid: KeyId):
-    cache_file = keyid.cache_path()
-    cache_file.unlink(missing_ok=True)
+    def _load_cached_record(
+        self, keyid: KeyId
+    ) -> tuple[Optional[dict], dict[str, str]]:
+        """Load the cached record if self.cache: otherwise return a null record"""
+        try:
+            if self.cache:
+                cache = json.loads(keyid.cache_path().read_text())
+                return cache["record"], cache["related"]
 
+        # cache is corrupted
+        except (KeyError, json.decoder.JSONDecodeError):
+            self._clear_cache(keyid)
 
-def resolve_related(keyid: KeyId, related: RelatedRecords) -> dict[str, str]:
-    related_identifiers = {str(keyid.key): keyid.identifier}
+        except FileNotFoundError:
+            pass
 
-    for key, res in related.items():
-        if isinstance(res, str):
-            related_identifiers[key] = res
-        else:
-            url_builder, parser = res
-            response = make_request(keyid.identifier, url_builder)
-            if response is not None:
-                parsed = parser(response)
-                if parsed is not None:
-                    related_identifiers[key] = parsed
-
-    return related_identifiers
-
-
-def _load_remote_record(
-    remote_record: RemoteRecord, keyid: KeyId
-) -> tuple[Optional[dict], dict[str, str]]:
-    """Load and parse the remote record."""
-    response = make_request(keyid.identifier, remote_record.build_url)
-    if response is not None:
-        record, related = remote_record.parse_record(response)
-        return (record, resolve_related(keyid, related))
-    else:
         return None, {}
 
+    def _load_remote_record(
+        self, keyid: KeyId
+    ) -> tuple[Optional[dict], dict[str, str]]:
+        """Load and parse the remote record."""
+        remote_record = get_remote_record(keyid)
+        response = self.make_request(keyid, remote_record.build_url)
+        if response is not None:
+            record, related = get_remote_record(keyid).parse_record(response)
+            return (record, self._resolve_related_records(keyid, related))
 
-def load_record(keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
-    """Load the item identifier, defaulting to the cache if possible and
-    writing to the cache after loading.
-
-    If the identifier is invalid, return a null record.
-    """
-    remote_record = REMOTES[keyid.key]
-
-    if not remote_record.validate_identifier(keyid.identifier):
         return None, {}
 
-    try:
-        cache = _load_cached_record(keyid)
-    except FileNotFoundError:
-        cache = None
+    def load_record(self, keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
+        remote_record = get_remote_record(keyid)
 
-    if cache is None:
-        record, related = _load_remote_record(remote_record, keyid)
-        serialize(keyid, record, related)
+        if not remote_record.validate_identifier(keyid.identifier):
+            return None, {}
+
+        # load cached record
+        record, related = self._load_cached_record(keyid)
+
+        # if no cache hit, get remote record and cache
+        if record is None:
+            record, related = self._load_remote_record(keyid)
+            self.serialize(keyid, record, related)
+
         return record, related
 
-    else:
-        record, related = cache
+    def serialize(
+        self, keyid: KeyId, record: Optional[dict], related: Optional[dict[str, str]]
+    ) -> None:
+        if self.cache:
+            target = keyid.cache_path()
+            target.parent.mkdir(parents=True, exist_ok=True)
+            cache_object = {
+                "record": record,
+                "accessed": datetime.now().isoformat(),
+                "related": related,
+            }
+            target.write_text(json.dumps(cache_object))
 
-    return (record, related)
+    def make_request(self, keyid: KeyId, build_url: URLBuilder) -> Optional[str]:
+        return self.make_raw_request(build_url(keyid.identifier))
 
+    def make_raw_request(self, url: str) -> Optional[str]:
+        if self.remote:
+            if self.print_info:
+                TermWrite.remote(url)
+            res = self.session.get(url, timeout=self.timeout)
 
-def streaming_download(url: str, target: Path) -> bool:
-    """Attempt to download the file, and return a boolean indicating success."""
-    TermWrite.download(url)
-    headers = {"User-Agent": f"MathBib/{__version__} (mailto:api-contact@rutar.org)"}
-    res = requests.get(url, headers=headers, stream=True)
+            if res.status_code == requests.codes.ok:
+                return res.text
 
-    # stream the download, and display a progress bar if isatty
-    if res.status_code == requests.codes.ok:
-        target.parent.mkdir(exist_ok=True, parents=True)
-        chunk_size = 8192
-        length = res.headers.get("content-length")
+    def make_raw_streaming_request(self, url: str, target: Path) -> bool:
+        """Attempt to download the file, and return a boolean indicating success."""
+        if self.remote:
+            TermWrite.download(url)
+            res = self.session.get(url, stream=True, timeout=self.timeout)
 
-        if False or length is not None and sys.stdout.isatty():
-            steps = int(int(length) / chunk_size)
+            # stream the download, and display a progress bar if isatty
+            if res.status_code == requests.codes.ok:
+                target.parent.mkdir(exist_ok=True, parents=True)
+                chunk_size = 8192
+                length = res.headers.get("content-length")
 
-            with target.open("wb") as fd:
-                with click.progressbar(
-                    res.iter_content(chunk_size=chunk_size), length=steps
-                ) as bar:
-                    for chunk in bar:
-                        fd.write(chunk)
-        else:
-            with target.open("wb") as fd:
-                for chunk in res.iter_content(chunk_size=chunk_size):
-                    fd.write(chunk)
+                if length is not None and sys.stdout.isatty() and self.print_info:
+                    steps = int(int(length) / chunk_size)
 
-        return True
+                    with target.open("wb") as fd:
+                        with click.progressbar(
+                            res.iter_content(chunk_size=chunk_size), length=steps
+                        ) as bar:
+                            for chunk in bar:
+                                fd.write(chunk)
+                else:
+                    with target.open("wb") as fd:
+                        for chunk in res.iter_content(chunk_size=chunk_size):
+                            fd.write(chunk)
+                return True
 
-    else:
         return False
