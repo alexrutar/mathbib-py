@@ -141,6 +141,7 @@ class RemoteSession:
 
             if res.status_code == requests.codes.ok:
                 return res.text
+        return None
 
     def make_raw_streaming_request(self, url: str, target: Path) -> bool:
         """Attempt to download the file, and return a boolean indicating success."""

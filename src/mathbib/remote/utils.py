@@ -20,10 +20,11 @@ def zbmath_external_identifier_url(identifier: str) -> str:
     return f"https://zbmath.org/?q=en:{quote(identifier)}"
 
 
-def zbmath_external_identifier_parse(result: str) -> str | None:
+def zbmath_external_identifier_parse(result: str) -> Optional[str]:
     search_result = re.search(r"Zbl ([\d\.]+)", result)
     if search_result is not None:
         return search_result.group(1)
+    return None
 
 
 def parse_journal(journal: str, fjournal: Optional[str] = None):

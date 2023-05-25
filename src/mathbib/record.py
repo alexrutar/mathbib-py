@@ -161,11 +161,13 @@ class ArchiveRecord:
             show_url = get_remote_record(keyid).show_url
             if show_url is not None:
                 return show_url(keyid.identifier)
+        return None
 
     def related_file(self) -> Optional[Path]:
         for keyid in self.related_keys():
             if keyid.file_path().exists():
                 return keyid.file_path()
+        return None
 
     def download_file(self) -> Optional[Path]:
         for keyid in self.related_keys():
@@ -178,6 +180,7 @@ class ArchiveRecord:
                 )
             ):
                 return path
+        return None
 
     def __str__(self) -> str:
         key, id, title, author, year, exists = self.as_tuple()

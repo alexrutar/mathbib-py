@@ -50,6 +50,7 @@ def citekey_to_record(
 
     except KeyIdError:
         TermWrite.warn(f"Could not find KEY:ID associated with '{citekey}'.")
+        return None
 
 
 def multiple_replace(dct: dict[str, str], text: str):
