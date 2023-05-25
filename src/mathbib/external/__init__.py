@@ -12,6 +12,10 @@ from . import doi, zbl, arxiv, zbmath, isbn, ol
 from ..remote import RemoteRecord, RemoteKey
 
 
+# TODO: refactor remote code
+# everything should be based off KeyId, which has some basic checks for validity
+# should not have this weird global record type (should just be a container class)
+
 _REMOTES: Final = {
     RemoteKey.ZBL: RemoteRecord(
         "zbl", zbl.url_builder, zbl.record_parser, zbl.validate_identifier

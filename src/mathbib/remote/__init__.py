@@ -154,6 +154,9 @@ class RemoteRecord:
 
         If the identifier is invalid, return a null record.
         """
+        if not self.is_valid_identifier(identifier):
+            return None, {}
+
         try:
             cache = self._load_cached_record(identifier)
         except FileNotFoundError:
