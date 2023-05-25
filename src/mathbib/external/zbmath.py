@@ -21,6 +21,10 @@ def url_builder(zbmath: str) -> str:
     )
 
 
+def validate_identifier(zbmath: str) -> bool:
+    return 4 <= len(zbmath) <= 8 and zbmath.isnumeric()
+
+
 def record_parser(result: str) -> ParsedRecord:
     related = {}
     metadata = BeautifulSoup(result, features="xml")

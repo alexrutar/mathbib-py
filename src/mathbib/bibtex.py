@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable
+    from typing import Iterable, Final
     from .record import ArchiveRecord
 
 import bibtexparser as bp
@@ -10,6 +10,19 @@ from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.customization import convert_to_unicode, page_double_hyphen, author
+
+
+CAPTURED: Final = (
+    "language",
+    "number",
+    "pages",
+    "publisher",
+    "title",
+    "volume",
+    "year",
+    "journal",
+    "booktitle",
+)
 
 
 class BibTexHandler:
@@ -28,7 +41,9 @@ class BibTexHandler:
 
     def write_records(self, records: Iterable[ArchiveRecord]) -> str:
         db = BibDatabase()
-        db.entries = [record.as_bibtex() for record in records]
+        db.entries = [
+            record.as_bibtex() for record in records if not record.is_null(warn=True)
+        ]
         return self.dumps(db)
 
     def dumps(self, db: BibDatabase) -> str:

@@ -6,14 +6,37 @@ if TYPE_CHECKING:
 
 from pathlib import Path
 import sys
-import re
 
 import click
+from tomllib import TOMLDecodeError
 
 from .bibtex import BibTexHandler
-from .citegen import generate_biblatex, make_record_lookup
+from .citegen import generate_biblatex
 from .record import ArchiveRecord
-from .external import KeyId
+from .external import KeyId, NullRecordError, KeyIdError
+from .alias import add_bib_alias, delete_bib_alias, get_bib_alias, alias_path
+from .term import TermWrite
+
+
+def keyid_callback(_ctx, _param, keyid_str: str) -> KeyId:
+    try:
+        return KeyId.from_str(keyid_str)
+    except KeyIdError as e:
+        raise click.BadParameter(str(e))
+
+
+keyid_argument = click.argument(
+    "keyid", type=str, metavar="KEY:ID", callback=keyid_callback
+)
+texfile_argument = click.argument(
+    "texfile",
+    nargs=-1,
+    type=click.Path(
+        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
+    ),
+    metavar="TEXFILE",
+)
+alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 
 
 @click.group()
@@ -32,14 +55,7 @@ def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
 
 
 @cli.command(short_help="Generate citations from keys in file.")
-@click.argument(
-    "texfile",
-    nargs=-1,
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
-    metavar="TEXFILE",
-)
+@texfile_argument
 @click.option(
     "--out",
     "out",
@@ -59,42 +75,46 @@ def generate(texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
-@cli.group(name="get", short_help="Retrieve various records from KEY:IDs.")
+@cli.group(name="get", short_help="Retrieve records.")
 def get_group():
     pass
 
 
 @get_group.command(name="json", short_help="Get record from KEY:ID.")
-@click.argument("keyid", type=str, metavar="KEY:ID")
-def json_cmd(keyid: str):
+@keyid_argument
+def json_cmd(keyid: KeyId):
     """Generate a JSON record for KEY:ID."""
-    click.echo(ArchiveRecord.from_keyid(keyid).as_json())
+    click.echo(ArchiveRecord(keyid).as_json())
 
 
 @get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID.")
-@click.argument("key_id", type=str, metavar="KEY:ID")
-def bibtex(key_id: str):
+@keyid_argument
+def bibtex(keyid: KeyId):
     """Generate a BibTeX record for KEY:ID."""
     bth = BibTexHandler()
-    click.echo(bth.write_records((ArchiveRecord.from_keyid(key_id),)), nl=False)
+    try:
+        click.echo(bth.write_records((ArchiveRecord(keyid),)), nl=False)
+    except KeyError:
+        TermWrite.error("Record missing ENTRYTYPE. Cannot generate BibTex.")
 
 
 @get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
-@click.argument("keyid", type=str, metavar="KEY:ID")
-def key(keyid: str):
+@keyid_argument
+def key(keyid: KeyId):
     """Generate a BibTeX record for KEY:ID."""
-    click.echo(ArchiveRecord.from_keyid(keyid).priority_key())
+    click.echo(ArchiveRecord(keyid).priority_key())
 
 
-@cli.group(name="file", short_help="Manage files associated with records.")
+@cli.group(name="file", short_help="Access and manage files associated with records.")
 def file_group():
     pass
 
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
-@click.argument("keyid_str", type=str, metavar="KEY:ID")
-def open_cmd(keyid_str: str):
-    for keyid in ArchiveRecord.from_keyid(keyid_str).related_keys():
+@keyid_argument
+def open_cmd(keyid: KeyId):
+    """Open file associated with record KEY:ID."""
+    for keyid in ArchiveRecord(keyid).related_keys():
         if click.launch(str(keyid.file_path())) == 0:
             return
 
@@ -103,39 +123,60 @@ def open_cmd(keyid_str: str):
     sys.exit(1)
 
 
-@cli.command(name="edit", short_help="Edit local record for KEY:ID.")
-@click.argument("keyid_str", type=str, metavar="KEY:ID")
-def edit_cmd(keyid_str: str):
-    path = KeyId.from_keyid(keyid_str).toml_path()
+@cli.command(name="edit", short_help="Edit local record.")
+@keyid_argument
+def edit_cmd(keyid: KeyId):
+    """Edit local record for KEY:ID."""
+    path = keyid.toml_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     click.edit(filename=str(path))
 
 
-def multiple_replace(dct: dict[str, str], text: str):
-    # Create a regular expression  from the dictionary keys
-    regex = re.compile(f"({'|'.join(map(re.escape, dct.keys()))})")
+@cli.group(name="alias", short_help="Manage record aliases.")
+def alias():
+    # TODO: catch tomllib.TOMLDecodeError
+    # TODO: can the sub-commands be run underneath?
+    pass
 
-    # For each match, look-up corresponding value in dictionary
-    return regex.sub(lambda mo: dct[mo.string[mo.start() : mo.end()]], text)
+
+@alias.command(name="add", short_help="Add new alias.")
+@alias_argument
+@keyid_argument
+def add_alias(alias_name: str, keyid: KeyId):
+    """Add ALIAS for record KEY:ID."""
+    try:
+        add_bib_alias(alias_name, keyid)
+    except NullRecordError:
+        TermWrite.error(f"Null record associated with '{keyid}'.")
+        sys.exit(1)
+    except TOMLDecodeError:
+        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
+        sys.exit(1)
 
 
-@cli.command(
-    name="update", short_help="Search for updated versions of keys in BIBFILE."
-)
-@click.argument(
-    "texfile",
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
-    metavar="TEXFILE",
-)
-@click.option(
-    "--key-source",
-    type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
-    metavar="BIBFILE",
-)
-def update(texfile: Path, key_source: Path):
-    record_lookup = make_record_lookup(key_source)
-    click.echo(multiple_replace(record_lookup, texfile.read_text()), nl=False)
+@alias.command(name="delete", short_help="Delete alias.")
+@alias_argument
+def delete_alias(alias_name: str):
+    """Delete record associated with ALIAS."""
+    try:
+        delete_bib_alias(alias_name)
+    except KeyError:
+        TermWrite.error(f"No alias with name '{alias_name}'.")
+        sys.exit(1)
+    except TOMLDecodeError:
+        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
+        sys.exit(1)
+
+
+@alias.command(name="get", short_help="Get record associated with alias.")
+@alias_argument
+def get_alias(alias_name: str):
+    """Get record associated with alias."""
+    try:
+        click.echo(get_bib_alias(alias_name), nl=False)
+    except KeyError:
+        TermWrite.error(f"No alias with name '{alias_name}'.")
+        sys.exit(1)
+    except TOMLDecodeError:
+        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
+        sys.exit(1)

@@ -59,8 +59,8 @@ class RemoteParseError(Exception):
         super().__init__(message)
 
 
-def make_request(identifier: str, url_builder: URLBuilder) -> str:
-    url = url_builder(identifier)
+def make_request(identifier: str, build_url: URLBuilder) -> Optional[str]:
+    url = build_url(identifier)
 
     TermWrite.remote(url)
 
@@ -72,14 +72,11 @@ def make_request(identifier: str, url_builder: URLBuilder) -> str:
     try:
         with urlopen(req) as fp:
             return fp.read().decode("utf8")
-            # record, related = self.record_parser(fp.read().decode("utf8"))
+            # record, related = self.parse_record(fp.read().decode("utf8"))
             # return (record, self.resolve_related(identifier, related))
 
-    except (HTTPError, RemoteAccessError) as e:
-        raise RemoteAccessError(f"Failed to access '{identifier}' from '{url}'") from e
-
-    except RemoteParseError as e:
-        raise RemoteParseError(f"While processing '{identifier}': " + e.message) from e
+    except (HTTPError, RemoteAccessError, RemoteParseError):
+        return
 
 
 class RemoteRecord:
@@ -88,11 +85,13 @@ class RemoteRecord:
         key: str,
         url_builder: URLBuilder,
         record_parser: RecordParser,
+        identifier_validator: Callable[[str], bool],
     ):
         self.key = key
         self.cache_folder = xdg_cache_home() / "mathbib" / key
-        self.url_builder = url_builder
-        self.record_parser = record_parser
+        self.build_url = url_builder
+        self.parse_record = record_parser
+        self.is_valid_identifier = identifier_validator
 
     def get_cache_path(self, identifier: str) -> Path:
         """Get the cache file associated with the item identifier."""
@@ -110,7 +109,9 @@ class RemoteRecord:
         }
         target.write_text(json.dumps(cache_object))
 
-    def load_cached_record(self, identifier: str) -> tuple[dict, dict[str, str]]:
+    def _load_cached_record(
+        self, identifier: str
+    ) -> tuple[Optional[dict], dict[str, str]]:
         cache = json.loads(self.get_cache_path(identifier).read_text())
         return cache["record"], cache["related"]
 
@@ -128,47 +129,42 @@ class RemoteRecord:
                 related_identifiers[key] = res
             else:
                 url_builder, parser = res
-                parsed = parser(make_request(identifier, url_builder))
-                if parsed is not None:
-                    related_identifiers[key] = parsed
+                response = make_request(identifier, url_builder)
+                if response is not None:
+                    parsed = parser(response)
+                    if parsed is not None:
+                        related_identifiers[key] = parsed
 
         return related_identifiers
 
-    def load_remote_record(
+    def _load_remote_record(
         self, identifier: str
-    ) -> Optional[tuple[dict, dict[str, str]]]:
+    ) -> tuple[Optional[dict], dict[str, str]]:
         """Load and parse the remote record."""
-        try:
-            record, related = self.record_parser(
-                make_request(identifier, self.url_builder)
-            )
+        response = make_request(identifier, self.build_url)
+        if response is not None:
+            record, related = self.parse_record(response)
             return (record, self.resolve_related(identifier, related))
-        except (RemoteAccessError, RemoteParseError):
-            return None
+        else:
+            return None, {}
 
-    def load_record(self, identifier: str) -> tuple[dict, dict[str, str]]:
+    def load_record(self, identifier: str) -> tuple[Optional[dict], dict[str, str]]:
         """Load the item identifier, defaulting to the cache if possible and
-        writing to the cache after loading."""
-        # attempt to load from cache
+        writing to the cache after loading.
+
+        If the identifier is invalid, return a null record.
+        """
         try:
-            cache = self.load_cached_record(identifier)
+            cache = self._load_cached_record(identifier)
         except FileNotFoundError:
             cache = None
 
         if cache is None:
-            remote = self.load_remote_record(identifier)
-            if remote is not None:
-                record, related = remote
-                self.serialize(identifier, record, related)
-            else:
-                self.serialize(identifier, None, None)
-                raise RemoteError("Null identifier {identifier}.", identifier)
+            record, related = self._load_remote_record(identifier)
+            self.serialize(identifier, record, related)
+            return record, related
+
         else:
             record, related = cache
-            if record is None or related is None:
-                raise RemoteError(
-                    f"Null identifier '{self.key}:{identifier}'.",
-                    f"{self.key}:{identifier}",
-                )
 
         return (record, related)

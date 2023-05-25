@@ -10,6 +10,11 @@ class TermWrite:
             click.echo(msg)
 
     @staticmethod
+    def warn(msg: str):
+        click.secho("Warning: ", fg="yellow", bold=True, nl=False, err=True)
+        click.echo(msg, err=True)
+
+    @staticmethod
     def error(msg: str):
         click.secho("Error: ", fg="red", bold=True, nl=False, err=True)
         click.echo(msg, err=True)

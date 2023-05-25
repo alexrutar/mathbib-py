@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, Final, Sequence
+    from typing import Iterable, Final, Optional
 
 from itertools import chain
 from pathlib import Path
@@ -10,65 +10,66 @@ import re
 
 from .record import ArchiveRecord
 from .bibtex import BibTexHandler
-from .external import KeyId
-from .remote import RemoteKey
+from .term import TermWrite
+from .alias import load_alias_dict
 
 
-def find_identifiers(db_entry: dict) -> tuple[str, Sequence[KeyId]]:
-    # TODO: also get ISBN, but needs validation
-    identifiers = [
-        KeyId.from_keyid(f"{k}:{v}")
-        for k, v in db_entry.items()
-        if k in ("doi", "arxiv", "zbl", "isbn")
-    ]
-    eprint = db_entry.get("eprint")
-    if db_entry.get("archiveprefix") in ("arxiv", "arXiv"):
-        if eprint:
-            identifiers.append(KeyId(RemoteKey.ARXIV, str(eprint)))
-
-    return (str(db_entry["ID"]), identifiers)
-
-
-def get_max_priority(keys: Iterable[KeyId]) -> KeyId:
-    return sorted([ArchiveRecord(keyid).priority_key() for keyid in keys])[0]
-
-
-def make_record_lookup(bibfile: Path) -> dict[str, str]:
-    """Convert a bibfile into a dictionary mapping keys to possible identifiers."""
-    bth = BibTexHandler()
-    db = bth.loads(bibfile.read_text())
-    candidates = dict(find_identifiers(entry) for entry in db.entries)
-    return {k: str(get_max_priority(v)) for k, v in candidates.items() if len(v) > 0}
-
-
-def get_citekeys(path: Path) -> Iterable[str]:
-    CITEKEY_REGEX: Final = re.compile(
-        r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?\{((?!\*)[^{}]+)\})"
+def get_citekeys(tex: str) -> frozenset[str]:
+    """Retern an iterable of all citation keys contained in the provided string."""
+    # a citation is a non-commented string of the form \<citecommand>[...]{key1, key2, ...}
+    # first match for {key1, key2, ...} and then extract the keys
+    rx_citecommand = re.compile(
+        r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?(?:\[[^\]]*\])?\{((?!\*)[^{}]+)\})"
     )
-    KEY_REGEX: Final = re.compile(r"([0-9a-zA-Z\.\-:_/]+)")
+    rx_citekey: Final = re.compile(r"([^\s,{}\[\]\(\)\\%#~]+)")
 
     cite_commands = (
-        m.group(2) for m in CITEKEY_REGEX.finditer(path.read_text()) if m.group(2)
+        match.group(2) for match in rx_citecommand.finditer(tex) if match.group(2)
     )
-    return set(chain.from_iterable(KEY_REGEX.findall(k) for k in cite_commands))
+
+    return frozenset(chain.from_iterable(rx_citekey.findall(k) for k in cite_commands))
 
 
-def cite_file_search(*paths: Path) -> Iterable[ArchiveRecord]:
+def citekey_to_record(citekey: str, alias: dict[str, str]) -> Optional[ArchiveRecord]:
+    """Convert a citation key to an ArchiveRecord if possible.
+
+    Warning: the returned ArchiveRecord might be a null record.
+    """
+    aliased = alias.get(citekey)
+    if aliased is not None:
+        citekey = aliased
+
+    try:
+        return ArchiveRecord.from_str(citekey)
+
+    except ValueError:
+        TermWrite.warn(
+            f"Could not find KEY:ID associated with '{citekey}'. Skipping..."
+        )
+
+
+def multiple_replace(dct: dict[str, str], text: str):
+    # Create a regular expression  from the dctionary keys
+    regex = re.compile("(%s)" % "|".join(map(re.escape, dct.keys())))
+
+    # For each match, look-up corresponding value in dctionary
+    return regex.sub(lambda mo: dct[mo.string[mo.start() : mo.end()]], text)
+
+
+def get_file_records(*paths: Path) -> Iterable[ArchiveRecord]:
     """Open the file at `path`, parse for citation commands, and
-    generate the corresponding list of ArchiveRecord,"""
+    generate the corresponding list of ArchiveRecord."""
 
-    SEARCHKEY_REGEX: Final = re.compile(r"((?:arxiv|doi|zbmath|zbl):(?:[\d\.]+))")
+    alias_dict = load_alias_dict()
+    citekeys = frozenset(
+        chain.from_iterable(get_citekeys(path.read_text()) for path in paths)
+    )
+    records_or_none = (citekey_to_record(citekey, alias_dict) for citekey in citekeys)
 
-    # search for all citation commands
-    cite_commands = chain.from_iterable(get_citekeys(path) for path in paths)
-
-    # then parse each citation command to find a valid key
-    cmds = set(chain.from_iterable(SEARCHKEY_REGEX.findall(k) for k in cite_commands))
-
-    return (ArchiveRecord.from_keyid(keyid) for keyid in cmds)
+    return (record for record in records_or_none if record is not None)
 
 
 def generate_biblatex(*paths: Path) -> str:
     """Generate the biblatex file associated with the citations inside a given file."""
     bth = BibTexHandler()
-    return bth.write_records(cite_file_search(*paths))
+    return bth.write_records(get_file_records(*paths))

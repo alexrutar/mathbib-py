@@ -17,8 +17,17 @@ from ..remote.parse import (
 )
 
 
+REGEX_ARXIV_ID = re.compile(
+    r"((?:(?:math|nucl-ex|nlin|q-alg|chao-dyn|cond-mat|dg-ga|adap-org|supr-con|bayes-an|hep-ph|comp-gas|patt-sol|solv-int|atom-ph|plasm-ph|stat|cs|nucl-th|q-bio|chem-ph|hep-th|ao-sci|eess|hep-lat|cmp-lg|gr-qc|funct-an|astro-ph|math-ph|quant-ph|mtrl-th|physics|hep-ex|econ|acc-phys|alg-geom|q-fin)/(?:(?:[0-1][0-9])|(?:9[1-9]))(?:0[1-9]|1[0-2])(?:\d{3})(?:v[1-9]\d*)?))|((?:(?:(?:[0-1][0-9])|(?:9[1-9]))(?:0[1-9]|1[0-2])(?:[.]\d{4,5})(?:v[1-9]\d*)?))"
+)
+
+
 def url_builder(arxiv: str) -> str:
     return f"https://export.arxiv.org/api/query?id_list={arxiv}"
+
+
+def validate_identifier(arxiv: str) -> bool:
+    return re.fullmatch(REGEX_ARXIV_ID, arxiv) is not None
 
 
 def record_parser(result: str) -> ParsedRecord:

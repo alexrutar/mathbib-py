@@ -1,0 +1,10 @@
+\documentclass{article}
+\usepackage{local-example}
+\addbibresource{search.bib}
+\begin{document}
+some text inside \cite{doi:10.1093/imrn/rnw336} with citations!
+multiple on line \cite{zbl:1467.28001}, \cite{arxiv:2209.13952}
+some repeats, different order \cite{zbl:1467.28001, zbl:1321.54059}
+a key that does not exist \cite{noexist}
+\printbibliography
+\end{document}

@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, TypedDict, Sequence
+    from typing import Iterable, TypedDict, Sequence, Optional
 
     class RecordEntry(TypedDict):
         id: str
@@ -18,22 +18,22 @@ import tomllib
 
 from xdg_base_dirs import xdg_data_home
 
-from .external import REMOTES, KeyId
+from .external import load_record, KeyId
+from .bibtex import CAPTURED
+from .term import TermWrite
 
 
 def get_record_lists(
     keyid_pairs: Iterable[KeyId],
-) -> dict[KeyId, tuple[dict, dict[str, str]]]:
-    return {
-        keyid: REMOTES[keyid.key].load_record(keyid.identifier) for keyid in keyid_pairs
-    }
+) -> dict[KeyId, tuple[Optional[dict], dict[str, str]]]:
+    return {keyid: load_record(keyid) for keyid in keyid_pairs}
 
 
 def extract_keyid_pairs(
-    to_resolve: Iterable[tuple[dict, dict[str, str]]]
+    to_resolve: Iterable[tuple[Optional[dict], dict[str, str]]]
 ) -> Sequence[KeyId]:
     return [
-        KeyId.from_keyid(f"{key}:{identifier}")
+        KeyId.from_str(f"{key}:{identifier}")
         for _, related in to_resolve
         for key, identifier in related.items()
     ]
@@ -45,7 +45,7 @@ def _resolve_all_records(
     results = get_record_lists(
         (keyid for keyid in keyid_pairs if keyid not in resolved)
     )
-    yield from ((keyid, rec) for keyid, (rec, _) in results.items())
+    yield from ((keyid, rec) for keyid, (rec, _) in results.items() if rec is not None)
 
     resolved.update(keyid_pairs)
     to_resolve = extract_keyid_pairs(results.values())
@@ -66,9 +66,12 @@ class ArchiveRecord:
         # TODO: do not hardcode
         self.local_record_folder = xdg_data_home() / "mathbib" / "records"
 
+    def __hash__(self) -> int:
+        return hash(self.keyid)
+
     @classmethod
-    def from_keyid(cls, keyid: str):
-        return cls(KeyId.from_keyid(keyid))
+    def from_str(cls, keyid_str: str):
+        return cls(KeyId.from_str(keyid_str))
 
     def as_json(self) -> str:
         return json.dumps({str(k): v for k, v in self.record.items()})
@@ -88,13 +91,19 @@ class ArchiveRecord:
     def priority_key(self) -> KeyId:
         return next(iter(self.record.keys()))
 
+    def is_null(self, warn: bool = False) -> bool:
+        ret = len(self.as_joint_record()) == 0
+        if warn and ret:
+            TermWrite.warn(f"Null record '{self.keyid}'")
+
+        return ret
+
     def as_bibtex(self) -> dict:
         joint_record = self.as_joint_record()
 
         eprint = {"eprint": self.keyid.identifier, "eprinttype": str(self.keyid.key)}
 
-        captured = ("journal", "volume", "number", "pages", "year", "title")
-        captured = {k: v for k, v in joint_record.items() if k in captured}
+        captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
 
         special = {
             "ID": f"{self.keyid.key}:{self.keyid.identifier}",

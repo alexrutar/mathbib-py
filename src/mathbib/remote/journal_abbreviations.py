@@ -204,7 +204,7 @@ JOURNALS = {
     "advances_and_applications_in_statistical_sciences": "Adv. Appl. Stat. Sci.",
     "advances_in_analysis_and_geometry": "Adv. Anal. Geom.",
     "advances_in_applied_clifford_algebras": "Adv. Appl. Clifford Algebr.",
-    "advances_in_applied_mathematics": "Adv. in Appl. Math.",
+    "advances_in_applied_mathematics": "Adv. Appl. Math.",
     "advances_in_applied_mathematics_and_mechanics": "Adv. Appl. Math. Mech.",
     "advances_in_applied_probability": "Adv. in Appl. Probab.",
     "advances_in_cad_for_vlsi": "Adv. CAD VLSI",

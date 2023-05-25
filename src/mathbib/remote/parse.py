@@ -9,7 +9,7 @@ import re
 from urllib.parse import quote
 
 from .journal_abbreviations import JOURNALS
-from ..bibtex import BibTexHandler
+from ..bibtex import BibTexHandler, CAPTURED
 from . import RemoteParseError
 
 
@@ -53,17 +53,6 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
     except IndexError:
         raise RemoteParseError("Could not parse bibtex entry.")
 
-    # capture some keys explicitly from the bibtex file
-    captured = (
-        "language",
-        "issn",
-        "number",
-        "pages",
-        "title",
-        "volume",
-        "year",
-    )
-
     # drop some keys from the bibtex file
     dropped = (
         "title",
@@ -79,24 +68,25 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
         "zbmath",
         "doi",
         "isbn",
+        "issn",
     )
 
     # extract some related keys
-    # TODO: also get ISBN?
+    # TODO: also get ISBN or ISSN?
     related = (
         "zbmath",
         "doi",
         "zbl",
     )
 
-    extracted = {k: v for k, v in bibtex_parsed.items() if k in captured}
+    extracted = {k: v for k, v in bibtex_parsed.items() if k in CAPTURED}
     try:
         additional = {
             # save any bibtex keys not captured or dropped
             "bibtex": {
                 k: v
                 for k, v in bibtex_parsed.items()
-                if k not in captured and k not in dropped
+                if k not in CAPTURED and k not in dropped
             },
             "bibtype": bibtex_parsed["ENTRYTYPE"],
         }
