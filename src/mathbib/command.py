@@ -25,6 +25,8 @@ def keyid_callback(_ctx, _param, keyid_str: str) -> KeyId:
         raise click.BadParameter(str(e))
 
 
+# TODO: add a '--aliased' option to first look up the alias key and automatically pass
+# the keyid corresponding to the priority record
 keyid_argument = click.argument(
     "keyid", type=str, metavar="KEY:ID", callback=keyid_callback
 )
@@ -39,6 +41,7 @@ texfile_argument = click.argument(
 alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 
 
+# TODO: add --cache/--no-cache option
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
 @click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
@@ -180,3 +183,9 @@ def get_alias(alias_name: str):
     except TOMLDecodeError:
         TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
         sys.exit(1)
+
+# TODO: add alias update to update all alias records so the string is as new as possible
+# TODO: also have a program to print all 'non-maximal' alias records
+
+# TODO: add mbib view command to open the record somewhere
+# TODO: this requires implementing URLs, etc. for all records

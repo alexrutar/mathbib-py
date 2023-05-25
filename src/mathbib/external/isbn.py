@@ -42,7 +42,7 @@ def record_parser(result: str) -> ParsedRecord:
 
         if match is not None:
             related["ol"] = str(match.group(1))
-            if match[-1] == "M":
+            if related["ol"] == "M":
                 record["bibtype"] = "book"
 
     except StopIteration:

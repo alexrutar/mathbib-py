@@ -59,19 +59,20 @@ def get_record_list(start_keyid: KeyId) -> dict[KeyId, dict]:
 
 
 class ArchiveRecord:
-    def __init__(self, keyid: KeyId):
+    def __init__(self, keyid: KeyId, alias: Optional[str] = None):
         self.keyid = keyid
         self.record = get_record_list(keyid)
 
         # TODO: do not hardcode
         self.local_record_folder = xdg_data_home() / "mathbib" / "records"
+        self.alias = alias
 
     def __hash__(self) -> int:
         return hash(self.keyid)
 
     @classmethod
-    def from_str(cls, keyid_str: str):
-        return cls(KeyId.from_str(keyid_str))
+    def from_str(cls, keyid_str: str, alias: Optional[str] = None):
+        return cls(KeyId.from_str(keyid_str), alias=alias)
 
     def as_json(self) -> str:
         return json.dumps({str(k): v for k, v in self.record.items()})
@@ -101,12 +102,13 @@ class ArchiveRecord:
     def as_bibtex(self) -> dict:
         joint_record = self.as_joint_record()
 
-        eprint = {"eprint": self.keyid.identifier, "eprinttype": str(self.keyid.key)}
+        eprint_keyid = self.priority_key()
+        eprint = {"eprint": eprint_keyid.identifier, "eprinttype": str(eprint_keyid.key)}
 
         captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
 
         special = {
-            "ID": f"{self.keyid.key}:{self.keyid.identifier}",
+            "ID": str(self.keyid) if self.alias is None else self.alias,
             "ENTRYTYPE": joint_record["bibtype"],
         }
         if "authors" in joint_record.keys():

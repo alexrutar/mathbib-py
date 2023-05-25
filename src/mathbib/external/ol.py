@@ -19,10 +19,9 @@ def url_builder(ol: str) -> str:
 
 
 def validate_identifier(ol: str) -> bool:
-    return re.fullmatch(r"\/(OL\d+[WM])\/", ol) is not None
+    return re.fullmatch(r"OL\d+[WM]", ol) is not None
 
 
 def record_parser(result: str) -> ParsedRecord:
     # TODO: parse the result (it's just JSON)
-    print(result)
     return {}, {}

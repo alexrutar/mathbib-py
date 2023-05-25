@@ -12,6 +12,7 @@ from .record import ArchiveRecord
 from .bibtex import BibTexHandler
 from .term import TermWrite
 from .alias import load_alias_dict
+from .external import KeyIdError
 
 
 def get_citekeys(tex: str) -> frozenset[str]:
@@ -36,15 +37,15 @@ def citekey_to_record(citekey: str, alias: dict[str, str]) -> Optional[ArchiveRe
     Warning: the returned ArchiveRecord might be a null record.
     """
     aliased = alias.get(citekey)
-    if aliased is not None:
-        citekey = aliased
-
     try:
-        return ArchiveRecord.from_str(citekey)
+        if aliased is not None:
+            return ArchiveRecord.from_str(aliased, alias=citekey)
+        else:
+            return ArchiveRecord.from_str(citekey)
 
-    except ValueError:
+    except KeyIdError:
         TermWrite.warn(
-            f"Could not find KEY:ID associated with '{citekey}'. Skipping..."
+            f"Could not find KEY:ID associated with '{citekey}'."
         )
 
 
