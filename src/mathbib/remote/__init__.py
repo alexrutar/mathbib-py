@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Callable, Optional
+    from typing import Final, Optional, Callable
 
     RelatedRecords = dict[
         str, str | tuple[Callable[[str], str], Callable[[str], Optional[str]]]
@@ -10,18 +10,15 @@ if TYPE_CHECKING:
     ParsedRecord = tuple[dict, RelatedRecords]
     RecordParser = Callable[[str], ParsedRecord]
     URLBuilder = Callable[[str], str]
+    IdentifierValidator = Callable[[str], bool]
 
-from datetime import datetime
+from dataclasses import dataclass
 from enum import IntEnum, auto
-import json
-from pathlib import Path
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+import tomllib
 
-from xdg_base_dirs import xdg_cache_home
+from xdg_base_dirs import xdg_data_home, xdg_cache_home
 
-from .. import __version__
-from ..term import TermWrite
+from . import doi, zbl, arxiv, zbmath, isbn, ol
 
 
 class RemoteKey(IntEnum):
@@ -40,134 +37,126 @@ class RemoteKey(IntEnum):
         return self.name.lower()
 
 
-class RemoteError(Exception):
-    def __init__(self, message: str, identifier: str):
-        self.message = message
-        self.identifier = identifier
-        super().__init__(message)
-
-
-class RemoteAccessError(Exception):
-    def __init__(self, message: str):
-        self.message = message
-        super().__init__(message)
-
-
-class RemoteParseError(Exception):
-    def __init__(self, message: str):
-        self.message = message
-        super().__init__(message)
-
-
-def make_request(identifier: str, build_url: URLBuilder) -> Optional[str]:
-    url = build_url(identifier)
-
-    TermWrite.remote(url)
-
-    req = Request(url)
-    req.add_header(
-        "User-Agent", f"MathBib/{__version__} (mailto:api-contact@rutar.org)"
-    )
-
-    try:
-        with urlopen(req) as fp:
-            return fp.read().decode("utf8")
-            # record, related = self.parse_record(fp.read().decode("utf8"))
-            # return (record, self.resolve_related(identifier, related))
-
-    except (HTTPError, RemoteAccessError, RemoteParseError):
-        return
-
-
+@dataclass(frozen=True)
 class RemoteRecord:
-    def __init__(
-        self,
-        key: str,
-        url_builder: URLBuilder,
-        record_parser: RecordParser,
-        identifier_validator: Callable[[str], bool],
-    ):
-        self.key = key
-        self.cache_folder = xdg_cache_home() / "mathbib" / key
-        self.build_url = url_builder
-        self.parse_record = record_parser
-        self.is_valid_identifier = identifier_validator
+    key: RemoteKey
+    build_url: URLBuilder
+    parse_record: RecordParser
+    validate_identifier: IdentifierValidator
 
-    def get_cache_path(self, identifier: str) -> Path:
-        """Get the cache file associated with the item identifier."""
-        return self.cache_folder / f"{identifier}.json"
 
-    def serialize(
-        self, identifier: str, record: Optional[dict], related: Optional[dict[str, str]]
-    ) -> None:
-        target = self.get_cache_path(identifier)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        cache_object = {
-            "record": record,
-            "accessed": datetime.now().isoformat(),
-            "related": related,
-        }
-        target.write_text(json.dumps(cache_object))
+REMOTES: Final = {
+    RemoteKey.ZBL: RemoteRecord(
+        RemoteKey.ZBL, zbl.url_builder, zbl.record_parser, zbl.validate_identifier
+    ),
+    RemoteKey.DOI: RemoteRecord(
+        RemoteKey.DOI, doi.url_builder, doi.record_parser, doi.validate_identifier
+    ),
+    RemoteKey.ZBMATH: RemoteRecord(
+        RemoteKey.ZBMATH, zbmath.url_builder, zbmath.record_parser, zbmath.validate_identifier
+    ),
+    RemoteKey.ARXIV: RemoteRecord(
+        RemoteKey.ARXIV, arxiv.url_builder, arxiv.record_parser, arxiv.validate_identifier
+    ),
+    RemoteKey.ISBN: RemoteRecord(
+        RemoteKey.ISBN, isbn.url_builder, isbn.record_parser, isbn.validate_identifier
+    ),
+    RemoteKey.OL: RemoteRecord(
+        RemoteKey.OL, ol.url_builder, ol.record_parser, ol.validate_identifier
+    ),
+}
 
-    def _load_cached_record(
-        self, identifier: str
-    ) -> tuple[Optional[dict], dict[str, str]]:
-        cache = json.loads(self.get_cache_path(identifier).read_text())
-        return cache["record"], cache["related"]
 
-    def delete_cached_record(self, identifier: str):
-        cache_file = self.get_cache_path(identifier)
-        cache_file.unlink(missing_ok=True)
+class KeyIdError(Exception):
+    def __init__(self, message="Invalid KeyId"):
+        super().__init__(message)
 
-    def resolve_related(
-        self, identifier: str, related: RelatedRecords
-    ) -> dict[str, str]:
-        related_identifiers = {self.key: identifier}
 
-        for key, res in related.items():
-            if isinstance(res, str):
-                related_identifiers[key] = res
+class KeyIdFormatError(KeyIdError):
+    def __init__(self, keyid_str: str):
+        super().__init__(f"Format for '{keyid_str}' is invalid.")
+
+
+class KeyIdKeyError(KeyIdError):
+    def __init__(self, key: str):
+        super().__init__(f"Key '{key}' is invalid.")
+
+
+class KeyIdIdentifierError(KeyIdError):
+    def __init__(self, key: RemoteKey, identifier: str):
+        super().__init__(f"Identifier '{identifier}' is invalid for key '{key}'.")
+
+
+@dataclass(order=True, frozen=True)
+class KeyId:
+    key: RemoteKey
+    identifier: str
+
+    @classmethod
+    def from_str(cls, keyid_str: str) -> KeyId:
+        """Build the KeyId from a string, with validation using the internal validation methods."""
+        tokens = keyid_str.split(":")
+        if len(tokens) >= 2:
+            if tokens[0].upper() in RemoteKey.__members__:
+                key, identifier = RemoteKey[tokens[0].upper()], ":".join(tokens[1:])
+                if REMOTES[key].validate_identifier(identifier):
+                    return cls(key, identifier)
+                else:
+                    raise KeyIdIdentifierError(key, identifier)
             else:
-                url_builder, parser = res
-                response = make_request(identifier, url_builder)
-                if response is not None:
-                    parsed = parser(response)
-                    if parsed is not None:
-                        related_identifiers[key] = parsed
-
-        return related_identifiers
-
-    def _load_remote_record(
-        self, identifier: str
-    ) -> tuple[Optional[dict], dict[str, str]]:
-        """Load and parse the remote record."""
-        response = make_request(identifier, self.build_url)
-        if response is not None:
-            record, related = self.parse_record(response)
-            return (record, self.resolve_related(identifier, related))
+                raise KeyIdKeyError(tokens[0])
         else:
-            return None, {}
+            raise KeyIdFormatError(keyid_str)
 
-    def load_record(self, identifier: str) -> tuple[Optional[dict], dict[str, str]]:
-        """Load the item identifier, defaulting to the cache if possible and
-        writing to the cache after loading.
+    def toml_path(self):
+        return (
+            xdg_data_home()
+            / "mathbib"
+            / "records"
+            / str(self.key)
+            / f"{self.identifier}.toml"
+        )
 
-        If the identifier is invalid, return a null record.
-        """
-        if not self.is_valid_identifier(identifier):
-            return None, {}
+    def file_path(self, suffix: str = "pdf"):
+        return (
+            xdg_data_home()
+            / "mathbib"
+            / "files"
+            / str(self.key)
+            / f"{self.identifier}.{suffix}"
+        )
 
+    def toml_record(self):
         try:
-            cache = self._load_cached_record(identifier)
+            return tomllib.loads(self.toml_path().read_text())
         except FileNotFoundError:
-            cache = None
+            return {}
 
-        if cache is None:
-            record, related = self._load_remote_record(identifier)
-            self.serialize(identifier, record, related)
-            return record, related
+    def cache_path(self):
+        return (
+            xdg_cache_home()
+            / "mathbib"
+            / str(self.key)
+            / f"{self.identifier}.json"
+        )
 
-        else:
-            record, related = cache
+    def __str__(self):
+        return f"{self.key}:{self.identifier}"
 
-        return (record, related)
+    def __repr__(self):
+        return f"{self.key}:{self.identifier}"
+
+
+@dataclass(frozen=True)
+class AliasedKeyId(KeyId):
+    key: RemoteKey
+    identifier: str
+    alias: Optional[str] = None
+
+    @classmethod
+    def from_str(cls, keyid_str: str, alias: Optional[str] = None):
+        sub = super().from_str(keyid_str)
+        return cls(sub.key, sub.identifier, alias)
+
+    def drop_alias(self) -> KeyId:
+        return KeyId(self.key, self.identifier)

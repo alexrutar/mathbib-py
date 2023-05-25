@@ -2,21 +2,20 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..remote import ParsedRecord
+    from . import ParsedRecord
 
 import re
 
 from bs4 import BeautifulSoup
 
-from ..remote import RemoteParseError
-from urllib.parse import quote
+from .utils import RemoteParseError
 
 
 def url_builder(zbmath: str) -> str:
     return (
         "https://oai.zbmath.org/v1/"
         "?verb=GetRecord"
-        f"&identifier=oai:zbmath.org:{quote(zbmath)}"
+        f"&identifier=oai:zbmath.org:{zbmath}"
         "&metadataPrefix=oai_zb_preview"
     )
 
@@ -29,7 +28,6 @@ def record_parser(result: str) -> ParsedRecord:
     related = {}
     metadata = BeautifulSoup(result, features="xml")
 
-    # find arxiv
     links = [entry.string for entry in metadata.find_all("zbmath:link")]
     arxiv_searched = (
         re.fullmatch(r"https?://arxiv.org/abs/(.+)", link) for link in links
@@ -38,7 +36,6 @@ def record_parser(result: str) -> ParsedRecord:
     if len(arxiv_pruned) > 0:
         related["arxiv"] = str(arxiv_pruned[0].group(1))
 
-    # find doi
     dois = metadata.find_all("zbmath:doi")
     if len(dois) > 0 and dois[0]:
         related["doi"] = dois[0].string
@@ -50,8 +47,6 @@ def record_parser(result: str) -> ParsedRecord:
         ),
         "year": metadata.find_all("zbmath:publication_year")[0].string,
     }
-
-    # extract year
 
     candidate_title = metadata.find_all("zbmath:document_title")[0].string
     if candidate_title is None:

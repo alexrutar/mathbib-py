@@ -12,7 +12,7 @@ from .record import ArchiveRecord
 from .bibtex import BibTexHandler
 from .term import TermWrite
 from .alias import load_alias_dict
-from .external import KeyIdError
+from .remote import KeyIdError
 
 
 def get_citekeys(tex: str) -> frozenset[str]:

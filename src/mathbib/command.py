@@ -13,20 +13,25 @@ from tomllib import TOMLDecodeError
 from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
-from .external import KeyId, NullRecordError, KeyIdError
-from .alias import add_bib_alias, delete_bib_alias, get_bib_alias, alias_path
+from .remote import AliasedKeyId, KeyIdError
+from .request import NullRecordError
+from .alias import add_bib_alias, delete_bib_alias, get_bib_alias, alias_path, load_alias_dict
 from .term import TermWrite
 
 
-def keyid_callback(_ctx, _param, keyid_str: str) -> KeyId:
+def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
+    """Construct the KeyId argument: first check if the keyid is aliased; otherwise, try to
+    obtain it directly.
+    """
     try:
-        return KeyId.from_str(keyid_str)
-    except KeyIdError as e:
-        raise click.BadParameter(str(e))
+        return AliasedKeyId.from_str(ctx.obj["alias"][keyid_str], alias=keyid_str)
+    except KeyError:
+        try:
+            return AliasedKeyId.from_str(keyid_str)
+        except KeyIdError as e:
+            raise click.BadParameter(str(e))
 
 
-# TODO: add a '--aliased' option to first look up the alias key and automatically pass
-# the keyid corresponding to the priority record
 keyid_argument = click.argument(
     "keyid", type=str, metavar="KEY:ID", callback=keyid_callback
 )
@@ -54,6 +59,7 @@ def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
     ctx.obj = {
         "verbose": verbose,
         "debug": debug,
+        "alias": load_alias_dict()
     }
 
 
@@ -85,14 +91,14 @@ def get_group():
 
 @get_group.command(name="json", short_help="Get record from KEY:ID.")
 @keyid_argument
-def json_cmd(keyid: KeyId):
+def json_cmd(keyid: AliasedKeyId):
     """Generate a JSON record for KEY:ID."""
     click.echo(ArchiveRecord(keyid).as_json())
 
 
 @get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID.")
 @keyid_argument
-def bibtex(keyid: KeyId):
+def bibtex(keyid: AliasedKeyId):
     """Generate a BibTeX record for KEY:ID."""
     bth = BibTexHandler()
     try:
@@ -103,7 +109,7 @@ def bibtex(keyid: KeyId):
 
 @get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
 @keyid_argument
-def key(keyid: KeyId):
+def key(keyid: AliasedKeyId):
     """Generate a BibTeX record for KEY:ID."""
     click.echo(ArchiveRecord(keyid).priority_key())
 
@@ -115,10 +121,10 @@ def file_group():
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
 @keyid_argument
-def open_cmd(keyid: KeyId):
+def open_cmd(keyid: AliasedKeyId):
     """Open file associated with record KEY:ID."""
-    for keyid in ArchiveRecord(keyid).related_keys():
-        if click.launch(str(keyid.file_path())) == 0:
+    for keyid_rel in ArchiveRecord(keyid).related_keys():
+        if click.launch(str(keyid_rel.file_path())) == 0:
             return
 
     # TODO: if missing file, try to download arxiv and open it instead
@@ -128,7 +134,7 @@ def open_cmd(keyid: KeyId):
 
 @cli.command(name="edit", short_help="Edit local record.")
 @keyid_argument
-def edit_cmd(keyid: KeyId):
+def edit_cmd(keyid: AliasedKeyId):
     """Edit local record for KEY:ID."""
     path = keyid.toml_path()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -145,7 +151,7 @@ def alias():
 @alias.command(name="add", short_help="Add new alias.")
 @alias_argument
 @keyid_argument
-def add_alias(alias_name: str, keyid: KeyId):
+def add_alias(alias_name: str, keyid: AliasedKeyId):
     """Add ALIAS for record KEY:ID."""
     try:
         add_bib_alias(alias_name, keyid)
@@ -176,16 +182,13 @@ def delete_alias(alias_name: str):
 def get_alias(alias_name: str):
     """Get record associated with alias."""
     try:
-        click.echo(get_bib_alias(alias_name), nl=False)
+        click.echo(get_bib_alias(alias_name))
     except KeyError:
         TermWrite.error(f"No alias with name '{alias_name}'.")
         sys.exit(1)
     except TOMLDecodeError:
         TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
         sys.exit(1)
-
-# TODO: add alias update to update all alias records so the string is as new as possible
-# TODO: also have a program to print all 'non-maximal' alias records
 
 # TODO: add mbib view command to open the record somewhere
 # TODO: this requires implementing URLs, etc. for all records

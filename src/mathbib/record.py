@@ -18,18 +18,19 @@ import tomllib
 
 from xdg_base_dirs import xdg_data_home
 
-from .external import load_record, KeyId
+from .remote import KeyId, AliasedKeyId
+from .request import load_record
 from .bibtex import CAPTURED
 from .term import TermWrite
 
 
-def get_record_lists(
+def _get_record_lists(
     keyid_pairs: Iterable[KeyId],
 ) -> dict[KeyId, tuple[Optional[dict], dict[str, str]]]:
     return {keyid: load_record(keyid) for keyid in keyid_pairs}
 
 
-def extract_keyid_pairs(
+def _extract_keyid_pairs(
     to_resolve: Iterable[tuple[Optional[dict], dict[str, str]]]
 ) -> Sequence[KeyId]:
     return [
@@ -42,48 +43,47 @@ def extract_keyid_pairs(
 def _resolve_all_records(
     keyid_pairs: Iterable[KeyId], resolved: set[KeyId]
 ) -> Iterable[tuple[KeyId, dict]]:
-    results = get_record_lists(
+    results = _get_record_lists(
         (keyid for keyid in keyid_pairs if keyid not in resolved)
     )
     yield from ((keyid, rec) for keyid, (rec, _) in results.items() if rec is not None)
 
     resolved.update(keyid_pairs)
-    to_resolve = extract_keyid_pairs(results.values())
+    to_resolve = _extract_keyid_pairs(results.values())
 
     if len(to_resolve) > 0:
         yield from _resolve_all_records(to_resolve, resolved)
 
 
-def get_record_list(start_keyid: KeyId) -> dict[KeyId, dict]:
+def _get_record_dict(start_keyid: KeyId) -> dict[KeyId, dict]:
     return dict(sorted(_resolve_all_records((start_keyid,), set())))
 
 
 class ArchiveRecord:
-    def __init__(self, keyid: KeyId, alias: Optional[str] = None):
+    def __init__(self, keyid: AliasedKeyId):
         self.keyid = keyid
-        self.record = get_record_list(keyid)
-
-        # TODO: do not hardcode
-        self.local_record_folder = xdg_data_home() / "mathbib" / "records"
-        self.alias = alias
+        self.record = _get_record_dict(keyid.drop_alias())
 
     def __hash__(self) -> int:
         return hash(self.keyid)
 
     @classmethod
     def from_str(cls, keyid_str: str, alias: Optional[str] = None):
-        return cls(KeyId.from_str(keyid_str), alias=alias)
+        return cls(AliasedKeyId.from_str(keyid_str, alias=alias))
 
     def as_json(self) -> str:
         return json.dumps({str(k): v for k, v in self.record.items()})
 
     def as_joint_record(self) -> dict:
-        records = reversed(list(self.record.values()))
+        records = list(reversed(self.record.values()))
         returned_record = reduce(operator.ior, records, {})
 
+        # collect compound keys
         returned_record["classifications"] = sorted(
             set(chain.from_iterable(rec.get("classifications", []) for rec in records))
         )
+        returned_record["bibtex"] = reduce(operator.ior, (rec.get("bibtex", {}) for rec in records), {})
+
         return returned_record
 
     def related_keys(self) -> Iterable[KeyId]:
@@ -99,6 +99,9 @@ class ArchiveRecord:
 
         return ret
 
+    def get_local_bibtex(self) -> dict:
+        return reduce(operator.ior, (keyid.toml_record() for keyid in reversed(self.record.keys())), {})
+
     def as_bibtex(self) -> dict:
         joint_record = self.as_joint_record()
 
@@ -108,20 +111,13 @@ class ArchiveRecord:
         captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
 
         special = {
-            "ID": str(self.keyid) if self.alias is None else self.alias,
+            "ID": str(self.keyid) if self.keyid.alias is None else self.keyid.alias,
             "ENTRYTYPE": joint_record["bibtype"],
         }
         if "authors" in joint_record.keys():
             special["author"] = " and ".join(joint_record["authors"])
 
-        try:
-            # TODO: something more intelligent?
-            bibtex = tomllib.loads(self.keyid.toml_path().read_text())
-
-        except FileNotFoundError:
-            bibtex = {}
-
-        return {**eprint, **captured, **special, **bibtex}
+        return {**eprint, **captured, **special, **self.get_local_bibtex()}
 
     def as_tuple(self) -> tuple[str, str, str | None, str | None, str | None, bool]:
         bibtex_record = self.as_bibtex()

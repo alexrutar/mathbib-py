@@ -2,11 +2,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..remote import ParsedRecord
+    from . import ParsedRecord
 
 import re
 
-from ..remote.parse import (
+from .utils import (
     parse_bibtex,
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,

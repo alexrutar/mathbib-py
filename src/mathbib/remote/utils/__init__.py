@@ -4,13 +4,14 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional, Iterable
 
-from nameparser import HumanName
 import re
 from urllib.parse import quote
 
+from nameparser import HumanName
+
 from .journal_abbreviations import JOURNALS
-from ..bibtex import BibTexHandler, CAPTURED
-from . import RemoteParseError
+from ...bibtex import BibTexHandler, CAPTURED
+from ..error import RemoteParseError
 
 
 def zbmath_external_identifier_url(identifier: str) -> str:
@@ -47,11 +48,8 @@ def canonicalize_authors(author_list: Iterable[str]) -> list[str]:
 
 
 def parse_bibtex(result: str) -> tuple[dict, dict]:
-    bth = BibTexHandler()
-    try:
-        bibtex_parsed = bth.loads(result).entries[0]
-    except IndexError:
-        raise RemoteParseError("Could not parse bibtex entry.")
+    print(result)
+    bibtex_parsed = BibTexHandler().loads(result).entries[0]
 
     # drop some keys from the bibtex file
     dropped = (
@@ -71,13 +69,15 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
         "issn",
     )
 
-    # extract some related keys
-    # TODO: also get ISBN or ISSN?
     related = (
         "zbmath",
         "doi",
         "zbl",
     )
+
+    # TODO: also get ISBN or ISSN?
+    # TODO: since there could be multiple associated ISBN records, the 'related' field
+    # needs to be refactored to be a list of KeyId
 
     extracted = {k: v for k, v in bibtex_parsed.items() if k in CAPTURED}
     try:

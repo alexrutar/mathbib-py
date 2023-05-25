@@ -9,8 +9,8 @@ import re
 
 from bs4 import BeautifulSoup
 
-from ..remote import RemoteAccessError, RemoteParseError
-from ..remote.parse import (
+from .error import RemoteAccessError, RemoteParseError
+from .utils import (
     canonicalize_authors,
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,

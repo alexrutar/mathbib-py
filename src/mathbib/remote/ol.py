@@ -2,10 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..remote import ParsedRecord
+    from . import ParsedRecord
 
-import re
 import json
+import re
 
 
 def url_builder(ol: str) -> str:
@@ -23,5 +23,12 @@ def validate_identifier(ol: str) -> bool:
 
 
 def record_parser(result: str) -> ParsedRecord:
-    # TODO: parse the result (it's just JSON)
-    return {}, {}
+    parsed = json.loads(result)
+    record = {}
+    related = {}
+    if 'title' in parsed.keys():
+        record['title'] = parsed['title']
+    if 'isbn_13' in parsed.keys():
+        # TODO: if multiple keys, add all
+        related['isbn'] = parsed['isbn_13'][0]
+    return record, related

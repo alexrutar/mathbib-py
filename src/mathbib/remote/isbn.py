@@ -2,15 +2,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from ..remote import ParsedRecord, RelatedRecords
+    from . import ParsedRecord, RelatedRecords
 
 import json
 import re
-from urllib.parse import quote
 
 from stdnum import isbn
 
-from ..remote.parse import (
+from .utils import (
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,
 )

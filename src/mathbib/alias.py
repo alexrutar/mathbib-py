@@ -2,14 +2,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .external import KeyId
+    from .remote import AliasedKeyId
     from pathlib import Path
 
 from xdg_base_dirs import xdg_data_home
 from tomli_w import dumps
 from tomllib import loads
 
-from .external import load_record, NullRecordError
+from .request import load_record, NullRecordError
 
 
 def alias_path(mkdir: bool = False) -> Path:
@@ -23,7 +23,8 @@ def load_alias_dict() -> dict[str, str]:
     return loads(alias_path().read_text())
 
 
-def add_bib_alias(alias: str, keyid: KeyId):
+def add_bib_alias(alias: str, aliased_keyid: AliasedKeyId):
+    keyid = aliased_keyid.drop_alias()
     record, _ = load_record(keyid)
     if record is None:
         raise NullRecordError(keyid)
