@@ -48,7 +48,6 @@ def canonicalize_authors(author_list: Iterable[str]) -> list[str]:
 
 
 def parse_bibtex(result: str) -> tuple[dict, dict]:
-    print(result)
     bibtex_parsed = BibTexHandler().loads(result).entries[0]
 
     # drop some keys from the bibtex file
