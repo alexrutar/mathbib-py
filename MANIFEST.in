@@ -1,1 +1,1 @@
-include src/mathbib/remote/utils/journal_abbreviations.json
+include src/mathbib/resources/journal_abbrevs.json
