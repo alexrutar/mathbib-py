@@ -18,7 +18,16 @@ from .utils import (
 
 
 REGEX_ARXIV_ID = re.compile(
-    r"((?:(?:math|nucl-ex|nlin|q-alg|chao-dyn|cond-mat|dg-ga|adap-org|supr-con|bayes-an|hep-ph|comp-gas|patt-sol|solv-int|atom-ph|plasm-ph|stat|cs|nucl-th|q-bio|chem-ph|hep-th|ao-sci|eess|hep-lat|cmp-lg|gr-qc|funct-an|astro-ph|math-ph|quant-ph|mtrl-th|physics|hep-ex|econ|acc-phys|alg-geom|q-fin)/(?:(?:[0-1][0-9])|(?:9[1-9]))(?:0[1-9]|1[0-2])(?:\d{3})(?:v[1-9]\d*)?))|((?:[0-9][0-9])(?:0[1-9]|1[0-2])(?:[.]\d{4,5}))"
+    r"((?:"
+    r"(?:math|nucl-ex|nlin|q-alg|chao-dyn|cond-mat|dg-ga|adap-org|supr-con"
+    r"|bayes-an|hep-ph|comp-gas|patt-sol|solv-int|atom-ph|plasm-ph|stat|cs"
+    r"|nucl-th|q-bio|chem-ph|hep-th|ao-sci|eess|hep-lat|cmp-lg|gr-qc|funct-an"
+    r"|astro-ph|math-ph|quant-ph|mtrl-th|physics|hep-ex|econ|acc-phys|alg-geom"
+    r"|q-fin)"
+    r"/"
+    r"(?:(?:[0-1][0-9])|(?:9[1-9]))(?:0[1-9]|1[0-2])(?:\d{3})(?:v[1-9]\d*)?))"
+    r"|"
+    r"((?:[0-9][0-9])(?:0[1-9]|1[0-2])(?:[.]\d{4,5}))"
 )
 
 
@@ -28,6 +37,14 @@ def url_builder(arxiv: str) -> str:
 
 def validate_identifier(arxiv: str) -> bool:
     return re.fullmatch(REGEX_ARXIV_ID, arxiv) is not None
+
+
+def show_url(arxiv: str) -> str:
+    return f"https://arxiv.org/abs/{arxiv}"
+
+
+def download_url(arxiv: str) -> str:
+    return f"https://arxiv.org/pdf/{arxiv}.pdf"
 
 
 def record_parser(result: str) -> ParsedRecord:

@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import Iterable, TypedDict, Sequence, Optional
+    from pathlib import Path
 
     class RecordEntry(TypedDict):
         id: str
@@ -17,8 +18,8 @@ from functools import reduce
 
 from xdg_base_dirs import xdg_data_home
 
-from .remote import KeyId, AliasedKeyId
-from .request import load_record, NullRecordError
+from .remote import KeyId, AliasedKeyId, REMOTES
+from .request import load_record, NullRecordError, streaming_download
 from .bibtex import CAPTURED
 from .term import TermWrite
 
@@ -148,6 +149,26 @@ class ArchiveRecord:
                 / f"{bibtex_record['eprint']}.pdf"
             ).exists(),
         )
+
+    def show_url(self) -> Optional[str]:
+        for keyid in self.related_keys():
+            show_url = REMOTES[keyid.key].show_url
+            if show_url is not None:
+                return show_url(keyid.identifier)
+
+    def related_file(self) -> Optional[Path]:
+        for keyid in self.related_keys():
+            if keyid.file_path().exists():
+                return keyid.file_path()
+
+    def download_file(self) -> Optional[Path]:
+        for keyid in self.related_keys():
+            download_url = REMOTES[keyid.key].download_url
+            path = keyid.file_path()
+            if download_url is not None and streaming_download(
+                download_url(keyid.identifier), path
+            ):
+                return path
 
     def __str__(self) -> str:
         key, id, title, author, year, exists = self.as_tuple()

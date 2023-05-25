@@ -16,7 +16,14 @@ from .utils import (
 
 
 def url_builder(isbn_str: str) -> str:
-    return f"https://openlibrary.org/api/books?bibkeys=ISBN:{isbn.format(isbn_str)}&format=json"
+    return (
+        "https://openlibrary.org/api/books?"
+        f"bibkeys=ISBN:{isbn.format(isbn_str)}&format=json"
+    )
+
+
+def show_url(isbn_str: str) -> str:
+    return f"https://openlibrary.org/isbn/{isbn.compact(isbn_str)}"
 
 
 def validate_identifier(isbn_str: str) -> bool:

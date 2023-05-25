@@ -18,6 +18,16 @@ def url_builder(ol: str) -> str:
             raise ValueError(f"Improper ol record '{ol}'")
 
 
+def show_url(ol: str) -> str:
+    match ol[-1]:
+        case "M":
+            return f"https://openlibrary.org/books/{ol}"
+        case "W":
+            return f"https://openlibrary.org/works/{ol}"
+        case _:
+            raise ValueError(f"Improper ol record '{ol}'")
+
+
 def validate_identifier(ol: str) -> bool:
     return re.fullmatch(r"OL\d+[WM]", ol) is not None
 

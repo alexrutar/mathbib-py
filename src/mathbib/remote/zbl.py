@@ -11,6 +11,10 @@ def url_builder(zbl: str) -> str:
     return f"https://zbmath.org/bibtex/{zbl}.bib"
 
 
+def show_url(zbl: str) -> str:
+    return f"https://zbmath.org/{zbl}"
+
+
 def validate_identifier(zbl: str) -> bool:
     split = zbl.split(".")
     return (len(split) == 1 and zbl.isnumeric()) or (

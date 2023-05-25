@@ -19,3 +19,9 @@ class TermWrite:
     def error(msg: str):
         click.secho("Error: ", fg="red", bold=True, nl=False, err=True)
         click.echo(msg, err=True)
+
+    @staticmethod
+    def download(url: str):
+        if sys.stdout.isatty():
+            click.secho("Downloading: ", fg="blue", bold=True, nl=False)
+            click.echo(f"{url}")

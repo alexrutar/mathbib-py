@@ -19,6 +19,10 @@ def url_builder(doi: str) -> str:
     return f"https://api.crossref.org/works/{doi}/transform/application/x-bibtex"
 
 
+def show_url(doi: str) -> str:
+    return f"https://doi.org/{doi}"
+
+
 def validate_identifier(doi: str) -> bool:
     return re.fullmatch(REGEX_DOI, doi) is not None
 

@@ -3,12 +3,15 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import Optional
+    from pathlib import Path
     from .remote import RelatedRecords, URLBuilder, RemoteRecord, KeyId
 
 from datetime import datetime
 import json
 
+import click
 import requests
+import sys
 
 from . import __version__
 from .term import TermWrite
@@ -108,3 +111,35 @@ def load_record(keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
         record, related = cache
 
     return (record, related)
+
+
+def streaming_download(url: str, target: Path) -> bool:
+    """Attempt to download the file, and return a boolean indicating success."""
+    TermWrite.download(url)
+    headers = {"User-Agent": f"MathBib/{__version__} (mailto:api-contact@rutar.org)"}
+    res = requests.get(url, headers=headers, stream=True)
+
+    # stream the download, and display a progress bar if isatty
+    if res.status_code == requests.codes.ok:
+        target.parent.mkdir(exist_ok=True, parents=True)
+        chunk_size = 8192
+        length = res.headers.get("content-length")
+
+        if False or length is not None and sys.stdout.isatty():
+            steps = int(int(length) / chunk_size)
+
+            with target.open("wb") as fd:
+                with click.progressbar(
+                    res.iter_content(chunk_size=chunk_size), length=steps
+                ) as bar:
+                    for chunk in bar:
+                        fd.write(chunk)
+        else:
+            with target.open("wb") as fd:
+                for chunk in res.iter_content(chunk_size=chunk_size):
+                    fd.write(chunk)
+
+        return True
+
+    else:
+        return False

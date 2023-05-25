@@ -43,14 +43,24 @@ class RemoteRecord:
     build_url: URLBuilder
     parse_record: RecordParser
     validate_identifier: IdentifierValidator
+    show_url: Optional[URLBuilder] = None
+    download_url: Optional[URLBuilder] = None
 
 
 REMOTES: Final = {
     RemoteKey.ZBL: RemoteRecord(
-        RemoteKey.ZBL, zbl.url_builder, zbl.record_parser, zbl.validate_identifier
+        RemoteKey.ZBL,
+        zbl.url_builder,
+        zbl.record_parser,
+        zbl.validate_identifier,
+        show_url=zbl.show_url,
     ),
     RemoteKey.DOI: RemoteRecord(
-        RemoteKey.DOI, doi.url_builder, doi.record_parser, doi.validate_identifier
+        RemoteKey.DOI,
+        doi.url_builder,
+        doi.record_parser,
+        doi.validate_identifier,
+        show_url=doi.show_url,
     ),
     RemoteKey.ZBMATH: RemoteRecord(
         RemoteKey.ZBMATH,
@@ -63,12 +73,22 @@ REMOTES: Final = {
         arxiv.url_builder,
         arxiv.record_parser,
         arxiv.validate_identifier,
+        show_url=arxiv.show_url,
+        download_url=arxiv.download_url,
     ),
     RemoteKey.ISBN: RemoteRecord(
-        RemoteKey.ISBN, isbn.url_builder, isbn.record_parser, isbn.validate_identifier
+        RemoteKey.ISBN,
+        isbn.url_builder,
+        isbn.record_parser,
+        isbn.validate_identifier,
+        show_url=isbn.show_url,
     ),
     RemoteKey.OL: RemoteRecord(
-        RemoteKey.OL, ol.url_builder, ol.record_parser, ol.validate_identifier
+        RemoteKey.OL,
+        ol.url_builder,
+        ol.record_parser,
+        ol.validate_identifier,
+        show_url=ol.show_url,
     ),
 }
 
@@ -100,7 +120,8 @@ class KeyId:
 
     @classmethod
     def from_str(cls, keyid_str: str) -> KeyId:
-        """Build the KeyId from a string, with validation using the internal validation methods."""
+        """Build the KeyId from a string, with validation using the
+        internal validation methods."""
         tokens = keyid_str.split(":")
         if len(tokens) >= 2:
             if tokens[0].upper() in RemoteKey.__members__:

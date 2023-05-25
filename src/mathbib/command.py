@@ -24,8 +24,8 @@ from .term import TermWrite
 
 
 def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
-    """Construct the KeyId argument: first check if the keyid is aliased; otherwise, try to
-    obtain it directly.
+    """Construct the KeyId argument: first check if the keyid is aliased;
+    otherwise, try to obtain it directly.
     """
     try:
         return AliasedKeyId.from_str(ctx.obj["alias"][keyid_str], alias=keyid_str)
@@ -37,14 +37,14 @@ def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
 
 
 def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
-    """Construct the KeyId argument: first check if the keyid is aliased; otherwise, try to
-    obtain it directly.
+    """Construct the KeyId argument: first check if the keyid is aliased;
+    otherwise, try to obtain it directly.
     """
     try:
         record = ArchiveRecord(keyid_callback(ctx, param, keyid_str))
     except ConnectionError:
         # TODO: fail more gracefully
-        TermWrite.error(f"Failed to resolve remote server address.")
+        TermWrite.error("Failed to resolve remote server address.")
         sys.exit(1)
 
     if record.is_null():
@@ -71,6 +71,7 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 
 
 # TODO: add --cache/--no-cache option
+# TODO: add --remote/--no-remote option
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
 @click.option("--verbose/--silent", "-v/-V", "verbose", default=True, help="Be verbose")
@@ -143,12 +144,20 @@ def file_group():
 @record_argument
 def open_cmd(record: ArchiveRecord):
     """Open file associated with record KEY:ID."""
-    for keyid_rel in record.related_keys():
-        if click.launch(str(keyid_rel.file_path())) == 0:
-            return
+    # First, try to open an existing file
+    local_file = record.related_file()
+    if local_file is not None:
+        click.launch(str(local_file))
+        return
 
-    # TODO: if missing file, try to download arxiv and open it instead
-    click.echo("Error: Could not find associated file.", err=True)
+    # if there is no file, try to download it
+    download_file = record.download_file()
+    if download_file is not None:
+        click.launch(str(download_file))
+        return
+
+    # if there is no file, try to download it
+    TermWrite.error("Could not find associated file.")
     sys.exit(1)
 
 
@@ -159,6 +168,15 @@ def edit_cmd(keyid: AliasedKeyId):
     path = keyid.toml_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     click.edit(filename=str(path))
+
+
+@cli.command(name="show", short_help="Edit local record.")
+@record_argument
+def show_cmd(record: ArchiveRecord):
+    """Show remote record associated KEY:ID."""
+    url = record.show_url()
+    if url is not None:
+        click.launch(url)
 
 
 @cli.group(name="alias", short_help="Manage record aliases.")
