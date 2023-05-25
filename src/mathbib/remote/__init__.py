@@ -53,10 +53,16 @@ REMOTES: Final = {
         RemoteKey.DOI, doi.url_builder, doi.record_parser, doi.validate_identifier
     ),
     RemoteKey.ZBMATH: RemoteRecord(
-        RemoteKey.ZBMATH, zbmath.url_builder, zbmath.record_parser, zbmath.validate_identifier
+        RemoteKey.ZBMATH,
+        zbmath.url_builder,
+        zbmath.record_parser,
+        zbmath.validate_identifier,
     ),
     RemoteKey.ARXIV: RemoteRecord(
-        RemoteKey.ARXIV, arxiv.url_builder, arxiv.record_parser, arxiv.validate_identifier
+        RemoteKey.ARXIV,
+        arxiv.url_builder,
+        arxiv.record_parser,
+        arxiv.validate_identifier,
     ),
     RemoteKey.ISBN: RemoteRecord(
         RemoteKey.ISBN, isbn.url_builder, isbn.record_parser, isbn.validate_identifier
@@ -133,12 +139,7 @@ class KeyId:
             return {}
 
     def cache_path(self):
-        return (
-            xdg_cache_home()
-            / "mathbib"
-            / str(self.key)
-            / f"{self.identifier}.json"
-        )
+        return xdg_cache_home() / "mathbib" / str(self.key) / f"{self.identifier}.json"
 
     def __str__(self):
         return f"{self.key}:{self.identifier}"

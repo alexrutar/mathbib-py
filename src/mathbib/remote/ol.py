@@ -26,9 +26,9 @@ def record_parser(result: str) -> ParsedRecord:
     parsed = json.loads(result)
     record = {}
     related = {}
-    if 'title' in parsed.keys():
-        record['title'] = parsed['title']
-    if 'isbn_13' in parsed.keys():
+    if "title" in parsed.keys():
+        record["title"] = parsed["title"]
+    if "isbn_13" in parsed.keys():
         # TODO: if multiple keys, add all
-        related['isbn'] = parsed['isbn_13'][0]
+        related["isbn"] = parsed["isbn_13"][0]
     return record, related

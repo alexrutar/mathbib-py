@@ -44,9 +44,7 @@ def citekey_to_record(citekey: str, alias: dict[str, str]) -> Optional[ArchiveRe
             return ArchiveRecord.from_str(citekey)
 
     except KeyIdError:
-        TermWrite.warn(
-            f"Could not find KEY:ID associated with '{citekey}'."
-        )
+        TermWrite.warn(f"Could not find KEY:ID associated with '{citekey}'.")
 
 
 def multiple_replace(dct: dict[str, str], text: str):

@@ -8,14 +8,18 @@ from pathlib import Path
 import sys
 
 import click
-from tomllib import TOMLDecodeError
+from requests.exceptions import ConnectionError
 
 from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
-from .request import NullRecordError
-from .alias import add_bib_alias, delete_bib_alias, get_bib_alias, alias_path, load_alias_dict
+from .alias import (
+    add_bib_alias,
+    delete_bib_alias,
+    get_bib_alias,
+    load_alias_dict,
+)
 from .term import TermWrite
 
 
@@ -28,12 +32,32 @@ def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
     except KeyError:
         try:
             return AliasedKeyId.from_str(keyid_str)
-        except KeyIdError as e:
-            raise click.BadParameter(str(e))
+        except KeyIdError:
+            raise click.BadParameter("Invalid alias or KEY:ID.")
+
+
+def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
+    """Construct the KeyId argument: first check if the keyid is aliased; otherwise, try to
+    obtain it directly.
+    """
+    try:
+        record = ArchiveRecord(keyid_callback(ctx, param, keyid_str))
+    except ConnectionError:
+        # TODO: fail more gracefully
+        TermWrite.error(f"Failed to resolve remote server address.")
+        sys.exit(1)
+
+    if record.is_null():
+        raise click.BadParameter("Null record")
+    else:
+        return record
 
 
 keyid_argument = click.argument(
     "keyid", type=str, metavar="KEY:ID", callback=keyid_callback
+)
+record_argument = click.argument(
+    "record", type=str, metavar="KEY:ID", callback=record_callback
 )
 texfile_argument = click.argument(
     "texfile",
@@ -56,11 +80,7 @@ def cli(ctx: click.Context, verbose: bool, debug: bool) -> None:
     """MathBib is a tool to help streamline the management of BibLaTeX files associated
     with records from various mathematical repositories.
     """
-    ctx.obj = {
-        "verbose": verbose,
-        "debug": debug,
-        "alias": load_alias_dict()
-    }
+    ctx.obj = {"verbose": verbose, "debug": debug, "alias": load_alias_dict()}
 
 
 @cli.command(short_help="Generate citations from keys in file.")
@@ -90,28 +110,28 @@ def get_group():
 
 
 @get_group.command(name="json", short_help="Get record from KEY:ID.")
-@keyid_argument
-def json_cmd(keyid: AliasedKeyId):
+@record_argument
+def json_cmd(record: ArchiveRecord):
     """Generate a JSON record for KEY:ID."""
-    click.echo(ArchiveRecord(keyid).as_json())
+    click.echo(record.as_json())
 
 
 @get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID.")
-@keyid_argument
-def bibtex(keyid: AliasedKeyId):
+@record_argument
+def bibtex(record: ArchiveRecord):
     """Generate a BibTeX record for KEY:ID."""
     bth = BibTexHandler()
     try:
-        click.echo(bth.write_records((ArchiveRecord(keyid),)), nl=False)
+        click.echo(bth.write_records((record,)), nl=False)
     except KeyError:
         TermWrite.error("Record missing ENTRYTYPE. Cannot generate BibTex.")
 
 
 @get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
-@keyid_argument
-def key(keyid: AliasedKeyId):
+@record_argument
+def key(record: ArchiveRecord):
     """Generate a BibTeX record for KEY:ID."""
-    click.echo(ArchiveRecord(keyid).priority_key())
+    click.echo(record.priority_key())
 
 
 @cli.group(name="file", short_help="Access and manage files associated with records.")
@@ -120,10 +140,10 @@ def file_group():
 
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
-@keyid_argument
-def open_cmd(keyid: AliasedKeyId):
+@record_argument
+def open_cmd(record: ArchiveRecord):
     """Open file associated with record KEY:ID."""
-    for keyid_rel in ArchiveRecord(keyid).related_keys():
+    for keyid_rel in record.related_keys():
         if click.launch(str(keyid_rel.file_path())) == 0:
             return
 
@@ -143,8 +163,6 @@ def edit_cmd(keyid: AliasedKeyId):
 
 @cli.group(name="alias", short_help="Manage record aliases.")
 def alias():
-    # TODO: catch tomllib.TOMLDecodeError
-    # TODO: can the sub-commands be run underneath?
     pass
 
 
@@ -153,42 +171,18 @@ def alias():
 @keyid_argument
 def add_alias(alias_name: str, keyid: AliasedKeyId):
     """Add ALIAS for record KEY:ID."""
-    try:
-        add_bib_alias(alias_name, keyid)
-    except NullRecordError:
-        TermWrite.error(f"Null record associated with '{keyid}'.")
-        sys.exit(1)
-    except TOMLDecodeError:
-        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
-        sys.exit(1)
+    add_bib_alias(alias_name, keyid)
 
 
 @alias.command(name="delete", short_help="Delete alias.")
 @alias_argument
 def delete_alias(alias_name: str):
     """Delete record associated with ALIAS."""
-    try:
-        delete_bib_alias(alias_name)
-    except KeyError:
-        TermWrite.error(f"No alias with name '{alias_name}'.")
-        sys.exit(1)
-    except TOMLDecodeError:
-        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
-        sys.exit(1)
+    delete_bib_alias(alias_name)
 
 
 @alias.command(name="get", short_help="Get record associated with alias.")
 @alias_argument
 def get_alias(alias_name: str):
     """Get record associated with alias."""
-    try:
-        click.echo(get_bib_alias(alias_name))
-    except KeyError:
-        TermWrite.error(f"No alias with name '{alias_name}'.")
-        sys.exit(1)
-    except TOMLDecodeError:
-        TermWrite.error(f"Malformed alias file at '{alias_path()}'.")
-        sys.exit(1)
-
-# TODO: add mbib view command to open the record somewhere
-# TODO: this requires implementing URLs, etc. for all records
+    click.echo(get_bib_alias(alias_name))

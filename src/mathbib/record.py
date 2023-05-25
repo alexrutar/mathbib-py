@@ -14,12 +14,11 @@ from itertools import chain
 import operator
 import json
 from functools import reduce
-import tomllib
 
 from xdg_base_dirs import xdg_data_home
 
 from .remote import KeyId, AliasedKeyId
-from .request import load_record
+from .request import load_record, NullRecordError
 from .bibtex import CAPTURED
 from .term import TermWrite
 
@@ -79,10 +78,15 @@ class ArchiveRecord:
         returned_record = reduce(operator.ior, records, {})
 
         # collect compound keys
-        returned_record["classifications"] = sorted(
+        classifications = sorted(
             set(chain.from_iterable(rec.get("classifications", []) for rec in records))
         )
-        returned_record["bibtex"] = reduce(operator.ior, (rec.get("bibtex", {}) for rec in records), {})
+        if len(classifications) > 0:
+            returned_record["classifications"] = classifications
+
+        bibtex = reduce(operator.ior, (rec.get("bibtex", {}) for rec in records), {})
+        if len(bibtex) > 0:
+            returned_record["bibtex"] = bibtex
 
         return returned_record
 
@@ -90,23 +94,32 @@ class ArchiveRecord:
         return self.record.keys()
 
     def priority_key(self) -> KeyId:
-        return next(iter(self.record.keys()))
+        try:
+            return next(iter(self.record.keys()))
+        except StopIteration:
+            raise NullRecordError(self.keyid)
 
     def is_null(self, warn: bool = False) -> bool:
         ret = len(self.as_joint_record()) == 0
         if warn and ret:
             TermWrite.warn(f"Null record '{self.keyid}'")
-
         return ret
 
     def get_local_bibtex(self) -> dict:
-        return reduce(operator.ior, (keyid.toml_record() for keyid in reversed(self.record.keys())), {})
+        return reduce(
+            operator.ior,
+            (keyid.toml_record() for keyid in reversed(self.record.keys())),
+            {},
+        )
 
     def as_bibtex(self) -> dict:
         joint_record = self.as_joint_record()
 
         eprint_keyid = self.priority_key()
-        eprint = {"eprint": eprint_keyid.identifier, "eprinttype": str(eprint_keyid.key)}
+        eprint = {
+            "eprint": eprint_keyid.identifier,
+            "eprinttype": str(eprint_keyid.key),
+        }
 
         captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
 

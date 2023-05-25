@@ -7,40 +7,32 @@ if TYPE_CHECKING:
 
 from datetime import datetime
 import json
-from urllib.request import urlopen, Request
-from urllib.error import HTTPError
+
+import requests
 
 from . import __version__
 from .term import TermWrite
 from .remote import REMOTES
-from .remote.error import RemoteAccessError, RemoteParseError
 
 
 class NullRecordError(Exception):
     def __init__(self, keyid: KeyId):
         self.keyid = keyid
-        super().__init__("KEY:ID '{keyid}' is a null record.")
+        super().__init__(f"KEY:ID '{keyid}' is a null record.")
 
 
 def make_request(identifier: str, build_url: URLBuilder) -> Optional[str]:
     url = build_url(identifier)
-
     TermWrite.remote(url)
+    headers = {"User-Agent": f"MathBib/{__version__} (mailto:api-contact@rutar.org)"}
+    res = requests.get(url, headers=headers)
 
-    req = Request(url)
-    req.add_header(
-        "User-Agent", f"MathBib/{__version__} (mailto:api-contact@rutar.org)"
-    )
-
-    try:
-        with urlopen(req) as fp:
-            return fp.read().decode("utf8")
-
-    except (HTTPError, RemoteAccessError, RemoteParseError):
-        return
+    if res.status_code == requests.codes.ok:
+        return res.text
 
 
-def serialize(keyid: KeyId, record: Optional[dict], related: Optional[dict[str, str]]
+def serialize(
+    keyid: KeyId, record: Optional[dict], related: Optional[dict[str, str]]
 ) -> None:
     target = keyid.cache_path()
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -51,17 +43,18 @@ def serialize(keyid: KeyId, record: Optional[dict], related: Optional[dict[str, 
     }
     target.write_text(json.dumps(cache_object))
 
+
 def _load_cached_record(keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
     cache = json.loads(keyid.cache_path().read_text())
     return cache["record"], cache["related"]
+
 
 def delete_cached_record(keyid: KeyId):
     cache_file = keyid.cache_path()
     cache_file.unlink(missing_ok=True)
 
-def resolve_related(
-    keyid: KeyId, related: RelatedRecords
-) -> dict[str, str]:
+
+def resolve_related(keyid: KeyId, related: RelatedRecords) -> dict[str, str]:
     related_identifiers = {str(keyid.key): keyid.identifier}
 
     for key, res in related.items():
@@ -77,7 +70,10 @@ def resolve_related(
 
     return related_identifiers
 
-def _load_remote_record(remote_record: RemoteRecord, keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
+
+def _load_remote_record(
+    remote_record: RemoteRecord, keyid: KeyId
+) -> tuple[Optional[dict], dict[str, str]]:
     """Load and parse the remote record."""
     response = make_request(keyid.identifier, remote_record.build_url)
     if response is not None:
@@ -85,6 +81,7 @@ def _load_remote_record(remote_record: RemoteRecord, keyid: KeyId) -> tuple[Opti
         return (record, resolve_related(keyid, related))
     else:
         return None, {}
+
 
 def load_record(keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
     """Load the item identifier, defaulting to the cache if possible and
