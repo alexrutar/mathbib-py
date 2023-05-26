@@ -1,5 +1,9 @@
 # MathBib
 MathBib is a mathematics BibLaTeX bibliography manager.
+Jump to:
+- [Installation and basic usage](#installation-and-basic-usage)
+- [Finer details](#some-finer-details)
+- [Program philosophy](#program-philosophy)
 
 ## Installation and basic usage
 First, ensure that `mbib` is installed with
@@ -29,6 +33,9 @@ However, if you check the output, you will notice that it actually returns
   year = {2014}
 }
 ```
+This contains more information than what can be found on arxiv!
+In general `mbib` will attempt to search multiple locations for records to build the most updated citation possible.
+
 Generating records from command-line arguments is nice, but a much more common use case is to generate records corresponding to a file.
 Suppose you have a file `doc.tex` containing the contents
 ```tex
@@ -89,3 +96,7 @@ For instance,
 ```
 mbib alias add 
 ```
+
+
+## Program philosophy
+TODO: write
