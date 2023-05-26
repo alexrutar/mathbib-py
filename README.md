@@ -3,7 +3,6 @@ MathBib is a mathematics BibLaTeX bibliography manager.
 Jump to:
 - [Installation and basic usage](#installation-and-basic-usage)
 - [Finer details](#some-finer-details)
-- [Program philosophy](#program-philosophy)
 
 ## Installation and basic usage
 First, ensure that `mbib` is installed with
@@ -17,7 +16,7 @@ For instance, running
 mbib get bibtex arxiv:1212.1873
 ```
 will retrieve the arxiv record at [https://arxiv.org/abs/1212.1873](https://arxiv.org/abs/1212.1873).
-However, if you check the output, you will notice that it actually returns
+If you check the output, you will notice that it actually returns
 ```bib
 @article{arxiv:1212.1873,
   author = {Hochman, Michael},
@@ -54,7 +53,7 @@ mbib generate doc.tex > doc.bib
 ```
 to build the `.bib` file, and compile.
 
-However, it can be somewhat inconvenient to remember a large number of citation keys.
+Of course, it can be somewhat inconvenient to remember a large number of citation keys, especially ones that are designed to be machine-readable.
 An easy fix here is to create aliases.
 Let's define a few:
 ```sh
@@ -97,6 +96,10 @@ For instance,
 mbib alias add 
 ```
 
+# Contributing and future improvements
+MathBib is still under active development!
+Some planned features include:
 
-## Program philosophy
-TODO: write
+1. Better remote record searching and parsing.
+2. Asynchronous requests for faster record downloading.
+3. Nicer printing and viewing using [rich](https://rich.readthedocs.io/en/stable/introduction.html).

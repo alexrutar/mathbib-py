@@ -28,6 +28,5 @@ out.bib
 .git
 archive*
 tmp
-
 *.egg-info
 __pycache__
