@@ -42,6 +42,7 @@ def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
     otherwise, try to obtain it directly.
     """
     try:
+        # TODO: do not do online record validation without an internet connection
         record = ArchiveRecord(
             keyid_callback(ctx, param, keyid_str), session=ctx.obj["session"]
         )
@@ -111,6 +112,7 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
+# TODO: allow getting multiple KEY:ID
 @cli.group(name="get", short_help="Retrieve records.")
 def get_group():
     pass
@@ -130,6 +132,7 @@ def bibtex(record: ArchiveRecord):
     bth = BibTexHandler()
     try:
         click.echo(bth.write_records((record,)), nl=False)
+    # TODO: rather than hard fail, check if the record is valid with is_null(warn=True) and print missing records.
     except KeyError:
         TermWrite.error("Record missing ENTRYTYPE. Cannot generate BibTex.")
 
