@@ -102,7 +102,7 @@ def cli(
     "--out",
     "out",
     type=click.Path(
-        exists=True, file_okay=True, dir_okay=False, writable=True, path_type=Path
+        file_okay=True, dir_okay=False, writable=True, path_type=Path
     ),
     help="Output file path.",
 )
