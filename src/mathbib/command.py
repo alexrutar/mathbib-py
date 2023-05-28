@@ -173,6 +173,7 @@ def open_cmd(record: ArchiveRecord):
     raise click.ClickException("Could not find associated file.")
 
 
+# TODO: turn this into general record listing
 @file_group.command(name="list", short_help="List all files.")
 @click.pass_obj
 def file_list(session: CLISession):
@@ -183,7 +184,7 @@ def file_list(session: CLISession):
         val = pat.relative_to(root / key).with_suffix("")
         record = ArchiveRecord.from_str(f"{key}:{val}", session).as_bibtex()
         click.echo(record["ID"], nl=False)
-        for src in ("author", "title"):
+        for src in ("author", "year", "title"):
             if src in record.keys():
                 click.echo(" - " + record[src], nl=False)
         click.echo()
