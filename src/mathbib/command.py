@@ -171,11 +171,18 @@ def open_cmd(record: ArchiveRecord):
 @click.pass_obj
 def file_list(session: CLISession):
     """Open file associated with record KEY:ID."""
+    root = xdg_data_home() / "mathbib" / "files"
     for pat in (xdg_data_home() / "mathbib" / "files").glob("**/*.pdf"):
+        key = pat.relative_to(root).parents[-2]
+        val = pat.relative_to(root / key).with_suffix('')
         record = ArchiveRecord.from_str(
-            f"{pat.parent.stem}:{pat.stem}", session
+            f"{key}:{val}", session
         ).as_bibtex()
-        click.echo(f"{record['ID']} - {record['title']}")
+        click.echo(record['ID'], nl=False)
+        for src in ('author', 'title'):
+            if src in record.keys():
+                click.echo(" - " + record[src], nl=False)
+        click.echo()
 
 
 @file_group.command(name="add", short_help="Add new file for record.")
