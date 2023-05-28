@@ -2,14 +2,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, Optional
+    from typing import Iterable, Optional, Sequence
 
 from pathlib import Path
 from tomllib import loads, TOMLDecodeError
 
 import click
 
-from .citegen import generate_biblatex
+from .citegen import generate_biblatex, get_citekeys_from_paths
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
 from .remote.error import RemoteAccessError
@@ -61,7 +61,9 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
 @click.option("--cache/--no-cache", "cache", default=True, help="Use local cache")
-@click.option("--remote/--no-remote", "remote", default=True, help="Use local cache")
+@click.option(
+    "--remote/--no-remote", "remote", default=True, help="Access remote records"
+)
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.option(
     "--alias-file",
@@ -119,7 +121,6 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
 @cli.group(name="get", short_help="Retrieve records.")
 def get_group():
     """Retrieve various record types associated with KEYI:ID records."""
-    pass
 
 
 @get_group.command(name="json", short_help="Get record from KEY:ID.")
@@ -147,7 +148,6 @@ def key(record: ArchiveRecord):
 @cli.group(name="file", short_help="Access and manage files associated with records.")
 def file_group():
     """Access and manage PDF files associated with records."""
-    pass
 
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
@@ -253,12 +253,12 @@ def show_cmd(record: ArchiveRecord):
         raise RemoteAccessError(f"No URL associated with {record.keyid}.")
 
 
+# TODO: add alias rename command
 @cli.group(name="alias", short_help="Manage record aliases.")
 def alias():
     """Add, delete, obtain, and list all aliases associated with various
     saved records.
     """
-    pass
 
 
 @alias.command(name="add", short_help="Add new alias.")
@@ -286,12 +286,27 @@ def get_alias(session: CLISession, alias_name: str):
 
 
 @alias.command(name="list", short_help="List all defined aliases.")
+@click.argument(
+    "key_sources",
+    nargs=-1,
+    type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path),
+    metavar="KEYSOURCE",
+)
 @click.pass_obj
-def list_alias(session: CLISession):
+def list_alias(session: CLISession, key_sources: Sequence[Path]):
     """Print all defined aliases to the terminal. The aliases are printed
-    in the format ALIAS: KEY:ID. Since KEY:ID cannot contain the character
-    set `: ` (colon space), splitting on `: ` and taking the last element is
-    a safe way to parse the records.
+    as valid TOML as a list of ALIAS = KEY:ID entries.
+
+    If any file paths are specified, only generate the alias entries corresponding
+    to citation keys in the corresponding files.
     """
-    for name, value in session.alias.items():
-        click.echo(f"{name}: {value}")
+    if len(key_sources) > 0:
+        alias_dict = {
+            k: v
+            for k, v in session.alias.items()
+            if k in get_citekeys_from_paths(*key_sources)
+        }
+    else:
+        alias_dict = session.alias
+
+    click.echo(dumps(alias_dict), nl=False)

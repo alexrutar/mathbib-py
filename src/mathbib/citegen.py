@@ -32,6 +32,12 @@ def get_citekeys(tex: str) -> frozenset[str]:
     return frozenset(chain.from_iterable(rx_citekey.findall(k) for k in cite_commands))
 
 
+def get_citekeys_from_paths(*paths: Path) -> frozenset[str]:
+    return frozenset(
+        chain.from_iterable(get_citekeys(path.read_text()) for path in paths)
+    )
+
+
 def citekey_to_record(
     session: CLISession, citekey: str, alias: dict[str, str]
 ) -> Optional[ArchiveRecord]:
@@ -63,9 +69,8 @@ def get_file_records(session: CLISession, *paths: Path) -> Iterable[ArchiveRecor
     """Open the file at `path`, parse for citation commands, and
     generate the corresponding list of ArchiveRecord."""
 
-    citekeys = frozenset(
-        chain.from_iterable(get_citekeys(path.read_text()) for path in paths)
-    )
+    citekeys = get_citekeys_from_paths(*paths)
+
     records_or_none = (
         citekey_to_record(session, citekey, session.alias) for citekey in citekeys
     )
