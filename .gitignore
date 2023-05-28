@@ -30,3 +30,4 @@ archive*
 tmp
 *.egg-info
 __pycache__
+dist

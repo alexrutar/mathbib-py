@@ -1,8 +1,7 @@
 # MathBib
 MathBib is a mathematics BibLaTeX bibliography manager.
-Jump to:
-- [Installation and basic usage](#installation-and-basic-usage)
-- [Finer details](#some-finer-details)
+
+**WARNING: MathBib is currently in alpha state. The API and other implementation details may change substantially!**
 
 ## Installation and basic usage
 First, ensure that `mbib` is installed with
