@@ -103,6 +103,19 @@ class HoldRemoteRecord:
 
         return self.resolved
 
+    def is_null(self):
+        """Check if the corresponding record is none.
+        If the record is already resolved, then it is certainly not None.
+        Otherwise, check if the record is present in the relations Partition.
+        Finally, check validity by loading from remote.
+        """
+        if self.resolved is not None:
+            return False
+        elif self.keyid in self.session.relations:
+            return False
+        else:
+            return self.session.remote_session.load_record(self.keyid)[0] is None
+
 
 class ArchiveRecord:
     def __init__(self, keyid: AliasedKeyId, session: CLISession):
@@ -143,13 +156,10 @@ class ArchiveRecord:
         return returned_record
 
     def is_null(self, warn: bool = False) -> bool:
-        if self.keyid.drop_alias() in self.cli_session.relations:
-            return False
-        else:
-            ret = len(self.as_joint_record()) == 0
-            if warn and ret:
-                TermWrite.warn(f"Null record '{self.keyid}'")
-            return ret
+        ret = self.record.is_null()
+        if warn and ret:
+            TermWrite.warn(f"Null record '{self.keyid}'")
+        return ret
 
     def related_keys(self) -> Iterable[KeyId]:
         try:

@@ -114,7 +114,6 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
-# TODO: allow getting multiple KEY:ID
 @cli.group(name="get", short_help="Retrieve records.")
 def get_group():
     pass
@@ -124,6 +123,7 @@ def get_group():
 @record_argument
 def json_cmd(record: ArchiveRecord):
     """Generate a JSON record for KEY:ID."""
+    # TODO: option to pass multiple records. Return list of JSON instead of JSON?
     click.echo(record.as_json())
 
 
@@ -131,13 +131,9 @@ def json_cmd(record: ArchiveRecord):
 @record_argument
 def bibtex(record: ArchiveRecord):
     """Generate a BibTeX record for KEY:ID."""
+    # TODO: option to pass multiple records
     bth = BibTexHandler()
-    try:
-        click.echo(bth.write_records((record,)), nl=False)
-    # TODO: rather than hard fail, check if the record is valid with
-    # is_null(warn=True) and print missing records.
-    except KeyError:
-        TermWrite.error("Record missing ENTRYTYPE. Cannot generate BibTex.")
+    click.echo(bth.write_records((record,)), nl=False)
 
 
 @get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
