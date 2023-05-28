@@ -82,8 +82,9 @@ class CLISession:
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
     ):
-        self.relation_file.parent.mkdir(exist_ok=True, parents=True)
         self.alias_file.parent.mkdir(exist_ok=True, parents=True)
-
-        self.relation_file.write_text(self.relations.serialize())
         self.alias_file.write_text(dumps(self.alias))
+
+        if self.cache:
+            self.relation_file.parent.mkdir(exist_ok=True, parents=True)
+            self.relation_file.write_text(self.relations.serialize())

@@ -5,6 +5,8 @@ if TYPE_CHECKING:
     from typing import Iterable, TypedDict, Sequence, Optional
     from pathlib import Path
 
+    from .remote import RemoteKey
+
     class RecordEntry(TypedDict):
         id: str
         record: dict
@@ -19,7 +21,8 @@ from functools import reduce
 from requests.exceptions import ConnectionError
 from xdg_base_dirs import xdg_data_home
 
-from .remote import KeyId, AliasedKeyId, get_remote_record
+from .remote import KeyId, AliasedKeyId, get_remote_record, KeyIdError
+from .term import TermWrite
 from .remote.error import NullRecordError, RemoteAccessError
 from .bibtex import CAPTURED
 from .term import TermWrite
@@ -34,26 +37,34 @@ def _get_record_lists(
     return {keyid: session.load_record(keyid) for keyid in keyid_pairs}
 
 
+def keyid_or_none(keyid_str: str) -> Optional[KeyId]:
+    try:
+        return KeyId.from_str(keyid_str)
+    except KeyIdError as e:
+        TermWrite.warn(e.message)
+        return None
+
 def _extract_keyid_pairs(
     to_resolve: Iterable[tuple[Optional[dict], list[tuple[str, str]]]]
 ) -> Sequence[KeyId]:
-    return [
-        KeyId.from_str(f"{key}:{identifier}")
+    candidates = (
+        keyid_or_none(f"{key}:{identifier}")
         for _, related in to_resolve
         for key, identifier in related
-    ]
+    )
+    return [keyid for keyid in candidates if keyid is not None]
 
 
 def _resolve_all_records(
-    keyid_pairs: Iterable[KeyId], resolved: set[KeyId], session: RemoteSession
+    keyids: Iterable[KeyId], resolved: set[RemoteKey], session: RemoteSession
 ) -> Iterable[tuple[KeyId, dict]]:
     # load all the records
     results = _get_record_lists(
-        (keyid for keyid in keyid_pairs if keyid not in resolved), session
+        (keyid for keyid in keyids if keyid.key not in resolved), session
     )
     yield from ((keyid, rec) for keyid, (rec, _) in results.items() if rec is not None)
 
-    resolved.update(keyid_pairs)
+    resolved.update(keyid.key for keyid in keyids)
     to_resolve = _extract_keyid_pairs(results.values())
 
     if len(to_resolve) > 0:
@@ -63,7 +74,7 @@ def _resolve_all_records(
 def _get_record_dict(start_keyid: KeyId, session: CLISession) -> dict[KeyId, dict]:
     # if the keyid is already in the relations dictionary,
     # use those elements to build the record
-    if start_keyid in session.relations:
+    if session.cache and start_keyid in session.relations:
         related_keys = session.relations[start_keyid]
 
         # sorting is not required since related_keys is already sorted
@@ -78,7 +89,8 @@ def _get_record_dict(start_keyid: KeyId, session: CLISession) -> dict[KeyId, dic
         resolved_record_dict = dict(
             sorted(_resolve_all_records((start_keyid,), set(), session.remote_session))
         )
-        session.relations.add(*resolved_record_dict.keys())
+        if session.cache:
+            session.relations.add(*resolved_record_dict.keys())
         return resolved_record_dict
 
 
@@ -181,7 +193,7 @@ class ArchiveRecord:
     def get_local_bibtex(self) -> dict:
         return reduce(
             operator.ior,
-            (keyid.toml_record() for keyid in reversed(self.record.resolve().keys())),
+            (keyid.toml_record(warn=True) for keyid in reversed(self.record.resolve().keys())),
             {},
         )
 
@@ -200,10 +212,27 @@ class ArchiveRecord:
             "ID": str(self.keyid) if self.keyid.alias is None else self.keyid.alias,
             "ENTRYTYPE": joint_record["bibtype"],
         }
-        if "authors" in joint_record.keys():
+        local_bibtex = self.get_local_bibtex()
+
+        if "authors" in local_bibtex.keys():
+            special["author"] = " and ".join(local_bibtex.pop("authors"))
+
+        elif "authors" in joint_record.keys():
             special["author"] = " and ".join(joint_record["authors"])
 
-        return {**eprint, **captured, **special, **self.get_local_bibtex()}
+        return {**eprint, **captured, **special, **local_bibtex}
+
+    def as_toml(self) -> dict:
+        joint_record = self.as_joint_record()
+
+        captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
+
+        special = {
+            "ENTRYTYPE": joint_record["bibtype"],
+            "authors": joint_record["authors"],
+        }
+
+        return {**captured, **special, **self.get_local_bibtex()}
 
     def as_tuple(self) -> tuple[str, str, str | None, str | None, str | None, bool]:
         bibtex_record = self.as_bibtex()

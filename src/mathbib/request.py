@@ -76,6 +76,7 @@ class RemoteSession:
 
             # resolve the related records
             candidates = [rel.resolve(keyid, self) for rel in related]
+
             return (
                 record,
                 [(str(keyid.key), keyid.identifier)]

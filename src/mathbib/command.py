@@ -5,17 +5,17 @@ if TYPE_CHECKING:
     from typing import Iterable, Optional
 
 from pathlib import Path
-import sys
+from tomllib import loads, TOMLDecodeError
 
 import click
 
-from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
-from .term import TermWrite
 from .session import CLISession
+from .term import TermWrite
 
+from tomli_w import dumps
 from xdg_base_dirs import xdg_data_home
 
 
@@ -123,7 +123,6 @@ def get_group():
 @record_argument
 def json_cmd(record: ArchiveRecord):
     """Generate a JSON record for KEY:ID."""
-    # TODO: option to pass multiple records. Return list of JSON instead of JSON?
     click.echo(record.as_json())
 
 
@@ -132,8 +131,7 @@ def json_cmd(record: ArchiveRecord):
 def bibtex(record: ArchiveRecord):
     """Generate a BibTeX record for KEY:ID."""
     # TODO: option to pass multiple records
-    bth = BibTexHandler()
-    click.echo(bth.write_records((record,)), nl=False)
+    click.echo(record.cli_session.bibtex_handler.write_records((record,)), nl=False)
 
 
 @get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
@@ -165,17 +163,41 @@ def open_cmd(record: ArchiveRecord):
         return
 
     # if there is no file, try to download it
-    TermWrite.error("Could not find associated file.")
-    sys.exit(1)
+    raise click.ClickException("Could not find associated file.")
+
+
+@file_group.command(name="list", short_help="List all cached files.")
+@click.pass_obj
+def file_list(session: CLISession):
+    """Open file associated with record KEY:ID."""
+    for pat in (xdg_data_home() / "mathbib" / "files").glob("**/*.pdf"):
+        record = ArchiveRecord.from_str(f"{pat.parent.stem}:{pat.stem}", session).as_bibtex()
+        click.echo(f"{record['ID']} - {record['title']}")
 
 
 @cli.command(name="edit", short_help="Edit local record.")
-@keyid_argument
-def edit_cmd(keyid: AliasedKeyId):
+@record_argument
+def edit_cmd(record: ArchiveRecord):
     """Edit local record for KEY:ID."""
-    path = keyid.toml_path()
-    path.parent.mkdir(parents=True, exist_ok=True)
-    click.edit(filename=str(path))
+    toml_record = dumps(record.as_toml())
+
+    while True:
+        edited = click.edit(toml_record, extension='.toml')
+        if edited is not None:
+            try:
+                loads(edited)
+                record.keyid.toml_path().write_text(edited)
+                return
+
+            except TOMLDecodeError as e:
+                TermWrite.error(f"invalid TOML: {e}")
+
+            if click.confirm('Edit again?'):
+                toml_record = edited
+            else:
+                return
+        else:
+            return
 
 
 @cli.command(name="show", short_help="Edit local record.")

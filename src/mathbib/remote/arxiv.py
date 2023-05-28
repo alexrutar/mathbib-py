@@ -20,11 +20,7 @@ from .utils import (
 
 REGEX_ARXIV_ID = re.compile(
     r"((?:"
-    r"(?:math|nucl-ex|nlin|q-alg|chao-dyn|cond-mat|dg-ga|adap-org|supr-con"
-    r"|bayes-an|hep-ph|comp-gas|patt-sol|solv-int|atom-ph|plasm-ph|stat|cs"
-    r"|nucl-th|q-bio|chem-ph|hep-th|ao-sci|eess|hep-lat|cmp-lg|gr-qc|funct-an"
-    r"|astro-ph|math-ph|quant-ph|mtrl-th|physics|hep-ex|econ|acc-phys|alg-geom"
-    r"|q-fin)"
+    r"(?:math|bayes-an|stat|cs|funct-an|alg-geom)"
     r"/"
     r"(?:(?:[0-1][0-9])|(?:9[1-9]))(?:0[1-9]|1[0-2])(?:\d{3})(?:v[1-9]\d*)?))"
     r"|"
@@ -49,11 +45,15 @@ def download_url(arxiv: str) -> str:
 
 
 def record_parser(result: str) -> ParsedRecord:
+    # TODO: sometimes this returns the incorrect record, which needs to be checked
+
     related = [
         RelatedRecord(
             "zbl", (zbmath_external_identifier_url, zbmath_external_identifier_parse)
         )
     ]
+
+    related = []
     metadata = BeautifulSoup(result, features="xml").entry
     if metadata is None:
         raise RemoteAccessError("Response does not contain entry metadata.")

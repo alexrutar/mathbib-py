@@ -17,6 +17,7 @@ import tomllib
 from xdg_base_dirs import xdg_data_home, xdg_cache_home
 
 from . import doi, zbl, arxiv, zbmath, isbn, ol
+from ..term import TermWrite
 
 
 class RemoteKey(IntEnum):
@@ -97,6 +98,7 @@ def get_remote_record(keyid: KeyId) -> RemoteRecord:
 
 class KeyIdError(Exception):
     def __init__(self, message="Invalid KeyId"):
+        self.message = message
         super().__init__(message)
 
 
@@ -160,11 +162,18 @@ class KeyId:
             / f"{self.identifier}.{suffix}"
         )
 
-    def toml_record(self):
+    def toml_record(self, warn: bool = False):
         try:
             return tomllib.loads(self.toml_path().read_text())
         except FileNotFoundError:
             return {}
+        except tomllib.TOMLDecodeError as e:
+            if warn:
+                TermWrite.warn(f"Invalid TOML in {self}: {e}")
+                return {}
+            else:
+                raise e
+
 
     def cache_path(self):
         return (
