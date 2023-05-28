@@ -46,6 +46,7 @@ class RelatedRecord:
                 parsed = parser(response)
                 if parsed is not None:
                     return self.related_key, parsed
+        return None
 
 
 def zbmath_external_identifier_url(identifier: str) -> str:
