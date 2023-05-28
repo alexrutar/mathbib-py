@@ -8,7 +8,7 @@ import re
 
 from bs4 import BeautifulSoup
 
-from .utils import RemoteParseError
+from .utils import RemoteParseError, RelatedRecord
 
 
 def url_builder(zbmath: str) -> str:
@@ -25,7 +25,7 @@ def validate_identifier(zbmath: str) -> bool:
 
 
 def record_parser(result: str) -> ParsedRecord:
-    related = {}
+    related = []
     metadata = BeautifulSoup(result, features="xml")
 
     links = [entry.string for entry in metadata.find_all("zbmath:link")]
@@ -34,11 +34,11 @@ def record_parser(result: str) -> ParsedRecord:
     )
     arxiv_pruned = [match for match in arxiv_searched if match is not None]
     if len(arxiv_pruned) > 0:
-        related["arxiv"] = str(arxiv_pruned[0].group(1))
+        related.append(RelatedRecord("arxiv", str(arxiv_pruned[0].group(1))))
 
     dois = metadata.find_all("zbmath:doi")
     if len(dois) > 0 and dois[0]:
-        related["doi"] = dois[0].string
+        related.append(RelatedRecord("doi", dois[0].string))
 
     out = {
         "author_ids": [entry.string for entry in metadata.find_all("zbmath:author_id")],

@@ -14,6 +14,7 @@ from .utils import (
     canonicalize_authors,
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,
+    RelatedRecord,
 )
 
 
@@ -48,16 +49,18 @@ def download_url(arxiv: str) -> str:
 
 
 def record_parser(result: str) -> ParsedRecord:
-    related = {
-        "zbl": (zbmath_external_identifier_url, zbmath_external_identifier_parse)
-    }
+    related = [
+        RelatedRecord(
+            "zbl", (zbmath_external_identifier_url, zbmath_external_identifier_parse)
+        )
+    ]
     metadata = BeautifulSoup(result, features="xml").entry
     if metadata is None:
         raise RemoteAccessError("Response does not contain entry metadata.")
 
     dois = metadata.find_all("arxiv:doi")
     if len(dois) > 0 and dois[0].string is not None:
-        related["doi"] = dois[0].string
+        related.append(RelatedRecord("doi", dois[0].string))
 
     published = metadata.published
     if published is None:

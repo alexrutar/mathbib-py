@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from . import ParsedRecord, RelatedRecords
+    from . import ParsedRecord
 
 import json
 import re
@@ -12,6 +12,7 @@ from stdnum import isbn
 from .utils import (
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,
+    RelatedRecord,
 )
 
 
@@ -38,17 +39,18 @@ def isbn_to_zbmath_url(isbn_str: str) -> str:
 
 def record_parser(result: str) -> ParsedRecord:
     record = {}
-    related: RelatedRecords = {
-        "zbl": (isbn_to_zbmath_url, zbmath_external_identifier_parse)
-    }
+    related = [
+        RelatedRecord("zbl", (isbn_to_zbmath_url, zbmath_external_identifier_parse))
+    ]
     res_parsed = json.loads(result)
     try:
         first_entry = next(iter(res_parsed.values()))["info_url"]
         match = re.search(r"\/(OL\d+[WM])\/", first_entry)
 
         if match is not None:
-            related["ol"] = str(match.group(1))
-            if related["ol"] == "M":
+            ol_related = str(match.group(1))
+            related.append(RelatedRecord("ol", ol_related))
+            if ol_related[-1] == "M":
                 record["bibtype"] = "book"
 
     except StopIteration:

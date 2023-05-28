@@ -74,12 +74,20 @@ It also contains more references \cite{HocShm2012, Shm2019}.
 ```
 Remember to regenerate the `doc.bib` file with `mbib generate doc.tex > doc.bib` (the keys need to be updated), and the file will compile!
 Aliases also work as command line arguments anywhere a `key:id` is expected.
-For instance, you can view the PDF file associated with a record using
+
+Suppose you have been working on the above TEX document for a while, and now you want to cite a specific theorem from the paper `Hoc2014`.
+Simply run
 ```sh
 mbib file open Hoc2014
 ```
+to open the PDF file associated with the resource.
 This will automatically download a PDF resource for the file (if `mbib` can find one online) and then open it.
 The PDF file is also saved locally, so the next time you run this command, you do not need an internet connection.
+
+Of course, if `mbib` cannot find a resource for your file, you can also add one yourself.
+```sh
+mbib file add Hoc2014 path/to/file.pdf
+```
 
 There are some other features implemented: either read more below, or run `mbib --help` and `mbib <subcommand> --help` for more information.
 

@@ -7,6 +7,8 @@ if TYPE_CHECKING:
 import json
 import re
 
+from .utils import RelatedRecord
+
 
 def url_builder(ol: str) -> str:
     match ol[-1]:
@@ -35,10 +37,10 @@ def validate_identifier(ol: str) -> bool:
 def record_parser(result: str) -> ParsedRecord:
     parsed = json.loads(result)
     record = {}
-    related = {}
+    related = []
     if "title" in parsed.keys():
         record["title"] = parsed["title"]
     if "isbn_13" in parsed.keys():
         # TODO: if multiple keys, add all
-        related["isbn"] = parsed["isbn_13"][0]
+        related = [RelatedRecord("isbn", parsed["isbn_13"][0])]
     return record, related

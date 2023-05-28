@@ -2,7 +2,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Optional, Iterable
+    from typing import Optional, Iterable, Callable
+    from ..request import RemoteSession
+    from . import ParsedRecord, KeyId
 
 from importlib.resources import files
 import re
@@ -14,6 +16,36 @@ from nameparser import HumanName
 from ..bibtex import BibTexHandler, CAPTURED
 from .error import RemoteParseError
 from .. import resources
+
+
+class RelatedRecord:
+    def __init__(
+        self,
+        related_key: str,
+        related_identifier: str
+        | tuple[Callable[[str], str], Callable[[str], Optional[str]]],
+    ):
+        """source_key: the starting point of the relation
+        related_key: the ending point of the relation
+        """
+        self.related_key = related_key
+        self.related_identifier = related_identifier
+
+    def resolve(
+        self, source_key: KeyId, session: RemoteSession
+    ) -> Optional[tuple[str, str]]:
+        """In order to resolve, we need a RemoteSession instance in order to make
+        the remote request, and also a source KeyId
+        """
+        if isinstance(self.related_identifier, str):
+            return self.related_key, self.related_identifier
+        else:
+            url_builder, parser = self.related_identifier
+            response = session.make_request(source_key, url_builder)
+            if response is not None:
+                parsed = parser(response)
+                if parsed is not None:
+                    return self.related_key, parsed
 
 
 def zbmath_external_identifier_url(identifier: str) -> str:
@@ -54,7 +86,7 @@ def canonicalize_authors(author_list: Iterable[str]) -> list[str]:
     return [f"{hn.last}, {hn.first} {hn.middle}".strip() for hn in human_names]
 
 
-def parse_bibtex(result: str) -> tuple[dict, dict]:
+def parse_bibtex(result: str) -> ParsedRecord:
     bibtex_parsed = BibTexHandler().loads(result).entries[0]
 
     # drop some keys from the bibtex file
@@ -107,6 +139,6 @@ def parse_bibtex(result: str) -> tuple[dict, dict]:
             bibtex_parsed["journal"], fjournal=bibtex_parsed.get("fjournal")
         )
 
-    return {**extracted, **additional}, {
-        k: v for k, v in bibtex_parsed.items() if k in related
-    }
+    return {**extracted, **additional}, [
+        RelatedRecord(k, v) for k, v in bibtex_parsed.items() if k in related
+    ]

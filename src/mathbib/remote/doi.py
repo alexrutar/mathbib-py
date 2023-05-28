@@ -10,6 +10,7 @@ from .utils import (
     parse_bibtex,
     zbmath_external_identifier_url,
     zbmath_external_identifier_parse,
+    RelatedRecord,
 )
 
 REGEX_DOI = re.compile(r"(10\.\d{4,9}(?:/[-._;():a-zA-Z0-9]+)+)|(10.1002(?:/[^\s/]+)+)")
@@ -31,5 +32,10 @@ def record_parser(result: str) -> ParsedRecord:
     btx, _ = parse_bibtex(result)
     return (
         btx,
-        {"zbl": (zbmath_external_identifier_url, zbmath_external_identifier_parse)},
+        [
+            RelatedRecord(
+                "zbl",
+                (zbmath_external_identifier_url, zbmath_external_identifier_parse),
+            )
+        ],
     )

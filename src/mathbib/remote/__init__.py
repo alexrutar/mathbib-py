@@ -2,12 +2,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Final, Optional, Callable
+    from typing import Final, Optional, Callable, Iterable
+    from .utils import RelatedRecord
 
-    RelatedRecords = dict[
-        str, str | tuple[Callable[[str], str], Callable[[str], Optional[str]]]
-    ]
-    ParsedRecord = tuple[dict, RelatedRecords]
+    ParsedRecord = tuple[dict, Iterable[RelatedRecord]]
     RecordParser = Callable[[str], ParsedRecord]
     URLBuilder = Callable[[str], str]
     IdentifierValidator = Callable[[str], bool]
@@ -139,6 +137,11 @@ class KeyId:
         else:
             raise KeyIdFormatError(keyid_str)
 
+    @classmethod
+    def _from_str_no_check(cls, keyid_str: str) -> KeyId:
+        tokens = keyid_str.split(":")
+        return cls(RemoteKey[tokens[0].upper()], ":".join(tokens[1:]))
+
     def toml_path(self):
         return (
             xdg_data_home()
@@ -164,7 +167,13 @@ class KeyId:
             return {}
 
     def cache_path(self):
-        return xdg_cache_home() / "mathbib" / str(self.key) / f"{self.identifier}.json"
+        return (
+            xdg_cache_home()
+            / "mathbib"
+            / "records"
+            / str(self.key)
+            / f"{self.identifier}.json"
+        )
 
     def __str__(self):
         return f"{self.key}:{self.identifier}"

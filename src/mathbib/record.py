@@ -16,33 +16,38 @@ import operator
 import json
 from functools import reduce
 
+from requests.exceptions import ConnectionError
 from xdg_base_dirs import xdg_data_home
 
 from .remote import KeyId, AliasedKeyId, get_remote_record
-from .request import NullRecordError, RemoteSession
+from .remote.error import NullRecordError, RemoteAccessError
 from .bibtex import CAPTURED
 from .term import TermWrite
+from .session import CLISession
+from .request import RemoteSession
 
 
 def _get_record_lists(
     keyid_pairs: Iterable[KeyId], session: RemoteSession
-) -> dict[KeyId, tuple[Optional[dict], dict[str, str]]]:
+) -> dict[KeyId, tuple[Optional[dict], list[tuple[str, str]]]]:
+    """Given an iterable of KeyId, load all the associated records"""
     return {keyid: session.load_record(keyid) for keyid in keyid_pairs}
 
 
 def _extract_keyid_pairs(
-    to_resolve: Iterable[tuple[Optional[dict], dict[str, str]]]
+    to_resolve: Iterable[tuple[Optional[dict], list[tuple[str, str]]]]
 ) -> Sequence[KeyId]:
     return [
         KeyId.from_str(f"{key}:{identifier}")
         for _, related in to_resolve
-        for key, identifier in related.items()
+        for key, identifier in related
     ]
 
 
 def _resolve_all_records(
     keyid_pairs: Iterable[KeyId], resolved: set[KeyId], session: RemoteSession
 ) -> Iterable[tuple[KeyId, dict]]:
+    # load all the records
     results = _get_record_lists(
         (keyid for keyid in keyid_pairs if keyid not in resolved), session
     )
@@ -55,15 +60,55 @@ def _resolve_all_records(
         yield from _resolve_all_records(to_resolve, resolved, session)
 
 
-def _get_record_dict(start_keyid: KeyId, session: RemoteSession) -> dict[KeyId, dict]:
-    return dict(sorted(_resolve_all_records((start_keyid,), set(), session)))
+def _get_record_dict(start_keyid: KeyId, session: CLISession) -> dict[KeyId, dict]:
+    # if the keyid is already in the relations dictionary,
+    # use those elements to build the record
+    if start_keyid in session.relations:
+        related_keys = session.relations[start_keyid]
+
+        # sorting is not required since related_keys is already sorted
+        candidates = {
+            keyid: session.remote_session.load_record(keyid)[0]
+            for keyid in related_keys
+        }
+        return {k: v for k, v in candidates.items() if v is not None}
+
+    # otherwise, build the records and add them to the relations dict
+    else:
+        resolved_record_dict = dict(
+            sorted(_resolve_all_records((start_keyid,), set(), session.remote_session))
+        )
+        session.relations.add(*resolved_record_dict.keys())
+        return resolved_record_dict
+
+
+class HoldRemoteRecord:
+    """An unresolved record object which only resolves when you ask
+    it for information that needs resolving.
+    """
+
+    def __init__(self, keyid: KeyId, session: CLISession):
+        self.keyid = keyid
+        self.session = session
+        self.resolved: Optional[dict[KeyId, dict]] = None
+
+    def resolve(self) -> dict[KeyId, dict]:
+        if self.resolved is None:
+            try:
+                self.resolved = _get_record_dict(self.keyid, self.session)
+            except ConnectionError:
+                raise RemoteAccessError("no connection")
+            if len(self.resolved.values()) == 0:
+                raise NullRecordError(self.keyid)
+
+        return self.resolved
 
 
 class ArchiveRecord:
-    def __init__(self, keyid: AliasedKeyId, session: Optional[RemoteSession] = None):
+    def __init__(self, keyid: AliasedKeyId, session: CLISession):
         self.keyid = keyid
-        self.remote_session = RemoteSession() if session is None else session
-        self.record = _get_record_dict(keyid.drop_alias(), self.remote_session)
+        self.cli_session = session
+        self.record = HoldRemoteRecord(keyid.drop_alias(), self.cli_session)
 
     def __hash__(self) -> int:
         return hash(self.keyid)
@@ -72,16 +117,16 @@ class ArchiveRecord:
     def from_str(
         cls,
         keyid_str: str,
+        session: CLISession,
         alias: Optional[str] = None,
-        session: Optional[RemoteSession] = None,
     ):
         return cls(AliasedKeyId.from_str(keyid_str, alias=alias), session=session)
 
     def as_json(self) -> str:
-        return json.dumps({str(k): v for k, v in self.record.items()})
+        return json.dumps({str(k): v for k, v in self.record.resolve().items()})
 
     def as_joint_record(self) -> dict:
-        records = list(reversed(self.record.values()))
+        records = list(reversed(self.record.resolve().values()))
         returned_record = reduce(operator.ior, records, {})
 
         # collect compound keys
@@ -97,25 +142,33 @@ class ArchiveRecord:
 
         return returned_record
 
-    def related_keys(self) -> Iterable[KeyId]:
-        return self.record.keys()
-
-    def priority_key(self) -> KeyId:
-        try:
-            return next(iter(self.record.keys()))
-        except StopIteration:
-            raise NullRecordError(self.keyid)
-
     def is_null(self, warn: bool = False) -> bool:
         ret = len(self.as_joint_record()) == 0
         if warn and ret:
             TermWrite.warn(f"Null record '{self.keyid}'")
         return ret
 
+    def related_keys(self) -> Iterable[KeyId]:
+        try:
+            return self.cli_session.relations.related(self.keyid)
+        except KeyError:
+            return self.record.resolve().keys()
+
+    def priority_key(self) -> KeyId:
+        try:
+            return self.cli_session.relations.canonical(self.keyid)
+        except KeyError:
+            pass
+
+        try:
+            return next(iter(self.record.resolve().keys()))
+        except StopIteration:
+            raise NullRecordError(self.keyid)
+
     def get_local_bibtex(self) -> dict:
         return reduce(
             operator.ior,
-            (keyid.toml_record() for keyid in reversed(self.record.keys())),
+            (keyid.toml_record() for keyid in reversed(self.record.resolve().keys())),
             {},
         )
 
@@ -164,6 +217,9 @@ class ArchiveRecord:
         return None
 
     def related_file(self) -> Optional[Path]:
+        if self.keyid.file_path().exists():
+            return self.keyid.file_path()
+
         for keyid in self.related_keys():
             if keyid.file_path().exists():
                 return keyid.file_path()
@@ -175,7 +231,7 @@ class ArchiveRecord:
             path = keyid.file_path()
             if (
                 download_url is not None
-                and self.remote_session.make_raw_streaming_request(
+                and self.cli_session.remote_session.make_raw_streaming_request(
                     download_url(keyid.identifier), path
                 )
             ):

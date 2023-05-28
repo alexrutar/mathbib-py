@@ -4,7 +4,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Optional
     from pathlib import Path
-    from .remote import RelatedRecords, URLBuilder, KeyId
+    from .remote import URLBuilder, KeyId
 
 from datetime import datetime
 import json
@@ -19,12 +19,6 @@ from xdg_base_dirs import xdg_config_home
 from . import __version__
 from .term import TermWrite
 from .remote import get_remote_record
-
-
-class NullRecordError(Exception):
-    def __init__(self, keyid: KeyId):
-        self.keyid = keyid
-        super().__init__(f"KEY:ID '{keyid}' is a null record.")
 
 
 class RemoteSession:
@@ -50,30 +44,12 @@ class RemoteSession:
         self.cache = cache
         self.remote = remote
 
-    def _resolve_related_records(
-        self, keyid: KeyId, related: RelatedRecords
-    ) -> dict[str, str]:
-        related_identifiers = {str(keyid.key): keyid.identifier}
-
-        for key, res in related.items():
-            if isinstance(res, str):
-                related_identifiers[key] = res
-            else:
-                url_builder, parser = res
-                response = self.make_request(keyid, url_builder)
-                if response is not None:
-                    parsed = parser(response)
-                    if parsed is not None:
-                        related_identifiers[key] = parsed
-
-        return related_identifiers
-
     def _clear_cache(self, keyid: KeyId):
         keyid.cache_path().unlink(missing_ok=True)
 
     def _load_cached_record(
         self, keyid: KeyId
-    ) -> tuple[Optional[dict], dict[str, str]]:
+    ) -> Optional[tuple[Optional[dict], list[tuple[str, str]]]]:
         """Load the cached record if self.cache: otherwise return a null record"""
         try:
             if self.cache:
@@ -87,38 +63,55 @@ class RemoteSession:
         except FileNotFoundError:
             pass
 
-        return None, {}
+        return None
 
     def _load_remote_record(
         self, keyid: KeyId
-    ) -> tuple[Optional[dict], dict[str, str]]:
+    ) -> tuple[Optional[dict], list[tuple[str, str]]]:
         """Load and parse the remote record."""
         remote_record = get_remote_record(keyid)
         response = self.make_request(keyid, remote_record.build_url)
         if response is not None:
             record, related = get_remote_record(keyid).parse_record(response)
-            return (record, self._resolve_related_records(keyid, related))
 
-        return None, {}
+            # resolve the related records
+            candidates = [rel.resolve(keyid, self) for rel in related]
+            return (
+                record,
+                [(str(keyid.key), keyid.identifier)]
+                + [rel for rel in candidates if rel is not None],
+            )
 
-    def load_record(self, keyid: KeyId) -> tuple[Optional[dict], dict[str, str]]:
+        return None, []
+
+    def load_record(self, keyid: KeyId) -> tuple[Optional[dict], list[tuple[str, str]]]:
+        """Attempt to load the record associated with keyid and cache a list of
+        related records. At this stage, the related records are not "final": they are
+        resolved (so they are strings) but otherwise the related records may not actually
+        be real records.
+        """
         remote_record = get_remote_record(keyid)
 
         if not remote_record.validate_identifier(keyid.identifier):
-            return None, {}
+            return None, []
 
         # load cached record
-        record, related = self._load_cached_record(keyid)
+        cache = self._load_cached_record(keyid)
 
         # if no cache hit, get remote record and cache
-        if record is None:
+        if cache is None:
             record, related = self._load_remote_record(keyid)
             self.serialize(keyid, record, related)
+            return record, related
 
-        return record, related
+        else:
+            return cache
 
     def serialize(
-        self, keyid: KeyId, record: Optional[dict], related: Optional[dict[str, str]]
+        self,
+        keyid: KeyId,
+        record: Optional[dict],
+        related: list[tuple[str, str]],
     ) -> None:
         if self.cache:
             target = keyid.cache_path()
