@@ -8,5 +8,5 @@ A mathematics BibLaTeX bibliography manager.
 """
 
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __repo__ = "https://github.com/alexrutar/mathbib"
