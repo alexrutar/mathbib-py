@@ -1,9 +1,5 @@
 set --local alias_path "alias.toml"
-set --local relation_path "relations.toml"
-set --local cache_dir "relations.toml"
-set --local cache_permanent "cache_permanent.toml"
-
-rm -f alias_path relation_path cache_dir
+set --local relation_path "relations.json"
 
 alias mb "mbib --alias-file $alias_path --relation-file $relation_path"
 
@@ -22,3 +18,5 @@ echo
 
 echo "Getting canonical"
 mb get key Hoc2014
+
+rm -f alias_path relation_path cache_dir

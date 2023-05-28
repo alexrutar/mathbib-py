@@ -12,6 +12,7 @@ import click
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
+from .remote.error import RemoteAccessError
 from .session import CLISession
 from .term import TermWrite
 
@@ -106,7 +107,7 @@ def cli(
 @click.pass_context
 def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
     """Parse TEXFILE and generate bibtex entries corresponding to keys.
-    If option --out is specified, write generated text to file.
+    If option --out is specified, write generated text to the given file.
     """
     bibstr = generate_biblatex(ctx.obj, *texfile)
     if out is None:
@@ -117,6 +118,7 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
 
 @cli.group(name="get", short_help="Retrieve records.")
 def get_group():
+    """Retrieve various record types associated with KEYI:ID records."""
     pass
 
 
@@ -144,13 +146,17 @@ def key(record: ArchiveRecord):
 
 @cli.group(name="file", short_help="Access and manage files associated with records.")
 def file_group():
+    """Access and manage PDF files associated with records."""
     pass
 
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
 @record_argument
 def open_cmd(record: ArchiveRecord):
-    """Open file associated with record KEY:ID."""
+    """Open the PDF file associated with record KEY:ID using the default
+    PDF viewer on your device. If the file does not exist, attempt to download
+    it from from a standardized location.
+    """
     # First, try to open an existing file
     local_file = record.related_file()
     if local_file is not None:
@@ -167,50 +173,52 @@ def open_cmd(record: ArchiveRecord):
     raise click.ClickException("Could not find associated file.")
 
 
-@file_group.command(name="list", short_help="List all cached files.")
+@file_group.command(name="list", short_help="List all files.")
 @click.pass_obj
 def file_list(session: CLISession):
-    """Open file associated with record KEY:ID."""
+    """List all the files saved on your device, along with the corresponding"""
     root = xdg_data_home() / "mathbib" / "files"
     for pat in (xdg_data_home() / "mathbib" / "files").glob("**/*.pdf"):
         key = pat.relative_to(root).parents[-2]
-        val = pat.relative_to(root / key).with_suffix('')
-        record = ArchiveRecord.from_str(
-            f"{key}:{val}", session
-        ).as_bibtex()
-        click.echo(record['ID'], nl=False)
-        for src in ('author', 'title'):
+        val = pat.relative_to(root / key).with_suffix("")
+        record = ArchiveRecord.from_str(f"{key}:{val}", session).as_bibtex()
+        click.echo(record["ID"], nl=False)
+        for src in ("author", "title"):
             if src in record.keys():
                 click.echo(" - " + record[src], nl=False)
         click.echo()
 
 
+# TODO: add --force to overwrite manually
 @file_group.command(name="add", short_help="Add new file for record.")
-@keyid_argument
+@record_argument
 @click.argument(
     "source",
     type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path),
     metavar="PDF",
 )
-def file_add(keyid: AliasedKeyId, source: Path):
+def file_add(record: ArchiveRecord, source: Path):
     """Add new resource PDF for record KEY:ID."""
-    target = keyid.file_path()
-    if source.suffix != ".pdf":
-        raise click.ClickException("cannot add non-PDF record")
+    if record.is_null():
+        raise click.ClickException("Cannot add record to invalid key!")
+    else:
+        target = record.keyid.file_path()
+        if source.suffix != ".pdf":
+            raise click.ClickException("cannot add non-PDF record")
 
-    if (
-        not target.exists()
-        or target.exists()
-        and click.confirm("Overwrite existing file?")
-    ):
-        target.parent.mkdir(exist_ok=True, parents=True)
-        shutil.copyfile(source, target)
+        if (
+            not target.exists()
+            or target.exists()
+            and click.confirm("Overwrite existing file?")
+        ):
+            target.parent.mkdir(exist_ok=True, parents=True)
+            shutil.copyfile(source, target)
 
 
 @cli.command(name="edit", short_help="Edit local record.")
 @record_argument
 def edit_cmd(record: ArchiveRecord):
-    """Edit local record for KEY:ID."""
+    """Edit local the record associated with KEY:ID."""
     toml_record = dumps(record.as_toml())
 
     while True:
@@ -232,17 +240,24 @@ def edit_cmd(record: ArchiveRecord):
             return
 
 
-@cli.command(name="show", short_help="Edit local record.")
+@cli.command(name="show", short_help="Open remote record in browser.")
 @record_argument
 def show_cmd(record: ArchiveRecord):
-    """Show remote record associated KEY:ID."""
+    """Show remote record associated KEY:ID. This searches for the
+    highest priority record and opens it in your browser.
+    """
     url = record.show_url()
     if url is not None:
         click.launch(url)
+    else:
+        raise RemoteAccessError(f"No URL associated with {record.keyid}.")
 
 
 @cli.group(name="alias", short_help="Manage record aliases.")
 def alias():
+    """Add, delete, obtain, and list all aliases associated with various
+    saved records.
+    """
     pass
 
 
@@ -273,6 +288,10 @@ def get_alias(session: CLISession, alias_name: str):
 @alias.command(name="list", short_help="List all defined aliases.")
 @click.pass_obj
 def list_alias(session: CLISession):
-    """Get record associated with alias."""
+    """Print all defined aliases to the terminal. The aliases are printed
+    in the format ALIAS: KEY:ID. Since KEY:ID cannot contain the character
+    set `: ` (colon space), splitting on `: ` and taking the last element is
+    a safe way to parse the records.
+    """
     for name, value in session.alias.items():
         click.echo(f"{name}: {value}")
