@@ -9,4 +9,4 @@ A mathematics BibLaTeX bibliography manager.
 
 
 __version__ = "0.1.2"
-__repo__ = "https://github.com/alexrutar/mathbib"
+__repo__ = "https://github.com/alexrutar/mathbib-py"
