@@ -13,13 +13,10 @@ from .bibtex import BibTexHandler
 from .citegen import generate_biblatex
 from .record import ArchiveRecord
 from .remote import AliasedKeyId, KeyIdError
-from .alias import (
-    add_bib_alias,
-    delete_bib_alias,
-    get_bib_alias,
-)
 from .term import TermWrite
 from .session import CLISession
+
+from xdg_base_dirs import xdg_data_home
 
 
 def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
@@ -64,12 +61,35 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 @click.option("--cache/--no-cache", "cache", default=True, help="Use local cache")
 @click.option("--remote/--no-remote", "remote", default=True, help="Use local cache")
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
+@click.option(
+    "--alias-file",
+    "alias_file",
+    default=xdg_data_home() / "mathbib" / "alias.toml",
+    help="Alias file",
+    type=click.Path(file_okay=True, dir_okay=False, readable=True, path_type=Path),
+)
+@click.option(
+    "--relation-file",
+    "relation_file",
+    default=xdg_data_home() / "mathbib" / "relations.json",
+    help="Alias file",
+    type=click.Path(file_okay=True, dir_okay=False, readable=True, path_type=Path),
+)
 @click.pass_context
-def cli(ctx: click.Context, cache: bool, remote: bool, debug: bool) -> None:
+def cli(
+    ctx: click.Context,
+    cache: bool,
+    remote: bool,
+    debug: bool,
+    alias_file: Path,
+    relation_file: Path,
+) -> None:
     """MathBib is a tool to help streamline the management of BibLaTeX files associated
     with records from various mathematical repositories.
     """
-    ctx.obj = ctx.with_resource(CLISession(debug, cache, remote))
+    ctx.obj = ctx.with_resource(
+        CLISession(debug, cache, remote, relation_file, alias_file)
+    )
 
 
 @cli.command(short_help="Generate citations from keys in file.")
@@ -87,7 +107,7 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
     """Parse TEXFILE and generate bibtex entries corresponding to keys.
     If option --out is specified, write generated text to file.
     """
-    bibstr = generate_biblatex(ctx.obj["session"], *texfile)
+    bibstr = generate_biblatex(ctx.obj, *texfile)
     if out is None:
         click.echo(bibstr, nl=False)
     else:
@@ -178,23 +198,31 @@ def alias():
 
 @alias.command(name="add", short_help="Add new alias.")
 @alias_argument
-@keyid_argument
-@click.pass_context
-def add_alias(ctx: click.Context, alias_name: str, keyid: AliasedKeyId):
+@record_argument
+def add_alias(alias_name: str, record: ArchiveRecord):
     """Add ALIAS for record KEY:ID."""
-    # TODO: maybe better to pass record directly?
-    add_bib_alias(alias_name, keyid, ctx.obj.remote_session)
+    record.cli_session.add_alias(alias_name, record)
 
 
 @alias.command(name="delete", short_help="Delete alias.")
 @alias_argument
-def delete_alias(alias_name: str):
+@click.pass_obj
+def delete_alias(session: CLISession, alias_name: str):
     """Delete record associated with ALIAS."""
-    delete_bib_alias(alias_name)
+    session.delete_alias(alias_name)
 
 
 @alias.command(name="get", short_help="Get record associated with alias.")
 @alias_argument
-def get_alias(alias_name: str):
+@click.pass_obj
+def get_alias(session: CLISession, alias_name: str):
     """Get record associated with alias."""
-    click.echo(get_bib_alias(alias_name))
+    click.echo(session.get_alias(alias_name))
+
+
+@alias.command(name="list", short_help="List all defined aliases.")
+@click.pass_obj
+def list_alias(session: CLISession):
+    """Get record associated with alias."""
+    for name, value in session.alias.items():
+        click.echo(f"{name}: {value}")

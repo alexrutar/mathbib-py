@@ -3,16 +3,14 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from typing import Iterable, Final, Optional
-    from .request import RemoteSession
+    from .session import CLISession
 
 from itertools import chain
 from pathlib import Path
 import re
 
 from .record import ArchiveRecord
-from .bibtex import BibTexHandler
 from .term import TermWrite
-from .alias import load_alias_dict
 from .remote import KeyIdError
 
 
@@ -35,7 +33,7 @@ def get_citekeys(tex: str) -> frozenset[str]:
 
 
 def citekey_to_record(
-    session: RemoteSession, citekey: str, alias: dict[str, str]
+    session: CLISession, citekey: str, alias: dict[str, str]
 ) -> Optional[ArchiveRecord]:
     """Convert a citation key to an ArchiveRecord if possible.
 
@@ -61,22 +59,20 @@ def multiple_replace(dct: dict[str, str], text: str):
     return regex.sub(lambda mo: dct[mo.string[mo.start() : mo.end()]], text)
 
 
-def get_file_records(session: RemoteSession, *paths: Path) -> Iterable[ArchiveRecord]:
+def get_file_records(session: CLISession, *paths: Path) -> Iterable[ArchiveRecord]:
     """Open the file at `path`, parse for citation commands, and
     generate the corresponding list of ArchiveRecord."""
 
-    alias_dict = load_alias_dict()
     citekeys = frozenset(
         chain.from_iterable(get_citekeys(path.read_text()) for path in paths)
     )
     records_or_none = (
-        citekey_to_record(session, citekey, alias_dict) for citekey in citekeys
+        citekey_to_record(session, citekey, session.alias) for citekey in citekeys
     )
 
     return (record for record in records_or_none if record is not None)
 
 
-def generate_biblatex(session: RemoteSession, *paths: Path) -> str:
+def generate_biblatex(session: CLISession, *paths: Path) -> str:
     """Generate the biblatex file associated with the citations inside a given file."""
-    bth = BibTexHandler()
-    return bth.write_records(get_file_records(session, *paths))
+    return session.bibtex_handler.write_records(get_file_records(session, *paths))

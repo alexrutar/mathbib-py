@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, Final
+    from typing import Iterable, Final, Optional
     from .record import ArchiveRecord
 
 import bibtexparser as bp
@@ -39,10 +39,12 @@ class BibTexHandler:
     def loads(self, bibstr: str) -> BibDatabase:
         return bp.loads(bibstr, self.parser)
 
-    def write_records(self, records: Iterable[ArchiveRecord]) -> str:
+    def write_records(self, records: Iterable[Optional[ArchiveRecord]]) -> str:
         db = BibDatabase()
         db.entries = [
-            record.as_bibtex() for record in records if not record.is_null(warn=True)
+            record.as_bibtex()
+            for record in records
+            if record is not None and not record.is_null(warn=True)
         ]
         return self.dumps(db)
 

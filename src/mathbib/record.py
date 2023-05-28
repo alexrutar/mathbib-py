@@ -143,14 +143,17 @@ class ArchiveRecord:
         return returned_record
 
     def is_null(self, warn: bool = False) -> bool:
-        ret = len(self.as_joint_record()) == 0
-        if warn and ret:
-            TermWrite.warn(f"Null record '{self.keyid}'")
-        return ret
+        if self.keyid.drop_alias() in self.cli_session.relations:
+            return False
+        else:
+            ret = len(self.as_joint_record()) == 0
+            if warn and ret:
+                TermWrite.warn(f"Null record '{self.keyid}'")
+            return ret
 
     def related_keys(self) -> Iterable[KeyId]:
         try:
-            return self.cli_session.relations.related(self.keyid)
+            return self.cli_session.relations.related(self.keyid.drop_alias())
         except KeyError:
             return self.record.resolve().keys()
 
