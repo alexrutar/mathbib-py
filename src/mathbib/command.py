@@ -101,9 +101,7 @@ def cli(
 @click.option(
     "--out",
     "out",
-    type=click.Path(
-        file_okay=True, dir_okay=False, writable=True, path_type=Path
-    ),
+    type=click.Path(file_okay=True, dir_okay=False, writable=True, path_type=Path),
     help="Output file path.",
 )
 @click.pass_context
@@ -171,23 +169,6 @@ def open_cmd(record: ArchiveRecord):
 
     # if there is no file, try to download it
     raise click.ClickException("Could not find associated file.")
-
-
-# TODO: turn this into general record listing
-@file_group.command(name="list", short_help="List all files.")
-@click.pass_obj
-def file_list(session: CLISession):
-    """List all the files saved on your device, along with the corresponding"""
-    root = xdg_data_home() / "mathbib" / "files"
-    for pat in (xdg_data_home() / "mathbib" / "files").glob("**/*.pdf"):
-        key = pat.relative_to(root).parents[-2]
-        val = pat.relative_to(root / key).with_suffix("")
-        record = ArchiveRecord.from_str(f"{key}:{val}", session).as_bibtex()
-        click.echo(record["ID"], nl=False)
-        for src in ("author", "year", "title"):
-            if src in record.keys():
-                click.echo(" - " + record[src], nl=False)
-        click.echo()
 
 
 # TODO: add --force to overwrite manually
@@ -311,3 +292,31 @@ def list_alias(session: CLISession, key_sources: Sequence[Path]):
         alias_dict = session.alias
 
     click.echo(dumps(alias_dict), nl=False)
+
+
+@cli.command(name="list", short_help="List all records.")
+@click.option(
+    "--sep",
+    "sep",
+    type=str,
+    default=" - ",
+    help="Separator for titles.",
+)
+@click.pass_obj
+def list_cmd(session: CLISession, sep: str):
+    """List all records. The records are printed in the format"""
+    for keyid in session.relations.iter_canonical():
+        record = ArchiveRecord(
+            AliasedKeyId(keyid.key, keyid.identifier), session
+        ).as_bibtex()
+        click.echo(
+            sep.join(
+                str(elem)
+                for elem in (
+                    keyid,
+                    record.get("author"),
+                    record.get("year"),
+                    record.get("title"),
+                )
+            )
+        )

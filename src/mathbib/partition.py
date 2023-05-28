@@ -1,3 +1,9 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Iterable
+
 import json
 
 from .remote import KeyId
@@ -14,6 +20,9 @@ class Partition:
     def canonical(self, elem: KeyId) -> KeyId:
         """Get the canonical record associated with an element."""
         return self._lookup[elem]
+
+    def iter_canonical(self) -> Iterable[KeyId]:
+        return iter(self._dict.keys())
 
     def related(self, elem: KeyId) -> list[KeyId]:
         """Get the canonical record associated with an element."""

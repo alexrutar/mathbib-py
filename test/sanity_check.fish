@@ -18,5 +18,6 @@ echo
 
 echo "Getting canonical"
 mb get key Hoc2014
+mb list
 
-rm -f alias_path relation_path cache_dir
+rm -f $alias_path $relation_path
