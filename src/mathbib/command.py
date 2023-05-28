@@ -17,6 +17,7 @@ from .term import TermWrite
 
 from tomli_w import dumps
 from xdg_base_dirs import xdg_data_home
+import shutil
 
 
 def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
@@ -171,8 +172,32 @@ def open_cmd(record: ArchiveRecord):
 def file_list(session: CLISession):
     """Open file associated with record KEY:ID."""
     for pat in (xdg_data_home() / "mathbib" / "files").glob("**/*.pdf"):
-        record = ArchiveRecord.from_str(f"{pat.parent.stem}:{pat.stem}", session).as_bibtex()
+        record = ArchiveRecord.from_str(
+            f"{pat.parent.stem}:{pat.stem}", session
+        ).as_bibtex()
         click.echo(f"{record['ID']} - {record['title']}")
+
+
+@file_group.command(name="add", short_help="Add new file for record.")
+@keyid_argument
+@click.argument(
+    "source",
+    type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path),
+    metavar="PDF",
+)
+def file_add(keyid: AliasedKeyId, source: Path):
+    """Add new resource PDF for record KEY:ID."""
+    target = keyid.file_path()
+    if source.suffix != ".pdf":
+        raise click.ClickException("cannot add non-PDF record")
+
+    if (
+        not target.exists()
+        or target.exists()
+        and click.confirm("Overwrite existing file?")
+    ):
+        target.parent.mkdir(exist_ok=True, parents=True)
+        shutil.copyfile(source, target)
 
 
 @cli.command(name="edit", short_help="Edit local record.")
@@ -182,7 +207,7 @@ def edit_cmd(record: ArchiveRecord):
     toml_record = dumps(record.as_toml())
 
     while True:
-        edited = click.edit(toml_record, extension='.toml')
+        edited = click.edit(toml_record, extension=".toml")
         if edited is not None:
             try:
                 loads(edited)
@@ -192,7 +217,7 @@ def edit_cmd(record: ArchiveRecord):
             except TOMLDecodeError as e:
                 TermWrite.error(f"invalid TOML: {e}")
 
-            if click.confirm('Edit again?'):
+            if click.confirm("Edit again?"):
                 toml_record = edited
             else:
                 return

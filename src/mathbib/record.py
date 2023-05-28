@@ -22,7 +22,6 @@ from requests.exceptions import ConnectionError
 from xdg_base_dirs import xdg_data_home
 
 from .remote import KeyId, AliasedKeyId, get_remote_record, KeyIdError
-from .term import TermWrite
 from .remote.error import NullRecordError, RemoteAccessError
 from .bibtex import CAPTURED
 from .term import TermWrite
@@ -43,6 +42,7 @@ def keyid_or_none(keyid_str: str) -> Optional[KeyId]:
     except KeyIdError as e:
         TermWrite.warn(e.message)
         return None
+
 
 def _extract_keyid_pairs(
     to_resolve: Iterable[tuple[Optional[dict], list[tuple[str, str]]]]
@@ -193,7 +193,10 @@ class ArchiveRecord:
     def get_local_bibtex(self) -> dict:
         return reduce(
             operator.ior,
-            (keyid.toml_record(warn=True) for keyid in reversed(self.record.resolve().keys())),
+            (
+                keyid.toml_record(warn=True)
+                for keyid in reversed(self.record.resolve().keys())
+            ),
             {},
         )
 

@@ -174,7 +174,6 @@ class KeyId:
             else:
                 raise e
 
-
     def cache_path(self):
         return (
             xdg_cache_home()
