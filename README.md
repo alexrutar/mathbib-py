@@ -48,7 +48,7 @@ It also contains more references \cite{zbl:1251.28008, doi:10.4007/annals.2019.1
 ```
 Simply run
 ```sh
-mbib generate doc.tex > doc.bib
+mbib generate doc.tex --out doc.bib
 ```
 to build the `.bib` file, and compile.
 
@@ -88,7 +88,7 @@ Of course, if `mbib` cannot find a resource for your file, you can also add one 
 mbib file add Hoc2014 path/to/file.pdf
 ```
 
-Finally, if you have loaded a record but there are mistakes (for instance, improperly formatted LaTeX titles), you can apply local modifications which will always be applied when requesting the record.
+Finally, if you have loaded a record but there are mistakes (for instance, improperly formatted LaTeX), you can apply local modifications which will always be applied when requesting the record.
 Edit the local record with, for example,
 ```
 mbib file open zbl:1251.28008
