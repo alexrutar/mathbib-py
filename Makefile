@@ -1,10 +1,9 @@
 SHELL := /usr/local/bin/fish
 
-.PHONY: upload test format test-type
+.PHONY: publish test format test-type
 
-upload: format test
-	python -m build
-	TWINE_USERNAME="__token__" TWINE_PASSWORD=(keyring get pypi_mathbib_token alexrutar) twine upload dist/*
+publish: format test
+	POETRY_PYPI_TOKEN_PYPI=(keyring get pypi_mathbib_token alexrutar) poetry publish --build
 
 test:
 	# mypy .
@@ -12,4 +11,4 @@ test:
 
 format:
 	black . --target-version py311 --preview
-	flake8 src/mathbib/
+	flake8 mathbib/
