@@ -1,9 +1,32 @@
 [build-system]
-requires = [
-    "setuptools>=67.7",
-    "wheel>=0.40"
-]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "mathbib"
+version = "0.3.0"
+description = "A mathematics BibLaTeX bibliography manager."
+authors = ["Alex Rutar <alex@rutar.org>"]
+readme = "README.md"
+packages = [{include = "mathbib"}]
+license = "MIT"
+repository = "https://github.com/alexrutar/mathbib-py"
+include = ["mathbib/resources/journal_abbrevs.json"]
+
+[tool.poetry.scripts]
+mbib = "mathbib.command:cli"
+
+[tool.poetry.dependencies]
+python = "^3.11.0"
+bibtexparser = "^1.4.0"
+click = "^8.1.3"
+nameparser = "^1.1.2"
+xdg-base-dirs = "^6.0.0"
+lxml = "^4.9.2"
+python-stdnum = "^1.18"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
+tomli-w = "^1.0.0"
 
 [tool.pyright]
 include = ["src"]

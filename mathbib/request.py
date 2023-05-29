@@ -16,7 +16,6 @@ import tomllib
 
 from xdg_base_dirs import xdg_config_home
 
-from . import __version__
 from .term import TermWrite
 from .remote import get_remote_record
 
@@ -36,7 +35,7 @@ class RemoteSession:
         ).get("email")
         if contact_email is not None:
             self.session.headers.update(
-                {"User-Agent": f"MathBib/{__version__} (mailto:{contact_email})"}
+                {"User-Agent": f"MathBib (mailto:{contact_email})"}
             )
 
         self.timeout = timeout
