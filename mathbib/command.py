@@ -66,7 +66,8 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 )
 @click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
 @click.option(
-    "--alias-file",
+    "--alias",
+    "-a",
     "alias_file",
     default=xdg_data_home() / "mathbib" / "alias.toml",
     help="Alias file",
