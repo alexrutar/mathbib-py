@@ -39,6 +39,9 @@ class CLISession:
         if record.is_null():
             raise NullRecordError(keyid)
 
+        if alias in self.alias.keys():
+            raise click.ClickException(f"Alias '{alias}' already exists. Delete first to overwrite.")
+
         self.alias[alias] = str(keyid)
 
     def delete_alias(self, alias: str):
