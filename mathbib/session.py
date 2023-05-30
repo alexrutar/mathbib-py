@@ -40,7 +40,9 @@ class CLISession:
             raise NullRecordError(keyid)
 
         if alias in self.alias.keys():
-            raise click.ClickException(f"Alias '{alias}' already exists. Delete first to overwrite.")
+            raise click.ClickException(
+                f"Alias '{alias}' already exists. Delete first to overwrite."
+            )
 
         self.alias[alias] = str(keyid)
 
