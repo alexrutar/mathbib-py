@@ -208,7 +208,7 @@ def edit_cmd(record: ArchiveRecord):
         if edited is not None:
             try:
                 loads(edited)
-                record.keyid.toml_path().mkdir(parents=True, exist_ok=True)
+                record.keyid.toml_path()parent.mkdir(parents=True, exist_ok=True)
                 record.keyid.toml_path().write_text(edited)
                 return
 
