@@ -30,9 +30,12 @@ class RemoteSession:
     ):
         self.session = requests.Session()
 
-        contact_email = tomllib.loads(
-            (xdg_config_home() / "mathbib" / "config.toml").read_text()
-        ).get("email")
+        try:
+            contact_email = tomllib.loads(
+                (xdg_config_home() / "mathbib" / "config.toml").read_text()
+            ).get("email")
+        except FileNotFoundError:
+            contact_email = None
         if contact_email is not None:
             self.session.headers.update(
                 {"User-Agent": f"MathBib (mailto:{contact_email})"}
