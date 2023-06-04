@@ -12,7 +12,7 @@ This installs the `mbib` command-line interface.
 The first useful subcommand is `mbib get`.
 For instance, running
 ```sh
-mbib get bibtex arxiv:1212.1873
+mbib get arxiv:1212.1873
 ```
 will retrieve the arxiv record at [https://arxiv.org/abs/1212.1873](https://arxiv.org/abs/1212.1873).
 If you check the output, you will notice that it actually returns
@@ -32,7 +32,7 @@ If you check the output, you will notice that it actually returns
 }
 ```
 This contains more information than what can be found on arxiv!
-In general `mbib` will attempt to search multiple locations for records to build the most updated citation possible.
+In general `mbib` will search multiple locations for records to build the most updated citation possible.
 
 Generating records from command-line arguments is nice, but a much more common use case is to generate records corresponding to a file.
 Suppose you have a file `doc.tex` containing the contents
@@ -53,7 +53,7 @@ mbib generate doc.tex --out doc.bib
 to build the `.bib` file, and compile.
 
 Of course, it can be somewhat inconvenient to remember a large number of citation keys, especially ones that are designed to be machine-readable.
-An easy fix here is to create aliases.
+One solution is to create aliases.
 Let's define a few:
 ```sh
 mbib alias add Hoc2014 arxiv:1212.1873
@@ -71,7 +71,7 @@ It also contains more references \cite{HocShm2012, Shm2019}.
 \printbibliography
 \end{document}
 ```
-Remember to regenerate the `doc.bib` file with `mbib generate doc.tex > doc.bib` (the keys need to be updated), and the file will compile!
+Remember to regenerate the `doc.bib` file with `mbib generate doc.tex > doc.bib` (the citation keys need to be updated), and the file will compile!
 Aliases also work as command line arguments anywhere a `key:id` is expected.
 
 Suppose you have been working on the above TEX document for a while, and now you want to cite a specific theorem from the paper `Hoc2014`.
@@ -113,7 +113,7 @@ In particular, the first search will be slow, but afterwards the request will re
 
 You can see all the information collected by MathBib by running, for instance,
 ```
-mbib get json arxiv:1212.1873
+mbib get -r json arxiv:1212.1873
 ```
 Note that MathBib also has an internal notion of record priority.
 Local modifications of records have the highest priority, and otherwise the priority is precisely as specified in the list above.

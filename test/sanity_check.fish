@@ -1,7 +1,7 @@
 set --local alias_path "alias.toml"
 set --local relation_path "relations.json"
 
-alias mb "mbib --alias-file $alias_path --relation-file $relation_path"
+alias mb "poetry run mbib --alias $alias_path --relation-file $relation_path"
 
 echo "Adding aliases example.tex"
 mb alias add Hoc2014 arxiv:1212.1873
@@ -17,7 +17,8 @@ mb generate example.tex
 echo
 
 echo "Getting canonical"
-mb get key Hoc2014
+mb get Hoc2014 HocShm2012
+mb get -r json Hoc2014 HocShm2012 | jq
 mb list
 
 rm -f $alias_path $relation_path

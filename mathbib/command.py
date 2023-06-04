@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from typing import Iterable, Optional, Sequence
+    from typing import Iterable, Optional, Sequence, Literal
 
 from pathlib import Path
 from tomllib import loads, TOMLDecodeError
@@ -17,6 +17,7 @@ from .session import CLISession
 from .term import TermWrite
 
 from tomli_w import dumps
+import json
 from xdg_base_dirs import xdg_data_home
 import shutil
 
@@ -41,11 +42,30 @@ def record_callback(ctx, param, keyid_str: str) -> ArchiveRecord:
     return ArchiveRecord(keyid_callback(ctx, param, keyid_str), ctx.obj)
 
 
+def record_callback_multiple(
+    ctx, param, keyid_strs: tuple[str]
+) -> Iterable[ArchiveRecord]:
+    """Construct the KeyId argument: first check if the keyid is aliased;
+    otherwise, try to obtain it directly.
+    """
+    return (
+        ArchiveRecord(keyid_callback(ctx, param, keyid_str), ctx.obj)
+        for keyid_str in sorted(set(keyid_strs))
+    )
+
+
 keyid_argument = click.argument(
     "keyid", type=str, metavar="KEY:ID", callback=keyid_callback
 )
 record_argument = click.argument(
     "record", type=str, metavar="KEY:ID", callback=record_callback
+)
+record_argument_multiple = click.argument(
+    "records",
+    type=str,
+    nargs=-1,
+    metavar="[KEY:ID]...",
+    callback=record_callback_multiple,
 )
 texfile_argument = click.argument(
     "texfile",
@@ -117,27 +137,40 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
         out.write_text(bibstr)
 
 
-@cli.group(name="get", short_help="Retrieve records.")
-def get_group():
-    """Retrieve various record types associated with KEYI:ID records."""
+@cli.command(name="get", short_help="Get record from KEY:ID.")
+@click.option(
+    "--record-type",
+    "-r",
+    "record_type",
+    type=click.Choice(["bibtex", "json"], case_sensitive=False),
+    default="bibtex",
+    help="Record type.",
+)
+@record_argument_multiple
+@click.pass_obj
+def get(
+    session: CLISession,
+    record_type: Literal["bibtex", "json"],
+    records: Iterable[ArchiveRecord],
+):
+    """Generate a record for multiple KEY:ID records. Specify the output type
+    using -r.
 
+    Input KEY:ID pairs are automatically sorted and duplicates are removed.
 
-@get_group.command(name="json", short_help="Get record from KEY:ID.")
-@record_argument
-def json_cmd(record: ArchiveRecord):
-    """Generate a JSON record for KEY:ID."""
-    click.echo(record.as_json())
-
-
-@get_group.command(name="bibtex", short_help="Get bibtex from KEY:ID.")
-@record_argument
-def bibtex(record: ArchiveRecord):
-    """Generate a BibTeX record for KEY:ID."""
+    - BibTex records are returned as the string contents of a valid .bib file.
+    - JSON records are returned as list of dictionaries containing the associated
+    record objects.
+    """
     # TODO: option to pass multiple records
-    click.echo(record.cli_session.bibtex_handler.write_records((record,)), nl=False)
+    match record_type:
+        case "json":
+            click.echo(json.dumps([record.as_json_dict() for record in records]))
+        case "bibtex":
+            click.echo(session.bibtex_handler.write_records(records), nl=False)
 
 
-@get_group.command(name="key", short_help="Get highest priority key from KEY:ID.")
+@cli.command(name="key", short_help="Get highest priority key from KEY:ID.")
 @record_argument
 def key(record: ArchiveRecord):
     """Generate a BibTeX record for KEY:ID."""

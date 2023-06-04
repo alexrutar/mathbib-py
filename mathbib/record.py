@@ -15,7 +15,6 @@ if TYPE_CHECKING:
 
 from itertools import chain
 import operator
-import json
 from functools import reduce
 
 from requests.exceptions import ConnectionError
@@ -147,8 +146,8 @@ class ArchiveRecord:
     ):
         return cls(AliasedKeyId.from_str(keyid_str, alias=alias), session=session)
 
-    def as_json(self) -> str:
-        return json.dumps({str(k): v for k, v in self.record.resolve().items()})
+    def as_json_dict(self) -> dict:
+        return {str(k): v for k, v in self.record.resolve().items()}
 
     def as_joint_record(self) -> dict:
         records = list(reversed(self.record.resolve().values()))
