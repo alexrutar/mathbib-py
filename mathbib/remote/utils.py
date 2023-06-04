@@ -41,7 +41,7 @@ class RelatedRecord:
             return self.related_key, self.related_identifier
         else:
             url_builder, parser = self.related_identifier
-            response = session.make_request(source_key, url_builder)
+            response, _ = session.make_request(source_key, url_builder)
             if response is not None:
                 parsed = parser(response)
                 if parsed is not None:

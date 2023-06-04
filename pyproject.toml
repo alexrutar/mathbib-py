@@ -2,6 +2,9 @@
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[virtualenv]
+in-project = true
+
 [tool.poetry]
 name = "mathbib"
 version = "0.6.1"
@@ -29,7 +32,7 @@ beautifulsoup4 = "^4.12.2"
 tomli-w = "^1.0.0"
 
 [tool.pyright]
-include = ["src"]
+include = ["mathbib"]
 exclude = [
     "**/__pycache__"
 ]
