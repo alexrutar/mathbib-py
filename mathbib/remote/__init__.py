@@ -145,22 +145,37 @@ class KeyId:
         return cls(RemoteKey[tokens[0].upper()], ":".join(tokens[1:]))
 
     def toml_path(self):
-        return (
+        ret = (
             xdg_data_home()
             / "mathbib"
             / "records"
             / str(self.key)
             / f"{self.identifier}.toml"
         )
+        ret.parent.mkdir(parents=True, exist_ok=True)
+        return ret
 
     def file_path(self, suffix: str = "pdf"):
-        return (
+        ret = (
             xdg_data_home()
             / "mathbib"
             / "files"
             / str(self.key)
             / f"{self.identifier}.{suffix}"
         )
+        ret.parent.mkdir(parents=True, exist_ok=True)
+        return ret
+
+    def cache_path(self):
+        ret = (
+            xdg_cache_home()
+            / "mathbib"
+            / "records"
+            / str(self.key)
+            / f"{self.identifier}.json"
+        )
+        ret.parent.mkdir(parents=True, exist_ok=True)
+        return ret
 
     def toml_record(self, warn: bool = False):
         try:
@@ -173,15 +188,6 @@ class KeyId:
                 return {}
             else:
                 raise e
-
-    def cache_path(self):
-        return (
-            xdg_cache_home()
-            / "mathbib"
-            / "records"
-            / str(self.key)
-            / f"{self.identifier}.json"
-        )
 
     def __str__(self):
         return f"{self.key}:{self.identifier}"

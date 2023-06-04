@@ -120,7 +120,6 @@ class RemoteSession:
     ) -> None:
         if self.cache:
             target = keyid.cache_path()
-            target.parent.mkdir(parents=True, exist_ok=True)
             cache_object = {
                 "record": record,
                 "accessed": datetime.now().isoformat(),

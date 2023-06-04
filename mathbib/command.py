@@ -194,7 +194,6 @@ def file_add(record: ArchiveRecord, source: Path):
             or target.exists()
             and click.confirm("Overwrite existing file?")
         ):
-            target.parent.mkdir(exist_ok=True, parents=True)
             shutil.copyfile(source, target)
 
 
@@ -209,7 +208,6 @@ def edit_cmd(record: ArchiveRecord):
         if edited is not None:
             try:
                 loads(edited)
-                record.keyid.toml_path().parent.mkdir(parents=True, exist_ok=True)
                 record.keyid.toml_path().write_text(edited)
                 return
 

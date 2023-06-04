@@ -274,7 +274,6 @@ class ArchiveRecord:
         for keyid in self.related_keys():
             download_url = get_remote_record(keyid).download_url
             path = keyid.file_path()
-            path.parent.mkdir(exist_ok=True, parents=True)
             if (
                 download_url is not None
                 and self.cli_session.remote_session.make_raw_streaming_request(
