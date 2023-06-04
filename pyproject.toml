@@ -7,7 +7,7 @@ in-project = true
 
 [tool.poetry]
 name = "mathbib"
-version = "0.7.0"
+version = "0.7.1"
 description = "A mathematics BibLaTeX bibliography manager."
 authors = ["Alex Rutar <alex@rutar.org>"]
 readme = "README.md"
