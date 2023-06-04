@@ -148,6 +148,7 @@ class RemoteSession:
             try:
                 res = self.session.get(url, timeout=self.timeout)
             except requests.Timeout:
+                TermWrite.warn("could not access record (connection timeout)")
                 return (None, False)
 
             if res.status_code == requests.codes.ok:
@@ -155,13 +156,17 @@ class RemoteSession:
             elif res.status_code == requests.codes.not_found:
                 return (None, True)
             else:
+                TermWrite.warn(
+                    f"could not access record (server returned code {res.status_code})"
+                )
                 return (None, False)
         return (None, True)
 
     def make_raw_streaming_request(self, url: str, target: Path) -> bool:
         """Attempt to download the file, and return a boolean indicating success."""
         if self.remote:
-            TermWrite.download(url)
+            if self.print_info:
+                TermWrite.download(url)
             res = self.session.get(url, stream=True, timeout=self.timeout)
 
             # stream the download, and display a progress bar if isatty
