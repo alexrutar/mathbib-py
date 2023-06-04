@@ -128,7 +128,9 @@ class RemoteSession:
             }
             target.write_text(json.dumps(cache_object))
 
-    def make_request(self, keyid: KeyId, build_url: URLBuilder) -> tuple[Optional[str], bool]:
+    def make_request(
+        self, keyid: KeyId, build_url: URLBuilder
+    ) -> tuple[Optional[str], bool]:
         return self.make_raw_request(build_url(keyid.identifier))
 
     def make_raw_request(self, url: str) -> tuple[Optional[str], bool]:
