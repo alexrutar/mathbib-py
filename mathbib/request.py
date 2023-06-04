@@ -89,10 +89,10 @@ class RemoteSession:
         return None, status, []
 
     def load_record(self, keyid: KeyId) -> tuple[Optional[dict], list[tuple[str, str]]]:
-        """Attempt to load the record associated with keyid and cache a list of
-        related records. At this stage, the related records are not "final": they are
-        resolved (so they are strings) but otherwise the related records may not actually
-        be real records.
+        """Attempt to load the record associated with keyid and cache a list of related
+        records. At this stage, the related records are not "final": they are resolved
+        (so they are strings) but otherwise the related records may not actually be real
+        records.
         """
         remote_record = get_remote_record(keyid)
 

@@ -11,5 +11,5 @@ test:
 	# pytest --run-slow
 
 format:
+	ruff check --fix mathbib/
 	black . --target-version py311 --preview
-	flake8 mathbib/
