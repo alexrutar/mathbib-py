@@ -20,7 +20,7 @@ def get_citekeys(tex: str) -> frozenset[str]:
     # \<citecommand>[...]{key1, key2, ...} first match for {key1, key2, ...}
     # and then extract the keys
     rx_citecommand = re.compile(
-        r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no)citep?"
+        r"(?<!\\)%.+|(\\(?:|paren|foot|text|super|auto|no|full)citep?"
         r"(?:\[[^\]]*\])?\{((?!\*)[^{}]+)\})"
     )
     rx_citekey: Final = re.compile(r"([^\s,{}\[\]\(\)\\%#~]+)")
