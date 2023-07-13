@@ -80,24 +80,24 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
 
 @click.group()
 @click.version_option(prog_name="mbib (mathbib)")
-@click.option("--cache/--no-cache", "cache", default=True, help="Use local cache")
+@click.option("--cache/--no-cache", "cache", default=True, help="Use local cache.")
 @click.option(
-    "--remote/--no-remote", "remote", default=True, help="Access remote records"
+    "--remote/--no-remote", "remote", default=True, help="Use remote records."
 )
-@click.option("--debug/--no-debug", "debug", default=False, help="Debug mode")
+@click.option("--debug/--no-debug", "debug", default=False, help="Debug mode.")
 @click.option(
     "--alias",
     "-a",
     "alias_file",
     default=xdg_data_home() / "mathbib" / "alias.toml",
-    help="Alias file",
+    help="Use alias file.",
     type=click.Path(file_okay=True, dir_okay=False, readable=True, path_type=Path),
 )
 @click.option(
     "--relation-file",
     "relation_file",
     default=xdg_data_home() / "mathbib" / "relations.json",
-    help="Alias file",
+    help="Use relation file.",
     type=click.Path(file_okay=True, dir_okay=False, readable=True, path_type=Path),
 )
 @click.pass_context
