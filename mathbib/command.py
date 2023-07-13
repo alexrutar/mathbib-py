@@ -94,7 +94,7 @@ alias_argument = click.argument("alias_name", type=str, metavar="ALIAS")
     type=click.Path(file_okay=True, dir_okay=False, readable=True, path_type=Path),
 )
 @click.option(
-    "--relation-file",
+    "--relation",
     "relation_file",
     default=xdg_data_home() / "mathbib" / "relations.json",
     help="Use relation file.",

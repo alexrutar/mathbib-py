@@ -1,7 +1,7 @@
 set --local alias_path "alias.toml"
 set --local relation_path "relations.json"
 
-alias mb "poetry run mbib --alias $alias_path --relation-file $relation_path"
+alias mb "poetry run mbib --alias $alias_path --relation $relation_path"
 
 echo "Adding aliases example.tex"
 mb alias add Hoc2014 arxiv:1212.1873

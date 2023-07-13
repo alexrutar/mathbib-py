@@ -199,6 +199,9 @@ class ArchiveRecord:
             {},
         )
 
+    def bib_id(self) -> str:
+        return str(self.keyid) if self.keyid.alias is None else self.keyid.alias
+
     def as_bibtex(self) -> dict:
         joint_record = self.as_joint_record()
 
@@ -211,7 +214,7 @@ class ArchiveRecord:
         captured = {k: v for k, v in joint_record.items() if k in CAPTURED}
 
         special = {
-            "ID": str(self.keyid) if self.keyid.alias is None else self.keyid.alias,
+            "ID": self.bib_id(),
             "ENTRYTYPE": joint_record["bibtype"],
         }
         local_bibtex = self.get_local_bibtex()

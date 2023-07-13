@@ -4,7 +4,9 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from typing import Iterable, Final, Optional
     from .session import CLISession
+    from .record import KeyId
 
+from collections import defaultdict
 from itertools import chain
 from pathlib import Path
 import re
@@ -75,7 +77,19 @@ def get_file_records(session: CLISession, *paths: Path) -> Iterable[ArchiveRecor
         citekey_to_record(session, citekey, session.alias) for citekey in citekeys
     )
 
-    return (record for record in records_or_none if record is not None)
+    out = [record for record in records_or_none if record is not None]
+
+    # check if there are multiple keys for the same record
+    multiple_citekeys: dict[KeyId, list[str]] = defaultdict(list)
+
+    for record in out:
+        multiple_citekeys[record.priority_key()].append(record.bib_id())
+
+    for priority_key, bib_ids in multiple_citekeys.items():
+        if len(bib_ids) > 1:
+            TermWrite.warn(f"Multiple citekeys for record '{priority_key}': {bib_ids}")
+
+    return out
 
 
 def generate_biblatex(session: CLISession, *paths: Path) -> str:
