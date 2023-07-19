@@ -301,6 +301,13 @@ def get_alias(session: CLISession, alias_name: str):
 
 
 @alias.command(name="list", short_help="List all defined aliases.")
+@click.option(
+    "--keys-only",
+    "keys_only",
+    is_flag=True,
+    default=False,
+    help="Only print ALIASes.",
+)
 @click.argument(
     "key_sources",
     nargs=-1,
@@ -308,12 +315,15 @@ def get_alias(session: CLISession, alias_name: str):
     metavar="KEYSOURCE",
 )
 @click.pass_obj
-def list_alias(session: CLISession, key_sources: Sequence[Path]):
+def list_alias(session: CLISession, keys_only: bool, key_sources: Sequence[Path]):
     """Print all defined aliases to the terminal. The aliases are printed
     as valid TOML as a list of ALIAS = KEY:ID entries.
 
     If any file paths are specified, only generate the alias entries corresponding
-    to citation keys in the corresponding files.
+    to citation keys in the corresponding files. This is useful for generating new
+    files to use with the top-level --alias option.
+
+    With the --keys-only, only print the ALIAS for each entry, separated by a newline.
     """
     if len(key_sources) > 0:
         alias_dict = {
@@ -324,7 +334,10 @@ def list_alias(session: CLISession, key_sources: Sequence[Path]):
     else:
         alias_dict = session.alias
 
-    click.echo(dumps(alias_dict), nl=False)
+    if keys_only:
+        click.echo("\n".join(sorted(alias_dict.keys())))
+    else:
+        click.echo(dumps(alias_dict), nl=False)
 
 
 @cli.command(name="list", short_help="List all records.")
