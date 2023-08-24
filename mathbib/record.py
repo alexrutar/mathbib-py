@@ -172,6 +172,20 @@ class ArchiveRecord:
             TermWrite.warn(f"Null record '{self.keyid}'")
         return ret
 
+    def get_linked_file(self) -> Optional[Path]:
+        """Return a path to the file associated with the record,
+        downloading the file if necessary. Returns None if the file
+        cannot be found.
+        """
+        local_file = self.related_file()
+        if local_file is not None:
+            return local_file
+
+        # if there is no file, try to download it
+        download_file = self.download_file()
+        if download_file is not None:
+            return download_file
+
     def related_keys(self) -> Iterable[KeyId]:
         try:
             return self.cli_session.relations.related(self.keyid.drop_alias())

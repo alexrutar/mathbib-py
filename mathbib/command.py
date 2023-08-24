@@ -188,19 +188,11 @@ def file_open(record: ArchiveRecord):
     PDF viewer on your device. If the file does not exist, attempt to download
     it from from a standardized location.
     """
-    # First, try to open an existing file
-    local_file = record.related_file()
-    if local_file is not None:
-        click.launch(str(local_file))
-        return
-
-    # if there is no file, try to download it
-    download_file = record.download_file()
-    if download_file is not None:
-        click.launch(str(download_file))
-        return
-
-    raise click.ClickException("Could not find associated file.")
+    linked_file = record.get_linked_file()
+    if linked_file is not None:
+        click.launch(str(linked_file))
+    else:
+        raise click.ClickException("Could not find associated file.")
 
 
 @file_group.command(name="export", short_help="Export file associated with KEY:ID.")
@@ -214,19 +206,11 @@ def file_export(record: ArchiveRecord, out: Path):
     If the file does not exist, attempt to download it from from a
     standardized location.
     """
-    # First, try to open an existing file
-    local_file = record.related_file()
-    if local_file is not None:
-        shutil.copyfile(local_file, out)
-        return
-
-    # if there is no file, try to download it
-    download_file = record.download_file()
-    if download_file is not None:
-        shutil.copyfile(download_file, out)
-        return
-
-    raise click.ClickException("Could not find associated file.")
+    linked_file = record.get_linked_file()
+    if linked_file is not None:
+        shutil.copyfile(linked_file, out)
+    else:
+        raise click.ClickException("Could not find associated file.")
 
 
 # TODO: add --force to overwrite manually
