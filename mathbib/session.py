@@ -8,15 +8,15 @@ if TYPE_CHECKING:
 
     from .record import ArchiveRecord
 
-from .bibtex import BibTexHandler
-from .request import RemoteSession
-from .partition import Partition
-from .remote.error import NullRecordError
-
 from tomllib import loads, TOMLDecodeError
 
 import click
 from tomli_w import dumps
+
+from .bibtex import BibTexHandler
+from .request import RemoteSession
+from .partition import Partition
+from .remote.error import NullRecordError
 
 
 class CLISession:

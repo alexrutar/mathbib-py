@@ -5,9 +5,13 @@ if TYPE_CHECKING:
     from typing import Iterable, Optional, Sequence, Literal
 
 from pathlib import Path
+import json
+import shutil
 from tomllib import loads, TOMLDecodeError
 
 import click
+from tomli_w import dumps
+from xdg_base_dirs import xdg_data_home
 
 from .citegen import generate_biblatex, get_citekeys_from_paths
 from .record import ArchiveRecord
@@ -15,11 +19,6 @@ from .remote import AliasedKeyId, KeyIdError
 from .remote.error import RemoteAccessError
 from .session import CLISession
 from .term import TermWrite
-
-from tomli_w import dumps
-import json
-from xdg_base_dirs import xdg_data_home
-import shutil
 
 
 def keyid_callback(ctx, _, keyid_str: str) -> AliasedKeyId:
@@ -184,7 +183,7 @@ def file_group():
 
 @file_group.command(name="open", short_help="Open file associated with KEY:ID.")
 @record_argument
-def open_cmd(record: ArchiveRecord):
+def file_open(record: ArchiveRecord):
     """Open the PDF file associated with record KEY:ID using the default
     PDF viewer on your device. If the file does not exist, attempt to download
     it from from a standardized location.
@@ -201,7 +200,32 @@ def open_cmd(record: ArchiveRecord):
         click.launch(str(download_file))
         return
 
+    raise click.ClickException("Could not find associated file.")
+
+
+@file_group.command(name="export", short_help="Export file associated with KEY:ID.")
+@record_argument
+@click.argument(
+    "out",
+    type=click.Path(file_okay=True, dir_okay=False, writable=True, path_type=Path),
+)
+def file_export(record: ArchiveRecord, out: Path):
+    """Export the PDF file associated with record KEY:ID to the path OUT.
+    If the file does not exist, attempt to download it from from a
+    standardized location.
+    """
+    # First, try to open an existing file
+    local_file = record.related_file()
+    if local_file is not None:
+        shutil.copyfile(local_file, out)
+        return
+
     # if there is no file, try to download it
+    download_file = record.download_file()
+    if download_file is not None:
+        shutil.copyfile(download_file, out)
+        return
+
     raise click.ClickException("Could not find associated file.")
 
 
