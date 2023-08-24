@@ -161,7 +161,6 @@ def get(
     - JSON records are returned as list of dictionaries containing the associated
     record objects.
     """
-    # TODO: option to pass multiple records
     match record_type:
         case "json":
             click.echo(json.dumps([record.as_json_dict() for record in records]))
@@ -201,19 +200,25 @@ def file_open(record: ArchiveRecord):
     "out",
     type=click.Path(file_okay=True, dir_okay=False, writable=True, path_type=Path),
 )
-def file_export(record: ArchiveRecord, out: Path):
+@click.option("--force/--no-force", "force", default=False, help="Force overwrite.")
+def file_export(record: ArchiveRecord, out: Path, force: bool):
     """Export the PDF file associated with record KEY:ID to the path OUT.
     If the file does not exist, attempt to download it from from a
     standardized location.
     """
     linked_file = record.get_linked_file()
     if linked_file is not None:
-        shutil.copyfile(linked_file, out)
+        if (
+            not out.exists()
+            or force
+            or out.exists()
+            and click.confirm("Overwrite existing file?")
+        ):
+            shutil.copyfile(linked_file, out)
     else:
         raise click.ClickException("Could not find associated file.")
 
 
-# TODO: add --force to overwrite manually
 @file_group.command(name="add", short_help="Add new file for record.")
 @record_argument
 @click.argument(
@@ -221,7 +226,8 @@ def file_export(record: ArchiveRecord, out: Path):
     type=click.Path(exists=True, file_okay=True, dir_okay=False, path_type=Path),
     metavar="PDF",
 )
-def file_add(record: ArchiveRecord, source: Path):
+@click.option("--force/--no-force", "force", default=False, help="Force overwrite.")
+def file_add(record: ArchiveRecord, source: Path, force: bool):
     """Add new resource PDF for record KEY:ID."""
     if record.is_null():
         raise click.ClickException("Cannot add record to invalid key!")
@@ -232,6 +238,7 @@ def file_add(record: ArchiveRecord, source: Path):
 
         if (
             not target.exists()
+            or force
             or target.exists()
             and click.confirm("Overwrite existing file?")
         ):
@@ -276,12 +283,20 @@ def show_cmd(record: ArchiveRecord):
         raise RemoteAccessError(f"No URL associated with {record.keyid}.")
 
 
-# TODO: add alias rename command
 @cli.group(name="alias", short_help="Manage record aliases.")
 def alias():
     """Add, delete, obtain, and list all aliases associated with various
     saved records.
     """
+
+
+@alias.command(name="rename", short_help="Rename alias.")
+@click.argument("old_alias", type=str, metavar="ALIAS")
+@click.argument("new_alias", type=str, metavar="NEW")
+@click.pass_obj
+def rename_alias(session: CLISession, old_alias: str, new_alias: str):
+    """Rename ALIAS to NEW."""
+    session.rename_alias(old_alias, new_alias)
 
 
 @alias.command(name="add", short_help="Add new alias.")

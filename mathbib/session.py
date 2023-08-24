@@ -46,6 +46,18 @@ class CLISession:
 
         self.alias[alias] = str(keyid)
 
+    def rename_alias(self, old_alias: str, new_alias: str):
+        if new_alias in self.alias.keys():
+            raise click.ClickException(
+                f"Alias '{new_alias}' already exists. Delete first to overwrite."
+            )
+        else:
+            try:
+                self.alias[new_alias] = self.alias[old_alias]
+                del self.alias[old_alias]
+            except KeyError:
+                raise click.ClickException(f"No alias with name '{old_alias}'")
+
     def delete_alias(self, alias: str):
         try:
             del self.alias[alias]
