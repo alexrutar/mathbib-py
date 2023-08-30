@@ -99,10 +99,10 @@ There are also other features implemented: either read more below, or run `mbib 
 ## Remote and local records
 Internally, whenever you request a new record, MathBib searches a few online data repositories for the information associated with the record.
 Currently, the following `KEY:` types are supported
-- `local:` (WARNING: not supported) internal local records
+- `local:` (WARNING: not yet supported) internal local records
 - `zbl:` [zbMATH Identifiers](https://zbmath.org/)
 - `doi:` [Digital Object Identifier](https://doi.org)
-- `mr:` (WARNING: not supported) [MathSciNet](https://mathscinet.ams.org)
+- `mr:` (WARNING: not yet supported) [MathSciNet](https://mathscinet.ams.org)
 - `zbmath:` [zbMath Internal Identifier](https://oai.zbmath.org/)
 - `arxiv:` [arXiv Identifier](https://arxiv.org)
 - `isbn:` [International Standard Book Number](https://en.wikipedia.org/wiki/ISBN).
@@ -121,6 +121,28 @@ For instance, if you run `mbib show arxiv:1212.1873`, your web browser will open
 If you view the corresponding JSON record, you will see the `zbl:` entry has the highest priority.
 
 
+## Useful scripts
+The output of `mbib list` is designed to be machine-readable.
+For example, to make it easier to find keys associated with documents, I find the following script (written in [Fish](https://fishshell.com/)) useful:
+```fish
+function pa --description 'Search MathBib record keys using fzf'
+    if count $argv > /dev/null
+        set --function fzf_opts --query "$argv"
+    end
+    set --local captured (mbib list | fzf $fzf_opts | cut -d " " -f 1)
+
+    if test -n "$captured"
+        echo $captured
+    end
+end
+```
+For instance, you can use this command whenever a key is required:
+```fish
+mbib file open (pa)
+```
+will prompt you to choose a file name, and then open the file.
+
+
 # Contributing and future improvements
 MathBib is still under active development!
 Some planned features include:
@@ -128,3 +150,4 @@ Some planned features include:
 1. Rework the code for remote record searching and parsing.
 2. Asynchronous requests for faster record downloading.
 3. Nicer printing and viewing using [rich](https://rich.readthedocs.io/en/stable/introduction.html).
+4. Proper implementation of local records.
