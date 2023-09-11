@@ -270,6 +270,32 @@ class ArchiveRecord:
             ).exists(),
         )
 
+    def as_inline(self) -> str:
+        record = {**self.as_joint_record(), **self.get_local_bibtex()}
+
+        auth_str = "; ".join(record["authors"])
+        if len(auth_str) > 0:
+            auth_str = auth_str + ". "
+
+        def format_key(key, prefix: str = "", suffix: str = ""):
+            if (val := record.get(key)) is not None:
+                return prefix + val + suffix + " "
+            else:
+                return ""
+
+        out = (
+            auth_str
+            + format_key("title", suffix=".")
+            + format_key("journal", r"\emph{", "}")
+            + format_key("volume", r"\textbf{", "}")
+            + format_key("year", r"(", ")")
+            + format_key("pages")
+        )
+
+        return out.strip()
+
+    # \textbf{296} (2020), no. 1-2, 813-830
+
     def show_url(self) -> Optional[str]:
         for keyid in self.related_keys():
             show_url = get_remote_record(keyid).show_url

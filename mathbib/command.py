@@ -141,7 +141,7 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
     "--record-type",
     "-r",
     "record_type",
-    type=click.Choice(["bibtex", "json"], case_sensitive=False),
+    type=click.Choice(["bibtex", "json", "inline"], case_sensitive=False),
     default="bibtex",
     help="Record type.",
 )
@@ -149,7 +149,7 @@ def generate(ctx: click.Context, texfile: Iterable[Path], out: Optional[Path]):
 @click.pass_obj
 def get(
     session: CLISession,
-    record_type: Literal["bibtex", "json"],
+    record_type: Literal["bibtex", "json", "inline"],
     records: Iterable[ArchiveRecord],
 ):
     """Generate a record for multiple KEY:ID records. Specify the output type
@@ -166,6 +166,9 @@ def get(
             click.echo(json.dumps([record.as_json_dict() for record in records]))
         case "bibtex":
             click.echo(session.bibtex_handler.write_records(records), nl=False)
+        case "inline":
+            for record in records:
+                click.echo(record.as_inline())
 
 
 @cli.command(name="key", short_help="Get highest priority key from KEY:ID.")
