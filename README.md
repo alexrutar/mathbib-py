@@ -71,7 +71,7 @@ It also contains more references \cite{HocShm2012, Shm2019}.
 \printbibliography
 \end{document}
 ```
-Remember to regenerate the `doc.bib` file with `mbib generate doc.tex > doc.bib` (the citation keys need to be updated), and the file will compile!
+Remember to regenerate the `doc.bib` file with `mbib generate doc.tex --out doc.bib` (the citation keys need to be updated), and the file will compile!
 Aliases also work as command line arguments anywhere a `key:id` is expected.
 
 Suppose you have been working on the above TEX document for a while, and now you want to cite a specific theorem from the paper `Hoc2014`.
@@ -90,7 +90,7 @@ mbib file add Hoc2014 path/to/file.pdf
 
 Finally, if you have loaded a record but there are mistakes (for instance, improperly formatted LaTeX), you can apply local modifications which will always be applied when requesting the record.
 Edit the local record with, for example,
-```
+```sh
 mbib file open zbl:1251.28008
 ```
 There are also other features implemented: either read more below, or run `mbib --help` and `mbib <subcommand> --help` for more information.
