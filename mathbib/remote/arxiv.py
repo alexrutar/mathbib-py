@@ -41,7 +41,7 @@ def show_url(arxiv: str) -> str:
 
 
 def download_url(arxiv: str) -> str:
-    return f"https://arxiv.org/pdf/{arxiv}.pdf"
+    return f"https://browse.arxiv.org/pdf/{arxiv}.pdf"
 
 
 def record_parser(result: str) -> ParsedRecord:
