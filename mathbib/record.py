@@ -44,7 +44,7 @@ def keyid_or_none(keyid_str: str) -> Optional[KeyId]:
 
 
 def _extract_keyid_pairs(
-    to_resolve: Iterable[tuple[Optional[dict], list[tuple[str, str]]]]
+    to_resolve: Iterable[tuple[Optional[dict], list[tuple[str, str]]]],
 ) -> Sequence[KeyId]:
     candidates = (
         keyid_or_none(f"{key}:{identifier}")

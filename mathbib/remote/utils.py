@@ -22,8 +22,9 @@ class RelatedRecord:
     def __init__(
         self,
         related_key: str,
-        related_identifier: str
-        | tuple[Callable[[str], str], Callable[[str], Optional[str]]],
+        related_identifier: (
+            str | tuple[Callable[[str], str], Callable[[str], Optional[str]]]
+        ),
     ):
         """source_key: the starting point of the relation
         related_key: the ending point of the relation

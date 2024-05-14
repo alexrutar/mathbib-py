@@ -12,4 +12,4 @@ test:
 
 format:
 	ruff check --fix mathbib/
-	black . --target-version py311 --preview
+	black . --target-version py312 --preview
