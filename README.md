@@ -1,3 +1,8 @@
+# Project superceded by Autobib
+
+This project has been superceded by the [Autobib](https://github.com/autobib/autobib) command-line tool, which supports all of the features supported by this library (and many more!).
+
+
 # MathBib
 MathBib is a mathematics BibLaTeX bibliography manager.
 
